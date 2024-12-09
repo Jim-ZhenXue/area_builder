@@ -1,0 +1,64 @@
+// Copyright 2014-2024, University of Colorado Boulder
+
+/**
+ * Main file for the vegas library demo.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */
+
+import Property from '../../axon/js/Property.js';
+import Screen from '../../joist/js/Screen.js';
+import Sim, { SimOptions } from '../../joist/js/Sim.js';
+import simLauncher from '../../joist/js/simLauncher.js';
+import TModel from '../../joist/js/TModel.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import ComponentsScreenView from './demo/components/ComponentsScreenView.js';
+import FiniteChallengesScreenView from './demo/FiniteChallengesScreenView.js';
+import InfiniteChallengesScreenView from './demo/InfiniteChallengesScreenView.js';
+import VegasStrings from './VegasStrings.js';
+
+// constants
+const vegasTitleStringProperty = VegasStrings.vegas.titleStringProperty;
+
+const simOptions: SimOptions = {
+  credits: {
+    leadDesign: 'PhET'
+  }
+};
+
+class VegasModel implements TModel {
+  public reset(): void { /* nothing to do */ }
+}
+
+function createEmptyModel(): VegasModel {
+  return new VegasModel();
+}
+
+simLauncher.launch( () => {
+  new Sim( vegasTitleStringProperty, [
+
+    new Screen(
+      createEmptyModel,
+      () => new ComponentsScreenView(), {
+        name: VegasStrings.screen.componentsStringProperty,
+        backgroundColorProperty: new Property( 'white' ),
+        tandem: Tandem.OPT_OUT
+      } ),
+
+    new Screen(
+      createEmptyModel,
+      () => new FiniteChallengesScreenView(), {
+        name: VegasStrings.screen.finiteChallengesStringProperty,
+        backgroundColorProperty: new Property( 'white' ),
+        tandem: Tandem.OPT_OUT
+      } ),
+
+    new Screen(
+      createEmptyModel,
+      () => new InfiniteChallengesScreenView(), {
+        name: VegasStrings.screen.infiniteChallengesStringProperty,
+        backgroundColorProperty: new Property( 'white' ),
+        tandem: Tandem.OPT_OUT
+      } )
+  ], simOptions ).start();
+} );

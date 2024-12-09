@@ -1,0 +1,115 @@
+{
+  "en": {
+    "number-pairs.title": {
+      "value": "Number Pairs"
+    },
+    "screen.intro": {
+      "value": "Intro"
+    },
+    "screen.ten": {
+      "value": "Ten"
+    },
+    "screen.twenty": {
+      "value": "Twenty"
+    },
+    "screen.sum": {
+      "value": "Sum"
+    },
+    "screen.game": {
+      "value": "Game"
+    },
+    "numberSentence": {
+      "value": "Number Sentence"
+    },
+    "numberBond": {
+      "value": "Number Bond"
+    },
+    "equation": {
+      "value": "Equation"
+    },
+    "decompositionNumberSentencePattern": {
+      "value": "<total>{{total}}</total> can be decomposed into <left>{{leftAddend}}</left> and <right>{{rightAddend}}</right>"
+    },
+    "sumNumberSentencePattern": {
+      "value": "<left>{{leftAddend}}</left> plus <right>{{rightAddend}}</right> equals <total>{{total}}</total>"
+    },
+    "aNumber": {
+      "value": "a number"
+    },
+    "anotherNumber": {
+      "value": "another number"
+    },
+    "zero": {
+      "value": "zero"
+    },
+    "one": {
+      "value": "one"
+    },
+    "two": {
+      "value": "two"
+    },
+    "three": {
+      "value": "three"
+    },
+    "four": {
+      "value": "four"
+    },
+    "five": {
+      "value": "five"
+    },
+    "six": {
+      "value": "six"
+    },
+    "seven": {
+      "value": "seven"
+    },
+    "eight": {
+      "value": "eight"
+    },
+    "nine": {
+      "value": "nine"
+    },
+    "ten": {
+      "value": "ten"
+    },
+    "eleven": {
+      "value": "eleven"
+    },
+    "twelve": {
+      "value": "twelve"
+    },
+    "thirteen": {
+      "value": "thirteen"
+    },
+    "fourteen": {
+      "value": "fourteen"
+    },
+    "fifteen": {
+      "value": "fifteen"
+    },
+    "sixteen": {
+      "value": "sixteen"
+    },
+    "seventeen": {
+      "value": "seventeen"
+    },
+    "eighteen": {
+      "value": "eighteen"
+    },
+    "nineteen": {
+      "value": "nineteen"
+    },
+    "twenty": {
+      "value": "twenty"
+    },
+    "addends": {
+      "value": "Addends"
+    },
+    "tickNumbers": {
+      "value": "Tick Numbers"
+    },
+    "totalJump": {
+      "value": "Total Jump"
+    }
+  }
+}

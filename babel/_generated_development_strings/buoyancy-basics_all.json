@@ -1,0 +1,199 @@
+{
+  "be": {
+    "screen.explore": {
+      "value": "Лабараторыя"
+    },
+    "buoyancy-basics.title": {
+      "value": "Выштурхваючая сіла: асновы"
+    }
+  },
+  "bs": {
+    "screen.explore": {
+      "value": "Istražite"
+    },
+    "buoyancy-basics.title": {
+      "value": "Potisak: osnove"
+    }
+  },
+  "ca": {
+    "screen.explore": {
+      "value": "Explora"
+    },
+    "buoyancy-basics.title": {
+      "value": "Flotabilitat: fonaments"
+    }
+  },
+  "cs": {
+    "screen.explore": {
+      "value": "Prozkoumat"
+    },
+    "buoyancy-basics.title": {
+      "value": "Vztlak: základy"
+    }
+  },
+  "da": {
+    "screen.explore": {
+      "value": "Opdag"
+    },
+    "buoyancy-basics.title": {
+      "value": "Opdrift: Basis"
+    }
+  },
+  "de": {
+    "screen.explore": {
+      "value": "Erkunden"
+    },
+    "buoyancy-basics.title": {
+      "value": "Auftrieb: Grundlagen"
+    }
+  },
+  "el": {
+    "screen.explore": {
+      "value": "Εξερεύνηση"
+    },
+    "buoyancy-basics.title": {
+      "value": "Άνωση: Τα βασικά"
+    }
+  },
+  "en_GB": {
+    "buoyancy-basics.title": {
+      "value": "Upthrust: Basics"
+    }
+  },
+  "es": {
+    "screen.explore": {
+      "value": "Explorar"
+    },
+    "buoyancy-basics.title": {
+      "value": "Flotabilidad: Intro"
+    }
+  },
+  "es_PE": {
+    "screen.explore": {
+      "value": "Explorar"
+    },
+    "buoyancy-basics.title": {
+      "value": "Flotabilidad: conceptos básicos"
+    }
+  },
+  "hr": {
+    "screen.explore": {
+      "value": "Istraži"
+    },
+    "buoyancy-basics.title": {
+      "value": "Uzgon: Osnove"
+    }
+  },
+  "it": {
+    "screen.explore": {
+      "value": "Esplora"
+    },
+    "buoyancy-basics.title": {
+      "value": "Galleggiabilità: introduzione"
+    }
+  },
+  "iw": {
+    "screen.explore": {
+      "value": "חקירה"
+    },
+    "buoyancy-basics.title": {
+      "value": "ציפה: מבוא"
+    }
+  },
+  "ko": {
+    "screen.explore": {
+      "value": "탐구"
+    },
+    "buoyancy-basics.title": {
+      "value": "부력: 기초"
+    }
+  },
+  "mn": {
+    "screen.explore": {
+      "value": "Судал"
+    },
+    "buoyancy-basics.title": {
+      "value": "Хөвөх: Үндсэн"
+    }
+  },
+  "pl": {
+    "screen.explore": {
+      "value": "Badaj"
+    },
+    "buoyancy-basics.title": {
+      "value": "Siła wyporu: podstawy"
+    }
+  },
+  "pt_BR": {
+    "screen.explore": {
+      "value": "Explorar"
+    },
+    "buoyancy-basics.title": {
+      "value": "Flutuabilidade: Básico"
+    }
+  },
+  "ro": {
+    "screen.explore": {
+      "value": "Explorează"
+    },
+    "buoyancy-basics.title": {
+      "value": "Plutirea corpurilor: Noțiuni de bază"
+    }
+  },
+  "sk": {
+    "screen.explore": {
+      "value": "Skúmanie"
+    },
+    "buoyancy-basics.title": {
+      "value": "Vztlak: základy"
+    }
+  },
+  "sl": {
+    "screen.explore": {
+      "value": "Raziskovanje"
+    },
+    "buoyancy-basics.title": {
+      "value": "Vzgon: Osnove"
+    }
+  },
+  "sr": {
+    "screen.explore": {
+      "value": "Истражите"
+    },
+    "buoyancy-basics.title": {
+      "value": "Потисак: основе"
+    }
+  },
+  "te": {
+    "screen.explore": {
+      "value": "అన్వేషించండి"
+    },
+    "buoyancy-basics.title": {
+      "value": "ఉత్ప్లవన బలం: ప్రాథమికాంశాలు"
+    }
+  },
+  "th": {
+    "screen.explore": {
+      "value": "สำรวจ"
+    },
+    "buoyancy-basics.title": {
+      "value": "การลอยตัว: พื้นฐาน"
+    }
+  },
+  "vi": {
+    "screen.explore": {
+      "value": "Tìm hiểu"
+    },
+    "buoyancy-basics.title": {
+      "value": "Sự nổi: phần cơ bản"
+    }
+  },
+  "en": {
+    "buoyancy-basics.title": {
+      "value": "Buoyancy: Basics"
+    },
+    "screen.explore": {
+      "value": "Explore"
+    }
+  }
+}

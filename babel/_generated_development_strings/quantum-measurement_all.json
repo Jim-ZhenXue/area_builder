@@ -1,0 +1,208 @@
+{
+  "en": {
+    "quantum-measurement.title": {
+      "value": "Quantum Measurement"
+    },
+    "screen.coins": {
+      "value": "Coins"
+    },
+    "screen.photons": {
+      "value": "Photons"
+    },
+    "screen.spin": {
+      "value": "Spin"
+    },
+    "screen.blochSphere": {
+      "value": "Bloch Sphere"
+    },
+    "averagePolarization": {
+      "value": "Average Polarization"
+    },
+    "averagePolarizationRate": {
+      "value": "Average Polarization Rate"
+    },
+    "coin": {
+      "value": "Coin"
+    },
+    "coinBias": {
+      "value": "Coin Bias (State)"
+    },
+    "custom": {
+      "value": "Custom"
+    },
+    "down": {
+      "value": "Down"
+    },
+    "eventsPerSecondPattern": {
+      "value": "{{value}}/s"
+    },
+    "expectationValue": {
+      "value": "Expectation Value"
+    },
+    "flip": {
+      "value": "Flip"
+    },
+    "flipAndReveal": {
+      "value": "Flip and Reveal"
+    },
+    "fortyFiveDegrees": {
+      "value": "45°"
+    },
+    "heads": {
+      "value": "Heads"
+    },
+    "hide": {
+      "value": "Hide"
+    },
+    "horizontal": {
+      "value": "Horizontal"
+    },
+    "identicalCoins": {
+      "value": "Identical Coins"
+    },
+    "initialOrientation": {
+      "value": "Initial Orientation"
+    },
+    "basisState": {
+      "value": "Basis State"
+    },
+    "H": {
+      "value": "H"
+    },
+    "itemToPreparePattern": {
+      "value": "{{item}} to Prepare"
+    },
+    "manyPhotons": {
+      "value": "Many Photons"
+    },
+    "mirror": {
+      "value": "Mirror"
+    },
+    "multipleCoinMeasurements": {
+      "value": "Multiple Coin Measurements"
+    },
+    "newCoin": {
+      "value": "New Coin"
+    },
+    "observe": {
+      "value": "Observe"
+    },
+    "photonPolarizationAngle": {
+      "value": "Photon Polarization Angle"
+    },
+    "polarization": {
+      "value": "Polarization"
+    },
+    "polarizationDetectorLabelPattern": {
+      "value": "{{orientation}} Polarization<br>Detector"
+    },
+    "polarizingBeamSplitter": {
+      "value": "Polarizing<br>Beam<br>Splitter"
+    },
+    "propagation": {
+      "value": "Propagation"
+    },
+    "propagationIntoPage": {
+      "value": "Propagation (into page)"
+    },
+    "classicalCoin": {
+      "value": "Classical Coin"
+    },
+    "P": {
+      "value": "P"
+    },
+    "photonSource": {
+      "value": "Photon Source"
+    },
+    "preparedState": {
+      "value": "Prepared State"
+    },
+    "probability": {
+      "value": "Probability"
+    },
+    "probabilityOfValuePattern": {
+      "value": "P({{value}})"
+    },
+    "numberOfCoinsPattern": {
+      "value": "N = {{number}}"
+    },
+    "quantumCoinQuoted": {
+      "value": "Quantum \"Coin\""
+    },
+    "reprepare": {
+      "value": "Reprepare"
+    },
+    "reprepareAndReveal": {
+      "value": "Reprepare and Observe"
+    },
+    "reveal": {
+      "value": "Reveal"
+    },
+    "singleCoinMeasurements": {
+      "value": "Single Coin Measurements"
+    },
+    "singlePhoton": {
+      "value": "Single Photon"
+    },
+    "stateToPrepare": {
+      "value": "State to Prepare"
+    },
+    "tails": {
+      "value": "Tails"
+    },
+    "up": {
+      "value": "Up"
+    },
+    "V": {
+      "value": "V"
+    },
+    "N": {
+      "value": "N"
+    },
+    "vertical": {
+      "value": "Vertical"
+    },
+    "SGSubZ": {
+      "value": "SG<sub>Z</sub>"
+    },
+    "SGSubX": {
+      "value": "SG<sub>X</sub>"
+    },
+    "SternGerlachMeasurements": {
+      "value": "Stern-Gerlach (SG) Measurements"
+    },
+    "sourceMode": {
+      "value": "Source Mode"
+    },
+    "spinSource": {
+      "value": "Spin Source"
+    },
+    "blochSphere": {
+      "value": "Bloch Sphere"
+    },
+    "representation": {
+      "value": "Representation"
+    },
+    "unpolarized": {
+      "value": "Unpolarized"
+    },
+    "unknownProbabilitySymbol": {
+      "value": "?"
+    },
+    "projection": {
+      "value": "Projection:"
+    },
+    "X": {
+      "value": "X"
+    },
+    "Z": {
+      "value": "Z"
+    },
+    "blockUp": {
+      "value": "Block Up"
+    },
+    "blockDown": {
+      "value": "Block Down"
+    }
+  }
+}

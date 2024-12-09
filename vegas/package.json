@@ -1,0 +1,31 @@
+{
+  "name": "vegas",
+  "version": "1.0.0-dev.5",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phetsims/vegas.git"
+  },
+  "devDependencies": {
+    "grunt": "~1.5.3"
+  },
+  "phet": {
+    "requirejsNamespace": "VEGAS",
+    "runnable": true,
+    "supportedBrands": [
+      "phet",
+      "adapted-from-phet"
+    ],
+    "simFeatures": {
+      "supportsSound": true,
+      "supportsDynamicLocale": true,
+      "supportsInteractiveDescription": true
+    },
+    "supportsOutputJS": true,
+    "screenNameKeys": [
+      "VEGAS/screen.components",
+      "VEGAS/screen.finiteChallenges",
+      "VEGAS/screen.infiniteChallenges"
+    ]
+  }
+}
