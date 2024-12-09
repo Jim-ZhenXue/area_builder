@@ -1,0 +1,6 @@
+[build]
+publish = "."
+[[redirects]]
+from = "/*"
+to = "/area-builder/area-builder_en.html"
+status = 200
