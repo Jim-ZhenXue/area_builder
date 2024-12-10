@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15c8002b-3d77-4eae-b2f8-94bbd8b64fd1" name="Changes" comment="initial push by xue" />
+    <list default="true" id="15c8002b-3d77-4eae-b2f8-94bbd8b64fd1" name="Changes" comment="initial push by xue">
+      <change beforePath="$PROJECT_DIR$/area-builder/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assert/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/axon/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/brand/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chipper/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/joist/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kite/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/perennial-alias/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phet-core/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phetcommon/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phetmarks/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/query-string-machine/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenery-phet/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenery/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sherpa/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sun/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tambo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tandem/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twixt/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utterance-queue/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vegas/.gitignore" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,12 +37,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Jim-ZhenXue/area_builder.git",
-    "accountId": "6ee681be-0e7d-4ee1-843b-139ba483b139"
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Jim-ZhenXue"
   }
 }]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jim-ZhenXue/area_builder.git&quot;,
+    &quot;accountId&quot;: &quot;6ee681be-0e7d-4ee1-843b-139ba483b139&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -28,24 +58,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/xz/Desktop/生涯/游戏/area_builder&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/xz/Desktop/生涯/游戏/area_builder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.112" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
       </set>
     </attachedChunks>
   </component>
@@ -59,6 +91,7 @@
       <updated>1733718267557</updated>
       <workItem from="1733718268593" duration="2271000" />
       <workItem from="1733720675831" duration="391000" />
+      <workItem from="1733837565272" duration="7092000" />
     </task>
     <task id="LOCAL-00001" summary="initial push by xue">
       <option name="closed" value="true" />
@@ -68,7 +101,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733719754314</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="initial push by xue">
+      <option name="closed" value="true" />
+      <created>1733740658435</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733740658435</updated>
+    </task>
+    <task id="LOCAL-00003" summary="initial push by xue">
+      <option name="closed" value="true" />
+      <created>1733839106584</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733839106584</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

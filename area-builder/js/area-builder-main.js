@@ -10,7 +10,6 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import AreaBuilderStrings from './AreaBuilderStrings.js';
-import AreaBuilderExploreScreen from './explore/AreaBuilderExploreScreen.js';
 import AreaBuilderGameScreen from './game/AreaBuilderGameScreen.js';
 
 const areaBuilderTitleStringProperty = AreaBuilderStrings[ 'area-builder' ].titleStringProperty;
@@ -31,7 +30,6 @@ const simOptions = {
 simLauncher.launch( () => {
   // create and start the sim
   new Sim( areaBuilderTitleStringProperty, [
-    new AreaBuilderExploreScreen( tandem.createTandem( 'exploreScreen' ) ),
     new AreaBuilderGameScreen( tandem.createTandem( 'gameScreen' ) )
   ], simOptions ).start();
 } );

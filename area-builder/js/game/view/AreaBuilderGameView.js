@@ -275,7 +275,7 @@ class AreaBuilderGameView extends ScreenView {
     }, buttonOptions ) );
     this.gameControlButtons.push( this.solutionButton );
 
-    // Solution button for 'build it' style of challenge, which has many potential answers.
+    // Solution button for '建造' style of challenge, which has many potential answers.
     this.showASolutionButton = new TextPushButton( aSolutionString, merge( {
       listener: () => {
         this.okayToUpdateYouBuiltWindow = false;
@@ -372,7 +372,7 @@ class AreaBuilderGameView extends ScreenView {
         } ).start();
       }
 
-      // If this is a 'built it' style challenge, and this is the first element being added to the board, add the
+      // If this is a '建造' style challenge, and this is the first element being added to the board, add the
       // build spec to the banner so that the user can reference it as they add more shapes to the board.
       if ( gameModel.currentChallengeProperty.get().buildSpec && this.challengePromptBanner.buildSpecProperty.value === null ) {
         this.challengePromptBanner.buildSpecProperty.value = gameModel.currentChallengeProperty.get().buildSpec;
@@ -380,7 +380,7 @@ class AreaBuilderGameView extends ScreenView {
     } );
 
     gameModel.simSpecificModel.movableShapes.addItemRemovedListener( () => {
-      // If the challenge is a 'build it' style challenge, and the game is in the state where the user is being given
+      // If the challenge is a '建造' style challenge, and the game is in the state where the user is being given
       // the opportunity to view a solution, and the user just removed a piece, check if they now have the correct
       // answer.
       if ( gameModel.gameStateProperty.value === GameState.SHOWING_INCORRECT_ANSWER_FEEDBACK_MOVE_ON && !this.isAnyShapeMoving() ) {
@@ -392,7 +392,7 @@ class AreaBuilderGameView extends ScreenView {
 
       this.updatedCheckButtonEnabledState();
 
-      // If the challenge is a 'build it' style challenge, and the game is in the state where the user is being
+      // If the challenge is a '建造' style challenge, and the game is in the state where the user is being
       // given the opportunity to view a solution, and they just changed what they had built, update the 'you built'
       // window.
       if ( gameModel.gameStateProperty.value === GameState.SHOWING_INCORRECT_ANSWER_FEEDBACK_MOVE_ON &&
@@ -616,7 +616,7 @@ class AreaBuilderGameView extends ScreenView {
     this.faceWithPointsNode.frown();
     this.faceWithPointsNode.setPoints( this.model.scoreProperty.get() );
 
-    // For 'built it' style challenges, the user can still interact while in this state in case they want to try
+    // For '建造' style challenges, the user can still interact while in this state in case they want to try
     // to get it right.  In 'find the area' challenges, further interaction is disallowed.
     if ( challenge.checkSpec === 'areaEntered' ) {
       this.challengeLayer.pickable = false;

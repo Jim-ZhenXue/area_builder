@@ -165,13 +165,13 @@
     ]
   },
   "buildIt": {
-    "value": "Build it!",
+    "value": "建造!",
     "history": [
       {
         "userId": 652918,
         "timestamp": 1663957367364,
         "oldValue": "",
-        "newValue": "Build it!"
+        "newValue": "建造!"
       }
     ]
   },

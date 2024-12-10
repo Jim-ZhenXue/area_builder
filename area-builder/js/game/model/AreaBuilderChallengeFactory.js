@@ -134,8 +134,8 @@ function AreaBuilderChallengeFactory() {
     }
   ];
 
-  // Color chooser for selecting randomized colors for 'find the area' challenges.
-  const FIND_THE_AREA_COLOR_CHOOSER = {
+  // Color chooser for selecting randomized colors for '建造' style challenges.
+  const BUILD_IT_COLOR_CHOOSER = {
     colorList: random.shuffle( [
       new Color( AreaBuilderSharedConstants.PALE_BLUE_COLOR ),
       new Color( AreaBuilderSharedConstants.PINKISH_COLOR ),
@@ -160,7 +160,7 @@ function AreaBuilderChallengeFactory() {
     }
   };
 
-  // Color chooser for selecting randomized colors for 'build it' style challenges.
+  // Color chooser for selecting randomized colors for '建造' style challenges.
   const BUILD_IT_COLOR_CHOOSER = {
     colorList: random.shuffle( [
       new Color( AreaBuilderSharedConstants.GREENISH_COLOR ),
@@ -185,7 +185,7 @@ function AreaBuilderChallengeFactory() {
     }
   };
 
-  // Color pair chooser, used for selecting randomized colors for two tone 'build it' challenges.
+  // Color pair chooser, used for selecting randomized colors for two tone '建造' challenges.
   const COLOR_PAIR_CHOOSER = {
     colorPairList: random.shuffle( [
       {
@@ -557,7 +557,7 @@ function AreaBuilderChallengeFactory() {
   }
 
   /**
-   * Generate a 'build it' area+perimeter challenge that consists of two connected rectangles.  See the design spec
+   * Generate a '建造' area+perimeter challenge that consists of two connected rectangles.  See the design spec
    * for details.
    */
   function generateTwoRectangleBuildAreaAndPerimeterChallenge() {
