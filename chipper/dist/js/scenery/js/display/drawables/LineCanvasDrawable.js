@@ -1,0 +1,38 @@
+// Copyright 2016-2022, University of Colorado Boulder
+/**
+ * Canvas drawable for Line nodes.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Poolable from '../../../../phet-core/js/Poolable.js';
+import { CanvasSelfDrawable, LineStatelessDrawable, Node, scenery } from '../../imports.js';
+let LineCanvasDrawable = class LineCanvasDrawable extends LineStatelessDrawable(CanvasSelfDrawable) {
+    /**
+   * Paints this drawable to a Canvas (the wrapper contains both a Canvas reference and its drawing context).
+   * @public
+   *
+   * Assumes that the Canvas's context is already in the proper local coordinate frame for the node, and that any
+   * other required effects (opacity, clipping, etc.) have already been prepared.
+   *
+   * This is part of the CanvasSelfDrawable API required to be implemented for subtypes.
+   *
+   * @param {CanvasContextWrapper} wrapper - Contains the Canvas and its drawing context
+   * @param {Node} node - Our node that is being drawn
+   * @param {Matrix3} matrix - The transformation matrix applied for this node's coordinate system.
+   */ paintCanvas(wrapper, node, matrix) {
+        assert && assert(node instanceof Node);
+        const context = wrapper.context;
+        context.beginPath();
+        context.moveTo(node.x1, node.y1);
+        context.lineTo(node.x2, node.y2);
+        if (node.hasPaintableStroke()) {
+            node.beforeCanvasStroke(wrapper); // defined in Paintable
+            context.stroke();
+            node.afterCanvasStroke(wrapper); // defined in Paintable
+        }
+    }
+};
+scenery.register('LineCanvasDrawable', LineCanvasDrawable);
+Poolable.mixInto(LineCanvasDrawable);
+export default LineCanvasDrawable;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvZGlzcGxheS9kcmF3YWJsZXMvTGluZUNhbnZhc0RyYXdhYmxlLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE2LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIENhbnZhcyBkcmF3YWJsZSBmb3IgTGluZSBub2Rlcy5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IFBvb2xhYmxlIGZyb20gJy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9Qb29sYWJsZS5qcyc7XG5pbXBvcnQgeyBDYW52YXNTZWxmRHJhd2FibGUsIExpbmVTdGF0ZWxlc3NEcmF3YWJsZSwgTm9kZSwgc2NlbmVyeSB9IGZyb20gJy4uLy4uL2ltcG9ydHMuanMnO1xuXG5jbGFzcyBMaW5lQ2FudmFzRHJhd2FibGUgZXh0ZW5kcyBMaW5lU3RhdGVsZXNzRHJhd2FibGUoIENhbnZhc1NlbGZEcmF3YWJsZSApIHtcbiAgLyoqXG4gICAqIFBhaW50cyB0aGlzIGRyYXdhYmxlIHRvIGEgQ2FudmFzICh0aGUgd3JhcHBlciBjb250YWlucyBib3RoIGEgQ2FudmFzIHJlZmVyZW5jZSBhbmQgaXRzIGRyYXdpbmcgY29udGV4dCkuXG4gICAqIEBwdWJsaWNcbiAgICpcbiAgICogQXNzdW1lcyB0aGF0IHRoZSBDYW52YXMncyBjb250ZXh0IGlzIGFscmVhZHkgaW4gdGhlIHByb3BlciBsb2NhbCBjb29yZGluYXRlIGZyYW1lIGZvciB0aGUgbm9kZSwgYW5kIHRoYXQgYW55XG4gICAqIG90aGVyIHJlcXVpcmVkIGVmZmVjdHMgKG9wYWNpdHksIGNsaXBwaW5nLCBldGMuKSBoYXZlIGFscmVhZHkgYmVlbiBwcmVwYXJlZC5cbiAgICpcbiAgICogVGhpcyBpcyBwYXJ0IG9mIHRoZSBDYW52YXNTZWxmRHJhd2FibGUgQVBJIHJlcXVpcmVkIHRvIGJlIGltcGxlbWVudGVkIGZvciBzdWJ0eXBlcy5cbiAgICpcbiAgICogQHBhcmFtIHtDYW52YXNDb250ZXh0V3JhcHBlcn0gd3JhcHBlciAtIENvbnRhaW5zIHRoZSBDYW52YXMgYW5kIGl0cyBkcmF3aW5nIGNvbnRleHRcbiAgICogQHBhcmFtIHtOb2RlfSBub2RlIC0gT3VyIG5vZGUgdGhhdCBpcyBiZWluZyBkcmF3blxuICAgKiBAcGFyYW0ge01hdHJpeDN9IG1hdHJpeCAtIFRoZSB0cmFuc2Zvcm1hdGlvbiBtYXRyaXggYXBwbGllZCBmb3IgdGhpcyBub2RlJ3MgY29vcmRpbmF0ZSBzeXN0ZW0uXG4gICAqL1xuICBwYWludENhbnZhcyggd3JhcHBlciwgbm9kZSwgbWF0cml4ICkge1xuICAgIGFzc2VydCAmJiBhc3NlcnQoIG5vZGUgaW5zdGFuY2VvZiBOb2RlICk7XG5cbiAgICBjb25zdCBjb250ZXh0ID0gd3JhcHBlci5jb250ZXh0O1xuXG4gICAgY29udGV4dC5iZWdpblBhdGgoKTtcbiAgICBjb250ZXh0Lm1vdmVUbyggbm9kZS54MSwgbm9kZS55MSApO1xuICAgIGNvbnRleHQubGluZVRvKCBub2RlLngyLCBub2RlLnkyICk7XG5cbiAgICBpZiAoIG5vZGUuaGFzUGFpbnRhYmxlU3Ryb2tlKCkgKSB7XG4gICAgICBub2RlLmJlZm9yZUNhbnZhc1N0cm9rZSggd3JhcHBlciApOyAvLyBkZWZpbmVkIGluIFBhaW50YWJsZVxuICAgICAgY29udGV4dC5zdHJva2UoKTtcbiAgICAgIG5vZGUuYWZ0ZXJDYW52YXNTdHJva2UoIHdyYXBwZXIgKTsgLy8gZGVmaW5lZCBpbiBQYWludGFibGVcbiAgICB9XG4gIH1cbn1cblxuc2NlbmVyeS5yZWdpc3RlciggJ0xpbmVDYW52YXNEcmF3YWJsZScsIExpbmVDYW52YXNEcmF3YWJsZSApO1xuXG5Qb29sYWJsZS5taXhJbnRvKCBMaW5lQ2FudmFzRHJhd2FibGUgKTtcblxuZXhwb3J0IGRlZmF1bHQgTGluZUNhbnZhc0RyYXdhYmxlOyJdLCJuYW1lcyI6WyJQb29sYWJsZSIsIkNhbnZhc1NlbGZEcmF3YWJsZSIsIkxpbmVTdGF0ZWxlc3NEcmF3YWJsZSIsIk5vZGUiLCJzY2VuZXJ5IiwiTGluZUNhbnZhc0RyYXdhYmxlIiwicGFpbnRDYW52YXMiLCJ3cmFwcGVyIiwibm9kZSIsIm1hdHJpeCIsImFzc2VydCIsImNvbnRleHQiLCJiZWdpblBhdGgiLCJtb3ZlVG8iLCJ4MSIsInkxIiwibGluZVRvIiwieDIiLCJ5MiIsImhhc1BhaW50YWJsZVN0cm9rZSIsImJlZm9yZUNhbnZhc1N0cm9rZSIsInN0cm9rZSIsImFmdGVyQ2FudmFzU3Ryb2tlIiwicmVnaXN0ZXIiLCJtaXhJbnRvIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGNBQWMsdUNBQXVDO0FBQzVELFNBQVNDLGtCQUFrQixFQUFFQyxxQkFBcUIsRUFBRUMsSUFBSSxFQUFFQyxPQUFPLFFBQVEsbUJBQW1CO0FBRTVGLElBQUEsQUFBTUMscUJBQU4sTUFBTUEsMkJBQTJCSCxzQkFBdUJEO0lBQ3REOzs7Ozs7Ozs7Ozs7R0FZQyxHQUNESyxZQUFhQyxPQUFPLEVBQUVDLElBQUksRUFBRUMsTUFBTSxFQUFHO1FBQ25DQyxVQUFVQSxPQUFRRixnQkFBZ0JMO1FBRWxDLE1BQU1RLFVBQVVKLFFBQVFJLE9BQU87UUFFL0JBLFFBQVFDLFNBQVM7UUFDakJELFFBQVFFLE1BQU0sQ0FBRUwsS0FBS00sRUFBRSxFQUFFTixLQUFLTyxFQUFFO1FBQ2hDSixRQUFRSyxNQUFNLENBQUVSLEtBQUtTLEVBQUUsRUFBRVQsS0FBS1UsRUFBRTtRQUVoQyxJQUFLVixLQUFLVyxrQkFBa0IsSUFBSztZQUMvQlgsS0FBS1ksa0JBQWtCLENBQUViLFVBQVcsdUJBQXVCO1lBQzNESSxRQUFRVSxNQUFNO1lBQ2RiLEtBQUtjLGlCQUFpQixDQUFFZixVQUFXLHVCQUF1QjtRQUM1RDtJQUNGO0FBQ0Y7QUFFQUgsUUFBUW1CLFFBQVEsQ0FBRSxzQkFBc0JsQjtBQUV4Q0wsU0FBU3dCLE9BQU8sQ0FBRW5CO0FBRWxCLGVBQWVBLG1CQUFtQiJ9

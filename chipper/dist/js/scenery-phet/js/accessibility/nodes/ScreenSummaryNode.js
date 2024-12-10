@@ -1,0 +1,51 @@
+// Copyright 2018-2022, University of Colorado Boulder
+/**
+ * A node that creates a summary of the screen in the PDOM. This type prevents duplicated code because
+ * all screens have an instance of this node that is accessible on the ScreenView type.
+ * Do not set the pdomOrder of this Node, as it is ordered in its constructor to accept new children in the
+ * proper place. TODO: Add assertions for this, see https://github.com/phetsims/joist/issues/511
+ * USAGE: To add content to the screen overview in the PDOM, simply `this.screenSummaryNode.addChild( myNode() )` from
+ * the ScreenView subtype, where myNode has accessible content to be displayed in the PDOM.
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import sceneryPhet from '../../sceneryPhet.js';
+import SceneryPhetStrings from '../../SceneryPhetStrings.js';
+let ScreenSummaryNode = class ScreenSummaryNode extends Node {
+    /**
+   * The parameters are not known in the constructor, so the intro string can be filled after instantiation.
+   * @param simName
+   * @param screenDisplayName - with the word "Screen" in it, like "Explore Screen"
+   * @param isMultiScreen - if the sim has multiple screens
+   */ setIntroString(simName, screenDisplayName, isMultiScreen) {
+        // different default string depending on if there are multiple screens
+        this.openingSummaryNode.innerContent = isMultiScreen && screenDisplayName ? StringUtils.fillIn(SceneryPhetStrings.a11y.simSection.screenSummary.multiScreenIntroStringProperty, {
+            screen: screenDisplayName
+        }) : StringUtils.fillIn(SceneryPhetStrings.a11y.simSection.screenSummary.singleScreenIntroPatternStringProperty, {
+            sim: simName
+        });
+    }
+    constructor(){
+        super();
+        this.openingSummaryNode = new Node({
+            tagName: 'p'
+        });
+        const keyboardShortcutsHint = new Node({
+            tagName: 'p',
+            innerContent: SceneryPhetStrings.a11y.simSection.screenSummary.keyboardShortcutsHintStringProperty
+        });
+        this.addChild(this.openingSummaryNode);
+        this.addChild(keyboardShortcutsHint);
+        // set the pdomOrder so that the generic opening summary is first, and the keyboard shortcuts hint is last.
+        this.pdomOrder = [
+            this.openingSummaryNode,
+            null,
+            keyboardShortcutsHint
+        ];
+    }
+};
+export { ScreenSummaryNode as default };
+sceneryPhet.register('ScreenSummaryNode', ScreenSummaryNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9hY2Nlc3NpYmlsaXR5L25vZGVzL1NjcmVlblN1bW1hcnlOb2RlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEEgbm9kZSB0aGF0IGNyZWF0ZXMgYSBzdW1tYXJ5IG9mIHRoZSBzY3JlZW4gaW4gdGhlIFBET00uIFRoaXMgdHlwZSBwcmV2ZW50cyBkdXBsaWNhdGVkIGNvZGUgYmVjYXVzZVxuICogYWxsIHNjcmVlbnMgaGF2ZSBhbiBpbnN0YW5jZSBvZiB0aGlzIG5vZGUgdGhhdCBpcyBhY2Nlc3NpYmxlIG9uIHRoZSBTY3JlZW5WaWV3IHR5cGUuXG4gKiBEbyBub3Qgc2V0IHRoZSBwZG9tT3JkZXIgb2YgdGhpcyBOb2RlLCBhcyBpdCBpcyBvcmRlcmVkIGluIGl0cyBjb25zdHJ1Y3RvciB0byBhY2NlcHQgbmV3IGNoaWxkcmVuIGluIHRoZVxuICogcHJvcGVyIHBsYWNlLiBUT0RPOiBBZGQgYXNzZXJ0aW9ucyBmb3IgdGhpcywgc2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9qb2lzdC9pc3N1ZXMvNTExXG4gKiBVU0FHRTogVG8gYWRkIGNvbnRlbnQgdG8gdGhlIHNjcmVlbiBvdmVydmlldyBpbiB0aGUgUERPTSwgc2ltcGx5IGB0aGlzLnNjcmVlblN1bW1hcnlOb2RlLmFkZENoaWxkKCBteU5vZGUoKSApYCBmcm9tXG4gKiB0aGUgU2NyZWVuVmlldyBzdWJ0eXBlLCB3aGVyZSBteU5vZGUgaGFzIGFjY2Vzc2libGUgY29udGVudCB0byBiZSBkaXNwbGF5ZWQgaW4gdGhlIFBET00uXG4gKlxuICogQGF1dGhvciBNaWNoYWVsIEthdXptYW5uIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBTdHJpbmdVdGlscyBmcm9tICcuLi8uLi8uLi8uLi9waGV0Y29tbW9uL2pzL3V0aWwvU3RyaW5nVXRpbHMuanMnO1xuaW1wb3J0IHsgTm9kZSB9IGZyb20gJy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vLi4vc2NlbmVyeVBoZXQuanMnO1xuaW1wb3J0IFNjZW5lcnlQaGV0U3RyaW5ncyBmcm9tICcuLi8uLi9TY2VuZXJ5UGhldFN0cmluZ3MuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTY3JlZW5TdW1tYXJ5Tm9kZSBleHRlbmRzIE5vZGUge1xuXG4gIHByaXZhdGUgcmVhZG9ubHkgb3BlbmluZ1N1bW1hcnlOb2RlOiBOb2RlO1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvcigpIHtcblxuICAgIHN1cGVyKCk7XG5cbiAgICB0aGlzLm9wZW5pbmdTdW1tYXJ5Tm9kZSA9IG5ldyBOb2RlKCB7IHRhZ05hbWU6ICdwJyB9ICk7XG5cbiAgICBjb25zdCBrZXlib2FyZFNob3J0Y3V0c0hpbnQgPSBuZXcgTm9kZSgge1xuICAgICAgdGFnTmFtZTogJ3AnLFxuICAgICAgaW5uZXJDb250ZW50OiBTY2VuZXJ5UGhldFN0cmluZ3MuYTExeS5zaW1TZWN0aW9uLnNjcmVlblN1bW1hcnkua2V5Ym9hcmRTaG9ydGN1dHNIaW50U3RyaW5nUHJvcGVydHlcbiAgICB9ICk7XG5cbiAgICB0aGlzLmFkZENoaWxkKCB0aGlzLm9wZW5pbmdTdW1tYXJ5Tm9kZSApO1xuICAgIHRoaXMuYWRkQ2hpbGQoIGtleWJvYXJkU2hvcnRjdXRzSGludCApO1xuXG4gICAgLy8gc2V0IHRoZSBwZG9tT3JkZXIgc28gdGhhdCB0aGUgZ2VuZXJpYyBvcGVuaW5nIHN1bW1hcnkgaXMgZmlyc3QsIGFuZCB0aGUga2V5Ym9hcmQgc2hvcnRjdXRzIGhpbnQgaXMgbGFzdC5cbiAgICB0aGlzLnBkb21PcmRlciA9IFsgdGhpcy5vcGVuaW5nU3VtbWFyeU5vZGUsIG51bGwsIGtleWJvYXJkU2hvcnRjdXRzSGludCBdO1xuICB9XG5cbiAgLyoqXG4gICAqIFRoZSBwYXJhbWV0ZXJzIGFyZSBub3Qga25vd24gaW4gdGhlIGNvbnN0cnVjdG9yLCBzbyB0aGUgaW50cm8gc3RyaW5nIGNhbiBiZSBmaWxsZWQgYWZ0ZXIgaW5zdGFudGlhdGlvbi5cbiAgICogQHBhcmFtIHNpbU5hbWVcbiAgICogQHBhcmFtIHNjcmVlbkRpc3BsYXlOYW1lIC0gd2l0aCB0aGUgd29yZCBcIlNjcmVlblwiIGluIGl0LCBsaWtlIFwiRXhwbG9yZSBTY3JlZW5cIlxuICAgKiBAcGFyYW0gaXNNdWx0aVNjcmVlbiAtIGlmIHRoZSBzaW0gaGFzIG11bHRpcGxlIHNjcmVlbnNcbiAgICovXG4gIHB1YmxpYyBzZXRJbnRyb1N0cmluZyggc2ltTmFtZTogc3RyaW5nLCBzY3JlZW5EaXNwbGF5TmFtZTogc3RyaW5nIHwgbnVsbCwgaXNNdWx0aVNjcmVlbjogYm9vbGVhbiApOiB2b2lkIHtcblxuICAgIC8vIGRpZmZlcmVudCBkZWZhdWx0IHN0cmluZyBkZXBlbmRpbmcgb24gaWYgdGhlcmUgYXJlIG11bHRpcGxlIHNjcmVlbnNcbiAgICB0aGlzLm9wZW5pbmdTdW1tYXJ5Tm9kZS5pbm5lckNvbnRlbnQgPVxuICAgICAgKCBpc011bHRpU2NyZWVuICYmIHNjcmVlbkRpc3BsYXlOYW1lICkgP1xuICAgICAgU3RyaW5nVXRpbHMuZmlsbEluKCBTY2VuZXJ5UGhldFN0cmluZ3MuYTExeS5zaW1TZWN0aW9uLnNjcmVlblN1bW1hcnkubXVsdGlTY3JlZW5JbnRyb1N0cmluZ1Byb3BlcnR5LCB7IHNjcmVlbjogc2NyZWVuRGlzcGxheU5hbWUgfSApIDpcbiAgICAgIFN0cmluZ1V0aWxzLmZpbGxJbiggU2NlbmVyeVBoZXRTdHJpbmdzLmExMXkuc2ltU2VjdGlvbi5zY3JlZW5TdW1tYXJ5LnNpbmdsZVNjcmVlbkludHJvUGF0dGVyblN0cmluZ1Byb3BlcnR5LCB7IHNpbTogc2ltTmFtZSB9ICk7XG4gIH1cbn1cblxuc2NlbmVyeVBoZXQucmVnaXN0ZXIoICdTY3JlZW5TdW1tYXJ5Tm9kZScsIFNjcmVlblN1bW1hcnlOb2RlICk7Il0sIm5hbWVzIjpbIlN0cmluZ1V0aWxzIiwiTm9kZSIsInNjZW5lcnlQaGV0IiwiU2NlbmVyeVBoZXRTdHJpbmdzIiwiU2NyZWVuU3VtbWFyeU5vZGUiLCJzZXRJbnRyb1N0cmluZyIsInNpbU5hbWUiLCJzY3JlZW5EaXNwbGF5TmFtZSIsImlzTXVsdGlTY3JlZW4iLCJvcGVuaW5nU3VtbWFyeU5vZGUiLCJpbm5lckNvbnRlbnQiLCJmaWxsSW4iLCJhMTF5Iiwic2ltU2VjdGlvbiIsInNjcmVlblN1bW1hcnkiLCJtdWx0aVNjcmVlbkludHJvU3RyaW5nUHJvcGVydHkiLCJzY3JlZW4iLCJzaW5nbGVTY3JlZW5JbnRyb1BhdHRlcm5TdHJpbmdQcm9wZXJ0eSIsInNpbSIsInRhZ05hbWUiLCJrZXlib2FyZFNob3J0Y3V0c0hpbnQiLCJrZXlib2FyZFNob3J0Y3V0c0hpbnRTdHJpbmdQcm9wZXJ0eSIsImFkZENoaWxkIiwicGRvbU9yZGVyIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Ozs7O0NBU0MsR0FFRCxPQUFPQSxpQkFBaUIsZ0RBQWdEO0FBQ3hFLFNBQVNDLElBQUksUUFBUSxvQ0FBb0M7QUFDekQsT0FBT0MsaUJBQWlCLHVCQUF1QjtBQUMvQyxPQUFPQyx3QkFBd0IsOEJBQThCO0FBRTlDLElBQUEsQUFBTUMsb0JBQU4sTUFBTUEsMEJBQTBCSDtJQXNCN0M7Ozs7O0dBS0MsR0FDRCxBQUFPSSxlQUFnQkMsT0FBZSxFQUFFQyxpQkFBZ0MsRUFBRUMsYUFBc0IsRUFBUztRQUV2RyxzRUFBc0U7UUFDdEUsSUFBSSxDQUFDQyxrQkFBa0IsQ0FBQ0MsWUFBWSxHQUNsQyxBQUFFRixpQkFBaUJELG9CQUNuQlAsWUFBWVcsTUFBTSxDQUFFUixtQkFBbUJTLElBQUksQ0FBQ0MsVUFBVSxDQUFDQyxhQUFhLENBQUNDLDhCQUE4QixFQUFFO1lBQUVDLFFBQVFUO1FBQWtCLEtBQ2pJUCxZQUFZVyxNQUFNLENBQUVSLG1CQUFtQlMsSUFBSSxDQUFDQyxVQUFVLENBQUNDLGFBQWEsQ0FBQ0csc0NBQXNDLEVBQUU7WUFBRUMsS0FBS1o7UUFBUTtJQUNoSTtJQS9CQSxhQUFxQjtRQUVuQixLQUFLO1FBRUwsSUFBSSxDQUFDRyxrQkFBa0IsR0FBRyxJQUFJUixLQUFNO1lBQUVrQixTQUFTO1FBQUk7UUFFbkQsTUFBTUMsd0JBQXdCLElBQUluQixLQUFNO1lBQ3RDa0IsU0FBUztZQUNUVCxjQUFjUCxtQkFBbUJTLElBQUksQ0FBQ0MsVUFBVSxDQUFDQyxhQUFhLENBQUNPLG1DQUFtQztRQUNwRztRQUVBLElBQUksQ0FBQ0MsUUFBUSxDQUFFLElBQUksQ0FBQ2Isa0JBQWtCO1FBQ3RDLElBQUksQ0FBQ2EsUUFBUSxDQUFFRjtRQUVmLDJHQUEyRztRQUMzRyxJQUFJLENBQUNHLFNBQVMsR0FBRztZQUFFLElBQUksQ0FBQ2Qsa0JBQWtCO1lBQUU7WUFBTVc7U0FBdUI7SUFDM0U7QUFnQkY7QUFwQ0EsU0FBcUJoQiwrQkFvQ3BCO0FBRURGLFlBQVlzQixRQUFRLENBQUUscUJBQXFCcEIifQ==

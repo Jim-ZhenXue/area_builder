@@ -1,0 +1,40 @@
+// Copyright 2017-2024, University of Colorado Boulder
+/**
+ * A scenery-internal type for tracking what currently has focus in Display. If a focused Node is shared between
+ * two Displays, it is possible that only one Node may have focus between the two displays. This is especially
+ * true for DOM focus since only one element can have DOM focus at a time.
+ *
+ * @author Jesse Greenberg
+ */ import ArrayIO from '../../../tandem/js/types/ArrayIO.js';
+import IOType from '../../../tandem/js/types/IOType.js';
+import StringIO from '../../../tandem/js/types/StringIO.js';
+import { scenery } from '../imports.js';
+let Focus = class Focus {
+    constructor(display, trail){
+        this.display = display;
+        this.trail = trail;
+    }
+};
+Focus.FocusIO = new IOType('FocusIO', {
+    valueType: Focus,
+    documentation: 'A PhET-iO Type for the instance in the simulation which currently has keyboard focus. FocusIO is ' + 'serialized into and Object with key `focusedPhetioElement` that is a list of PhET-iO Elements, ' + 'from parent-most to child-most corresponding to the PhET-iO Element that was instrumented.',
+    toStateObject: (focus)=>{
+        const phetioIDs = [];
+        focus.trail.nodes.forEach((node, i)=>{
+            // If the node was PhET-iO instrumented, include its phetioID instead of its index (because phetioID is more stable)
+            if (node.isPhetioInstrumented()) {
+                phetioIDs.push(node.tandem.phetioID);
+            }
+        });
+        return {
+            focusedPhetioElement: phetioIDs
+        };
+    },
+    stateSchema: {
+        focusedPhetioElement: ArrayIO(StringIO)
+    }
+});
+scenery.register('Focus', Focus);
+export default Focus;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvYWNjZXNzaWJpbGl0eS9Gb2N1cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNy0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBBIHNjZW5lcnktaW50ZXJuYWwgdHlwZSBmb3IgdHJhY2tpbmcgd2hhdCBjdXJyZW50bHkgaGFzIGZvY3VzIGluIERpc3BsYXkuIElmIGEgZm9jdXNlZCBOb2RlIGlzIHNoYXJlZCBiZXR3ZWVuXG4gKiB0d28gRGlzcGxheXMsIGl0IGlzIHBvc3NpYmxlIHRoYXQgb25seSBvbmUgTm9kZSBtYXkgaGF2ZSBmb2N1cyBiZXR3ZWVuIHRoZSB0d28gZGlzcGxheXMuIFRoaXMgaXMgZXNwZWNpYWxseVxuICogdHJ1ZSBmb3IgRE9NIGZvY3VzIHNpbmNlIG9ubHkgb25lIGVsZW1lbnQgY2FuIGhhdmUgRE9NIGZvY3VzIGF0IGEgdGltZS5cbiAqXG4gKiBAYXV0aG9yIEplc3NlIEdyZWVuYmVyZ1xuICovXG5cbmltcG9ydCBBcnJheUlPIGZyb20gJy4uLy4uLy4uL3RhbmRlbS9qcy90eXBlcy9BcnJheUlPLmpzJztcbmltcG9ydCBJT1R5cGUgZnJvbSAnLi4vLi4vLi4vdGFuZGVtL2pzL3R5cGVzL0lPVHlwZS5qcyc7XG5pbXBvcnQgU3RyaW5nSU8gZnJvbSAnLi4vLi4vLi4vdGFuZGVtL2pzL3R5cGVzL1N0cmluZ0lPLmpzJztcbmltcG9ydCB7IERpc3BsYXksIHNjZW5lcnksIFRyYWlsIH0gZnJvbSAnLi4vaW1wb3J0cy5qcyc7XG5cbnR5cGUgRm9jdXNTdGF0ZVR5cGUgPSB7XG4gIGZvY3VzZWRQaGV0aW9FbGVtZW50OiBzdHJpbmdbXTtcbn07XG5cbmNsYXNzIEZvY3VzIHtcblxuICAvLyBUaGUgdHJhaWwgdG8gdGhlIGZvY3VzZWQgTm9kZS5cbiAgcHVibGljIHJlYWRvbmx5IHRyYWlsOiBUcmFpbDtcblxuICAvLyBUaGUgRGlzcGxheSBjb250YWluaW5nIHRoZSBUcmFpbCB0byB0aGUgZm9jdXNlZCBOb2RlLlxuICBwdWJsaWMgcmVhZG9ubHkgZGlzcGxheTogRGlzcGxheTtcblxuICBwdWJsaWMgc3RhdGljIHJlYWRvbmx5IEZvY3VzSU8gPSBuZXcgSU9UeXBlPEZvY3VzLCBGb2N1c1N0YXRlVHlwZT4oICdGb2N1c0lPJywge1xuICAgIHZhbHVlVHlwZTogRm9jdXMsXG4gICAgZG9jdW1lbnRhdGlvbjogJ0EgUGhFVC1pTyBUeXBlIGZvciB0aGUgaW5zdGFuY2UgaW4gdGhlIHNpbXVsYXRpb24gd2hpY2ggY3VycmVudGx5IGhhcyBrZXlib2FyZCBmb2N1cy4gRm9jdXNJTyBpcyAnICtcbiAgICAgICAgICAgICAgICAgICAnc2VyaWFsaXplZCBpbnRvIGFuZCBPYmplY3Qgd2l0aCBrZXkgYGZvY3VzZWRQaGV0aW9FbGVtZW50YCB0aGF0IGlzIGEgbGlzdCBvZiBQaEVULWlPIEVsZW1lbnRzLCAnICtcbiAgICAgICAgICAgICAgICAgICAnZnJvbSBwYXJlbnQtbW9zdCB0byBjaGlsZC1tb3N0IGNvcnJlc3BvbmRpbmcgdG8gdGhlIFBoRVQtaU8gRWxlbWVudCB0aGF0IHdhcyBpbnN0cnVtZW50ZWQuJyxcbiAgICB0b1N0YXRlT2JqZWN0OiAoIGZvY3VzOiBGb2N1cyApID0+IHtcbiAgICAgIGNvbnN0IHBoZXRpb0lEczogc3RyaW5nW10gPSBbXTtcbiAgICAgIGZvY3VzLnRyYWlsLm5vZGVzLmZvckVhY2goICggbm9kZSwgaSApID0+IHtcblxuICAgICAgICAvLyBJZiB0aGUgbm9kZSB3YXMgUGhFVC1pTyBpbnN0cnVtZW50ZWQsIGluY2x1ZGUgaXRzIHBoZXRpb0lEIGluc3RlYWQgb2YgaXRzIGluZGV4IChiZWNhdXNlIHBoZXRpb0lEIGlzIG1vcmUgc3RhYmxlKVxuICAgICAgICBpZiAoIG5vZGUuaXNQaGV0aW9JbnN0cnVtZW50ZWQoKSApIHtcbiAgICAgICAgICBwaGV0aW9JRHMucHVzaCggbm9kZS50YW5kZW0ucGhldGlvSUQgKTtcbiAgICAgICAgfVxuICAgICAgfSApO1xuXG4gICAgICByZXR1cm4ge1xuICAgICAgICBmb2N1c2VkUGhldGlvRWxlbWVudDogcGhldGlvSURzXG4gICAgICB9O1xuICAgIH0sXG4gICAgc3RhdGVTY2hlbWE6IHtcbiAgICAgIGZvY3VzZWRQaGV0aW9FbGVtZW50OiBBcnJheUlPKCBTdHJpbmdJTyApXG4gICAgfVxuICB9ICk7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBkaXNwbGF5OiBEaXNwbGF5LCB0cmFpbDogVHJhaWwgKSB7XG4gICAgdGhpcy5kaXNwbGF5ID0gZGlzcGxheTtcbiAgICB0aGlzLnRyYWlsID0gdHJhaWw7XG4gIH1cbn1cblxuc2NlbmVyeS5yZWdpc3RlciggJ0ZvY3VzJywgRm9jdXMgKTtcbmV4cG9ydCBkZWZhdWx0IEZvY3VzOyJdLCJuYW1lcyI6WyJBcnJheUlPIiwiSU9UeXBlIiwiU3RyaW5nSU8iLCJzY2VuZXJ5IiwiRm9jdXMiLCJkaXNwbGF5IiwidHJhaWwiLCJGb2N1c0lPIiwidmFsdWVUeXBlIiwiZG9jdW1lbnRhdGlvbiIsInRvU3RhdGVPYmplY3QiLCJmb2N1cyIsInBoZXRpb0lEcyIsIm5vZGVzIiwiZm9yRWFjaCIsIm5vZGUiLCJpIiwiaXNQaGV0aW9JbnN0cnVtZW50ZWQiLCJwdXNoIiwidGFuZGVtIiwicGhldGlvSUQiLCJmb2N1c2VkUGhldGlvRWxlbWVudCIsInN0YXRlU2NoZW1hIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7O0NBTUMsR0FFRCxPQUFPQSxhQUFhLHNDQUFzQztBQUMxRCxPQUFPQyxZQUFZLHFDQUFxQztBQUN4RCxPQUFPQyxjQUFjLHVDQUF1QztBQUM1RCxTQUFrQkMsT0FBTyxRQUFlLGdCQUFnQjtBQU14RCxJQUFBLEFBQU1DLFFBQU4sTUFBTUE7SUFnQ0osWUFBb0JDLE9BQWdCLEVBQUVDLEtBQVksQ0FBRztRQUNuRCxJQUFJLENBQUNELE9BQU8sR0FBR0E7UUFDZixJQUFJLENBQUNDLEtBQUssR0FBR0E7SUFDZjtBQUNGO0FBcENNRixNQVFtQkcsVUFBVSxJQUFJTixPQUErQixXQUFXO0lBQzdFTyxXQUFXSjtJQUNYSyxlQUFlLHNHQUNBLG9HQUNBO0lBQ2ZDLGVBQWUsQ0FBRUM7UUFDZixNQUFNQyxZQUFzQixFQUFFO1FBQzlCRCxNQUFNTCxLQUFLLENBQUNPLEtBQUssQ0FBQ0MsT0FBTyxDQUFFLENBQUVDLE1BQU1DO1lBRWpDLG9IQUFvSDtZQUNwSCxJQUFLRCxLQUFLRSxvQkFBb0IsSUFBSztnQkFDakNMLFVBQVVNLElBQUksQ0FBRUgsS0FBS0ksTUFBTSxDQUFDQyxRQUFRO1lBQ3RDO1FBQ0Y7UUFFQSxPQUFPO1lBQ0xDLHNCQUFzQlQ7UUFDeEI7SUFDRjtJQUNBVSxhQUFhO1FBQ1hELHNCQUFzQnJCLFFBQVNFO0lBQ2pDO0FBQ0Y7QUFRRkMsUUFBUW9CLFFBQVEsQ0FBRSxTQUFTbkI7QUFDM0IsZUFBZUEsTUFBTSJ9

@@ -1,0 +1,16 @@
+// Copyright 2017, University of Colorado Boulder
+/**
+ * Returns a list of repositories actively handled by tooling for PhET
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ const getRepoList = require('./getRepoList');
+/**
+ * Returns a list of repositories actively handled by tooling for PhET
+ * @public
+ *
+ * @returns {Array.<string>}
+ */ module.exports = function() {
+    return getRepoList('active-repos');
+};
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZ2V0QWN0aXZlUmVwb3MuanMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTcsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFJldHVybnMgYSBsaXN0IG9mIHJlcG9zaXRvcmllcyBhY3RpdmVseSBoYW5kbGVkIGJ5IHRvb2xpbmcgZm9yIFBoRVRcbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuY29uc3QgZ2V0UmVwb0xpc3QgPSByZXF1aXJlKCAnLi9nZXRSZXBvTGlzdCcgKTtcblxuLyoqXG4gKiBSZXR1cm5zIGEgbGlzdCBvZiByZXBvc2l0b3JpZXMgYWN0aXZlbHkgaGFuZGxlZCBieSB0b29saW5nIGZvciBQaEVUXG4gKiBAcHVibGljXG4gKlxuICogQHJldHVybnMge0FycmF5LjxzdHJpbmc+fVxuICovXG5tb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uKCkge1xuICByZXR1cm4gZ2V0UmVwb0xpc3QoICdhY3RpdmUtcmVwb3MnICk7XG59OyJdLCJuYW1lcyI6WyJnZXRSZXBvTGlzdCIsInJlcXVpcmUiLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFFakQ7Ozs7Q0FJQyxHQUVELE1BQU1BLGNBQWNDLFFBQVM7QUFFN0I7Ozs7O0NBS0MsR0FDREMsT0FBT0MsT0FBTyxHQUFHO0lBQ2YsT0FBT0gsWUFBYTtBQUN0QiJ9

@@ -1,0 +1,10 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * Finds keys of an object that do not match a specific type, see
+ *
+ * For instance, KeysMatching<{ foo: number; x: string; k: number; }, number> will be 'x'
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9LZXlzTm90TWF0Y2hpbmcudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjItMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogRmluZHMga2V5cyBvZiBhbiBvYmplY3QgdGhhdCBkbyBub3QgbWF0Y2ggYSBzcGVjaWZpYyB0eXBlLCBzZWVcbiAqXG4gKiBGb3IgaW5zdGFuY2UsIEtleXNNYXRjaGluZzx7IGZvbzogbnVtYmVyOyB4OiBzdHJpbmc7IGs6IG51bWJlcjsgfSwgbnVtYmVyPiB3aWxsIGJlICd4J1xuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG50eXBlIEtleXNOb3RNYXRjaGluZzxULCBWPiA9IHsgW0sgaW4ga2V5b2YgVF0tPzogVFtLXSBleHRlbmRzIFYgPyBuZXZlciA6IEsgfVtrZXlvZiBUXTtcbmV4cG9ydCBkZWZhdWx0IEtleXNOb3RNYXRjaGluZzsiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Q0FNQyxHQUdELFdBQStCIn0=

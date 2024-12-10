@@ -1,0 +1,40 @@
+// Copyright 2014-2022, University of Colorado Boulder
+/**
+ * BackspaceIcon draws a backspace icon.
+ * This was originally created for use on keypads, but may have other applications.
+ *
+ * @author John Blanco
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import Dimension2 from '../../dot/js/Dimension2.js';
+import { Shape } from '../../kite/js/imports.js';
+import optionize from '../../phet-core/js/optionize.js';
+import { Path } from '../../scenery/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let BackspaceIcon = class BackspaceIcon extends Path {
+    constructor(providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            size: new Dimension2(15, 10),
+            // PathOptions
+            stroke: 'black',
+            lineWidth: 1,
+            lineJoin: 'round',
+            lineCap: 'square'
+        }, providedOptions);
+        const iconShape = new Shape();
+        // the outline, tip points left, described clockwise from the tip
+        const tipWidth = options.size.width / 3;
+        iconShape.moveTo(0, tipWidth).lineTo(tipWidth, 0).lineTo(options.size.width, 0).lineTo(options.size.width, options.size.height).lineTo(tipWidth, options.size.height).close();
+        // the x in the middle, multipliers determined empirically
+        const left = 0.47 * options.size.width;
+        const right = 0.73 * options.size.width;
+        const top = 0.3 * options.size.height;
+        const bottom = 0.7 * options.size.height;
+        iconShape.moveTo(left, top).lineTo(right, bottom).moveTo(right, top).lineTo(left, bottom);
+        super(iconShape, options);
+    }
+};
+export { BackspaceIcon as default };
+sceneryPhet.register('BackspaceIcon', BackspaceIcon);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9CYWNrc3BhY2VJY29uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE0LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEJhY2tzcGFjZUljb24gZHJhd3MgYSBiYWNrc3BhY2UgaWNvbi5cbiAqIFRoaXMgd2FzIG9yaWdpbmFsbHkgY3JlYXRlZCBmb3IgdXNlIG9uIGtleXBhZHMsIGJ1dCBtYXkgaGF2ZSBvdGhlciBhcHBsaWNhdGlvbnMuXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jb1xuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgRGltZW5zaW9uMiBmcm9tICcuLi8uLi9kb3QvanMvRGltZW5zaW9uMi5qcyc7XG5pbXBvcnQgeyBTaGFwZSB9IGZyb20gJy4uLy4uL2tpdGUvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IHsgUGF0aCwgUGF0aE9wdGlvbnMgfSBmcm9tICcuLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IHNjZW5lcnlQaGV0IGZyb20gJy4vc2NlbmVyeVBoZXQuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0ge1xuICBzaXplPzogRGltZW5zaW9uMjtcbn07XG5cbmV4cG9ydCB0eXBlIEJhY2tzcGFjZUljb25PcHRpb25zID0gU2VsZk9wdGlvbnMgJiBQYXRoT3B0aW9ucztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgQmFja3NwYWNlSWNvbiBleHRlbmRzIFBhdGgge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvdmlkZWRPcHRpb25zPzogQmFja3NwYWNlSWNvbk9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPEJhY2tzcGFjZUljb25PcHRpb25zLCBTZWxmT3B0aW9ucywgUGF0aE9wdGlvbnM+KCkoIHtcblxuICAgICAgLy8gU2VsZk9wdGlvbnNcbiAgICAgIHNpemU6IG5ldyBEaW1lbnNpb24yKCAxNSwgMTAgKSxcblxuICAgICAgLy8gUGF0aE9wdGlvbnNcbiAgICAgIHN0cm9rZTogJ2JsYWNrJyxcbiAgICAgIGxpbmVXaWR0aDogMSxcbiAgICAgIGxpbmVKb2luOiAncm91bmQnLFxuICAgICAgbGluZUNhcDogJ3NxdWFyZSdcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIGNvbnN0IGljb25TaGFwZSA9IG5ldyBTaGFwZSgpO1xuXG4gICAgLy8gdGhlIG91dGxpbmUsIHRpcCBwb2ludHMgbGVmdCwgZGVzY3JpYmVkIGNsb2Nrd2lzZSBmcm9tIHRoZSB0aXBcbiAgICBjb25zdCB0aXBXaWR0aCA9IG9wdGlvbnMuc2l6ZS53aWR0aCAvIDM7XG4gICAgaWNvblNoYXBlLm1vdmVUbyggMCwgdGlwV2lkdGggKVxuICAgICAgLmxpbmVUbyggdGlwV2lkdGgsIDAgKVxuICAgICAgLmxpbmVUbyggb3B0aW9ucy5zaXplLndpZHRoLCAwIClcbiAgICAgIC5saW5lVG8oIG9wdGlvbnMuc2l6ZS53aWR0aCwgb3B0aW9ucy5zaXplLmhlaWdodCApXG4gICAgICAubGluZVRvKCB0aXBXaWR0aCwgb3B0aW9ucy5zaXplLmhlaWdodCApXG4gICAgICAuY2xvc2UoKTtcblxuICAgIC8vIHRoZSB4IGluIHRoZSBtaWRkbGUsIG11bHRpcGxpZXJzIGRldGVybWluZWQgZW1waXJpY2FsbHlcbiAgICBjb25zdCBsZWZ0ID0gMC40NyAqIG9wdGlvbnMuc2l6ZS53aWR0aDtcbiAgICBjb25zdCByaWdodCA9IDAuNzMgKiBvcHRpb25zLnNpemUud2lkdGg7XG4gICAgY29uc3QgdG9wID0gMC4zICogb3B0aW9ucy5zaXplLmhlaWdodDtcbiAgICBjb25zdCBib3R0b20gPSAwLjcgKiBvcHRpb25zLnNpemUuaGVpZ2h0O1xuICAgIGljb25TaGFwZS5tb3ZlVG8oIGxlZnQsIHRvcCApXG4gICAgICAubGluZVRvKCByaWdodCwgYm90dG9tIClcbiAgICAgIC5tb3ZlVG8oIHJpZ2h0LCB0b3AgKVxuICAgICAgLmxpbmVUbyggbGVmdCwgYm90dG9tICk7XG5cbiAgICBzdXBlciggaWNvblNoYXBlLCBvcHRpb25zICk7XG4gIH1cbn1cblxuc2NlbmVyeVBoZXQucmVnaXN0ZXIoICdCYWNrc3BhY2VJY29uJywgQmFja3NwYWNlSWNvbiApOyJdLCJuYW1lcyI6WyJEaW1lbnNpb24yIiwiU2hhcGUiLCJvcHRpb25pemUiLCJQYXRoIiwic2NlbmVyeVBoZXQiLCJCYWNrc3BhY2VJY29uIiwicHJvdmlkZWRPcHRpb25zIiwib3B0aW9ucyIsInNpemUiLCJzdHJva2UiLCJsaW5lV2lkdGgiLCJsaW5lSm9pbiIsImxpbmVDYXAiLCJpY29uU2hhcGUiLCJ0aXBXaWR0aCIsIndpZHRoIiwibW92ZVRvIiwibGluZVRvIiwiaGVpZ2h0IiwiY2xvc2UiLCJsZWZ0IiwicmlnaHQiLCJ0b3AiLCJib3R0b20iLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Q0FNQyxHQUVELE9BQU9BLGdCQUFnQiw2QkFBNkI7QUFDcEQsU0FBU0MsS0FBSyxRQUFRLDJCQUEyQjtBQUNqRCxPQUFPQyxlQUFlLGtDQUFrQztBQUN4RCxTQUFTQyxJQUFJLFFBQXFCLDhCQUE4QjtBQUNoRSxPQUFPQyxpQkFBaUIsbUJBQW1CO0FBUTVCLElBQUEsQUFBTUMsZ0JBQU4sTUFBTUEsc0JBQXNCRjtJQUV6QyxZQUFvQkcsZUFBc0MsQ0FBRztRQUUzRCxNQUFNQyxVQUFVTCxZQUE2RDtZQUUzRSxjQUFjO1lBQ2RNLE1BQU0sSUFBSVIsV0FBWSxJQUFJO1lBRTFCLGNBQWM7WUFDZFMsUUFBUTtZQUNSQyxXQUFXO1lBQ1hDLFVBQVU7WUFDVkMsU0FBUztRQUNYLEdBQUdOO1FBRUgsTUFBTU8sWUFBWSxJQUFJWjtRQUV0QixpRUFBaUU7UUFDakUsTUFBTWEsV0FBV1AsUUFBUUMsSUFBSSxDQUFDTyxLQUFLLEdBQUc7UUFDdENGLFVBQVVHLE1BQU0sQ0FBRSxHQUFHRixVQUNsQkcsTUFBTSxDQUFFSCxVQUFVLEdBQ2xCRyxNQUFNLENBQUVWLFFBQVFDLElBQUksQ0FBQ08sS0FBSyxFQUFFLEdBQzVCRSxNQUFNLENBQUVWLFFBQVFDLElBQUksQ0FBQ08sS0FBSyxFQUFFUixRQUFRQyxJQUFJLENBQUNVLE1BQU0sRUFDL0NELE1BQU0sQ0FBRUgsVUFBVVAsUUFBUUMsSUFBSSxDQUFDVSxNQUFNLEVBQ3JDQyxLQUFLO1FBRVIsMERBQTBEO1FBQzFELE1BQU1DLE9BQU8sT0FBT2IsUUFBUUMsSUFBSSxDQUFDTyxLQUFLO1FBQ3RDLE1BQU1NLFFBQVEsT0FBT2QsUUFBUUMsSUFBSSxDQUFDTyxLQUFLO1FBQ3ZDLE1BQU1PLE1BQU0sTUFBTWYsUUFBUUMsSUFBSSxDQUFDVSxNQUFNO1FBQ3JDLE1BQU1LLFNBQVMsTUFBTWhCLFFBQVFDLElBQUksQ0FBQ1UsTUFBTTtRQUN4Q0wsVUFBVUcsTUFBTSxDQUFFSSxNQUFNRSxLQUNyQkwsTUFBTSxDQUFFSSxPQUFPRSxRQUNmUCxNQUFNLENBQUVLLE9BQU9DLEtBQ2ZMLE1BQU0sQ0FBRUcsTUFBTUc7UUFFakIsS0FBSyxDQUFFVixXQUFXTjtJQUNwQjtBQUNGO0FBdkNBLFNBQXFCRiwyQkF1Q3BCO0FBRURELFlBQVlvQixRQUFRLENBQUUsaUJBQWlCbkIifQ==

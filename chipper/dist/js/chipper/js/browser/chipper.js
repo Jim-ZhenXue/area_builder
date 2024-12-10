@@ -1,0 +1,10 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * Creates the namespace for this repository.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Namespace from '../../../phet-core/js/Namespace.js';
+// NOTE: special logic in Namespace to allow register to work!
+export default new Namespace('chipper');
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pzL2Jyb3dzZXIvY2hpcHBlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBDcmVhdGVzIHRoZSBuYW1lc3BhY2UgZm9yIHRoaXMgcmVwb3NpdG9yeS5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IE5hbWVzcGFjZSBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvTmFtZXNwYWNlLmpzJztcblxuLy8gTk9URTogc3BlY2lhbCBsb2dpYyBpbiBOYW1lc3BhY2UgdG8gYWxsb3cgcmVnaXN0ZXIgdG8gd29yayFcbmV4cG9ydCBkZWZhdWx0IG5ldyBOYW1lc3BhY2UoICdjaGlwcGVyJyApOyJdLCJuYW1lcyI6WyJOYW1lc3BhY2UiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsZUFBZSxxQ0FBcUM7QUFFM0QsOERBQThEO0FBQzlELGVBQWUsSUFBSUEsVUFBVyxXQUFZIn0=

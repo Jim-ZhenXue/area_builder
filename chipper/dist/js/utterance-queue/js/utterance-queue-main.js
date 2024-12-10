@@ -1,0 +1,8 @@
+// Copyright 2019-2024, University of Colorado Boulder
+/**
+ * @author Jesse Greenberg (PhET Interactive Simulations)
+ */ import '../../axon/js/main.js';
+import '../../phet-core/js/main.js';
+import './main.js';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3V0dGVyYW5jZS1xdWV1ZS9qcy91dHRlcmFuY2UtcXVldWUtbWFpbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOS0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBAYXV0aG9yIEplc3NlIEdyZWVuYmVyZyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgJy4uLy4uL2F4b24vanMvbWFpbi5qcyc7XG5pbXBvcnQgJy4uLy4uL3BoZXQtY29yZS9qcy9tYWluLmpzJztcbmltcG9ydCAnLi9tYWluLmpzJzsiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOztDQUVDLEdBRUQsT0FBTyx3QkFBd0I7QUFDL0IsT0FBTyw2QkFBNkI7QUFDcEMsT0FBTyxZQUFZIn0=

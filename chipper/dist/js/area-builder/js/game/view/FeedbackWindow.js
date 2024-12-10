@@ -1,0 +1,70 @@
+// Copyright 2014-2022, University of Colorado Boulder
+/**
+ * Base class for a node that looks like a window and provides the user with feedback about what they have entered
+ * during the challenge.
+ *
+ * @author John Blanco
+ */ import merge from '../../../../phet-core/js/merge.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { Node, Text } from '../../../../scenery/js/imports.js';
+import Panel from '../../../../sun/js/Panel.js';
+import areaBuilder from '../../areaBuilder.js';
+// constants
+const X_MARGIN = 8;
+const TITLE_FONT = new PhetFont({
+    size: 20,
+    weight: 'bold'
+});
+const NORMAL_TEXT_FONT = new PhetFont({
+    size: 18
+});
+const CORRECT_ANSWER_BACKGROUND_COLOR = 'white';
+const INCORRECT_ANSWER_BACKGROUND_COLOR = PhetColorScheme.PHET_LOGO_YELLOW;
+let FeedbackWindow = class FeedbackWindow extends Panel {
+    /**
+   * Set the background color of this window based on whether or not the information being displayed is the correct
+   * answer.
+   *
+   * @param userAnswerIsCorrect
+   * @public
+   */ setColorBasedOnAnswerCorrectness(userAnswerIsCorrect) {
+        this.setFill(userAnswerIsCorrect ? CORRECT_ANSWER_BACKGROUND_COLOR : INCORRECT_ANSWER_BACKGROUND_COLOR);
+    }
+    /**
+   * Constructor for the window that shows the user what they built.  It is constructed with no contents, and the
+   * contents are added later when the build spec is set.
+   *
+   * @param {string} title
+   * @param {number} maxWidth
+   * @param {Object} [options]
+   */ constructor(title, maxWidth, options){
+        options = merge({
+            fill: INCORRECT_ANSWER_BACKGROUND_COLOR,
+            stroke: 'black',
+            xMargin: X_MARGIN
+        }, options);
+        const contentNode = new Node();
+        // @protected subclasses will do layout relative to this.titleNode
+        const titleNode = new Text(title, {
+            font: TITLE_FONT
+        });
+        titleNode.scale(Math.min((maxWidth - 2 * X_MARGIN) / titleNode.width, 1));
+        titleNode.top = 5;
+        contentNode.addChild(titleNode);
+        // Invoke super constructor - called here because content with no bounds doesn't work.  This does not pass through
+        // position options - that needs to be handled in descendant classes.
+        super(contentNode, options);
+        // @protected subclasses will addChild and removeChild
+        this.contentNode = contentNode;
+        // @protected subclasses will do layout relative to this.titleNode
+        this.titleNode = titleNode;
+    }
+};
+// @protected for use by subclasses
+FeedbackWindow.X_MARGIN = X_MARGIN; // Must be visible to subtypes so that max width can be calculated and, if necessary, scaled.
+FeedbackWindow.NORMAL_TEXT_FONT = NORMAL_TEXT_FONT; // Font used in this window for text that is not the title.
+areaBuilder.register('FeedbackWindow', FeedbackWindow);
+export default FeedbackWindow;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL2FyZWEtYnVpbGRlci9qcy9nYW1lL3ZpZXcvRmVlZGJhY2tXaW5kb3cuanMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTQtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQmFzZSBjbGFzcyBmb3IgYSBub2RlIHRoYXQgbG9va3MgbGlrZSBhIHdpbmRvdyBhbmQgcHJvdmlkZXMgdGhlIHVzZXIgd2l0aCBmZWVkYmFjayBhYm91dCB3aGF0IHRoZXkgaGF2ZSBlbnRlcmVkXG4gKiBkdXJpbmcgdGhlIGNoYWxsZW5nZS5cbiAqXG4gKiBAYXV0aG9yIEpvaG4gQmxhbmNvXG4gKi9cblxuaW1wb3J0IG1lcmdlIGZyb20gJy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9tZXJnZS5qcyc7XG5pbXBvcnQgUGhldENvbG9yU2NoZW1lIGZyb20gJy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9QaGV0Q29sb3JTY2hlbWUuanMnO1xuaW1wb3J0IFBoZXRGb250IGZyb20gJy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9QaGV0Rm9udC5qcyc7XG5pbXBvcnQgeyBOb2RlLCBUZXh0IH0gZnJvbSAnLi4vLi4vLi4vLi4vc2NlbmVyeS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBQYW5lbCBmcm9tICcuLi8uLi8uLi8uLi9zdW4vanMvUGFuZWwuanMnO1xuaW1wb3J0IGFyZWFCdWlsZGVyIGZyb20gJy4uLy4uL2FyZWFCdWlsZGVyLmpzJztcblxuLy8gY29uc3RhbnRzXG5jb25zdCBYX01BUkdJTiA9IDg7XG5jb25zdCBUSVRMRV9GT05UID0gbmV3IFBoZXRGb250KCB7IHNpemU6IDIwLCB3ZWlnaHQ6ICdib2xkJyB9ICk7XG5jb25zdCBOT1JNQUxfVEVYVF9GT05UID0gbmV3IFBoZXRGb250KCB7IHNpemU6IDE4IH0gKTtcbmNvbnN0IENPUlJFQ1RfQU5TV0VSX0JBQ0tHUk9VTkRfQ09MT1IgPSAnd2hpdGUnO1xuY29uc3QgSU5DT1JSRUNUX0FOU1dFUl9CQUNLR1JPVU5EX0NPTE9SID0gUGhldENvbG9yU2NoZW1lLlBIRVRfTE9HT19ZRUxMT1c7XG5cbmNsYXNzIEZlZWRiYWNrV2luZG93IGV4dGVuZHMgUGFuZWwge1xuXG4gIC8qKlxuICAgKiBDb25zdHJ1Y3RvciBmb3IgdGhlIHdpbmRvdyB0aGF0IHNob3dzIHRoZSB1c2VyIHdoYXQgdGhleSBidWlsdC4gIEl0IGlzIGNvbnN0cnVjdGVkIHdpdGggbm8gY29udGVudHMsIGFuZCB0aGVcbiAgICogY29udGVudHMgYXJlIGFkZGVkIGxhdGVyIHdoZW4gdGhlIGJ1aWxkIHNwZWMgaXMgc2V0LlxuICAgKlxuICAgKiBAcGFyYW0ge3N0cmluZ30gdGl0bGVcbiAgICogQHBhcmFtIHtudW1iZXJ9IG1heFdpZHRoXG4gICAqIEBwYXJhbSB7T2JqZWN0fSBbb3B0aW9uc11cbiAgICovXG4gIGNvbnN0cnVjdG9yKCB0aXRsZSwgbWF4V2lkdGgsIG9wdGlvbnMgKSB7XG5cbiAgICBvcHRpb25zID0gbWVyZ2UoIHtcbiAgICAgIGZpbGw6IElOQ09SUkVDVF9BTlNXRVJfQkFDS0dST1VORF9DT0xPUixcbiAgICAgIHN0cm9rZTogJ2JsYWNrJyxcbiAgICAgIHhNYXJnaW46IFhfTUFSR0lOXG4gICAgfSwgb3B0aW9ucyApO1xuXG4gICAgY29uc3QgY29udGVudE5vZGUgPSBuZXcgTm9kZSgpO1xuXG4gICAgLy8gQHByb3RlY3RlZCBzdWJjbGFzc2VzIHdpbGwgZG8gbGF5b3V0IHJlbGF0aXZlIHRvIHRoaXMudGl0bGVOb2RlXG4gICAgY29uc3QgdGl0bGVOb2RlID0gbmV3IFRleHQoIHRpdGxlLCB7IGZvbnQ6IFRJVExFX0ZPTlQgfSApO1xuICAgIHRpdGxlTm9kZS5zY2FsZSggTWF0aC5taW4oICggbWF4V2lkdGggLSAyICogWF9NQVJHSU4gKSAvIHRpdGxlTm9kZS53aWR0aCwgMSApICk7XG4gICAgdGl0bGVOb2RlLnRvcCA9IDU7XG4gICAgY29udGVudE5vZGUuYWRkQ2hpbGQoIHRpdGxlTm9kZSApO1xuXG4gICAgLy8gSW52b2tlIHN1cGVyIGNvbnN0cnVjdG9yIC0gY2FsbGVkIGhlcmUgYmVjYXVzZSBjb250ZW50IHdpdGggbm8gYm91bmRzIGRvZXNuJ3Qgd29yay4gIFRoaXMgZG9lcyBub3QgcGFzcyB0aHJvdWdoXG4gICAgLy8gcG9zaXRpb24gb3B0aW9ucyAtIHRoYXQgbmVlZHMgdG8gYmUgaGFuZGxlZCBpbiBkZXNjZW5kYW50IGNsYXNzZXMuXG4gICAgc3VwZXIoIGNvbnRlbnROb2RlLCBvcHRpb25zICk7XG5cbiAgICAvLyBAcHJvdGVjdGVkIHN1YmNsYXNzZXMgd2lsbCBhZGRDaGlsZCBhbmQgcmVtb3ZlQ2hpbGRcbiAgICB0aGlzLmNvbnRlbnROb2RlID0gY29udGVudE5vZGU7XG5cbiAgICAvLyBAcHJvdGVjdGVkIHN1YmNsYXNzZXMgd2lsbCBkbyBsYXlvdXQgcmVsYXRpdmUgdG8gdGhpcy50aXRsZU5vZGVcbiAgICB0aGlzLnRpdGxlTm9kZSA9IHRpdGxlTm9kZTtcbiAgfVxuXG4gIC8qKlxuICAgKiBTZXQgdGhlIGJhY2tncm91bmQgY29sb3Igb2YgdGhpcyB3aW5kb3cgYmFzZWQgb24gd2hldGhlciBvciBub3QgdGhlIGluZm9ybWF0aW9uIGJlaW5nIGRpc3BsYXllZCBpcyB0aGUgY29ycmVjdFxuICAgKiBhbnN3ZXIuXG4gICAqXG4gICAqIEBwYXJhbSB1c2VyQW5zd2VySXNDb3JyZWN0XG4gICAqIEBwdWJsaWNcbiAgICovXG4gIHNldENvbG9yQmFzZWRPbkFuc3dlckNvcnJlY3RuZXNzKCB1c2VyQW5zd2VySXNDb3JyZWN0ICkge1xuICAgIHRoaXMuc2V0RmlsbCggdXNlckFuc3dlcklzQ29ycmVjdCA/IENPUlJFQ1RfQU5TV0VSX0JBQ0tHUk9VTkRfQ09MT1IgOiBJTkNPUlJFQ1RfQU5TV0VSX0JBQ0tHUk9VTkRfQ09MT1IgKTtcbiAgfVxufVxuXG4vLyBAcHJvdGVjdGVkIGZvciB1c2UgYnkgc3ViY2xhc3Nlc1xuRmVlZGJhY2tXaW5kb3cuWF9NQVJHSU4gPSBYX01BUkdJTjsgLy8gTXVzdCBiZSB2aXNpYmxlIHRvIHN1YnR5cGVzIHNvIHRoYXQgbWF4IHdpZHRoIGNhbiBiZSBjYWxjdWxhdGVkIGFuZCwgaWYgbmVjZXNzYXJ5LCBzY2FsZWQuXG5GZWVkYmFja1dpbmRvdy5OT1JNQUxfVEVYVF9GT05UID0gTk9STUFMX1RFWFRfRk9OVDsgLy8gRm9udCB1c2VkIGluIHRoaXMgd2luZG93IGZvciB0ZXh0IHRoYXQgaXMgbm90IHRoZSB0aXRsZS5cblxuYXJlYUJ1aWxkZXIucmVnaXN0ZXIoICdGZWVkYmFja1dpbmRvdycsIEZlZWRiYWNrV2luZG93ICk7XG5leHBvcnQgZGVmYXVsdCBGZWVkYmFja1dpbmRvdzsiXSwibmFtZXMiOlsibWVyZ2UiLCJQaGV0Q29sb3JTY2hlbWUiLCJQaGV0Rm9udCIsIk5vZGUiLCJUZXh0IiwiUGFuZWwiLCJhcmVhQnVpbGRlciIsIlhfTUFSR0lOIiwiVElUTEVfRk9OVCIsInNpemUiLCJ3ZWlnaHQiLCJOT1JNQUxfVEVYVF9GT05UIiwiQ09SUkVDVF9BTlNXRVJfQkFDS0dST1VORF9DT0xPUiIsIklOQ09SUkVDVF9BTlNXRVJfQkFDS0dST1VORF9DT0xPUiIsIlBIRVRfTE9HT19ZRUxMT1ciLCJGZWVkYmFja1dpbmRvdyIsInNldENvbG9yQmFzZWRPbkFuc3dlckNvcnJlY3RuZXNzIiwidXNlckFuc3dlcklzQ29ycmVjdCIsInNldEZpbGwiLCJjb25zdHJ1Y3RvciIsInRpdGxlIiwibWF4V2lkdGgiLCJvcHRpb25zIiwiZmlsbCIsInN0cm9rZSIsInhNYXJnaW4iLCJjb250ZW50Tm9kZSIsInRpdGxlTm9kZSIsImZvbnQiLCJzY2FsZSIsIk1hdGgiLCJtaW4iLCJ3aWR0aCIsInRvcCIsImFkZENoaWxkIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLFdBQVcsb0NBQW9DO0FBQ3RELE9BQU9DLHFCQUFxQixpREFBaUQ7QUFDN0UsT0FBT0MsY0FBYywwQ0FBMEM7QUFDL0QsU0FBU0MsSUFBSSxFQUFFQyxJQUFJLFFBQVEsb0NBQW9DO0FBQy9ELE9BQU9DLFdBQVcsOEJBQThCO0FBQ2hELE9BQU9DLGlCQUFpQix1QkFBdUI7QUFFL0MsWUFBWTtBQUNaLE1BQU1DLFdBQVc7QUFDakIsTUFBTUMsYUFBYSxJQUFJTixTQUFVO0lBQUVPLE1BQU07SUFBSUMsUUFBUTtBQUFPO0FBQzVELE1BQU1DLG1CQUFtQixJQUFJVCxTQUFVO0lBQUVPLE1BQU07QUFBRztBQUNsRCxNQUFNRyxrQ0FBa0M7QUFDeEMsTUFBTUMsb0NBQW9DWixnQkFBZ0JhLGdCQUFnQjtBQUUxRSxJQUFBLEFBQU1DLGlCQUFOLE1BQU1BLHVCQUF1QlY7SUFxQzNCOzs7Ozs7R0FNQyxHQUNEVyxpQ0FBa0NDLG1CQUFtQixFQUFHO1FBQ3RELElBQUksQ0FBQ0MsT0FBTyxDQUFFRCxzQkFBc0JMLGtDQUFrQ0M7SUFDeEU7SUE1Q0E7Ozs7Ozs7R0FPQyxHQUNETSxZQUFhQyxLQUFLLEVBQUVDLFFBQVEsRUFBRUMsT0FBTyxDQUFHO1FBRXRDQSxVQUFVdEIsTUFBTztZQUNmdUIsTUFBTVY7WUFDTlcsUUFBUTtZQUNSQyxTQUFTbEI7UUFDWCxHQUFHZTtRQUVILE1BQU1JLGNBQWMsSUFBSXZCO1FBRXhCLGtFQUFrRTtRQUNsRSxNQUFNd0IsWUFBWSxJQUFJdkIsS0FBTWdCLE9BQU87WUFBRVEsTUFBTXBCO1FBQVc7UUFDdERtQixVQUFVRSxLQUFLLENBQUVDLEtBQUtDLEdBQUcsQ0FBRSxBQUFFVixDQUFBQSxXQUFXLElBQUlkLFFBQU8sSUFBTW9CLFVBQVVLLEtBQUssRUFBRTtRQUMxRUwsVUFBVU0sR0FBRyxHQUFHO1FBQ2hCUCxZQUFZUSxRQUFRLENBQUVQO1FBRXRCLGtIQUFrSDtRQUNsSCxxRUFBcUU7UUFDckUsS0FBSyxDQUFFRCxhQUFhSjtRQUVwQixzREFBc0Q7UUFDdEQsSUFBSSxDQUFDSSxXQUFXLEdBQUdBO1FBRW5CLGtFQUFrRTtRQUNsRSxJQUFJLENBQUNDLFNBQVMsR0FBR0E7SUFDbkI7QUFZRjtBQUVBLG1DQUFtQztBQUNuQ1osZUFBZVIsUUFBUSxHQUFHQSxVQUFVLDZGQUE2RjtBQUNqSVEsZUFBZUosZ0JBQWdCLEdBQUdBLGtCQUFrQiwyREFBMkQ7QUFFL0dMLFlBQVk2QixRQUFRLENBQUUsa0JBQWtCcEI7QUFDeEMsZUFBZUEsZUFBZSJ9

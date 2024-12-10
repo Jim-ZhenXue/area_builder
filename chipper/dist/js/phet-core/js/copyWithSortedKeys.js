@@ -1,0 +1,36 @@
+// Copyright 2019-2023, University of Colorado Boulder
+/**
+ * Preload file that sorts the keys in an object intended for JSON, using the strategy defined in
+ * https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
+ *
+ * This is used in the simulation side to make sure the elements-baseline file is sorted, and used in the phet-io
+ * wrapper side to make sure the elements-overrides file is sorted.
+ *
+ * Namespacing and naming are discussed in https://github.com/phetsims/phet-io/issues/1446#issuecomment-476842068 and below
+ * NOTE: Please be mindful of the copy in formatPhetioAPI, see https://github.com/phetsims/phet-io/issues/1733
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Chris Klusendorf (PhET Interactive Simulations)
+ */ import phetCore from './phetCore.js';
+/**
+ * Creates a new object, recursively, by sorting the keys at each level.
+ * @param unordered - jsonifiable object to be sorted by key name.  Sorting is recursive and hence.
+ */ function copyWithSortedKeys(unordered) {
+    if (Array.isArray(unordered)) {
+        return unordered.map(copyWithSortedKeys);
+    } else if (typeof unordered !== 'object' || unordered === null) {
+        return unordered;
+    }
+    const ordered = {};
+    Object.keys(unordered).sort().forEach((key)=>{
+        // @ts-expect-error
+        const value = unordered[key];
+        // @ts-expect-error
+        ordered[key] = copyWithSortedKeys(value);
+    });
+    return ordered;
+}
+phetCore.register('copyWithSortedKeys', copyWithSortedKeys);
+export default copyWithSortedKeys;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9jb3B5V2l0aFNvcnRlZEtleXMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTktMjAyMywgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogUHJlbG9hZCBmaWxlIHRoYXQgc29ydHMgdGhlIGtleXMgaW4gYW4gb2JqZWN0IGludGVuZGVkIGZvciBKU09OLCB1c2luZyB0aGUgc3RyYXRlZ3kgZGVmaW5lZCBpblxuICogaHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTQ2NzEyOS9zb3J0LWphdmFzY3JpcHQtb2JqZWN0LWJ5LWtleVxuICpcbiAqIFRoaXMgaXMgdXNlZCBpbiB0aGUgc2ltdWxhdGlvbiBzaWRlIHRvIG1ha2Ugc3VyZSB0aGUgZWxlbWVudHMtYmFzZWxpbmUgZmlsZSBpcyBzb3J0ZWQsIGFuZCB1c2VkIGluIHRoZSBwaGV0LWlvXG4gKiB3cmFwcGVyIHNpZGUgdG8gbWFrZSBzdXJlIHRoZSBlbGVtZW50cy1vdmVycmlkZXMgZmlsZSBpcyBzb3J0ZWQuXG4gKlxuICogTmFtZXNwYWNpbmcgYW5kIG5hbWluZyBhcmUgZGlzY3Vzc2VkIGluIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9waGV0LWlvL2lzc3Vlcy8xNDQ2I2lzc3VlY29tbWVudC00NzY4NDIwNjggYW5kIGJlbG93XG4gKiBOT1RFOiBQbGVhc2UgYmUgbWluZGZ1bCBvZiB0aGUgY29weSBpbiBmb3JtYXRQaGV0aW9BUEksIHNlZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvcGhldC1pby9pc3N1ZXMvMTczM1xuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIENocmlzIEtsdXNlbmRvcmYgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cbmltcG9ydCBwaGV0Q29yZSBmcm9tICcuL3BoZXRDb3JlLmpzJztcblxuLyoqXG4gKiBDcmVhdGVzIGEgbmV3IG9iamVjdCwgcmVjdXJzaXZlbHksIGJ5IHNvcnRpbmcgdGhlIGtleXMgYXQgZWFjaCBsZXZlbC5cbiAqIEBwYXJhbSB1bm9yZGVyZWQgLSBqc29uaWZpYWJsZSBvYmplY3QgdG8gYmUgc29ydGVkIGJ5IGtleSBuYW1lLiAgU29ydGluZyBpcyByZWN1cnNpdmUgYW5kIGhlbmNlLlxuICovXG5mdW5jdGlvbiBjb3B5V2l0aFNvcnRlZEtleXM8VD4oIHVub3JkZXJlZDogVCApOiBUIHtcbiAgaWYgKCBBcnJheS5pc0FycmF5KCB1bm9yZGVyZWQgKSApIHtcbiAgICByZXR1cm4gdW5vcmRlcmVkLm1hcCggY29weVdpdGhTb3J0ZWRLZXlzICkgYXMgVDtcbiAgfVxuICBlbHNlIGlmICggdHlwZW9mIHVub3JkZXJlZCAhPT0gJ29iamVjdCcgfHwgdW5vcmRlcmVkID09PSBudWxsICkge1xuICAgIHJldHVybiB1bm9yZGVyZWQ7XG4gIH1cblxuICBjb25zdCBvcmRlcmVkID0ge307XG4gIE9iamVjdC5rZXlzKCB1bm9yZGVyZWQgKS5zb3J0KCkuZm9yRWFjaCgga2V5ID0+IHtcblxuICAgIC8vIEB0cy1leHBlY3QtZXJyb3JcbiAgICBjb25zdCB2YWx1ZSA9IHVub3JkZXJlZFsga2V5IF07XG4gICAgLy8gQHRzLWV4cGVjdC1lcnJvclxuICAgIG9yZGVyZWRbIGtleSBdID0gY29weVdpdGhTb3J0ZWRLZXlzKCB2YWx1ZSApO1xuICB9ICk7XG4gIHJldHVybiBvcmRlcmVkIGFzIFQ7XG59XG5cbnBoZXRDb3JlLnJlZ2lzdGVyKCAnY29weVdpdGhTb3J0ZWRLZXlzJywgY29weVdpdGhTb3J0ZWRLZXlzICk7XG5cbmV4cG9ydCBkZWZhdWx0IGNvcHlXaXRoU29ydGVkS2V5czsiXSwibmFtZXMiOlsicGhldENvcmUiLCJjb3B5V2l0aFNvcnRlZEtleXMiLCJ1bm9yZGVyZWQiLCJBcnJheSIsImlzQXJyYXkiLCJtYXAiLCJvcmRlcmVkIiwiT2JqZWN0Iiwia2V5cyIsInNvcnQiLCJmb3JFYWNoIiwia2V5IiwidmFsdWUiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7Q0FZQyxHQUNELE9BQU9BLGNBQWMsZ0JBQWdCO0FBRXJDOzs7Q0FHQyxHQUNELFNBQVNDLG1CQUF1QkMsU0FBWTtJQUMxQyxJQUFLQyxNQUFNQyxPQUFPLENBQUVGLFlBQWM7UUFDaEMsT0FBT0EsVUFBVUcsR0FBRyxDQUFFSjtJQUN4QixPQUNLLElBQUssT0FBT0MsY0FBYyxZQUFZQSxjQUFjLE1BQU87UUFDOUQsT0FBT0E7SUFDVDtJQUVBLE1BQU1JLFVBQVUsQ0FBQztJQUNqQkMsT0FBT0MsSUFBSSxDQUFFTixXQUFZTyxJQUFJLEdBQUdDLE9BQU8sQ0FBRUMsQ0FBQUE7UUFFdkMsbUJBQW1CO1FBQ25CLE1BQU1DLFFBQVFWLFNBQVMsQ0FBRVMsSUFBSztRQUM5QixtQkFBbUI7UUFDbkJMLE9BQU8sQ0FBRUssSUFBSyxHQUFHVixtQkFBb0JXO0lBQ3ZDO0lBQ0EsT0FBT047QUFDVDtBQUVBTixTQUFTYSxRQUFRLENBQUUsc0JBQXNCWjtBQUV6QyxlQUFlQSxtQkFBbUIifQ==

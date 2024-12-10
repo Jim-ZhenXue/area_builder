@@ -1,0 +1,10 @@
+// Copyright 2020-2024, University of Colorado Boulder
+/**
+ * Fix end of lines for a string based on the operating system this code is being run on.
+ * See https://github.com/phetsims/chipper/issues/933
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import os from 'os';
+export default ((string)=>string.split('\r').join('').split('\n').join(os.EOL));
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pzL2dydW50L2ZpeEVPTC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBGaXggZW5kIG9mIGxpbmVzIGZvciBhIHN0cmluZyBiYXNlZCBvbiB0aGUgb3BlcmF0aW5nIHN5c3RlbSB0aGlzIGNvZGUgaXMgYmVpbmcgcnVuIG9uLlxuICogU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9jaGlwcGVyL2lzc3Vlcy85MzNcbiAqXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IG9zIGZyb20gJ29zJztcblxuZXhwb3J0IGRlZmF1bHQgKCBzdHJpbmc6IHN0cmluZyApOiBzdHJpbmcgPT4gc3RyaW5nLnNwbGl0KCAnXFxyJyApLmpvaW4oICcnICkuc3BsaXQoICdcXG4nICkuam9pbiggb3MuRU9MICk7Il0sIm5hbWVzIjpbIm9zIiwic3RyaW5nIiwic3BsaXQiLCJqb2luIiwiRU9MIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7O0NBS0MsR0FFRCxPQUFPQSxRQUFRLEtBQUs7QUFFcEIsZUFBZSxDQUFBLENBQUVDLFNBQTRCQSxPQUFPQyxLQUFLLENBQUUsTUFBT0MsSUFBSSxDQUFFLElBQUtELEtBQUssQ0FBRSxNQUFPQyxJQUFJLENBQUVILEdBQUdJLEdBQUcsQ0FBQyxFQUFFIn0=

@@ -1,0 +1,39 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * A superclass for a panel of content in the Preferences Dialog. Mostly responsible for visibility of panel content.
+ *
+ * @author Jesse Greenberg
+ */ import Multilink from '../../../axon/js/Multilink.js';
+import optionize from '../../../phet-core/js/optionize.js';
+import { Node } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import joist from '../joist.js';
+let PreferencesPanel = class PreferencesPanel extends Node {
+    /**
+   * @param preferencesType - PreferencesType for this panel
+   * @param selectedTabProperty - Property representing the selected tab to be displayed.
+   * @param tabVisibleProperty - Is the Tab for this panel invisible (so this panel should also be invisible)?
+   * @param providedOptions
+   */ constructor(preferencesType, selectedTabProperty, tabVisibleProperty, providedOptions){
+        const options = optionize()({
+            // pdom
+            tagName: 'div',
+            labelTagName: 'h2'
+        }, providedOptions);
+        // don't instrument the Panel Node itself, though many subclasses make it required for subcomponents
+        options.tandem = Tandem.OPT_OUT;
+        super(options);
+        // This panel is only visible when selected tab is this preferencesType, but it can also be hidden explicitly by
+        // PhET-iO.
+        Multilink.multilink([
+            selectedTabProperty,
+            tabVisibleProperty
+        ], (selectedTab, tabVisible)=>{
+            this.visible = selectedTab === preferencesType && tabVisible;
+        });
+    }
+};
+joist.register('PreferencesPanel', PreferencesPanel);
+export default PreferencesPanel;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL3ByZWZlcmVuY2VzL1ByZWZlcmVuY2VzUGFuZWwudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjItMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQSBzdXBlcmNsYXNzIGZvciBhIHBhbmVsIG9mIGNvbnRlbnQgaW4gdGhlIFByZWZlcmVuY2VzIERpYWxvZy4gTW9zdGx5IHJlc3BvbnNpYmxlIGZvciB2aXNpYmlsaXR5IG9mIHBhbmVsIGNvbnRlbnQuXG4gKlxuICogQGF1dGhvciBKZXNzZSBHcmVlbmJlcmdcbiAqL1xuXG5pbXBvcnQgTXVsdGlsaW5rIGZyb20gJy4uLy4uLy4uL2F4b24vanMvTXVsdGlsaW5rLmpzJztcbmltcG9ydCBUUmVhZE9ubHlQcm9wZXJ0eSBmcm9tICcuLi8uLi8uLi9heG9uL2pzL1RSZWFkT25seVByb3BlcnR5LmpzJztcbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFN0cmljdE9taXQgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL3R5cGVzL1N0cmljdE9taXQuanMnO1xuaW1wb3J0IHsgTm9kZSwgTm9kZU9wdGlvbnMgfSBmcm9tICcuLi8uLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IFRhbmRlbSBmcm9tICcuLi8uLi8uLi90YW5kZW0vanMvVGFuZGVtLmpzJztcbmltcG9ydCBqb2lzdCBmcm9tICcuLi9qb2lzdC5qcyc7XG5pbXBvcnQgUHJlZmVyZW5jZXNUeXBlIGZyb20gJy4vUHJlZmVyZW5jZXNUeXBlLmpzJztcblxudHlwZSBTZWxmT3B0aW9ucyA9IEVtcHR5U2VsZk9wdGlvbnM7XG5leHBvcnQgdHlwZSBQcmVmZXJlbmNlc1BhbmVsT3B0aW9ucyA9IFN0cmljdE9taXQ8Tm9kZU9wdGlvbnMsICd0YWdOYW1lJyB8ICdsYWJlbFRhZ05hbWUnPjtcblxuY2xhc3MgUHJlZmVyZW5jZXNQYW5lbCBleHRlbmRzIE5vZGUge1xuXG4gIC8qKlxuICAgKiBAcGFyYW0gcHJlZmVyZW5jZXNUeXBlIC0gUHJlZmVyZW5jZXNUeXBlIGZvciB0aGlzIHBhbmVsXG4gICAqIEBwYXJhbSBzZWxlY3RlZFRhYlByb3BlcnR5IC0gUHJvcGVydHkgcmVwcmVzZW50aW5nIHRoZSBzZWxlY3RlZCB0YWIgdG8gYmUgZGlzcGxheWVkLlxuICAgKiBAcGFyYW0gdGFiVmlzaWJsZVByb3BlcnR5IC0gSXMgdGhlIFRhYiBmb3IgdGhpcyBwYW5lbCBpbnZpc2libGUgKHNvIHRoaXMgcGFuZWwgc2hvdWxkIGFsc28gYmUgaW52aXNpYmxlKT9cbiAgICogQHBhcmFtIHByb3ZpZGVkT3B0aW9uc1xuICAgKi9cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcmVmZXJlbmNlc1R5cGU6IFByZWZlcmVuY2VzVHlwZSwgc2VsZWN0ZWRUYWJQcm9wZXJ0eTogVFJlYWRPbmx5UHJvcGVydHk8UHJlZmVyZW5jZXNUeXBlPiwgdGFiVmlzaWJsZVByb3BlcnR5OiBUUmVhZE9ubHlQcm9wZXJ0eTxib29sZWFuPiwgcHJvdmlkZWRPcHRpb25zPzogUHJlZmVyZW5jZXNQYW5lbE9wdGlvbnMgKSB7XG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxQcmVmZXJlbmNlc1BhbmVsT3B0aW9ucywgU2VsZk9wdGlvbnMsIE5vZGVPcHRpb25zPigpKCB7XG5cbiAgICAgIC8vIHBkb21cbiAgICAgIHRhZ05hbWU6ICdkaXYnLFxuICAgICAgbGFiZWxUYWdOYW1lOiAnaDInXG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICAvLyBkb24ndCBpbnN0cnVtZW50IHRoZSBQYW5lbCBOb2RlIGl0c2VsZiwgdGhvdWdoIG1hbnkgc3ViY2xhc3NlcyBtYWtlIGl0IHJlcXVpcmVkIGZvciBzdWJjb21wb25lbnRzXG4gICAgb3B0aW9ucy50YW5kZW0gPSBUYW5kZW0uT1BUX09VVDtcblxuICAgIHN1cGVyKCBvcHRpb25zICk7XG5cbiAgICAvLyBUaGlzIHBhbmVsIGlzIG9ubHkgdmlzaWJsZSB3aGVuIHNlbGVjdGVkIHRhYiBpcyB0aGlzIHByZWZlcmVuY2VzVHlwZSwgYnV0IGl0IGNhbiBhbHNvIGJlIGhpZGRlbiBleHBsaWNpdGx5IGJ5XG4gICAgLy8gUGhFVC1pTy5cbiAgICBNdWx0aWxpbmsubXVsdGlsaW5rKCBbIHNlbGVjdGVkVGFiUHJvcGVydHksIHRhYlZpc2libGVQcm9wZXJ0eSBdLCAoIHNlbGVjdGVkVGFiLCB0YWJWaXNpYmxlICkgPT4ge1xuICAgICAgdGhpcy52aXNpYmxlID0gc2VsZWN0ZWRUYWIgPT09IHByZWZlcmVuY2VzVHlwZSAmJiB0YWJWaXNpYmxlO1xuICAgIH0gKTtcbiAgfVxufVxuXG5qb2lzdC5yZWdpc3RlciggJ1ByZWZlcmVuY2VzUGFuZWwnLCBQcmVmZXJlbmNlc1BhbmVsICk7XG5leHBvcnQgZGVmYXVsdCBQcmVmZXJlbmNlc1BhbmVsOyJdLCJuYW1lcyI6WyJNdWx0aWxpbmsiLCJvcHRpb25pemUiLCJOb2RlIiwiVGFuZGVtIiwiam9pc3QiLCJQcmVmZXJlbmNlc1BhbmVsIiwicHJlZmVyZW5jZXNUeXBlIiwic2VsZWN0ZWRUYWJQcm9wZXJ0eSIsInRhYlZpc2libGVQcm9wZXJ0eSIsInByb3ZpZGVkT3B0aW9ucyIsIm9wdGlvbnMiLCJ0YWdOYW1lIiwibGFiZWxUYWdOYW1lIiwidGFuZGVtIiwiT1BUX09VVCIsIm11bHRpbGluayIsInNlbGVjdGVkVGFiIiwidGFiVmlzaWJsZSIsInZpc2libGUiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxPQUFPQSxlQUFlLGdDQUFnQztBQUV0RCxPQUFPQyxlQUFxQyxxQ0FBcUM7QUFFakYsU0FBU0MsSUFBSSxRQUFxQixpQ0FBaUM7QUFDbkUsT0FBT0MsWUFBWSwrQkFBK0I7QUFDbEQsT0FBT0MsV0FBVyxjQUFjO0FBTWhDLElBQUEsQUFBTUMsbUJBQU4sTUFBTUEseUJBQXlCSDtJQUU3Qjs7Ozs7R0FLQyxHQUNELFlBQW9CSSxlQUFnQyxFQUFFQyxtQkFBdUQsRUFBRUMsa0JBQThDLEVBQUVDLGVBQXlDLENBQUc7UUFDek0sTUFBTUMsVUFBVVQsWUFBZ0U7WUFFOUUsT0FBTztZQUNQVSxTQUFTO1lBQ1RDLGNBQWM7UUFDaEIsR0FBR0g7UUFFSCxvR0FBb0c7UUFDcEdDLFFBQVFHLE1BQU0sR0FBR1YsT0FBT1csT0FBTztRQUUvQixLQUFLLENBQUVKO1FBRVAsZ0hBQWdIO1FBQ2hILFdBQVc7UUFDWFYsVUFBVWUsU0FBUyxDQUFFO1lBQUVSO1lBQXFCQztTQUFvQixFQUFFLENBQUVRLGFBQWFDO1lBQy9FLElBQUksQ0FBQ0MsT0FBTyxHQUFHRixnQkFBZ0JWLG1CQUFtQlc7UUFDcEQ7SUFDRjtBQUNGO0FBRUFiLE1BQU1lLFFBQVEsQ0FBRSxvQkFBb0JkO0FBQ3BDLGVBQWVBLGlCQUFpQiJ9

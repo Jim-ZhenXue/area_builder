@@ -1,0 +1,24 @@
+// Copyright 2019-2022, University of Colorado Boulder
+/**
+ * Constants used in sun, scenery-phet, and potentially in other PhET UI components.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import sun from './sun.js';
+const SunConstants = {
+    /**
+   * Named placeholder in string patterns where a value will be substituted.
+   * Typically appears in translated strings (e.g. "{{value}} nm") and used with StringUtils.fillIn.
+   */ VALUE_NAMED_PLACEHOLDER: '{{value}}',
+    /**
+   * Numbered placeholder in string patterns where a value will be substituted.
+   * Typically appears in translated strings (e.g. "{0} nm") and used with StringUtils.format.
+   * @deprecated - Named placeholders are the new standard, and numbered placeholders should not be used in new code.
+   */ VALUE_NUMBERED_PLACEHOLDER: '{0}',
+    /**
+   * Vertical rotation for vertical sliders. Will rotate all the slider's parts accordingly.
+   */ SLIDER_VERTICAL_ROTATION: -Math.PI / 2
+};
+sun.register('SunConstants', SunConstants);
+export default SunConstants;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3N1bi9qcy9TdW5Db25zdGFudHMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTktMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQ29uc3RhbnRzIHVzZWQgaW4gc3VuLCBzY2VuZXJ5LXBoZXQsIGFuZCBwb3RlbnRpYWxseSBpbiBvdGhlciBQaEVUIFVJIGNvbXBvbmVudHMuXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgc3VuIGZyb20gJy4vc3VuLmpzJztcblxuY29uc3QgU3VuQ29uc3RhbnRzID0ge1xuXG4gIC8qKlxuICAgKiBOYW1lZCBwbGFjZWhvbGRlciBpbiBzdHJpbmcgcGF0dGVybnMgd2hlcmUgYSB2YWx1ZSB3aWxsIGJlIHN1YnN0aXR1dGVkLlxuICAgKiBUeXBpY2FsbHkgYXBwZWFycyBpbiB0cmFuc2xhdGVkIHN0cmluZ3MgKGUuZy4gXCJ7e3ZhbHVlfX0gbm1cIikgYW5kIHVzZWQgd2l0aCBTdHJpbmdVdGlscy5maWxsSW4uXG4gICAqL1xuICBWQUxVRV9OQU1FRF9QTEFDRUhPTERFUjogJ3t7dmFsdWV9fScsXG5cbiAgLyoqXG4gICAqIE51bWJlcmVkIHBsYWNlaG9sZGVyIGluIHN0cmluZyBwYXR0ZXJucyB3aGVyZSBhIHZhbHVlIHdpbGwgYmUgc3Vic3RpdHV0ZWQuXG4gICAqIFR5cGljYWxseSBhcHBlYXJzIGluIHRyYW5zbGF0ZWQgc3RyaW5ncyAoZS5nLiBcInswfSBubVwiKSBhbmQgdXNlZCB3aXRoIFN0cmluZ1V0aWxzLmZvcm1hdC5cbiAgICogQGRlcHJlY2F0ZWQgLSBOYW1lZCBwbGFjZWhvbGRlcnMgYXJlIHRoZSBuZXcgc3RhbmRhcmQsIGFuZCBudW1iZXJlZCBwbGFjZWhvbGRlcnMgc2hvdWxkIG5vdCBiZSB1c2VkIGluIG5ldyBjb2RlLlxuICAgKi9cbiAgVkFMVUVfTlVNQkVSRURfUExBQ0VIT0xERVI6ICd7MH0nLFxuXG4gIC8qKlxuICAgKiBWZXJ0aWNhbCByb3RhdGlvbiBmb3IgdmVydGljYWwgc2xpZGVycy4gV2lsbCByb3RhdGUgYWxsIHRoZSBzbGlkZXIncyBwYXJ0cyBhY2NvcmRpbmdseS5cbiAgICovXG4gIFNMSURFUl9WRVJUSUNBTF9ST1RBVElPTjogLU1hdGguUEkgLyAyXG59O1xuXG5zdW4ucmVnaXN0ZXIoICdTdW5Db25zdGFudHMnLCBTdW5Db25zdGFudHMgKTtcbmV4cG9ydCBkZWZhdWx0IFN1bkNvbnN0YW50czsiXSwibmFtZXMiOlsic3VuIiwiU3VuQ29uc3RhbnRzIiwiVkFMVUVfTkFNRURfUExBQ0VIT0xERVIiLCJWQUxVRV9OVU1CRVJFRF9QTEFDRUhPTERFUiIsIlNMSURFUl9WRVJUSUNBTF9ST1RBVElPTiIsIk1hdGgiLCJQSSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLFNBQVMsV0FBVztBQUUzQixNQUFNQyxlQUFlO0lBRW5COzs7R0FHQyxHQUNEQyx5QkFBeUI7SUFFekI7Ozs7R0FJQyxHQUNEQyw0QkFBNEI7SUFFNUI7O0dBRUMsR0FDREMsMEJBQTBCLENBQUNDLEtBQUtDLEVBQUUsR0FBRztBQUN2QztBQUVBTixJQUFJTyxRQUFRLENBQUUsZ0JBQWdCTjtBQUM5QixlQUFlQSxhQUFhIn0=

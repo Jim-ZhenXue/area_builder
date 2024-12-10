@@ -1,0 +1,52 @@
+// Copyright 2018-2023, University of Colorado Boulder
+/**
+ * Standard math symbols used in PhET sims.
+ * Sims should use these so that they are easy to change in the future.
+ * Do NOT inline characters in string concatenations.
+ *
+ * E.g. for an expression that involves the multiplication of 2 values:
+ * Good:  var expressionString = value1 + ' ' + MathSymbols.TIMES + ' ' +  value2;
+ * Bad:   var expressionString = value1 + ' \u00d7 ' + value2;
+ * Wrong: var expressionString = value1 + ' x ' + value2;
+ *
+ * Note: These are all 'as const' to support strong typing. See NUMBER_SUITE_COMMON/SymbolType for an example.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import sceneryPhet from './sceneryPhet.js';
+const MathSymbols = {
+    //==================================================================================================================
+    // Symbols in this section are universal and are NOT translatable.  A decision to promote any of these to
+    // translatable requires discussion with PhET team members and subject-matter experts.
+    //==================================================================================================================
+    // binary operators
+    PLUS: '+',
+    MINUS: '\u2212',
+    TIMES: '\u00d7',
+    DIVIDE: '\u00f7',
+    DOT: '\u22c5',
+    // unary operators
+    UNARY_PLUS: '+',
+    UNARY_MINUS: '-',
+    // relational operators
+    EQUAL_TO: '=',
+    NOT_EQUAL_TO: '\u2260',
+    GREATER_THAN: '>',
+    LESS_THAN: '<',
+    LESS_THAN_OR_EQUAL: '\u2264',
+    GREATER_THAN_OR_EQUAL: '\u2265',
+    // other math symbols
+    PERCENT: '%',
+    INFINITY: '\u221E',
+    PI: '\u03c0',
+    PLUS_MINUS: '\u00B1',
+    // Greek characters
+    THETA: '\u03b8',
+    // Used to symbolize 'no value', e.g. on a meter that is not reading anything.
+    // See https://github.com/phetsims/scenery-phet/issues/431
+    NO_VALUE: '\u2014',
+    DEGREES: '\u00B0'
+};
+sceneryPhet.register('MathSymbols', MathSymbols);
+export default MathSymbols;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9NYXRoU3ltYm9scy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBTdGFuZGFyZCBtYXRoIHN5bWJvbHMgdXNlZCBpbiBQaEVUIHNpbXMuXG4gKiBTaW1zIHNob3VsZCB1c2UgdGhlc2Ugc28gdGhhdCB0aGV5IGFyZSBlYXN5IHRvIGNoYW5nZSBpbiB0aGUgZnV0dXJlLlxuICogRG8gTk9UIGlubGluZSBjaGFyYWN0ZXJzIGluIHN0cmluZyBjb25jYXRlbmF0aW9ucy5cbiAqXG4gKiBFLmcuIGZvciBhbiBleHByZXNzaW9uIHRoYXQgaW52b2x2ZXMgdGhlIG11bHRpcGxpY2F0aW9uIG9mIDIgdmFsdWVzOlxuICogR29vZDogIHZhciBleHByZXNzaW9uU3RyaW5nID0gdmFsdWUxICsgJyAnICsgTWF0aFN5bWJvbHMuVElNRVMgKyAnICcgKyAgdmFsdWUyO1xuICogQmFkOiAgIHZhciBleHByZXNzaW9uU3RyaW5nID0gdmFsdWUxICsgJyBcXHUwMGQ3ICcgKyB2YWx1ZTI7XG4gKiBXcm9uZzogdmFyIGV4cHJlc3Npb25TdHJpbmcgPSB2YWx1ZTEgKyAnIHggJyArIHZhbHVlMjtcbiAqXG4gKiBOb3RlOiBUaGVzZSBhcmUgYWxsICdhcyBjb25zdCcgdG8gc3VwcG9ydCBzdHJvbmcgdHlwaW5nLiBTZWUgTlVNQkVSX1NVSVRFX0NPTU1PTi9TeW1ib2xUeXBlIGZvciBhbiBleGFtcGxlLlxuICpcbiAqIEBhdXRob3IgQ2hyaXMgTWFsbGV5IChQaXhlbFpvb20sIEluYy4pXG4gKi9cblxuaW1wb3J0IHNjZW5lcnlQaGV0IGZyb20gJy4vc2NlbmVyeVBoZXQuanMnO1xuXG5jb25zdCBNYXRoU3ltYm9scyA9IHtcblxuICAvLz09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuICAvLyBTeW1ib2xzIGluIHRoaXMgc2VjdGlvbiBhcmUgdW5pdmVyc2FsIGFuZCBhcmUgTk9UIHRyYW5zbGF0YWJsZS4gIEEgZGVjaXNpb24gdG8gcHJvbW90ZSBhbnkgb2YgdGhlc2UgdG9cbiAgLy8gdHJhbnNsYXRhYmxlIHJlcXVpcmVzIGRpc2N1c3Npb24gd2l0aCBQaEVUIHRlYW0gbWVtYmVycyBhbmQgc3ViamVjdC1tYXR0ZXIgZXhwZXJ0cy5cbiAgLy89PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuICAvLyBiaW5hcnkgb3BlcmF0b3JzXG4gIFBMVVM6ICcrJyBhcyBjb25zdCxcbiAgTUlOVVM6ICdcXHUyMjEyJyBhcyBjb25zdCwgLy8gbG9uZ2VyIHRoYW4gVU5BUllfTUlOVVMgKFBoRVQtc3BlY2lmaWMgY29udmVudGlvbilcbiAgVElNRVM6ICdcXHUwMGQ3JyBhcyBjb25zdCxcbiAgRElWSURFOiAnXFx1MDBmNycgYXMgY29uc3QsXG4gIERPVDogJ1xcdTIyYzUnIGFzIGNvbnN0LFxuXG4gIC8vIHVuYXJ5IG9wZXJhdG9yc1xuICBVTkFSWV9QTFVTOiAnKycgYXMgY29uc3QsXG4gIFVOQVJZX01JTlVTOiAnLScgYXMgY29uc3QsIC8vIHNob3J0ZXIgdGhhbiBNSU5VUyAoUGhFVC1zcGVjaWZpYyBjb252ZW50aW9uKVxuXG4gIC8vIHJlbGF0aW9uYWwgb3BlcmF0b3JzXG4gIEVRVUFMX1RPOiAnPScgYXMgY29uc3QsXG4gIE5PVF9FUVVBTF9UTzogJ1xcdTIyNjAnIGFzIGNvbnN0LFxuICBHUkVBVEVSX1RIQU46ICc+JyBhcyBjb25zdCxcbiAgTEVTU19USEFOOiAnPCcgYXMgY29uc3QsXG4gIExFU1NfVEhBTl9PUl9FUVVBTDogJ1xcdTIyNjQnIGFzIGNvbnN0LFxuICBHUkVBVEVSX1RIQU5fT1JfRVFVQUw6ICdcXHUyMjY1JyBhcyBjb25zdCxcblxuICAvLyBvdGhlciBtYXRoIHN5bWJvbHNcbiAgUEVSQ0VOVDogJyUnIGFzIGNvbnN0LFxuICBJTkZJTklUWTogJ1xcdTIyMUUnIGFzIGNvbnN0LFxuICBQSTogJ1xcdTAzYzAnIGFzIGNvbnN0LFxuICBQTFVTX01JTlVTOiAnXFx1MDBCMScgYXMgY29uc3QsXG5cbiAgLy8gR3JlZWsgY2hhcmFjdGVyc1xuICBUSEVUQTogJ1xcdTAzYjgnIGFzIGNvbnN0LFxuXG4gIC8vIFVzZWQgdG8gc3ltYm9saXplICdubyB2YWx1ZScsIGUuZy4gb24gYSBtZXRlciB0aGF0IGlzIG5vdCByZWFkaW5nIGFueXRoaW5nLlxuICAvLyBTZWUgaHR0cHM6Ly9naXRodWIuY29tL3BoZXRzaW1zL3NjZW5lcnktcGhldC9pc3N1ZXMvNDMxXG4gIE5PX1ZBTFVFOiAnXFx1MjAxNCcgYXMgY29uc3QsIC8vIGVtIGRhc2hcblxuICBERUdSRUVTOiAnXFx1MDBCMCcgYXMgY29uc3Rcbn07XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnTWF0aFN5bWJvbHMnLCBNYXRoU3ltYm9scyApO1xuZXhwb3J0IGRlZmF1bHQgTWF0aFN5bWJvbHM7Il0sIm5hbWVzIjpbInNjZW5lcnlQaGV0IiwiTWF0aFN5bWJvbHMiLCJQTFVTIiwiTUlOVVMiLCJUSU1FUyIsIkRJVklERSIsIkRPVCIsIlVOQVJZX1BMVVMiLCJVTkFSWV9NSU5VUyIsIkVRVUFMX1RPIiwiTk9UX0VRVUFMX1RPIiwiR1JFQVRFUl9USEFOIiwiTEVTU19USEFOIiwiTEVTU19USEFOX09SX0VRVUFMIiwiR1JFQVRFUl9USEFOX09SX0VRVUFMIiwiUEVSQ0VOVCIsIklORklOSVRZIiwiUEkiLCJQTFVTX01JTlVTIiwiVEhFVEEiLCJOT19WQUxVRSIsIkRFR1JFRVMiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7O0NBYUMsR0FFRCxPQUFPQSxpQkFBaUIsbUJBQW1CO0FBRTNDLE1BQU1DLGNBQWM7SUFFbEIsb0hBQW9IO0lBQ3BILHlHQUF5RztJQUN6RyxzRkFBc0Y7SUFDdEYsb0hBQW9IO0lBRXBILG1CQUFtQjtJQUNuQkMsTUFBTTtJQUNOQyxPQUFPO0lBQ1BDLE9BQU87SUFDUEMsUUFBUTtJQUNSQyxLQUFLO0lBRUwsa0JBQWtCO0lBQ2xCQyxZQUFZO0lBQ1pDLGFBQWE7SUFFYix1QkFBdUI7SUFDdkJDLFVBQVU7SUFDVkMsY0FBYztJQUNkQyxjQUFjO0lBQ2RDLFdBQVc7SUFDWEMsb0JBQW9CO0lBQ3BCQyx1QkFBdUI7SUFFdkIscUJBQXFCO0lBQ3JCQyxTQUFTO0lBQ1RDLFVBQVU7SUFDVkMsSUFBSTtJQUNKQyxZQUFZO0lBRVosbUJBQW1CO0lBQ25CQyxPQUFPO0lBRVAsOEVBQThFO0lBQzlFLDBEQUEwRDtJQUMxREMsVUFBVTtJQUVWQyxTQUFTO0FBQ1g7QUFFQXJCLFlBQVlzQixRQUFRLENBQUUsZUFBZXJCO0FBQ3JDLGVBQWVBLFlBQVkifQ==

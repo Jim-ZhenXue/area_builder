@@ -1,0 +1,24 @@
+// Copyright 2020-2022, University of Colorado Boulder
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */ /**
+ * Decode a base-64 encoded sound into a Uint8Array.  This does *not* do audio decompression, such as that needed for
+ * interpreting MP3 files.
+ */ const base64SoundToByteArray = (audioContext, base64Sound)=>{
+    const soundData = base64Sound.replace(new RegExp('^.*,'), ''); // remove the mime header
+    const byteChars = atob(soundData);
+    const byteArray = new Uint8Array(byteChars.length);
+    for(let j = 0; j < byteArray.length; j++){
+        // A note to future maintainers of this code: The line below, strictly speaking, seems to disregard the highest 8
+        // bits of the character code, since strings in JavaScript are UTF-16.  This seems a little odd, but testing showed
+        // that the decoded base64 data never had values above 255, so it worked.  This code was leveraged from examples
+        // found on the web, and has worked through all our testing, so perhaps the upper bits are simply never used in this
+        // decoding process.  That seems like the best explanation.  However, if we one day run into issues with sound
+        // decoding, this might warrant further scrutiny.
+        byteArray[j] = byteChars.charCodeAt(j);
+    }
+    return byteArray;
+};
+export default base64SoundToByteArray;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3RhbWJvL2pzL2Jhc2U2NFNvdW5kVG9CeXRlQXJyYXkudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjAtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQGF1dGhvciBKb2huIEJsYW5jbyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG4vKipcbiAqIERlY29kZSBhIGJhc2UtNjQgZW5jb2RlZCBzb3VuZCBpbnRvIGEgVWludDhBcnJheS4gIFRoaXMgZG9lcyAqbm90KiBkbyBhdWRpbyBkZWNvbXByZXNzaW9uLCBzdWNoIGFzIHRoYXQgbmVlZGVkIGZvclxuICogaW50ZXJwcmV0aW5nIE1QMyBmaWxlcy5cbiAqL1xuY29uc3QgYmFzZTY0U291bmRUb0J5dGVBcnJheSA9ICggYXVkaW9Db250ZXh0OiBBdWRpb0NvbnRleHQsIGJhc2U2NFNvdW5kOiBzdHJpbmcgKTogVWludDhBcnJheSA9PiB7XG4gIGNvbnN0IHNvdW5kRGF0YSA9IGJhc2U2NFNvdW5kLnJlcGxhY2UoIG5ldyBSZWdFeHAoICdeLiosJyApLCAnJyApOyAvLyByZW1vdmUgdGhlIG1pbWUgaGVhZGVyXG4gIGNvbnN0IGJ5dGVDaGFycyA9IGF0b2IoIHNvdW5kRGF0YSApO1xuICBjb25zdCBieXRlQXJyYXkgPSBuZXcgVWludDhBcnJheSggYnl0ZUNoYXJzLmxlbmd0aCApO1xuICBmb3IgKCBsZXQgaiA9IDA7IGogPCBieXRlQXJyYXkubGVuZ3RoOyBqKysgKSB7XG5cbiAgICAvLyBBIG5vdGUgdG8gZnV0dXJlIG1haW50YWluZXJzIG9mIHRoaXMgY29kZTogVGhlIGxpbmUgYmVsb3csIHN0cmljdGx5IHNwZWFraW5nLCBzZWVtcyB0byBkaXNyZWdhcmQgdGhlIGhpZ2hlc3QgOFxuICAgIC8vIGJpdHMgb2YgdGhlIGNoYXJhY3RlciBjb2RlLCBzaW5jZSBzdHJpbmdzIGluIEphdmFTY3JpcHQgYXJlIFVURi0xNi4gIFRoaXMgc2VlbXMgYSBsaXR0bGUgb2RkLCBidXQgdGVzdGluZyBzaG93ZWRcbiAgICAvLyB0aGF0IHRoZSBkZWNvZGVkIGJhc2U2NCBkYXRhIG5ldmVyIGhhZCB2YWx1ZXMgYWJvdmUgMjU1LCBzbyBpdCB3b3JrZWQuICBUaGlzIGNvZGUgd2FzIGxldmVyYWdlZCBmcm9tIGV4YW1wbGVzXG4gICAgLy8gZm91bmQgb24gdGhlIHdlYiwgYW5kIGhhcyB3b3JrZWQgdGhyb3VnaCBhbGwgb3VyIHRlc3RpbmcsIHNvIHBlcmhhcHMgdGhlIHVwcGVyIGJpdHMgYXJlIHNpbXBseSBuZXZlciB1c2VkIGluIHRoaXNcbiAgICAvLyBkZWNvZGluZyBwcm9jZXNzLiAgVGhhdCBzZWVtcyBsaWtlIHRoZSBiZXN0IGV4cGxhbmF0aW9uLiAgSG93ZXZlciwgaWYgd2Ugb25lIGRheSBydW4gaW50byBpc3N1ZXMgd2l0aCBzb3VuZFxuICAgIC8vIGRlY29kaW5nLCB0aGlzIG1pZ2h0IHdhcnJhbnQgZnVydGhlciBzY3J1dGlueS5cbiAgICBieXRlQXJyYXlbIGogXSA9IGJ5dGVDaGFycy5jaGFyQ29kZUF0KCBqICk7XG4gIH1cbiAgcmV0dXJuIGJ5dGVBcnJheTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IGJhc2U2NFNvdW5kVG9CeXRlQXJyYXk7Il0sIm5hbWVzIjpbImJhc2U2NFNvdW5kVG9CeXRlQXJyYXkiLCJhdWRpb0NvbnRleHQiLCJiYXNlNjRTb3VuZCIsInNvdW5kRGF0YSIsInJlcGxhY2UiLCJSZWdFeHAiLCJieXRlQ2hhcnMiLCJhdG9iIiwiYnl0ZUFycmF5IiwiVWludDhBcnJheSIsImxlbmd0aCIsImoiLCJjaGFyQ29kZUF0Il0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7O0NBRUMsR0FFRDs7O0NBR0MsR0FDRCxNQUFNQSx5QkFBeUIsQ0FBRUMsY0FBNEJDO0lBQzNELE1BQU1DLFlBQVlELFlBQVlFLE9BQU8sQ0FBRSxJQUFJQyxPQUFRLFNBQVUsS0FBTSx5QkFBeUI7SUFDNUYsTUFBTUMsWUFBWUMsS0FBTUo7SUFDeEIsTUFBTUssWUFBWSxJQUFJQyxXQUFZSCxVQUFVSSxNQUFNO0lBQ2xELElBQU0sSUFBSUMsSUFBSSxHQUFHQSxJQUFJSCxVQUFVRSxNQUFNLEVBQUVDLElBQU07UUFFM0MsaUhBQWlIO1FBQ2pILG1IQUFtSDtRQUNuSCxnSEFBZ0g7UUFDaEgsb0hBQW9IO1FBQ3BILDhHQUE4RztRQUM5RyxpREFBaUQ7UUFDakRILFNBQVMsQ0FBRUcsRUFBRyxHQUFHTCxVQUFVTSxVQUFVLENBQUVEO0lBQ3pDO0lBQ0EsT0FBT0g7QUFDVDtBQUVBLGVBQWVSLHVCQUF1QiJ9

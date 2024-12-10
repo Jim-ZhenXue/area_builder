@@ -1,0 +1,41 @@
+// Copyright 2013-2024, University of Colorado Boulder
+/**
+ * Highlight node for navigation bar screen buttons, phet button, etc.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import optionize from '../../phet-core/js/optionize.js';
+import { Color, HBox, LinearGradient, Rectangle } from '../../scenery/js/imports.js';
+import joist from './joist.js';
+let HighlightNode = class HighlightNode extends HBox {
+    /**
+   * @param width - can be mutated with the `spacing` property.
+   * @param height
+   * @param [providedOptions]
+   */ constructor(width, height, providedOptions){
+        const options = optionize()({
+            fill: 'white',
+            highlightWidth: 1,
+            pickable: false
+        }, providedOptions);
+        assert && assert(options.spacing === undefined, 'HighlightNode sets spacing');
+        options.spacing = width;
+        const innerColor = options.fill;
+        const outerColor = Color.toColor(innerColor).withAlpha(0); // transparent
+        const barOptions = {
+            fill: new LinearGradient(0, 0, 0, height).addColorStop(0, outerColor).addColorStop(0.5, innerColor).addColorStop(1, outerColor)
+        };
+        const leftBar = new Rectangle(0, 0, options.highlightWidth, height, barOptions);
+        const rightBar = new Rectangle(0, 0, options.highlightWidth, height, barOptions);
+        assert && assert(!options.children, 'HighlightNode sets children');
+        options.children = [
+            leftBar,
+            rightBar
+        ];
+        super(options);
+    }
+};
+joist.register('HighlightNode', HighlightNode);
+export default HighlightNode;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL0hpZ2hsaWdodE5vZGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTMtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogSGlnaGxpZ2h0IG5vZGUgZm9yIG5hdmlnYXRpb24gYmFyIHNjcmVlbiBidXR0b25zLCBwaGV0IGJ1dHRvbiwgZXRjLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBvcHRpb25pemUgZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgeyBDb2xvciwgSEJveCwgSEJveE9wdGlvbnMsIExpbmVhckdyYWRpZW50LCBSZWN0YW5nbGUsIFRDb2xvciB9IGZyb20gJy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgam9pc3QgZnJvbSAnLi9qb2lzdC5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSB7XG4gIGhpZ2hsaWdodFdpZHRoPzogbnVtYmVyO1xuICBmaWxsPzogVENvbG9yO1xufTtcbnR5cGUgSGlnaGxpZ2h0Tm9kZU9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIEhCb3hPcHRpb25zO1xuXG5jbGFzcyBIaWdobGlnaHROb2RlIGV4dGVuZHMgSEJveCB7XG5cbiAgLyoqXG4gICAqIEBwYXJhbSB3aWR0aCAtIGNhbiBiZSBtdXRhdGVkIHdpdGggdGhlIGBzcGFjaW5nYCBwcm9wZXJ0eS5cbiAgICogQHBhcmFtIGhlaWdodFxuICAgKiBAcGFyYW0gW3Byb3ZpZGVkT3B0aW9uc11cbiAgICovXG4gIHB1YmxpYyBjb25zdHJ1Y3Rvciggd2lkdGg6IG51bWJlciwgaGVpZ2h0OiBudW1iZXIsIHByb3ZpZGVkT3B0aW9ucz86IEhpZ2hsaWdodE5vZGVPcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxIaWdobGlnaHROb2RlT3B0aW9ucywgU2VsZk9wdGlvbnMsIEhCb3hPcHRpb25zPigpKCB7XG4gICAgICBmaWxsOiAnd2hpdGUnLFxuICAgICAgaGlnaGxpZ2h0V2lkdGg6IDEsXG4gICAgICBwaWNrYWJsZTogZmFsc2VcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIGFzc2VydCAmJiBhc3NlcnQoIG9wdGlvbnMuc3BhY2luZyA9PT0gdW5kZWZpbmVkLCAnSGlnaGxpZ2h0Tm9kZSBzZXRzIHNwYWNpbmcnICk7XG4gICAgb3B0aW9ucy5zcGFjaW5nID0gd2lkdGg7XG5cbiAgICBjb25zdCBpbm5lckNvbG9yID0gb3B0aW9ucy5maWxsO1xuICAgIGNvbnN0IG91dGVyQ29sb3IgPSBDb2xvci50b0NvbG9yKCBpbm5lckNvbG9yICkud2l0aEFscGhhKCAwICk7IC8vIHRyYW5zcGFyZW50XG5cbiAgICBjb25zdCBiYXJPcHRpb25zID0ge1xuICAgICAgZmlsbDogbmV3IExpbmVhckdyYWRpZW50KCAwLCAwLCAwLCBoZWlnaHQgKVxuICAgICAgICAuYWRkQ29sb3JTdG9wKCAwLCBvdXRlckNvbG9yIClcbiAgICAgICAgLmFkZENvbG9yU3RvcCggMC41LCBpbm5lckNvbG9yIClcbiAgICAgICAgLmFkZENvbG9yU3RvcCggMSwgb3V0ZXJDb2xvciApXG4gICAgfTtcbiAgICBjb25zdCBsZWZ0QmFyID0gbmV3IFJlY3RhbmdsZSggMCwgMCwgb3B0aW9ucy5oaWdobGlnaHRXaWR0aCwgaGVpZ2h0LCBiYXJPcHRpb25zICk7XG4gICAgY29uc3QgcmlnaHRCYXIgPSBuZXcgUmVjdGFuZ2xlKCAwLCAwLCBvcHRpb25zLmhpZ2hsaWdodFdpZHRoLCBoZWlnaHQsIGJhck9wdGlvbnMgKTtcblxuICAgIGFzc2VydCAmJiBhc3NlcnQoICFvcHRpb25zLmNoaWxkcmVuLCAnSGlnaGxpZ2h0Tm9kZSBzZXRzIGNoaWxkcmVuJyApO1xuICAgIG9wdGlvbnMuY2hpbGRyZW4gPSBbIGxlZnRCYXIsIHJpZ2h0QmFyIF07XG5cbiAgICBzdXBlciggb3B0aW9ucyApO1xuICB9XG59XG5cbmpvaXN0LnJlZ2lzdGVyKCAnSGlnaGxpZ2h0Tm9kZScsIEhpZ2hsaWdodE5vZGUgKTtcbmV4cG9ydCBkZWZhdWx0IEhpZ2hsaWdodE5vZGU7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsIkNvbG9yIiwiSEJveCIsIkxpbmVhckdyYWRpZW50IiwiUmVjdGFuZ2xlIiwiam9pc3QiLCJIaWdobGlnaHROb2RlIiwid2lkdGgiLCJoZWlnaHQiLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiZmlsbCIsImhpZ2hsaWdodFdpZHRoIiwicGlja2FibGUiLCJhc3NlcnQiLCJzcGFjaW5nIiwidW5kZWZpbmVkIiwiaW5uZXJDb2xvciIsIm91dGVyQ29sb3IiLCJ0b0NvbG9yIiwid2l0aEFscGhhIiwiYmFyT3B0aW9ucyIsImFkZENvbG9yU3RvcCIsImxlZnRCYXIiLCJyaWdodEJhciIsImNoaWxkcmVuIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLGVBQWUsa0NBQWtDO0FBQ3hELFNBQVNDLEtBQUssRUFBRUMsSUFBSSxFQUFlQyxjQUFjLEVBQUVDLFNBQVMsUUFBZ0IsOEJBQThCO0FBQzFHLE9BQU9DLFdBQVcsYUFBYTtBQVEvQixJQUFBLEFBQU1DLGdCQUFOLE1BQU1BLHNCQUFzQko7SUFFMUI7Ozs7R0FJQyxHQUNELFlBQW9CSyxLQUFhLEVBQUVDLE1BQWMsRUFBRUMsZUFBc0MsQ0FBRztRQUUxRixNQUFNQyxVQUFVVixZQUE2RDtZQUMzRVcsTUFBTTtZQUNOQyxnQkFBZ0I7WUFDaEJDLFVBQVU7UUFDWixHQUFHSjtRQUVISyxVQUFVQSxPQUFRSixRQUFRSyxPQUFPLEtBQUtDLFdBQVc7UUFDakROLFFBQVFLLE9BQU8sR0FBR1I7UUFFbEIsTUFBTVUsYUFBYVAsUUFBUUMsSUFBSTtRQUMvQixNQUFNTyxhQUFhakIsTUFBTWtCLE9BQU8sQ0FBRUYsWUFBYUcsU0FBUyxDQUFFLElBQUssY0FBYztRQUU3RSxNQUFNQyxhQUFhO1lBQ2pCVixNQUFNLElBQUlSLGVBQWdCLEdBQUcsR0FBRyxHQUFHSyxRQUNoQ2MsWUFBWSxDQUFFLEdBQUdKLFlBQ2pCSSxZQUFZLENBQUUsS0FBS0wsWUFDbkJLLFlBQVksQ0FBRSxHQUFHSjtRQUN0QjtRQUNBLE1BQU1LLFVBQVUsSUFBSW5CLFVBQVcsR0FBRyxHQUFHTSxRQUFRRSxjQUFjLEVBQUVKLFFBQVFhO1FBQ3JFLE1BQU1HLFdBQVcsSUFBSXBCLFVBQVcsR0FBRyxHQUFHTSxRQUFRRSxjQUFjLEVBQUVKLFFBQVFhO1FBRXRFUCxVQUFVQSxPQUFRLENBQUNKLFFBQVFlLFFBQVEsRUFBRTtRQUNyQ2YsUUFBUWUsUUFBUSxHQUFHO1lBQUVGO1lBQVNDO1NBQVU7UUFFeEMsS0FBSyxDQUFFZDtJQUNUO0FBQ0Y7QUFFQUwsTUFBTXFCLFFBQVEsQ0FBRSxpQkFBaUJwQjtBQUNqQyxlQUFlQSxjQUFjIn0=

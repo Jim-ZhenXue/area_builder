@@ -1,0 +1,36 @@
+// Copyright 2013-2024, University of Colorado Boulder
+/**
+ * Tracks a single touch point
+ *
+ * IE guidelines for Touch-friendly sites: http://blogs.msdn.com/b/ie/archive/2012/04/20/guidelines-for-building-touch-friendly-sites.aspx
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { Pointer, scenery } from '../imports.js';
+let Touch = class Touch extends Pointer {
+    /**
+   * Sets information in this Touch for a given touch move. (scenery-internal)
+   *
+   * @returns - Whether the point changed
+   */ move(point) {
+        const pointChanged = this.hasPointChanged(point);
+        this.point = point;
+        return pointChanged;
+    }
+    /**
+   * Returns an improved string representation of this object.
+   */ toString() {
+        return `Touch#${this.id}`;
+    }
+    isTouchLike() {
+        return true;
+    }
+    constructor(id, point, event){
+        super(point, 'touch'); // true: touches always start in the down state
+        this.id = id;
+        sceneryLog && sceneryLog.Pointer && sceneryLog.Pointer(`Created ${this.toString()}`);
+    }
+};
+export { Touch as default };
+scenery.register('Touch', Touch);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvaW5wdXQvVG91Y2gudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTMtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogVHJhY2tzIGEgc2luZ2xlIHRvdWNoIHBvaW50XG4gKlxuICogSUUgZ3VpZGVsaW5lcyBmb3IgVG91Y2gtZnJpZW5kbHkgc2l0ZXM6IGh0dHA6Ly9ibG9ncy5tc2RuLmNvbS9iL2llL2FyY2hpdmUvMjAxMi8wNC8yMC9ndWlkZWxpbmVzLWZvci1idWlsZGluZy10b3VjaC1mcmllbmRseS1zaXRlcy5hc3B4XG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCBWZWN0b3IyIGZyb20gJy4uLy4uLy4uL2RvdC9qcy9WZWN0b3IyLmpzJztcbmltcG9ydCB7IFBvaW50ZXIsIHNjZW5lcnkgfSBmcm9tICcuLi9pbXBvcnRzLmpzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgVG91Y2ggZXh0ZW5kcyBQb2ludGVyIHtcblxuICAvLyBGb3IgdHJhY2tpbmcgd2hpY2ggdG91Y2ggaXMgd2hpY2hcbiAgcHVibGljIGlkOiBudW1iZXI7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBpZDogbnVtYmVyLCBwb2ludDogVmVjdG9yMiwgZXZlbnQ6IEV2ZW50ICkge1xuICAgIHN1cGVyKCBwb2ludCwgJ3RvdWNoJyApOyAvLyB0cnVlOiB0b3VjaGVzIGFsd2F5cyBzdGFydCBpbiB0aGUgZG93biBzdGF0ZVxuXG4gICAgdGhpcy5pZCA9IGlkO1xuXG4gICAgc2NlbmVyeUxvZyAmJiBzY2VuZXJ5TG9nLlBvaW50ZXIgJiYgc2NlbmVyeUxvZy5Qb2ludGVyKCBgQ3JlYXRlZCAke3RoaXMudG9TdHJpbmcoKX1gICk7XG4gIH1cblxuICAvKipcbiAgICogU2V0cyBpbmZvcm1hdGlvbiBpbiB0aGlzIFRvdWNoIGZvciBhIGdpdmVuIHRvdWNoIG1vdmUuIChzY2VuZXJ5LWludGVybmFsKVxuICAgKlxuICAgKiBAcmV0dXJucyAtIFdoZXRoZXIgdGhlIHBvaW50IGNoYW5nZWRcbiAgICovXG4gIHB1YmxpYyBtb3ZlKCBwb2ludDogVmVjdG9yMiApOiBib29sZWFuIHtcbiAgICBjb25zdCBwb2ludENoYW5nZWQgPSB0aGlzLmhhc1BvaW50Q2hhbmdlZCggcG9pbnQgKTtcblxuICAgIHRoaXMucG9pbnQgPSBwb2ludDtcblxuICAgIHJldHVybiBwb2ludENoYW5nZWQ7XG4gIH1cblxuICAvKipcbiAgICogUmV0dXJucyBhbiBpbXByb3ZlZCBzdHJpbmcgcmVwcmVzZW50YXRpb24gb2YgdGhpcyBvYmplY3QuXG4gICAqL1xuICBwdWJsaWMgb3ZlcnJpZGUgdG9TdHJpbmcoKTogc3RyaW5nIHtcbiAgICByZXR1cm4gYFRvdWNoIyR7dGhpcy5pZH1gO1xuICB9XG5cbiAgcHVibGljIG92ZXJyaWRlIGlzVG91Y2hMaWtlKCk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0cnVlO1xuICB9XG59XG5cbnNjZW5lcnkucmVnaXN0ZXIoICdUb3VjaCcsIFRvdWNoICk7Il0sIm5hbWVzIjpbIlBvaW50ZXIiLCJzY2VuZXJ5IiwiVG91Y2giLCJtb3ZlIiwicG9pbnQiLCJwb2ludENoYW5nZWQiLCJoYXNQb2ludENoYW5nZWQiLCJ0b1N0cmluZyIsImlkIiwiaXNUb3VjaExpa2UiLCJldmVudCIsInNjZW5lcnlMb2ciLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Q0FNQyxHQUdELFNBQVNBLE9BQU8sRUFBRUMsT0FBTyxRQUFRLGdCQUFnQjtBQUVsQyxJQUFBLEFBQU1DLFFBQU4sTUFBTUEsY0FBY0Y7SUFhakM7Ozs7R0FJQyxHQUNELEFBQU9HLEtBQU1DLEtBQWMsRUFBWTtRQUNyQyxNQUFNQyxlQUFlLElBQUksQ0FBQ0MsZUFBZSxDQUFFRjtRQUUzQyxJQUFJLENBQUNBLEtBQUssR0FBR0E7UUFFYixPQUFPQztJQUNUO0lBRUE7O0dBRUMsR0FDRCxBQUFnQkUsV0FBbUI7UUFDakMsT0FBTyxDQUFDLE1BQU0sRUFBRSxJQUFJLENBQUNDLEVBQUUsRUFBRTtJQUMzQjtJQUVnQkMsY0FBdUI7UUFDckMsT0FBTztJQUNUO0lBOUJBLFlBQW9CRCxFQUFVLEVBQUVKLEtBQWMsRUFBRU0sS0FBWSxDQUFHO1FBQzdELEtBQUssQ0FBRU4sT0FBTyxVQUFXLCtDQUErQztRQUV4RSxJQUFJLENBQUNJLEVBQUUsR0FBR0E7UUFFVkcsY0FBY0EsV0FBV1gsT0FBTyxJQUFJVyxXQUFXWCxPQUFPLENBQUUsQ0FBQyxRQUFRLEVBQUUsSUFBSSxDQUFDTyxRQUFRLElBQUk7SUFDdEY7QUF5QkY7QUFwQ0EsU0FBcUJMLG1CQW9DcEI7QUFFREQsUUFBUVcsUUFBUSxDQUFFLFNBQVNWIn0=

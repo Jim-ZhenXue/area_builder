@@ -1,0 +1,11 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * Run internal tests for the Gruntfile. Note the output is reported over console.log, so be careful what you output.
+ * The command invoked is something like this: execSync( `${gruntCommand} test-grunt --brands=a,b,c --lint=false --type-check=false` )
+ *
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import testGruntOptions from './util/testGruntOptions.js';
+testGruntOptions();
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9ncnVudC90YXNrcy90ZXN0LWdydW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcbi8qKlxuICogUnVuIGludGVybmFsIHRlc3RzIGZvciB0aGUgR3J1bnRmaWxlLiBOb3RlIHRoZSBvdXRwdXQgaXMgcmVwb3J0ZWQgb3ZlciBjb25zb2xlLmxvZywgc28gYmUgY2FyZWZ1bCB3aGF0IHlvdSBvdXRwdXQuXG4gKiBUaGUgY29tbWFuZCBpbnZva2VkIGlzIHNvbWV0aGluZyBsaWtlIHRoaXM6IGV4ZWNTeW5jKCBgJHtncnVudENvbW1hbmR9IHRlc3QtZ3J1bnQgLS1icmFuZHM9YSxiLGMgLS1saW50PWZhbHNlIC0tdHlwZS1jaGVjaz1mYWxzZWAgKVxuICpcbiAqXG4gKiBAYXV0aG9yIFNhbSBSZWlkIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCB0ZXN0R3J1bnRPcHRpb25zIGZyb20gJy4vdXRpbC90ZXN0R3J1bnRPcHRpb25zLmpzJztcblxudGVzdEdydW50T3B0aW9ucygpOyJdLCJuYW1lcyI6WyJ0ZXN0R3J1bnRPcHRpb25zIl0sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFDakQ7Ozs7OztDQU1DLEdBRUQsT0FBT0Esc0JBQXNCLDZCQUE2QjtBQUUxREEifQ==

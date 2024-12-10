@@ -1,0 +1,9 @@
+// Copyright 2015-2022, University of Colorado Boulder
+/**
+ * Creates the namespace for this repository.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import Namespace from '../../phet-core/js/Namespace.js';
+export default new Namespace('sceneryPhet');
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9zY2VuZXJ5UGhldC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNS0yMDIyLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBDcmVhdGVzIHRoZSBuYW1lc3BhY2UgZm9yIHRoaXMgcmVwb3NpdG9yeS5cbiAqXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBOYW1lc3BhY2UgZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL05hbWVzcGFjZS5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IG5ldyBOYW1lc3BhY2UoICdzY2VuZXJ5UGhldCcgKTsiXSwibmFtZXMiOlsiTmFtZXNwYWNlIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGVBQWUsa0NBQWtDO0FBRXhELGVBQWUsSUFBSUEsVUFBVyxlQUFnQiJ9

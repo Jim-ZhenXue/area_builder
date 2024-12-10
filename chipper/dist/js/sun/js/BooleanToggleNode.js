@@ -1,0 +1,27 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Shows one node if the property is true or another node if the property is false. Used to indicate boolean state.
+ * This is a convenience API for true/false nodes, see SelectedNode for the general case.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import sun from './sun.js';
+import ToggleNode from './ToggleNode.js';
+let BooleanToggleNode = class BooleanToggleNode extends ToggleNode {
+    constructor(booleanProperty, trueNode, falseNode, providedOptions){
+        super(booleanProperty, [
+            {
+                value: true,
+                createNode: ()=>trueNode
+            },
+            {
+                value: false,
+                createNode: ()=>falseNode
+            }
+        ], providedOptions);
+    }
+};
+export { BooleanToggleNode as default };
+sun.register('BooleanToggleNode', BooleanToggleNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3N1bi9qcy9Cb29sZWFuVG9nZ2xlTm9kZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBTaG93cyBvbmUgbm9kZSBpZiB0aGUgcHJvcGVydHkgaXMgdHJ1ZSBvciBhbm90aGVyIG5vZGUgaWYgdGhlIHByb3BlcnR5IGlzIGZhbHNlLiBVc2VkIHRvIGluZGljYXRlIGJvb2xlYW4gc3RhdGUuXG4gKiBUaGlzIGlzIGEgY29udmVuaWVuY2UgQVBJIGZvciB0cnVlL2ZhbHNlIG5vZGVzLCBzZWUgU2VsZWN0ZWROb2RlIGZvciB0aGUgZ2VuZXJhbCBjYXNlLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBUUmVhZE9ubHlQcm9wZXJ0eSBmcm9tICcuLi8uLi9heG9uL2pzL1RSZWFkT25seVByb3BlcnR5LmpzJztcbmltcG9ydCB7IEVtcHR5U2VsZk9wdGlvbnMgfSBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvb3B0aW9uaXplLmpzJztcbmltcG9ydCB7IE5vZGUgfSBmcm9tICcuLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IHN1biBmcm9tICcuL3N1bi5qcyc7XG5pbXBvcnQgVG9nZ2xlTm9kZSwgeyBUb2dnbGVOb2RlT3B0aW9ucyB9IGZyb20gJy4vVG9nZ2xlTm9kZS5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSBFbXB0eVNlbGZPcHRpb25zO1xuXG5leHBvcnQgdHlwZSBCb29sZWFuVG9nZ2xlTm9kZU9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIFRvZ2dsZU5vZGVPcHRpb25zO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBCb29sZWFuVG9nZ2xlTm9kZSBleHRlbmRzIFRvZ2dsZU5vZGU8Ym9vbGVhbj4ge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggYm9vbGVhblByb3BlcnR5OiBUUmVhZE9ubHlQcm9wZXJ0eTxib29sZWFuPixcbiAgICAgICAgICAgICAgICAgICAgICB0cnVlTm9kZTogTm9kZSxcbiAgICAgICAgICAgICAgICAgICAgICBmYWxzZU5vZGU6IE5vZGUsXG4gICAgICAgICAgICAgICAgICAgICAgcHJvdmlkZWRPcHRpb25zPzogQm9vbGVhblRvZ2dsZU5vZGVPcHRpb25zICkge1xuICAgIHN1cGVyKCBib29sZWFuUHJvcGVydHksIFtcbiAgICAgIHsgdmFsdWU6IHRydWUsIGNyZWF0ZU5vZGU6ICgpID0+IHRydWVOb2RlIH0sXG4gICAgICB7IHZhbHVlOiBmYWxzZSwgY3JlYXRlTm9kZTogKCkgPT4gZmFsc2VOb2RlIH1cbiAgICBdLCBwcm92aWRlZE9wdGlvbnMgKTtcbiAgfVxufVxuXG5zdW4ucmVnaXN0ZXIoICdCb29sZWFuVG9nZ2xlTm9kZScsIEJvb2xlYW5Ub2dnbGVOb2RlICk7Il0sIm5hbWVzIjpbInN1biIsIlRvZ2dsZU5vZGUiLCJCb29sZWFuVG9nZ2xlTm9kZSIsImJvb2xlYW5Qcm9wZXJ0eSIsInRydWVOb2RlIiwiZmFsc2VOb2RlIiwicHJvdmlkZWRPcHRpb25zIiwidmFsdWUiLCJjcmVhdGVOb2RlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7O0NBTUMsR0FLRCxPQUFPQSxTQUFTLFdBQVc7QUFDM0IsT0FBT0MsZ0JBQXVDLGtCQUFrQjtBQU1qRCxJQUFBLEFBQU1DLG9CQUFOLE1BQU1BLDBCQUEwQkQ7SUFFN0MsWUFBb0JFLGVBQTJDLEVBQzNDQyxRQUFjLEVBQ2RDLFNBQWUsRUFDZkMsZUFBMEMsQ0FBRztRQUMvRCxLQUFLLENBQUVILGlCQUFpQjtZQUN0QjtnQkFBRUksT0FBTztnQkFBTUMsWUFBWSxJQUFNSjtZQUFTO1lBQzFDO2dCQUFFRyxPQUFPO2dCQUFPQyxZQUFZLElBQU1IO1lBQVU7U0FDN0MsRUFBRUM7SUFDTDtBQUNGO0FBWEEsU0FBcUJKLCtCQVdwQjtBQUVERixJQUFJUyxRQUFRLENBQUUscUJBQXFCUCJ9

@@ -1,0 +1,19 @@
+// Copyright 2017, University of Colorado Boulder
+/**
+ * Executes a command on the dev server
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ const buildLocal = require('./buildLocal');
+const ssh = require('./ssh');
+/**
+ * Executes a command on the dev server
+ * @public
+ *
+ * @param {string} cmd
+ * @returns {Promise.<string>} - Stdout
+ * @rejects {ExecuteError}
+ */ module.exports = function(cmd) {
+    return ssh(buildLocal.devUsername, buildLocal.devDeployServer, cmd);
+};
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZGV2U3NoLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE3LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBFeGVjdXRlcyBhIGNvbW1hbmQgb24gdGhlIGRldiBzZXJ2ZXJcbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuY29uc3QgYnVpbGRMb2NhbCA9IHJlcXVpcmUoICcuL2J1aWxkTG9jYWwnICk7XG5jb25zdCBzc2ggPSByZXF1aXJlKCAnLi9zc2gnICk7XG5cbi8qKlxuICogRXhlY3V0ZXMgYSBjb21tYW5kIG9uIHRoZSBkZXYgc2VydmVyXG4gKiBAcHVibGljXG4gKlxuICogQHBhcmFtIHtzdHJpbmd9IGNtZFxuICogQHJldHVybnMge1Byb21pc2UuPHN0cmluZz59IC0gU3Rkb3V0XG4gKiBAcmVqZWN0cyB7RXhlY3V0ZUVycm9yfVxuICovXG5tb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uKCBjbWQgKSB7XG4gIHJldHVybiBzc2goIGJ1aWxkTG9jYWwuZGV2VXNlcm5hbWUsIGJ1aWxkTG9jYWwuZGV2RGVwbG95U2VydmVyLCBjbWQgKTtcbn07Il0sIm5hbWVzIjpbImJ1aWxkTG9jYWwiLCJyZXF1aXJlIiwic3NoIiwibW9kdWxlIiwiZXhwb3J0cyIsImNtZCIsImRldlVzZXJuYW1lIiwiZGV2RGVwbG95U2VydmVyIl0sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFFakQ7Ozs7Q0FJQyxHQUVELE1BQU1BLGFBQWFDLFFBQVM7QUFDNUIsTUFBTUMsTUFBTUQsUUFBUztBQUVyQjs7Ozs7OztDQU9DLEdBQ0RFLE9BQU9DLE9BQU8sR0FBRyxTQUFVQyxHQUFHO0lBQzVCLE9BQU9ILElBQUtGLFdBQVdNLFdBQVcsRUFBRU4sV0FBV08sZUFBZSxFQUFFRjtBQUNsRSJ9

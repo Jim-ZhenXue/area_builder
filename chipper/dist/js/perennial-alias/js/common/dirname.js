@@ -1,0 +1,20 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * Instead of using __dirname, which doesn't work for type:module mode (only commonjs). We cannot factoru out
+ * "import.meta.url" because it is different based on the file context you call it in.
+ *
+ * Usage will look something like this:
+ *
+ * // @ts-expect-error - until we have "type": "module" in our package.json
+ * const __dirname = dirname( import.meta.url );
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import path from 'path';
+import { fileURLToPath } from 'url';
+export default function dirname(url) {
+    const filename = fileURLToPath(url);
+    return path.dirname(filename);
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZGlybmFtZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogSW5zdGVhZCBvZiB1c2luZyBfX2Rpcm5hbWUsIHdoaWNoIGRvZXNuJ3Qgd29yayBmb3IgdHlwZTptb2R1bGUgbW9kZSAob25seSBjb21tb25qcykuIFdlIGNhbm5vdCBmYWN0b3J1IG91dFxuICogXCJpbXBvcnQubWV0YS51cmxcIiBiZWNhdXNlIGl0IGlzIGRpZmZlcmVudCBiYXNlZCBvbiB0aGUgZmlsZSBjb250ZXh0IHlvdSBjYWxsIGl0IGluLlxuICpcbiAqIFVzYWdlIHdpbGwgbG9vayBzb21ldGhpbmcgbGlrZSB0aGlzOlxuICpcbiAqIC8vIEB0cy1leHBlY3QtZXJyb3IgLSB1bnRpbCB3ZSBoYXZlIFwidHlwZVwiOiBcIm1vZHVsZVwiIGluIG91ciBwYWNrYWdlLmpzb25cbiAqIGNvbnN0IF9fZGlybmFtZSA9IGRpcm5hbWUoIGltcG9ydC5tZXRhLnVybCApO1xuICpcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IHBhdGggZnJvbSAncGF0aCc7XG5pbXBvcnQgeyBmaWxlVVJMVG9QYXRoIH0gZnJvbSAndXJsJztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gZGlybmFtZSggdXJsOiBzdHJpbmcgKTogc3RyaW5nIHtcbiAgY29uc3QgZmlsZW5hbWUgPSBmaWxlVVJMVG9QYXRoKCB1cmwgKTtcbiAgcmV0dXJuIHBhdGguZGlybmFtZSggZmlsZW5hbWUgKTtcbn0iXSwibmFtZXMiOlsicGF0aCIsImZpbGVVUkxUb1BhdGgiLCJkaXJuYW1lIiwidXJsIiwiZmlsZW5hbWUiXSwibWFwcGluZ3MiOiJBQUFBLGlEQUFpRDtBQUVqRDs7Ozs7Ozs7Ozs7Q0FXQyxHQUVELE9BQU9BLFVBQVUsT0FBTztBQUN4QixTQUFTQyxhQUFhLFFBQVEsTUFBTTtBQUVwQyxlQUFlLFNBQVNDLFFBQVNDLEdBQVc7SUFDMUMsTUFBTUMsV0FBV0gsY0FBZUU7SUFDaEMsT0FBT0gsS0FBS0UsT0FBTyxDQUFFRTtBQUN2QiJ9

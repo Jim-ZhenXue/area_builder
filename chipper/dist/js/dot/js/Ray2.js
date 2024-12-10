@@ -1,0 +1,37 @@
+// Copyright 2013-2024, University of Colorado Boulder
+/**
+ * 2-dimensional ray consisting of an origin point and a unit direction vector.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import dot from './dot.js';
+let Ray2 = class Ray2 {
+    /**
+   * Returns a new Ray that has it origin shifted to a position given by an amount distance*this.direction.
+   */ shifted(distance) {
+        return new Ray2(this.pointAtDistance(distance), this.direction);
+    }
+    /**
+   * Returns a position that is a distance 'distance' along the ray.
+   */ pointAtDistance(distance) {
+        return this.position.plus(this.direction.timesScalar(distance));
+    }
+    /**
+   * Returns the attributes of this ray into a string
+   */ toString() {
+        return `${this.position.toString()} => ${this.direction.toString()}`;
+    }
+    /**
+   * Constructs a2D ray using the supplied origin position and unit length direction vector
+   *
+   * @param position - the ray's point of origin
+   * @param direction - the ray's unit direction vector
+   */ constructor(position, direction){
+        this.position = position;
+        this.direction = direction;
+        assert && assert(Math.abs(direction.magnitude - 1) < 0.01, 'the direction must be a unit vector');
+    }
+};
+export { Ray2 as default };
+dot.register('Ray2', Ray2);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2RvdC9qcy9SYXkyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDEzLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIDItZGltZW5zaW9uYWwgcmF5IGNvbnNpc3Rpbmcgb2YgYW4gb3JpZ2luIHBvaW50IGFuZCBhIHVuaXQgZGlyZWN0aW9uIHZlY3Rvci5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IGRvdCBmcm9tICcuL2RvdC5qcyc7XG5pbXBvcnQgVmVjdG9yMiBmcm9tICcuL1ZlY3RvcjIuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBSYXkyIHtcblxuICBwdWJsaWMgcG9zaXRpb246IFZlY3RvcjI7XG4gIHB1YmxpYyBkaXJlY3Rpb246IFZlY3RvcjI7XG5cbiAgLyoqXG4gICAqIENvbnN0cnVjdHMgYTJEIHJheSB1c2luZyB0aGUgc3VwcGxpZWQgb3JpZ2luIHBvc2l0aW9uIGFuZCB1bml0IGxlbmd0aCBkaXJlY3Rpb24gdmVjdG9yXG4gICAqXG4gICAqIEBwYXJhbSBwb3NpdGlvbiAtIHRoZSByYXkncyBwb2ludCBvZiBvcmlnaW5cbiAgICogQHBhcmFtIGRpcmVjdGlvbiAtIHRoZSByYXkncyB1bml0IGRpcmVjdGlvbiB2ZWN0b3JcbiAgICovXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcG9zaXRpb246IFZlY3RvcjIsIGRpcmVjdGlvbjogVmVjdG9yMiApIHtcblxuICAgIHRoaXMucG9zaXRpb24gPSBwb3NpdGlvbjtcbiAgICB0aGlzLmRpcmVjdGlvbiA9IGRpcmVjdGlvbjtcblxuICAgIGFzc2VydCAmJiBhc3NlcnQoIE1hdGguYWJzKCBkaXJlY3Rpb24ubWFnbml0dWRlIC0gMSApIDwgMC4wMSwgJ3RoZSBkaXJlY3Rpb24gbXVzdCBiZSBhIHVuaXQgdmVjdG9yJyApO1xuICB9XG5cbiAgLyoqXG4gICAqIFJldHVybnMgYSBuZXcgUmF5IHRoYXQgaGFzIGl0IG9yaWdpbiBzaGlmdGVkIHRvIGEgcG9zaXRpb24gZ2l2ZW4gYnkgYW4gYW1vdW50IGRpc3RhbmNlKnRoaXMuZGlyZWN0aW9uLlxuICAgKi9cbiAgcHVibGljIHNoaWZ0ZWQoIGRpc3RhbmNlOiBudW1iZXIgKTogUmF5MiB7XG4gICAgcmV0dXJuIG5ldyBSYXkyKCB0aGlzLnBvaW50QXREaXN0YW5jZSggZGlzdGFuY2UgKSwgdGhpcy5kaXJlY3Rpb24gKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBSZXR1cm5zIGEgcG9zaXRpb24gdGhhdCBpcyBhIGRpc3RhbmNlICdkaXN0YW5jZScgYWxvbmcgdGhlIHJheS5cbiAgICovXG4gIHB1YmxpYyBwb2ludEF0RGlzdGFuY2UoIGRpc3RhbmNlOiBudW1iZXIgKTogVmVjdG9yMiB7XG4gICAgcmV0dXJuIHRoaXMucG9zaXRpb24ucGx1cyggdGhpcy5kaXJlY3Rpb24udGltZXNTY2FsYXIoIGRpc3RhbmNlICkgKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBSZXR1cm5zIHRoZSBhdHRyaWJ1dGVzIG9mIHRoaXMgcmF5IGludG8gYSBzdHJpbmdcbiAgICovXG4gIHB1YmxpYyB0b1N0cmluZygpOiBzdHJpbmcge1xuICAgIHJldHVybiBgJHt0aGlzLnBvc2l0aW9uLnRvU3RyaW5nKCl9ID0+ICR7dGhpcy5kaXJlY3Rpb24udG9TdHJpbmcoKX1gO1xuICB9XG59XG5cbmRvdC5yZWdpc3RlciggJ1JheTInLCBSYXkyICk7Il0sIm5hbWVzIjpbImRvdCIsIlJheTIiLCJzaGlmdGVkIiwiZGlzdGFuY2UiLCJwb2ludEF0RGlzdGFuY2UiLCJkaXJlY3Rpb24iLCJwb3NpdGlvbiIsInBsdXMiLCJ0aW1lc1NjYWxhciIsInRvU3RyaW5nIiwiYXNzZXJ0IiwiTWF0aCIsImFicyIsIm1hZ25pdHVkZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLFNBQVMsV0FBVztBQUdaLElBQUEsQUFBTUMsT0FBTixNQUFNQTtJQW1CbkI7O0dBRUMsR0FDRCxBQUFPQyxRQUFTQyxRQUFnQixFQUFTO1FBQ3ZDLE9BQU8sSUFBSUYsS0FBTSxJQUFJLENBQUNHLGVBQWUsQ0FBRUQsV0FBWSxJQUFJLENBQUNFLFNBQVM7SUFDbkU7SUFFQTs7R0FFQyxHQUNELEFBQU9ELGdCQUFpQkQsUUFBZ0IsRUFBWTtRQUNsRCxPQUFPLElBQUksQ0FBQ0csUUFBUSxDQUFDQyxJQUFJLENBQUUsSUFBSSxDQUFDRixTQUFTLENBQUNHLFdBQVcsQ0FBRUw7SUFDekQ7SUFFQTs7R0FFQyxHQUNELEFBQU9NLFdBQW1CO1FBQ3hCLE9BQU8sR0FBRyxJQUFJLENBQUNILFFBQVEsQ0FBQ0csUUFBUSxHQUFHLElBQUksRUFBRSxJQUFJLENBQUNKLFNBQVMsQ0FBQ0ksUUFBUSxJQUFJO0lBQ3RFO0lBakNBOzs7OztHQUtDLEdBQ0QsWUFBb0JILFFBQWlCLEVBQUVELFNBQWtCLENBQUc7UUFFMUQsSUFBSSxDQUFDQyxRQUFRLEdBQUdBO1FBQ2hCLElBQUksQ0FBQ0QsU0FBUyxHQUFHQTtRQUVqQkssVUFBVUEsT0FBUUMsS0FBS0MsR0FBRyxDQUFFUCxVQUFVUSxTQUFTLEdBQUcsS0FBTSxNQUFNO0lBQ2hFO0FBc0JGO0FBdkNBLFNBQXFCWixrQkF1Q3BCO0FBRURELElBQUljLFFBQVEsQ0FBRSxRQUFRYiJ9

@@ -1,0 +1,25 @@
+// Copyright 2017-2023, University of Colorado Boulder
+/**
+ * Given inheritance using inherit, this will give the full prototype chain.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import phetCore from './phetCore.js';
+/*
+ * @param type - Constructor for the type in question.
+ * @returns - a list of the prototypes
+ */ function inheritance(type) {
+    const types = [
+        type
+    ];
+    let proto = type.prototype;
+    while(proto && (proto = Object.getPrototypeOf(proto))){
+        if (proto.constructor) {
+            types.push(proto.constructor);
+        }
+    }
+    return types;
+}
+phetCore.register('inheritance', inheritance);
+export default inheritance;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9pbmhlcml0YW5jZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNy0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBHaXZlbiBpbmhlcml0YW5jZSB1c2luZyBpbmhlcml0LCB0aGlzIHdpbGwgZ2l2ZSB0aGUgZnVsbCBwcm90b3R5cGUgY2hhaW4uXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCBwaGV0Q29yZSBmcm9tICcuL3BoZXRDb3JlLmpzJztcbmltcG9ydCBJbnRlbnRpb25hbEFueSBmcm9tICcuL3R5cGVzL0ludGVudGlvbmFsQW55LmpzJztcblxuLypcbiAqIEBwYXJhbSB0eXBlIC0gQ29uc3RydWN0b3IgZm9yIHRoZSB0eXBlIGluIHF1ZXN0aW9uLlxuICogQHJldHVybnMgLSBhIGxpc3Qgb2YgdGhlIHByb3RvdHlwZXNcbiAqL1xuZnVuY3Rpb24gaW5oZXJpdGFuY2UoIHR5cGU6IEludGVudGlvbmFsQW55ICk6IEludGVudGlvbmFsQW55W10ge1xuICBjb25zdCB0eXBlcyA9IFsgdHlwZSBdO1xuXG4gIGxldCBwcm90byA9IHR5cGUucHJvdG90eXBlO1xuICB3aGlsZSAoIHByb3RvICYmICggcHJvdG8gPSBPYmplY3QuZ2V0UHJvdG90eXBlT2YoIHByb3RvICkgKSApIHtcbiAgICBpZiAoIHByb3RvLmNvbnN0cnVjdG9yICkge1xuICAgICAgdHlwZXMucHVzaCggcHJvdG8uY29uc3RydWN0b3IgKTtcbiAgICB9XG4gIH1cbiAgcmV0dXJuIHR5cGVzO1xufVxuXG5waGV0Q29yZS5yZWdpc3RlciggJ2luaGVyaXRhbmNlJywgaW5oZXJpdGFuY2UgKTtcblxuZXhwb3J0IGRlZmF1bHQgaW5oZXJpdGFuY2U7Il0sIm5hbWVzIjpbInBoZXRDb3JlIiwiaW5oZXJpdGFuY2UiLCJ0eXBlIiwidHlwZXMiLCJwcm90byIsInByb3RvdHlwZSIsIk9iamVjdCIsImdldFByb3RvdHlwZU9mIiwiY29uc3RydWN0b3IiLCJwdXNoIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsY0FBYyxnQkFBZ0I7QUFHckM7OztDQUdDLEdBQ0QsU0FBU0MsWUFBYUMsSUFBb0I7SUFDeEMsTUFBTUMsUUFBUTtRQUFFRDtLQUFNO0lBRXRCLElBQUlFLFFBQVFGLEtBQUtHLFNBQVM7SUFDMUIsTUFBUUQsU0FBV0EsQ0FBQUEsUUFBUUUsT0FBT0MsY0FBYyxDQUFFSCxNQUFNLEVBQU07UUFDNUQsSUFBS0EsTUFBTUksV0FBVyxFQUFHO1lBQ3ZCTCxNQUFNTSxJQUFJLENBQUVMLE1BQU1JLFdBQVc7UUFDL0I7SUFDRjtJQUNBLE9BQU9MO0FBQ1Q7QUFFQUgsU0FBU1UsUUFBUSxDQUFFLGVBQWVUO0FBRWxDLGVBQWVBLFlBQVkifQ==

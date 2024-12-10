@@ -1,0 +1,55 @@
+// Copyright 2016-2024, University of Colorado Boulder
+/**
+ * MathSymbolFont is the font used for math symbols (e.g. 'x', 'y') in PhET sims.
+ * See https://github.com/phetsims/scenery/issues/545
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import DerivedStringProperty from '../../axon/js/DerivedStringProperty.js';
+import optionize from '../../phet-core/js/optionize.js';
+import StringUtils from '../../phetcommon/js/util/StringUtils.js';
+import { Font } from '../../scenery/js/imports.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import sceneryPhet from './sceneryPhet.js';
+const DEFAULT_STYLE = 'italic';
+let MathSymbolFont = class MathSymbolFont extends Font {
+    /**
+   * Converts a string to the markup needed to display that string with RichText, using the same family as MathSymbolFont.
+   * @param text
+   * @param [style] - see Font options.style
+   */ static getRichTextMarkup(text, style = DEFAULT_STYLE) {
+        assert && assert(Font.isFontStyle(style), `invalid style: ${style}`);
+        return StringUtils.fillIn('<span style=\'font-family: {{family}};font-style: {{style}}\'>{{text}}</span>', {
+            family: MathSymbolFont.FAMILY,
+            style: style,
+            text: text
+        });
+    }
+    /**
+   * Wraps a dynamic string in RichText markup that will display the string in the same font as MathSymbolFont.
+   */ static createDerivedProperty(symbolStringProperty, providedOptions) {
+        const options = providedOptions || {};
+        return new DerivedStringProperty([
+            symbolStringProperty
+        ], (symbolString)=>MathSymbolFont.getRichTextMarkup(symbolString, options.style || DEFAULT_STYLE), {
+            tandem: options.tandem || Tandem.OPT_OUT
+        });
+    }
+    constructor(providedOptions){
+        // convenience constructor: new MathSymbolFont( {number|string} size )
+        if (typeof providedOptions === 'number' || typeof providedOptions === 'string') {
+            providedOptions = {
+                size: providedOptions
+            };
+        }
+        const options = optionize()({
+            family: MathSymbolFont.FAMILY,
+            style: DEFAULT_STYLE
+        }, providedOptions);
+        super(options);
+    }
+};
+MathSymbolFont.FAMILY = '"Times New Roman", Times, serif';
+export { MathSymbolFont as default };
+sceneryPhet.register('MathSymbolFont', MathSymbolFont);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9NYXRoU3ltYm9sRm9udC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBNYXRoU3ltYm9sRm9udCBpcyB0aGUgZm9udCB1c2VkIGZvciBtYXRoIHN5bWJvbHMgKGUuZy4gJ3gnLCAneScpIGluIFBoRVQgc2ltcy5cbiAqIFNlZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvc2NlbmVyeS9pc3N1ZXMvNTQ1XG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgRGVyaXZlZFN0cmluZ1Byb3BlcnR5IGZyb20gJy4uLy4uL2F4b24vanMvRGVyaXZlZFN0cmluZ1Byb3BlcnR5LmpzJztcbmltcG9ydCBUUmVhZE9ubHlQcm9wZXJ0eSBmcm9tICcuLi8uLi9heG9uL2pzL1RSZWFkT25seVByb3BlcnR5LmpzJztcbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFBpY2tPcHRpb25hbCBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvUGlja09wdGlvbmFsLmpzJztcbmltcG9ydCBTdHJpY3RPbWl0IGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9TdHJpY3RPbWl0LmpzJztcbmltcG9ydCBTdHJpbmdVdGlscyBmcm9tICcuLi8uLi9waGV0Y29tbW9uL2pzL3V0aWwvU3RyaW5nVXRpbHMuanMnO1xuaW1wb3J0IHsgRm9udCwgRm9udE9wdGlvbnMgfSBmcm9tICcuLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IHsgUGhldGlvT2JqZWN0T3B0aW9ucyB9IGZyb20gJy4uLy4uL3RhbmRlbS9qcy9QaGV0aW9PYmplY3QuanMnO1xuaW1wb3J0IFRhbmRlbSBmcm9tICcuLi8uLi90YW5kZW0vanMvVGFuZGVtLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuL3NjZW5lcnlQaGV0LmpzJztcblxuY29uc3QgREVGQVVMVF9TVFlMRSA9ICdpdGFsaWMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0gRW1wdHlTZWxmT3B0aW9ucztcblxuZXhwb3J0IHR5cGUgTWF0aFN5bWJvbEZvbnRPcHRpb25zID0gU2VsZk9wdGlvbnMgJiBTdHJpY3RPbWl0PEZvbnRPcHRpb25zLCAnZmFtaWx5Jz47XG5cbnR5cGUgQ3JlYXRlRGVyaXZlZFByb3BlcnR5T3B0aW9ucyA9IFBpY2tPcHRpb25hbDxGb250T3B0aW9ucywgJ3N0eWxlJz4gJiBQaWNrT3B0aW9uYWw8UGhldGlvT2JqZWN0T3B0aW9ucywgJ3RhbmRlbSc+O1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBNYXRoU3ltYm9sRm9udCBleHRlbmRzIEZvbnQge1xuXG4gIHB1YmxpYyBzdGF0aWMgcmVhZG9ubHkgRkFNSUxZID0gJ1wiVGltZXMgTmV3IFJvbWFuXCIsIFRpbWVzLCBzZXJpZic7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcm92aWRlZE9wdGlvbnM/OiBudW1iZXIgfCBzdHJpbmcgfCBNYXRoU3ltYm9sRm9udE9wdGlvbnMgKSB7XG5cbiAgICAvLyBjb252ZW5pZW5jZSBjb25zdHJ1Y3RvcjogbmV3IE1hdGhTeW1ib2xGb250KCB7bnVtYmVyfHN0cmluZ30gc2l6ZSApXG4gICAgaWYgKCB0eXBlb2YgcHJvdmlkZWRPcHRpb25zID09PSAnbnVtYmVyJyB8fCB0eXBlb2YgcHJvdmlkZWRPcHRpb25zID09PSAnc3RyaW5nJyApIHtcbiAgICAgIHByb3ZpZGVkT3B0aW9ucyA9IHtcbiAgICAgICAgc2l6ZTogcHJvdmlkZWRPcHRpb25zXG4gICAgICB9O1xuICAgIH1cblxuICAgIGNvbnN0IG9wdGlvbnMgPSBvcHRpb25pemU8TWF0aFN5bWJvbEZvbnRPcHRpb25zLCBTZWxmT3B0aW9ucywgRm9udE9wdGlvbnM+KCkoIHtcbiAgICAgIGZhbWlseTogTWF0aFN5bWJvbEZvbnQuRkFNSUxZLFxuICAgICAgc3R5bGU6IERFRkFVTFRfU1RZTEVcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIHN1cGVyKCBvcHRpb25zICk7XG4gIH1cblxuICAvKipcbiAgICogQ29udmVydHMgYSBzdHJpbmcgdG8gdGhlIG1hcmt1cCBuZWVkZWQgdG8gZGlzcGxheSB0aGF0IHN0cmluZyB3aXRoIFJpY2hUZXh0LCB1c2luZyB0aGUgc2FtZSBmYW1pbHkgYXMgTWF0aFN5bWJvbEZvbnQuXG4gICAqIEBwYXJhbSB0ZXh0XG4gICAqIEBwYXJhbSBbc3R5bGVdIC0gc2VlIEZvbnQgb3B0aW9ucy5zdHlsZVxuICAgKi9cbiAgcHVibGljIHN0YXRpYyBnZXRSaWNoVGV4dE1hcmt1cCggdGV4dDogc3RyaW5nLCBzdHlsZSA9IERFRkFVTFRfU1RZTEUgKTogc3RyaW5nIHtcbiAgICBhc3NlcnQgJiYgYXNzZXJ0KCBGb250LmlzRm9udFN0eWxlKCBzdHlsZSApLCBgaW52YWxpZCBzdHlsZTogJHtzdHlsZX1gICk7XG4gICAgcmV0dXJuIFN0cmluZ1V0aWxzLmZpbGxJbiggJzxzcGFuIHN0eWxlPVxcJ2ZvbnQtZmFtaWx5OiB7e2ZhbWlseX19O2ZvbnQtc3R5bGU6IHt7c3R5bGV9fVxcJz57e3RleHR9fTwvc3Bhbj4nLCB7XG4gICAgICBmYW1pbHk6IE1hdGhTeW1ib2xGb250LkZBTUlMWSxcbiAgICAgIHN0eWxlOiBzdHlsZSxcbiAgICAgIHRleHQ6IHRleHRcbiAgICB9ICk7XG4gIH1cblxuICAvKipcbiAgICogV3JhcHMgYSBkeW5hbWljIHN0cmluZyBpbiBSaWNoVGV4dCBtYXJrdXAgdGhhdCB3aWxsIGRpc3BsYXkgdGhlIHN0cmluZyBpbiB0aGUgc2FtZSBmb250IGFzIE1hdGhTeW1ib2xGb250LlxuICAgKi9cbiAgcHVibGljIHN0YXRpYyBjcmVhdGVEZXJpdmVkUHJvcGVydHkoIHN5bWJvbFN0cmluZ1Byb3BlcnR5OiBUUmVhZE9ubHlQcm9wZXJ0eTxzdHJpbmc+LCBwcm92aWRlZE9wdGlvbnM/OiBDcmVhdGVEZXJpdmVkUHJvcGVydHlPcHRpb25zICk6IFRSZWFkT25seVByb3BlcnR5PHN0cmluZz4ge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IHByb3ZpZGVkT3B0aW9ucyB8fCB7fTtcblxuICAgIHJldHVybiBuZXcgRGVyaXZlZFN0cmluZ1Byb3BlcnR5KCBbIHN5bWJvbFN0cmluZ1Byb3BlcnR5IF0sXG4gICAgICBzeW1ib2xTdHJpbmcgPT4gTWF0aFN5bWJvbEZvbnQuZ2V0UmljaFRleHRNYXJrdXAoIHN5bWJvbFN0cmluZywgb3B0aW9ucy5zdHlsZSB8fCBERUZBVUxUX1NUWUxFICksIHtcbiAgICAgICAgdGFuZGVtOiBvcHRpb25zLnRhbmRlbSB8fCBUYW5kZW0uT1BUX09VVFxuICAgICAgfSApO1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnTWF0aFN5bWJvbEZvbnQnLCBNYXRoU3ltYm9sRm9udCApOyJdLCJuYW1lcyI6WyJEZXJpdmVkU3RyaW5nUHJvcGVydHkiLCJvcHRpb25pemUiLCJTdHJpbmdVdGlscyIsIkZvbnQiLCJUYW5kZW0iLCJzY2VuZXJ5UGhldCIsIkRFRkFVTFRfU1RZTEUiLCJNYXRoU3ltYm9sRm9udCIsImdldFJpY2hUZXh0TWFya3VwIiwidGV4dCIsInN0eWxlIiwiYXNzZXJ0IiwiaXNGb250U3R5bGUiLCJmaWxsSW4iLCJmYW1pbHkiLCJGQU1JTFkiLCJjcmVhdGVEZXJpdmVkUHJvcGVydHkiLCJzeW1ib2xTdHJpbmdQcm9wZXJ0eSIsInByb3ZpZGVkT3B0aW9ucyIsIm9wdGlvbnMiLCJzeW1ib2xTdHJpbmciLCJ0YW5kZW0iLCJPUFRfT1VUIiwic2l6ZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7O0NBS0MsR0FFRCxPQUFPQSwyQkFBMkIseUNBQXlDO0FBRTNFLE9BQU9DLGVBQXFDLGtDQUFrQztBQUc5RSxPQUFPQyxpQkFBaUIsMENBQTBDO0FBQ2xFLFNBQVNDLElBQUksUUFBcUIsOEJBQThCO0FBRWhFLE9BQU9DLFlBQVksNEJBQTRCO0FBQy9DLE9BQU9DLGlCQUFpQixtQkFBbUI7QUFFM0MsTUFBTUMsZ0JBQWdCO0FBUVAsSUFBQSxBQUFNQyxpQkFBTixNQUFNQSx1QkFBdUJKO0lBcUIxQzs7OztHQUlDLEdBQ0QsT0FBY0ssa0JBQW1CQyxJQUFZLEVBQUVDLFFBQVFKLGFBQWEsRUFBVztRQUM3RUssVUFBVUEsT0FBUVIsS0FBS1MsV0FBVyxDQUFFRixRQUFTLENBQUMsZUFBZSxFQUFFQSxPQUFPO1FBQ3RFLE9BQU9SLFlBQVlXLE1BQU0sQ0FBRSxpRkFBaUY7WUFDMUdDLFFBQVFQLGVBQWVRLE1BQU07WUFDN0JMLE9BQU9BO1lBQ1BELE1BQU1BO1FBQ1I7SUFDRjtJQUVBOztHQUVDLEdBQ0QsT0FBY08sc0JBQXVCQyxvQkFBK0MsRUFBRUMsZUFBOEMsRUFBOEI7UUFFaEssTUFBTUMsVUFBVUQsbUJBQW1CLENBQUM7UUFFcEMsT0FBTyxJQUFJbEIsc0JBQXVCO1lBQUVpQjtTQUFzQixFQUN4REcsQ0FBQUEsZUFBZ0JiLGVBQWVDLGlCQUFpQixDQUFFWSxjQUFjRCxRQUFRVCxLQUFLLElBQUlKLGdCQUFpQjtZQUNoR2UsUUFBUUYsUUFBUUUsTUFBTSxJQUFJakIsT0FBT2tCLE9BQU87UUFDMUM7SUFDSjtJQTFDQSxZQUFvQkosZUFBeUQsQ0FBRztRQUU5RSxzRUFBc0U7UUFDdEUsSUFBSyxPQUFPQSxvQkFBb0IsWUFBWSxPQUFPQSxvQkFBb0IsVUFBVztZQUNoRkEsa0JBQWtCO2dCQUNoQkssTUFBTUw7WUFDUjtRQUNGO1FBRUEsTUFBTUMsVUFBVWxCLFlBQThEO1lBQzVFYSxRQUFRUCxlQUFlUSxNQUFNO1lBQzdCTCxPQUFPSjtRQUNULEdBQUdZO1FBRUgsS0FBSyxDQUFFQztJQUNUO0FBNEJGO0FBL0NxQlosZUFFSVEsU0FBUztBQUZsQyxTQUFxQlIsNEJBK0NwQjtBQUVERixZQUFZbUIsUUFBUSxDQUFFLGtCQUFrQmpCIn0=

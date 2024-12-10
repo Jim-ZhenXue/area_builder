@@ -1,0 +1,143 @@
+// Copyright 2020-2024, University of Colorado Boulder
+/**
+ * A lightweight version of Property (that satisfies some of the interface), meant for high-performance applications
+ * where validation, phet-io support and other things are not needed.
+ *
+ * This directly extends TinyEmitter in order to save memory.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import axon from './axon.js';
+import TinyEmitter from './TinyEmitter.js';
+import Validation from './Validation.js';
+let TinyProperty = class TinyProperty extends TinyEmitter {
+    /**
+   * Returns the value.
+   *
+   * You can also use the es5 getter (property.value) but this means is provided for inner loops
+   * or internal code that must be fast.
+   */ get() {
+        return this._value;
+    }
+    /**
+   * Returns the value.
+   */ get value() {
+        return this.get();
+    }
+    /**
+   * Sets the value.
+   */ set value(newValue) {
+        this.set(newValue);
+    }
+    /**
+   * Sets the value and notifies listeners, unless deferred or disposed. You can also use the es5 getter
+   * (property.value) but this means is provided for inner loops or internal code that must be fast. If the value
+   * hasn't changed, this is a no-op.
+   */ set(value) {
+        // It is very important that `equalsValue` holds all logic about if the value should change AND if listeners
+        // are notified.
+        if (!this.equalsValue(value)) {
+            const oldValue = this._value;
+            this.setPropertyValue(value);
+            this.notifyListeners(oldValue);
+        }
+    }
+    /**
+   * Sets the value without notifying any listeners. This is a place to override if a subtype performs additional work
+   * when setting the value.
+   */ setPropertyValue(value) {
+        this._value = value;
+    }
+    /**
+   * Returns true if and only if the specified value equals the value of this property. This is used to determine if
+   * a Property's value should change and if listeners should be notified. In general, this implementation should
+   * not be overridden except to provide more correct "value"s as parameters for the areValuesEqual() function.
+   */ equalsValue(value) {
+        return this.areValuesEqual(value, this._value);
+    }
+    /**
+   * Central logic for determining value equality for Property. This determines if a value should change, and if
+   * listeners should notify based on set() call.
+   *
+   * Determines equality semantics for value comparison, including whether notifications are sent out when the
+   * wrapped value changes, and whether onValue() is triggered. See Validation.equalsForValidationStrategy for details
+   * and doc on ValueComparisonStrategy
+   *
+   * Overriding this function is deprecated, instead provide a custom valueComparisonStrategy.
+   */ areValuesEqual(a, b) {
+        return Validation.equalsForValidationStrategy(a, b, this.valueComparisonStrategy);
+    }
+    /**
+   * Directly notifies listeners of changes.
+   */ notifyListeners(oldValue) {
+        // We use this._value here for performance, AND to avoid calling onAccessAttempt unnecessarily.
+        this.emit(this._value, oldValue, this);
+    }
+    /**
+   * Adds listener and calls it immediately. If listener is already registered, this is a no-op. The initial
+   * notification provides the current value for newValue and null for oldValue.
+   */ link(listener) {
+        this.addListener(listener);
+        listener(this._value, null, this); // null should be used when an object is expected but unavailable
+    }
+    /**
+   * Add an listener to the TinyProperty, without calling it back right away. This is used when you need to register a
+   * listener without an immediate callback.
+   */ lazyLink(listener) {
+        this.addListener(listener); // Because it's a lazy link, it will never be called with null
+    }
+    /**
+   * Removes a listener. If listener is not registered, this is a no-op.
+   */ unlink(listener) {
+        this.removeListener(listener);
+    }
+    /**
+   * Removes all listeners. If no listeners are registered, this is a no-op.
+   */ unlinkAll() {
+        this.removeAllListeners();
+    }
+    /**
+   * Links an object's named attribute to this TinyProperty.  Returns a handle so it can be removed using
+   * TinyProperty.unlink();
+   * Example: modelVisibleProperty.linkAttribute(view, 'visible');
+   *
+   * NOTE: Duplicated with Property.linkAttribute
+   */ linkAttribute(object, attributeName) {
+        const handle = (value)=>{
+            object[attributeName] = value;
+        };
+        this.link(handle);
+        return handle;
+    }
+    /**
+   * Returns true if the value can be set externally, using .value= or set()
+   */ isSettable() {
+        return true;
+    }
+    get valueComparisonStrategy() {
+        return this._valueComparisonStrategy || 'reference';
+    }
+    set valueComparisonStrategy(valueComparisonStrategy) {
+        this._valueComparisonStrategy = valueComparisonStrategy;
+    }
+    /**
+   * Releases references.
+   */ dispose() {
+        // Remove any listeners that are still attached (note that the emitter dispose would do this also, but without the
+        // potentially-needed extra logic of changeCount, etc.)
+        this.unlinkAll();
+        super.dispose();
+    }
+    constructor(value, onBeforeNotify, hasListenerOrderDependencies, reentrantNotificationStrategy){
+        // Defaults to "queue" for Properties so that we notify all listeners for a value change
+        // before notifying for the next value change. For example, if we change from a->b, and one listener changes the value
+        // from b->c, that reentrant value change will queue its listeners for after all listeners have fired for a->b. For
+        // specifics see documentation in TinyEmitter.
+        super(onBeforeNotify, hasListenerOrderDependencies, reentrantNotificationStrategy || 'queue');
+        this._value = value;
+    }
+};
+export { TinyProperty as default };
+axon.register('TinyProperty', TinyProperty);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2F4b24vanMvVGlueVByb3BlcnR5LnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIwLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEEgbGlnaHR3ZWlnaHQgdmVyc2lvbiBvZiBQcm9wZXJ0eSAodGhhdCBzYXRpc2ZpZXMgc29tZSBvZiB0aGUgaW50ZXJmYWNlKSwgbWVhbnQgZm9yIGhpZ2gtcGVyZm9ybWFuY2UgYXBwbGljYXRpb25zXG4gKiB3aGVyZSB2YWxpZGF0aW9uLCBwaGV0LWlvIHN1cHBvcnQgYW5kIG90aGVyIHRoaW5ncyBhcmUgbm90IG5lZWRlZC5cbiAqXG4gKiBUaGlzIGRpcmVjdGx5IGV4dGVuZHMgVGlueUVtaXR0ZXIgaW4gb3JkZXIgdG8gc2F2ZSBtZW1vcnkuXG4gKlxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgYXhvbiBmcm9tICcuL2F4b24uanMnO1xuaW1wb3J0IFRpbnlFbWl0dGVyLCB7IFRpbnlFbWl0dGVyT3B0aW9ucyB9IGZyb20gJy4vVGlueUVtaXR0ZXIuanMnO1xuaW1wb3J0IFRQcm9wZXJ0eSBmcm9tICcuL1RQcm9wZXJ0eS5qcyc7XG5pbXBvcnQgVFJlYWRPbmx5UHJvcGVydHksIHsgUHJvcGVydHlMYXp5TGlua0xpc3RlbmVyLCBQcm9wZXJ0eUxpbmtMaXN0ZW5lciwgUHJvcGVydHlMaXN0ZW5lciB9IGZyb20gJy4vVFJlYWRPbmx5UHJvcGVydHkuanMnO1xuaW1wb3J0IFZhbGlkYXRpb24sIHsgVmFsdWVDb21wYXJpc29uU3RyYXRlZ3kgfSBmcm9tICcuL1ZhbGlkYXRpb24uanMnO1xuXG5leHBvcnQgdHlwZSBUaW55UHJvcGVydHlFbWl0dGVyUGFyYW1ldGVyczxUPiA9IFsgVCwgVCB8IG51bGwsIFRSZWFkT25seVByb3BlcnR5PFQ+IF07XG5leHBvcnQgdHlwZSBUaW55UHJvcGVydHlPbkJlZm9yZU5vdGlmeTxUPiA9ICggLi4uYXJnczogVGlueVByb3BlcnR5RW1pdHRlclBhcmFtZXRlcnM8VD4gKSA9PiB2b2lkO1xuXG4vLyBKdXN0IGEgc2hvcnRlciBuYW1lXG50eXBlIE9wdGlvbnNBbGlhczxUPiA9IFRpbnlFbWl0dGVyT3B0aW9uczxUaW55UHJvcGVydHlFbWl0dGVyUGFyYW1ldGVyczxUPj47XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFRpbnlQcm9wZXJ0eTxUPiBleHRlbmRzIFRpbnlFbWl0dGVyPFRpbnlQcm9wZXJ0eUVtaXR0ZXJQYXJhbWV0ZXJzPFQ+PiBpbXBsZW1lbnRzIFRQcm9wZXJ0eTxUPiB7XG5cbiAgcHVibGljIF92YWx1ZTogVDsgLy8gU3RvcmUgdGhlIGludGVybmFsIHZhbHVlIC0tIE5PVCBmb3IgZ2VuZXJhbCB1c2UgKGJ1dCB1c2VkIGluIFNjZW5lcnkgZm9yIHBlcmZvcm1hbmNlKVxuXG4gIC8vIElmIHByb3ZpZGVkLCBmb3JjZSB1c2Ugb2YgdGhlIGN1c3RvbSB2YWx1ZSBjb21wYXJpc29uIGJleW9uZCByZWZlcmVuY2UgZXF1YWxpdHkgY2hlY2tzLiBLZWVwcyBzb21lIGNvbXBhdGliaWxpdHlcbiAgLy8gd2l0aCB0aGUgUHJvcGVydHkgaW50ZXJmYWNlIHRvIGhhdmUgdGhlIGVxdWFsaXR5IGNoZWNrIGluIHRoaXMgdHlwZSB0b28uIE5vdCBkZWZpbmluZyBpbiB0aGUgZ2VuZXJhbCBjYXNlIGZvclxuICAvLyBtZW1vcnkgdXNhZ2UsIG9ubHkgdXNpbmcgaWYgd2Ugbm90aWNlIHRoaXMgZmxhZyBzZXQuIFRoaXMgaXMgbm90IHJlYWRvbmx5IHNvIHRoYXQgd2UgY2FuIHVwZGF0ZSB0aGlzIGFmdGVyIGNvbnN0cnVjdGlvbi4gRGVmYXVsdHMgdG8gXCJyZWZlcmVuY2VcIi5cbiAgcHVibGljIF92YWx1ZUNvbXBhcmlzb25TdHJhdGVneT86IFZhbHVlQ29tcGFyaXNvblN0cmF0ZWd5PFQ+O1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggdmFsdWU6IFQsIG9uQmVmb3JlTm90aWZ5PzogT3B0aW9uc0FsaWFzPFQ+WydvbkJlZm9yZU5vdGlmeSddIHwgbnVsbCxcbiAgICAgICAgICAgICAgICAgICAgICBoYXNMaXN0ZW5lck9yZGVyRGVwZW5kZW5jaWVzPzogT3B0aW9uc0FsaWFzPFQ+WydoYXNMaXN0ZW5lck9yZGVyRGVwZW5kZW5jaWVzJ10gfCBudWxsLFxuICAgICAgICAgICAgICAgICAgICAgIHJlZW50cmFudE5vdGlmaWNhdGlvblN0cmF0ZWd5PzogT3B0aW9uc0FsaWFzPFQ+WydyZWVudHJhbnROb3RpZmljYXRpb25TdHJhdGVneSddIHwgbnVsbCApIHtcblxuICAgIC8vIERlZmF1bHRzIHRvIFwicXVldWVcIiBmb3IgUHJvcGVydGllcyBzbyB0aGF0IHdlIG5vdGlmeSBhbGwgbGlzdGVuZXJzIGZvciBhIHZhbHVlIGNoYW5nZVxuICAgIC8vIGJlZm9yZSBub3RpZnlpbmcgZm9yIHRoZSBuZXh0IHZhbHVlIGNoYW5nZS4gRm9yIGV4YW1wbGUsIGlmIHdlIGNoYW5nZSBmcm9tIGEtPmIsIGFuZCBvbmUgbGlzdGVuZXIgY2hhbmdlcyB0aGUgdmFsdWVcbiAgICAvLyBmcm9tIGItPmMsIHRoYXQgcmVlbnRyYW50IHZhbHVlIGNoYW5nZSB3aWxsIHF1ZXVlIGl0cyBsaXN0ZW5lcnMgZm9yIGFmdGVyIGFsbCBsaXN0ZW5lcnMgaGF2ZSBmaXJlZCBmb3IgYS0+Yi4gRm9yXG4gICAgLy8gc3BlY2lmaWNzIHNlZSBkb2N1bWVudGF0aW9uIGluIFRpbnlFbWl0dGVyLlxuICAgIHN1cGVyKCBvbkJlZm9yZU5vdGlmeSwgaGFzTGlzdGVuZXJPcmRlckRlcGVuZGVuY2llcywgcmVlbnRyYW50Tm90aWZpY2F0aW9uU3RyYXRlZ3kgfHwgJ3F1ZXVlJyApO1xuXG4gICAgdGhpcy5fdmFsdWUgPSB2YWx1ZTtcbiAgfVxuXG4gIC8qKlxuICAgKiBSZXR1cm5zIHRoZSB2YWx1ZS5cbiAgICpcbiAgICogWW91IGNhbiBhbHNvIHVzZSB0aGUgZXM1IGdldHRlciAocHJvcGVydHkudmFsdWUpIGJ1dCB0aGlzIG1lYW5zIGlzIHByb3ZpZGVkIGZvciBpbm5lciBsb29wc1xuICAgKiBvciBpbnRlcm5hbCBjb2RlIHRoYXQgbXVzdCBiZSBmYXN0LlxuICAgKi9cbiAgcHVibGljIGdldCgpOiBUIHtcbiAgICByZXR1cm4gdGhpcy5fdmFsdWU7XG4gIH1cblxuICAvKipcbiAgICogUmV0dXJucyB0aGUgdmFsdWUuXG4gICAqL1xuICBwdWJsaWMgZ2V0IHZhbHVlKCk6IFQge1xuICAgIHJldHVybiB0aGlzLmdldCgpO1xuICB9XG5cbiAgLyoqXG4gICAqIFNldHMgdGhlIHZhbHVlLlxuICAgKi9cbiAgcHVibGljIHNldCB2YWx1ZSggbmV3VmFsdWU6IFQgKSB7XG4gICAgdGhpcy5zZXQoIG5ld1ZhbHVlICk7XG4gIH1cblxuICAvKipcbiAgICogU2V0cyB0aGUgdmFsdWUgYW5kIG5vdGlmaWVzIGxpc3RlbmVycywgdW5sZXNzIGRlZmVycmVkIG9yIGRpc3Bvc2VkLiBZb3UgY2FuIGFsc28gdXNlIHRoZSBlczUgZ2V0dGVyXG4gICAqIChwcm9wZXJ0eS52YWx1ZSkgYnV0IHRoaXMgbWVhbnMgaXMgcHJvdmlkZWQgZm9yIGlubmVyIGxvb3BzIG9yIGludGVybmFsIGNvZGUgdGhhdCBtdXN0IGJlIGZhc3QuIElmIHRoZSB2YWx1ZVxuICAgKiBoYXNuJ3QgY2hhbmdlZCwgdGhpcyBpcyBhIG5vLW9wLlxuICAgKi9cbiAgcHVibGljIHNldCggdmFsdWU6IFQgKTogdm9pZCB7XG5cbiAgICAvLyBJdCBpcyB2ZXJ5IGltcG9ydGFudCB0aGF0IGBlcXVhbHNWYWx1ZWAgaG9sZHMgYWxsIGxvZ2ljIGFib3V0IGlmIHRoZSB2YWx1ZSBzaG91bGQgY2hhbmdlIEFORCBpZiBsaXN0ZW5lcnNcbiAgICAvLyBhcmUgbm90aWZpZWQuXG4gICAgaWYgKCAhdGhpcy5lcXVhbHNWYWx1ZSggdmFsdWUgKSApIHtcbiAgICAgIGNvbnN0IG9sZFZhbHVlID0gdGhpcy5fdmFsdWU7XG5cbiAgICAgIHRoaXMuc2V0UHJvcGVydHlWYWx1ZSggdmFsdWUgKTtcblxuICAgICAgdGhpcy5ub3RpZnlMaXN0ZW5lcnMoIG9sZFZhbHVlICk7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIFNldHMgdGhlIHZhbHVlIHdpdGhvdXQgbm90aWZ5aW5nIGFueSBsaXN0ZW5lcnMuIFRoaXMgaXMgYSBwbGFjZSB0byBvdmVycmlkZSBpZiBhIHN1YnR5cGUgcGVyZm9ybXMgYWRkaXRpb25hbCB3b3JrXG4gICAqIHdoZW4gc2V0dGluZyB0aGUgdmFsdWUuXG4gICAqL1xuICBwdWJsaWMgc2V0UHJvcGVydHlWYWx1ZSggdmFsdWU6IFQgKTogdm9pZCB7XG4gICAgdGhpcy5fdmFsdWUgPSB2YWx1ZTtcbiAgfVxuXG4gIC8qKlxuICAgKiBSZXR1cm5zIHRydWUgaWYgYW5kIG9ubHkgaWYgdGhlIHNwZWNpZmllZCB2YWx1ZSBlcXVhbHMgdGhlIHZhbHVlIG9mIHRoaXMgcHJvcGVydHkuIFRoaXMgaXMgdXNlZCB0byBkZXRlcm1pbmUgaWZcbiAgICogYSBQcm9wZXJ0eSdzIHZhbHVlIHNob3VsZCBjaGFuZ2UgYW5kIGlmIGxpc3RlbmVycyBzaG91bGQgYmUgbm90aWZpZWQuIEluIGdlbmVyYWwsIHRoaXMgaW1wbGVtZW50YXRpb24gc2hvdWxkXG4gICAqIG5vdCBiZSBvdmVycmlkZGVuIGV4Y2VwdCB0byBwcm92aWRlIG1vcmUgY29ycmVjdCBcInZhbHVlXCJzIGFzIHBhcmFtZXRlcnMgZm9yIHRoZSBhcmVWYWx1ZXNFcXVhbCgpIGZ1bmN0aW9uLlxuICAgKi9cbiAgcHJvdGVjdGVkIGVxdWFsc1ZhbHVlKCB2YWx1ZTogVCApOiBib29sZWFuIHtcbiAgICByZXR1cm4gdGhpcy5hcmVWYWx1ZXNFcXVhbCggdmFsdWUsIHRoaXMuX3ZhbHVlICk7XG4gIH1cblxuICAvKipcbiAgICogQ2VudHJhbCBsb2dpYyBmb3IgZGV0ZXJtaW5pbmcgdmFsdWUgZXF1YWxpdHkgZm9yIFByb3BlcnR5LiBUaGlzIGRldGVybWluZXMgaWYgYSB2YWx1ZSBzaG91bGQgY2hhbmdlLCBhbmQgaWZcbiAgICogbGlzdGVuZXJzIHNob3VsZCBub3RpZnkgYmFzZWQgb24gc2V0KCkgY2FsbC5cbiAgICpcbiAgICogRGV0ZXJtaW5lcyBlcXVhbGl0eSBzZW1hbnRpY3MgZm9yIHZhbHVlIGNvbXBhcmlzb24sIGluY2x1ZGluZyB3aGV0aGVyIG5vdGlmaWNhdGlvbnMgYXJlIHNlbnQgb3V0IHdoZW4gdGhlXG4gICAqIHdyYXBwZWQgdmFsdWUgY2hhbmdlcywgYW5kIHdoZXRoZXIgb25WYWx1ZSgpIGlzIHRyaWdnZXJlZC4gU2VlIFZhbGlkYXRpb24uZXF1YWxzRm9yVmFsaWRhdGlvblN0cmF0ZWd5IGZvciBkZXRhaWxzXG4gICAqIGFuZCBkb2Mgb24gVmFsdWVDb21wYXJpc29uU3RyYXRlZ3lcbiAgICpcbiAgICogT3ZlcnJpZGluZyB0aGlzIGZ1bmN0aW9uIGlzIGRlcHJlY2F0ZWQsIGluc3RlYWQgcHJvdmlkZSBhIGN1c3RvbSB2YWx1ZUNvbXBhcmlzb25TdHJhdGVneS5cbiAgICovXG4gIHB1YmxpYyBhcmVWYWx1ZXNFcXVhbCggYTogVCwgYjogVCApOiBib29sZWFuIHtcbiAgICByZXR1cm4gVmFsaWRhdGlvbi5lcXVhbHNGb3JWYWxpZGF0aW9uU3RyYXRlZ3k8VD4oIGEsIGIsIHRoaXMudmFsdWVDb21wYXJpc29uU3RyYXRlZ3kgKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBEaXJlY3RseSBub3RpZmllcyBsaXN0ZW5lcnMgb2YgY2hhbmdlcy5cbiAgICovXG4gIHB1YmxpYyBub3RpZnlMaXN0ZW5lcnMoIG9sZFZhbHVlOiBUICk6IHZvaWQge1xuICAgIC8vIFdlIHVzZSB0aGlzLl92YWx1ZSBoZXJlIGZvciBwZXJmb3JtYW5jZSwgQU5EIHRvIGF2b2lkIGNhbGxpbmcgb25BY2Nlc3NBdHRlbXB0IHVubmVjZXNzYXJpbHkuXG4gICAgdGhpcy5lbWl0KCB0aGlzLl92YWx1ZSwgb2xkVmFsdWUsIHRoaXMgKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBBZGRzIGxpc3RlbmVyIGFuZCBjYWxscyBpdCBpbW1lZGlhdGVseS4gSWYgbGlzdGVuZXIgaXMgYWxyZWFkeSByZWdpc3RlcmVkLCB0aGlzIGlzIGEgbm8tb3AuIFRoZSBpbml0aWFsXG4gICAqIG5vdGlmaWNhdGlvbiBwcm92aWRlcyB0aGUgY3VycmVudCB2YWx1ZSBmb3IgbmV3VmFsdWUgYW5kIG51bGwgZm9yIG9sZFZhbHVlLlxuICAgKi9cbiAgcHVibGljIGxpbmsoIGxpc3RlbmVyOiBQcm9wZXJ0eUxpbmtMaXN0ZW5lcjxUPiApOiB2b2lkIHtcbiAgICB0aGlzLmFkZExpc3RlbmVyKCBsaXN0ZW5lciApO1xuXG4gICAgbGlzdGVuZXIoIHRoaXMuX3ZhbHVlLCBudWxsLCB0aGlzICk7IC8vIG51bGwgc2hvdWxkIGJlIHVzZWQgd2hlbiBhbiBvYmplY3QgaXMgZXhwZWN0ZWQgYnV0IHVuYXZhaWxhYmxlXG4gIH1cblxuICAvKipcbiAgICogQWRkIGFuIGxpc3RlbmVyIHRvIHRoZSBUaW55UHJvcGVydHksIHdpdGhvdXQgY2FsbGluZyBpdCBiYWNrIHJpZ2h0IGF3YXkuIFRoaXMgaXMgdXNlZCB3aGVuIHlvdSBuZWVkIHRvIHJlZ2lzdGVyIGFcbiAgICogbGlzdGVuZXIgd2l0aG91dCBhbiBpbW1lZGlhdGUgY2FsbGJhY2suXG4gICAqL1xuICBwdWJsaWMgbGF6eUxpbmsoIGxpc3RlbmVyOiBQcm9wZXJ0eUxhenlMaW5rTGlzdGVuZXI8VD4gKTogdm9pZCB7XG4gICAgdGhpcy5hZGRMaXN0ZW5lciggbGlzdGVuZXIgYXMgUHJvcGVydHlMaW5rTGlzdGVuZXI8VD4gKTsgLy8gQmVjYXVzZSBpdCdzIGEgbGF6eSBsaW5rLCBpdCB3aWxsIG5ldmVyIGJlIGNhbGxlZCB3aXRoIG51bGxcbiAgfVxuXG4gIC8qKlxuICAgKiBSZW1vdmVzIGEgbGlzdGVuZXIuIElmIGxpc3RlbmVyIGlzIG5vdCByZWdpc3RlcmVkLCB0aGlzIGlzIGEgbm8tb3AuXG4gICAqL1xuICBwdWJsaWMgdW5saW5rKCBsaXN0ZW5lcjogUHJvcGVydHlMaXN0ZW5lcjxUPiApOiB2b2lkIHtcbiAgICB0aGlzLnJlbW92ZUxpc3RlbmVyKCBsaXN0ZW5lciBhcyBQcm9wZXJ0eUxpbmtMaXN0ZW5lcjxUPiApO1xuICB9XG5cbiAgLyoqXG4gICAqIFJlbW92ZXMgYWxsIGxpc3RlbmVycy4gSWYgbm8gbGlzdGVuZXJzIGFyZSByZWdpc3RlcmVkLCB0aGlzIGlzIGEgbm8tb3AuXG4gICAqL1xuICBwdWJsaWMgdW5saW5rQWxsKCk6IHZvaWQge1xuICAgIHRoaXMucmVtb3ZlQWxsTGlzdGVuZXJzKCk7XG4gIH1cblxuICAvKipcbiAgICogTGlua3MgYW4gb2JqZWN0J3MgbmFtZWQgYXR0cmlidXRlIHRvIHRoaXMgVGlueVByb3BlcnR5LiAgUmV0dXJucyBhIGhhbmRsZSBzbyBpdCBjYW4gYmUgcmVtb3ZlZCB1c2luZ1xuICAgKiBUaW55UHJvcGVydHkudW5saW5rKCk7XG4gICAqIEV4YW1wbGU6IG1vZGVsVmlzaWJsZVByb3BlcnR5LmxpbmtBdHRyaWJ1dGUodmlldywgJ3Zpc2libGUnKTtcbiAgICpcbiAgICogTk9URTogRHVwbGljYXRlZCB3aXRoIFByb3BlcnR5LmxpbmtBdHRyaWJ1dGVcbiAgICovXG4gIHB1YmxpYyBsaW5rQXR0cmlidXRlPEF0dHIgZXh0ZW5kcyBzdHJpbmc+KCBvYmplY3Q6IFJlY29yZDxBdHRyLCBUPiwgYXR0cmlidXRlTmFtZTogQXR0ciApOiAoIHZhbHVlOiBUICkgPT4gdm9pZCB7XG4gICAgY29uc3QgaGFuZGxlID0gKCB2YWx1ZTogVCApID0+IHsgb2JqZWN0WyBhdHRyaWJ1dGVOYW1lIF0gPSB2YWx1ZTsgfTtcbiAgICB0aGlzLmxpbmsoIGhhbmRsZSApO1xuICAgIHJldHVybiBoYW5kbGU7XG4gIH1cblxuICAvKipcbiAgICogUmV0dXJucyB0cnVlIGlmIHRoZSB2YWx1ZSBjYW4gYmUgc2V0IGV4dGVybmFsbHksIHVzaW5nIC52YWx1ZT0gb3Igc2V0KClcbiAgICovXG4gIHB1YmxpYyBpc1NldHRhYmxlKCk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0cnVlO1xuICB9XG5cbiAgcHVibGljIGdldCB2YWx1ZUNvbXBhcmlzb25TdHJhdGVneSgpOiBWYWx1ZUNvbXBhcmlzb25TdHJhdGVneTxUPiB7XG4gICAgcmV0dXJuIHRoaXMuX3ZhbHVlQ29tcGFyaXNvblN0cmF0ZWd5IHx8ICdyZWZlcmVuY2UnO1xuICB9XG5cbiAgcHVibGljIHNldCB2YWx1ZUNvbXBhcmlzb25TdHJhdGVneSggdmFsdWVDb21wYXJpc29uU3RyYXRlZ3k6IFZhbHVlQ29tcGFyaXNvblN0cmF0ZWd5PFQ+ICkge1xuICAgIHRoaXMuX3ZhbHVlQ29tcGFyaXNvblN0cmF0ZWd5ID0gdmFsdWVDb21wYXJpc29uU3RyYXRlZ3k7XG4gIH1cblxuICAvKipcbiAgICogUmVsZWFzZXMgcmVmZXJlbmNlcy5cbiAgICovXG4gIHB1YmxpYyBvdmVycmlkZSBkaXNwb3NlKCk6IHZvaWQge1xuICAgIC8vIFJlbW92ZSBhbnkgbGlzdGVuZXJzIHRoYXQgYXJlIHN0aWxsIGF0dGFjaGVkIChub3RlIHRoYXQgdGhlIGVtaXR0ZXIgZGlzcG9zZSB3b3VsZCBkbyB0aGlzIGFsc28sIGJ1dCB3aXRob3V0IHRoZVxuICAgIC8vIHBvdGVudGlhbGx5LW5lZWRlZCBleHRyYSBsb2dpYyBvZiBjaGFuZ2VDb3VudCwgZXRjLilcbiAgICB0aGlzLnVubGlua0FsbCgpO1xuXG4gICAgc3VwZXIuZGlzcG9zZSgpO1xuICB9XG59XG5cbmF4b24ucmVnaXN0ZXIoICdUaW55UHJvcGVydHknLCBUaW55UHJvcGVydHkgKTsiXSwibmFtZXMiOlsiYXhvbiIsIlRpbnlFbWl0dGVyIiwiVmFsaWRhdGlvbiIsIlRpbnlQcm9wZXJ0eSIsImdldCIsIl92YWx1ZSIsInZhbHVlIiwibmV3VmFsdWUiLCJzZXQiLCJlcXVhbHNWYWx1ZSIsIm9sZFZhbHVlIiwic2V0UHJvcGVydHlWYWx1ZSIsIm5vdGlmeUxpc3RlbmVycyIsImFyZVZhbHVlc0VxdWFsIiwiYSIsImIiLCJlcXVhbHNGb3JWYWxpZGF0aW9uU3RyYXRlZ3kiLCJ2YWx1ZUNvbXBhcmlzb25TdHJhdGVneSIsImVtaXQiLCJsaW5rIiwibGlzdGVuZXIiLCJhZGRMaXN0ZW5lciIsImxhenlMaW5rIiwidW5saW5rIiwicmVtb3ZlTGlzdGVuZXIiLCJ1bmxpbmtBbGwiLCJyZW1vdmVBbGxMaXN0ZW5lcnMiLCJsaW5rQXR0cmlidXRlIiwib2JqZWN0IiwiYXR0cmlidXRlTmFtZSIsImhhbmRsZSIsImlzU2V0dGFibGUiLCJfdmFsdWVDb21wYXJpc29uU3RyYXRlZ3kiLCJkaXNwb3NlIiwib25CZWZvcmVOb3RpZnkiLCJoYXNMaXN0ZW5lck9yZGVyRGVwZW5kZW5jaWVzIiwicmVlbnRyYW50Tm90aWZpY2F0aW9uU3RyYXRlZ3kiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7OztDQVFDLEdBRUQsT0FBT0EsVUFBVSxZQUFZO0FBQzdCLE9BQU9DLGlCQUF5QyxtQkFBbUI7QUFHbkUsT0FBT0MsZ0JBQTZDLGtCQUFrQjtBQVF2RCxJQUFBLEFBQU1DLGVBQU4sTUFBTUEscUJBQXdCRjtJQXNCM0M7Ozs7O0dBS0MsR0FDRCxBQUFPRyxNQUFTO1FBQ2QsT0FBTyxJQUFJLENBQUNDLE1BQU07SUFDcEI7SUFFQTs7R0FFQyxHQUNELElBQVdDLFFBQVc7UUFDcEIsT0FBTyxJQUFJLENBQUNGLEdBQUc7SUFDakI7SUFFQTs7R0FFQyxHQUNELElBQVdFLE1BQU9DLFFBQVcsRUFBRztRQUM5QixJQUFJLENBQUNDLEdBQUcsQ0FBRUQ7SUFDWjtJQUVBOzs7O0dBSUMsR0FDRCxBQUFPQyxJQUFLRixLQUFRLEVBQVM7UUFFM0IsNEdBQTRHO1FBQzVHLGdCQUFnQjtRQUNoQixJQUFLLENBQUMsSUFBSSxDQUFDRyxXQUFXLENBQUVILFFBQVU7WUFDaEMsTUFBTUksV0FBVyxJQUFJLENBQUNMLE1BQU07WUFFNUIsSUFB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

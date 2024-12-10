@@ -1,0 +1,14 @@
+// Copyright 2019-2024, University of Colorado Boulder
+/**
+ * Unit tests for joist.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Chris Klusendorf (PhET Interactive Simulations)
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import qunitStart from '../../chipper/js/browser/sim-tests/qunitStart.js';
+import './selectScreensTests.js';
+import './TemporalCounterTests.js';
+// Since our tests are loaded asynchronously, we must direct QUnit to begin the tests
+qunitStart();
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL2pvaXN0LXRlc3RzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE5LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFVuaXQgdGVzdHMgZm9yIGpvaXN0LlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIENocmlzIEtsdXNlbmRvcmYgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IHF1bml0U3RhcnQgZnJvbSAnLi4vLi4vY2hpcHBlci9qcy9icm93c2VyL3NpbS10ZXN0cy9xdW5pdFN0YXJ0LmpzJztcbmltcG9ydCAnLi9zZWxlY3RTY3JlZW5zVGVzdHMuanMnO1xuaW1wb3J0ICcuL1RlbXBvcmFsQ291bnRlclRlc3RzLmpzJztcblxuLy8gU2luY2Ugb3VyIHRlc3RzIGFyZSBsb2FkZWQgYXN5bmNocm9ub3VzbHksIHdlIG11c3QgZGlyZWN0IFFVbml0IHRvIGJlZ2luIHRoZSB0ZXN0c1xucXVuaXRTdGFydCgpOyJdLCJuYW1lcyI6WyJxdW5pdFN0YXJ0Il0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7OztDQU1DLEdBRUQsT0FBT0EsZ0JBQWdCLG1EQUFtRDtBQUMxRSxPQUFPLDBCQUEwQjtBQUNqQyxPQUFPLDRCQUE0QjtBQUVuQyxxRkFBcUY7QUFDckZBIn0=

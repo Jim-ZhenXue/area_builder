@@ -1,0 +1,9 @@
+// Copyright 2017, University of Colorado Boulder
+/**
+ * The grunt "command" based on the platform.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ // {string} - needs to be a slightly different command for Windows
+module.exports = /^win/.test(process.platform) ? 'grunt.cmd' : 'grunt';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZ3J1bnRDb21tYW5kLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE3LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBUaGUgZ3J1bnQgXCJjb21tYW5kXCIgYmFzZWQgb24gdGhlIHBsYXRmb3JtLlxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG4vLyB7c3RyaW5nfSAtIG5lZWRzIHRvIGJlIGEgc2xpZ2h0bHkgZGlmZmVyZW50IGNvbW1hbmQgZm9yIFdpbmRvd3Ncbm1vZHVsZS5leHBvcnRzID0gL153aW4vLnRlc3QoIHByb2Nlc3MucGxhdGZvcm0gKSA/ICdncnVudC5jbWQnIDogJ2dydW50JzsiXSwibmFtZXMiOlsibW9kdWxlIiwiZXhwb3J0cyIsInRlc3QiLCJwcm9jZXNzIiwicGxhdGZvcm0iXSwibWFwcGluZ3MiOiJBQUFBLGlEQUFpRDtBQUVqRDs7OztDQUlDLEdBRUQsa0VBQWtFO0FBQ2xFQSxPQUFPQyxPQUFPLEdBQUcsT0FBT0MsSUFBSSxDQUFFQyxRQUFRQyxRQUFRLElBQUssY0FBYyJ9

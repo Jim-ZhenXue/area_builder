@@ -1,0 +1,9 @@
+// Copyright 2022, University of Colorado Boulder
+/**
+ * The model type for Sim.ts must have a reset function and if it has a step function, it must have this signature.
+ * See https://github.com/phetsims/joist/issues/861 for the origins and design history of TModel.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL1RNb2RlbC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogVGhlIG1vZGVsIHR5cGUgZm9yIFNpbS50cyBtdXN0IGhhdmUgYSByZXNldCBmdW5jdGlvbiBhbmQgaWYgaXQgaGFzIGEgc3RlcCBmdW5jdGlvbiwgaXQgbXVzdCBoYXZlIHRoaXMgc2lnbmF0dXJlLlxuICogU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9qb2lzdC9pc3N1ZXMvODYxIGZvciB0aGUgb3JpZ2lucyBhbmQgZGVzaWduIGhpc3Rvcnkgb2YgVE1vZGVsLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cbnR5cGUgVE1vZGVsID0ge1xuICBzdGVwPzogKCBkdDogbnVtYmVyICkgPT4gdm9pZDtcbiAgcmVzZXQ6ICgpID0+IHZvaWQ7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBUTW9kZWw7Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGlEQUFpRDtBQUVqRDs7Ozs7Q0FLQyxHQU1ELFdBQXNCIn0=

@@ -1,0 +1,36 @@
+// Copyright 2015-2022, University of Colorado Boulder
+/**
+ * Main file for the Joist demo.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import Property from '../../axon/js/Property.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import DialogsScreenView from './demo/DialogsScreenView.js';
+import JoistStrings from './JoistStrings.js';
+import Screen from './Screen.js';
+import Sim from './Sim.js';
+import simLauncher from './simLauncher.js';
+const joistTitleStringProperty = JoistStrings.joist.titleStringProperty;
+const simOptions = {
+    credits: {
+        leadDesign: 'PhET'
+    }
+};
+let DemoModel = class DemoModel {
+    reset() {}
+};
+simLauncher.launch(()=>{
+    const dialogsScreenTandem = Tandem.ROOT.createTandem('dialogsScreen');
+    const screens = [
+        new Screen(()=>new DemoModel(), ()=>new DialogsScreenView({
+                tandem: dialogsScreenTandem.createTandem('view')
+            }), {
+            name: new Property('Dialogs'),
+            backgroundColorProperty: new Property('white'),
+            tandem: Tandem.OPT_OUT
+        })
+    ];
+    new Sim(joistTitleStringProperty, screens, simOptions).start();
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL2pvaXN0LW1haW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTUtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogTWFpbiBmaWxlIGZvciB0aGUgSm9pc3QgZGVtby5cbiAqXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBQcm9wZXJ0eSBmcm9tICcuLi8uLi9heG9uL2pzL1Byb3BlcnR5LmpzJztcbmltcG9ydCBUYW5kZW0gZnJvbSAnLi4vLi4vdGFuZGVtL2pzL1RhbmRlbS5qcyc7XG5pbXBvcnQgRGlhbG9nc1NjcmVlblZpZXcgZnJvbSAnLi9kZW1vL0RpYWxvZ3NTY3JlZW5WaWV3LmpzJztcbmltcG9ydCBKb2lzdFN0cmluZ3MgZnJvbSAnLi9Kb2lzdFN0cmluZ3MuanMnO1xuaW1wb3J0IFNjcmVlbiBmcm9tICcuL1NjcmVlbi5qcyc7XG5pbXBvcnQgU2ltLCB7IFNpbU9wdGlvbnMgfSBmcm9tICcuL1NpbS5qcyc7XG5pbXBvcnQgc2ltTGF1bmNoZXIgZnJvbSAnLi9zaW1MYXVuY2hlci5qcyc7XG5cbmNvbnN0IGpvaXN0VGl0bGVTdHJpbmdQcm9wZXJ0eSA9IEpvaXN0U3RyaW5ncy5qb2lzdC50aXRsZVN0cmluZ1Byb3BlcnR5O1xuXG5jb25zdCBzaW1PcHRpb25zOiBTaW1PcHRpb25zID0ge1xuICBjcmVkaXRzOiB7XG4gICAgbGVhZERlc2lnbjogJ1BoRVQnXG4gIH1cbn07XG5cbmNsYXNzIERlbW9Nb2RlbCB7XG4gIHB1YmxpYyByZXNldCgpOiB2b2lkIHsgLyogbm90aGluZyB0byBkbyAqLyB9XG59XG5cbnNpbUxhdW5jaGVyLmxhdW5jaCggKCkgPT4ge1xuXG4gIGNvbnN0IGRpYWxvZ3NTY3JlZW5UYW5kZW0gPSBUYW5kZW0uUk9PVC5jcmVhdGVUYW5kZW0oICdkaWFsb2dzU2NyZWVuJyApO1xuXG4gIGNvbnN0IHNjcmVlbnMgPSBbXG4gICAgbmV3IFNjcmVlbihcbiAgICAgICggKCkgPT4gbmV3IERlbW9Nb2RlbCgpICksXG4gICAgICAoICgpID0+IG5ldyBEaWFsb2dzU2NyZWVuVmlldyggeyB0YW5kZW06IGRpYWxvZ3NTY3JlZW5UYW5kZW0uY3JlYXRlVGFuZGVtKCAndmlldycgKSB9ICkgKSwge1xuICAgICAgICBuYW1lOiBuZXcgUHJvcGVydHkoICdEaWFsb2dzJyApLFxuICAgICAgICBiYWNrZ3JvdW5kQ29sb3JQcm9wZXJ0eTogbmV3IFByb3BlcnR5KCAnd2hpdGUnICksXG4gICAgICAgIHRhbmRlbTogVGFuZGVtLk9QVF9PVVRcbiAgICAgIH0gKVxuICBdO1xuXG4gIG5ldyBTaW0oIGpvaXN0VGl0bGVTdHJpbmdQcm9wZXJ0eSwgc2NyZWVucywgc2ltT3B0aW9ucyApLnN0YXJ0KCk7XG59ICk7Il0sIm5hbWVzIjpbIlByb3BlcnR5IiwiVGFuZGVtIiwiRGlhbG9nc1NjcmVlblZpZXciLCJKb2lzdFN0cmluZ3MiLCJTY3JlZW4iLCJTaW0iLCJzaW1MYXVuY2hlciIsImpvaXN0VGl0bGVTdHJpbmdQcm9wZXJ0eSIsImpvaXN0IiwidGl0bGVTdHJpbmdQcm9wZXJ0eSIsInNpbU9wdGlvbnMiLCJjcmVkaXRzIiwibGVhZERlc2lnbiIsIkRlbW9Nb2RlbCIsInJlc2V0IiwibGF1bmNoIiwiZGlhbG9nc1NjcmVlblRhbmRlbSIsIlJPT1QiLCJjcmVhdGVUYW5kZW0iLCJzY3JlZW5zIiwidGFuZGVtIiwibmFtZSIsImJhY2tncm91bmRDb2xvclByb3BlcnR5IiwiT1BUX09VVCIsInN0YXJ0Il0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGNBQWMsNEJBQTRCO0FBQ2pELE9BQU9DLFlBQVksNEJBQTRCO0FBQy9DLE9BQU9DLHVCQUF1Qiw4QkFBOEI7QUFDNUQsT0FBT0Msa0JBQWtCLG9CQUFvQjtBQUM3QyxPQUFPQyxZQUFZLGNBQWM7QUFDakMsT0FBT0MsU0FBeUIsV0FBVztBQUMzQyxPQUFPQyxpQkFBaUIsbUJBQW1CO0FBRTNDLE1BQU1DLDJCQUEyQkosYUFBYUssS0FBSyxDQUFDQyxtQkFBbUI7QUFFdkUsTUFBTUMsYUFBeUI7SUFDN0JDLFNBQVM7UUFDUEMsWUFBWTtJQUNkO0FBQ0Y7QUFFQSxJQUFBLEFBQU1DLFlBQU4sTUFBTUE7SUFDR0MsUUFBYyxDQUFzQjtBQUM3QztBQUVBUixZQUFZUyxNQUFNLENBQUU7SUFFbEIsTUFBTUMsc0JBQXNCZixPQUFPZ0IsSUFBSSxDQUFDQyxZQUFZLENBQUU7SUFFdEQsTUFBTUMsVUFBVTtRQUNkLElBQUlmLE9BQ0EsSUFBTSxJQUFJUyxhQUNWLElBQU0sSUFBSVgsa0JBQW1CO2dCQUFFa0IsUUFBUUosb0JBQW9CRSxZQUFZLENBQUU7WUFBUyxJQUFPO1lBQ3pGRyxNQUFNLElBQUlyQixTQUFVO1lBQ3BCc0IseUJBQXlCLElBQUl0QixTQUFVO1lBQ3ZDb0IsUUFBUW5CLE9BQU9zQixPQUFPO1FBQ3hCO0tBQ0g7SUFFRCxJQUFJbEIsSUFBS0UsMEJBQTBCWSxTQUFTVCxZQUFhYyxLQUFLO0FBQ2hFIn0=

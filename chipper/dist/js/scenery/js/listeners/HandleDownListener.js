@@ -1,0 +1,23 @@
+// Copyright 2017-2021, University of Colorado Boulder
+/**
+ * A type of listener that absorbs all 'down' events, not letting it bubble further to ancestor node listeners.
+ *
+ * NOTE: This does not call abort(), so listeners that are added to the same Node as this listener will still fire
+ *       normally.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { scenery } from '../imports.js';
+let HandleDownlistener = class HandleDownlistener {
+    /**
+   * Scenery input callback to absorb down events.
+   * @public
+   *
+   * @param {SceneryEvent} event
+   */ down(event) {
+        event.handle();
+    }
+};
+scenery.register('HandleDownlistener', HandleDownlistener);
+export default HandleDownlistener;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvbGlzdGVuZXJzL0hhbmRsZURvd25MaXN0ZW5lci5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNy0yMDIxLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBBIHR5cGUgb2YgbGlzdGVuZXIgdGhhdCBhYnNvcmJzIGFsbCAnZG93bicgZXZlbnRzLCBub3QgbGV0dGluZyBpdCBidWJibGUgZnVydGhlciB0byBhbmNlc3RvciBub2RlIGxpc3RlbmVycy5cbiAqXG4gKiBOT1RFOiBUaGlzIGRvZXMgbm90IGNhbGwgYWJvcnQoKSwgc28gbGlzdGVuZXJzIHRoYXQgYXJlIGFkZGVkIHRvIHRoZSBzYW1lIE5vZGUgYXMgdGhpcyBsaXN0ZW5lciB3aWxsIHN0aWxsIGZpcmVcbiAqICAgICAgIG5vcm1hbGx5LlxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgeyBzY2VuZXJ5IH0gZnJvbSAnLi4vaW1wb3J0cy5qcyc7XG5cbmNsYXNzIEhhbmRsZURvd25saXN0ZW5lciB7XG4gIC8qKlxuICAgKiBTY2VuZXJ5IGlucHV0IGNhbGxiYWNrIHRvIGFic29yYiBkb3duIGV2ZW50cy5cbiAgICogQHB1YmxpY1xuICAgKlxuICAgKiBAcGFyYW0ge1NjZW5lcnlFdmVudH0gZXZlbnRcbiAgICovXG4gIGRvd24oIGV2ZW50ICkge1xuICAgIGV2ZW50LmhhbmRsZSgpO1xuICB9XG59XG5cbnNjZW5lcnkucmVnaXN0ZXIoICdIYW5kbGVEb3dubGlzdGVuZXInLCBIYW5kbGVEb3dubGlzdGVuZXIgKTtcbmV4cG9ydCBkZWZhdWx0IEhhbmRsZURvd25saXN0ZW5lcjsiXSwibmFtZXMiOlsic2NlbmVyeSIsIkhhbmRsZURvd25saXN0ZW5lciIsImRvd24iLCJldmVudCIsImhhbmRsZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Ozs7Q0FPQyxHQUVELFNBQVNBLE9BQU8sUUFBUSxnQkFBZ0I7QUFFeEMsSUFBQSxBQUFNQyxxQkFBTixNQUFNQTtJQUNKOzs7OztHQUtDLEdBQ0RDLEtBQU1DLEtBQUssRUFBRztRQUNaQSxNQUFNQyxNQUFNO0lBQ2Q7QUFDRjtBQUVBSixRQUFRSyxRQUFRLENBQUUsc0JBQXNCSjtBQUN4QyxlQUFlQSxtQkFBbUIifQ==

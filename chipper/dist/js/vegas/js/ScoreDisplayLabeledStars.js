@@ -1,0 +1,44 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Display a score as 'Score: * * * *', where '*' are stars, which may be fully or partially filled in.
+ * See specification in https://github.com/phetsims/vegas/issues/59.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import optionize from '../../phet-core/js/optionize.js';
+import StatusBar from '../../scenery-phet/js/StatusBar.js';
+import { HBox, Text } from '../../scenery/js/imports.js';
+import ScoreDisplayStars from './ScoreDisplayStars.js';
+import vegas from './vegas.js';
+import VegasStrings from './VegasStrings.js';
+let ScoreDisplayLabeledStars = class ScoreDisplayLabeledStars extends HBox {
+    dispose() {
+        this.disposeScoreDisplayLabeledStars();
+        super.dispose();
+    }
+    constructor(scoreProperty, providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            font: StatusBar.DEFAULT_FONT,
+            textFill: 'black',
+            spacing: 5
+        }, providedOptions);
+        const textNode = new Text(VegasStrings.scoreStringProperty, {
+            font: options.font,
+            fill: options.textFill
+        });
+        const scoreDisplay = new ScoreDisplayStars(scoreProperty, options);
+        options.children = [
+            textNode,
+            scoreDisplay
+        ];
+        super(options);
+        this.disposeScoreDisplayLabeledStars = ()=>{
+            textNode.dispose();
+            scoreDisplay.dispose();
+        };
+    }
+};
+export { ScoreDisplayLabeledStars as default };
+vegas.register('ScoreDisplayLabeledStars', ScoreDisplayLabeledStars);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3ZlZ2FzL2pzL1Njb3JlRGlzcGxheUxhYmVsZWRTdGFycy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBEaXNwbGF5IGEgc2NvcmUgYXMgJ1Njb3JlOiAqICogKiAqJywgd2hlcmUgJyonIGFyZSBzdGFycywgd2hpY2ggbWF5IGJlIGZ1bGx5IG9yIHBhcnRpYWxseSBmaWxsZWQgaW4uXG4gKiBTZWUgc3BlY2lmaWNhdGlvbiBpbiBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvdmVnYXMvaXNzdWVzLzU5LlxuICpcbiAqIEBhdXRob3IgQ2hyaXMgTWFsbGV5IChQaXhlbFpvb20sIEluYy4pXG4gKi9cblxuaW1wb3J0IFRSZWFkT25seVByb3BlcnR5IGZyb20gJy4uLy4uL2F4b24vanMvVFJlYWRPbmx5UHJvcGVydHkuanMnO1xuaW1wb3J0IG9wdGlvbml6ZSBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvb3B0aW9uaXplLmpzJztcbmltcG9ydCBTdHJpY3RPbWl0IGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9TdHJpY3RPbWl0LmpzJztcbmltcG9ydCBTdGF0dXNCYXIgZnJvbSAnLi4vLi4vc2NlbmVyeS1waGV0L2pzL1N0YXR1c0Jhci5qcyc7XG5pbXBvcnQgeyBGb250LCBIQm94LCBIQm94T3B0aW9ucywgVENvbG9yLCBUZXh0IH0gZnJvbSAnLi4vLi4vc2NlbmVyeS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBTY29yZURpc3BsYXlTdGFycywgeyBTY29yZURpc3BsYXlTdGFyc09wdGlvbnMgfSBmcm9tICcuL1Njb3JlRGlzcGxheVN0YXJzLmpzJztcbmltcG9ydCB2ZWdhcyBmcm9tICcuL3ZlZ2FzLmpzJztcbmltcG9ydCBWZWdhc1N0cmluZ3MgZnJvbSAnLi9WZWdhc1N0cmluZ3MuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0ge1xuICBmb250PzogRm9udDtcbiAgdGV4dEZpbGw/OiBUQ29sb3I7XG4gIHNwYWNpbmc/OiBudW1iZXI7XG59O1xuXG5leHBvcnQgdHlwZSBTY29yZURpc3BsYXlMYWJlbGVkU3RhcnNPcHRpb25zID0gU2VsZk9wdGlvbnMgJiBTY29yZURpc3BsYXlTdGFyc09wdGlvbnMgJiBTdHJpY3RPbWl0PEhCb3hPcHRpb25zLCAnY2hpbGRyZW4nPjtcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgU2NvcmVEaXNwbGF5TGFiZWxlZFN0YXJzIGV4dGVuZHMgSEJveCB7XG5cbiAgcHJpdmF0ZSByZWFkb25seSBkaXNwb3NlU2NvcmVEaXNwbGF5TGFiZWxlZFN0YXJzOiAoKSA9PiB2b2lkO1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3Rvciggc2NvcmVQcm9wZXJ0eTogVFJlYWRPbmx5UHJvcGVydHk8bnVtYmVyPiwgcHJvdmlkZWRPcHRpb25zPzogU2NvcmVEaXNwbGF5TGFiZWxlZFN0YXJzT3B0aW9ucyApIHtcblxuICAgIGNvbnN0IG9wdGlvbnMgPSBvcHRpb25pemU8U2NvcmVEaXNwbGF5TGFiZWxlZFN0YXJzT3B0aW9ucywgU2VsZk9wdGlvbnMsIEhCb3hPcHRpb25zPigpKCB7XG5cbiAgICAgIC8vIFNlbGZPcHRpb25zXG4gICAgICBmb250OiBTdGF0dXNCYXIuREVGQVVMVF9GT05ULFxuICAgICAgdGV4dEZpbGw6ICdibGFjaycsXG4gICAgICBzcGFjaW5nOiA1XG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICBjb25zdCB0ZXh0Tm9kZSA9IG5ldyBUZXh0KCBWZWdhc1N0cmluZ3Muc2NvcmVTdHJpbmdQcm9wZXJ0eSwge1xuICAgICAgZm9udDogb3B0aW9ucy5mb250LFxuICAgICAgZmlsbDogb3B0aW9ucy50ZXh0RmlsbFxuICAgIH0gKTtcblxuICAgIGNvbnN0IHNjb3JlRGlzcGxheSA9IG5ldyBTY29yZURpc3BsYXlTdGFycyggc2NvcmVQcm9wZXJ0eSwgb3B0aW9ucyApO1xuXG4gICAgb3B0aW9ucy5jaGlsZHJlbiA9IFsgdGV4dE5vZGUsIHNjb3JlRGlzcGxheSBdO1xuXG4gICAgc3VwZXIoIG9wdGlvbnMgKTtcblxuICAgIHRoaXMuZGlzcG9zZVNjb3JlRGlzcGxheUxhYmVsZWRTdGFycyA9ICgpID0+IHtcbiAgICAgIHRleHROb2RlLmRpc3Bvc2UoKTtcbiAgICAgIHNjb3JlRGlzcGxheS5kaXNwb3NlKCk7XG4gICAgfTtcbiAgfVxuXG4gIHB1YmxpYyBvdmVycmlkZSBkaXNwb3NlKCk6IHZvaWQge1xuICAgIHRoaXMuZGlzcG9zZVNjb3JlRGlzcGxheUxhYmVsZWRTdGFycygpO1xuICAgIHN1cGVyLmRpc3Bvc2UoKTtcbiAgfVxufVxuXG52ZWdhcy5yZWdpc3RlciggJ1Njb3JlRGlzcGxheUxhYmVsZWRTdGFycycsIFNjb3JlRGlzcGxheUxhYmVsZWRTdGFycyApOyJdLCJuYW1lcyI6WyJvcHRpb25pemUiLCJTdGF0dXNCYXIiLCJIQm94IiwiVGV4dCIsIlNjb3JlRGlzcGxheVN0YXJzIiwidmVnYXMiLCJWZWdhc1N0cmluZ3MiLCJTY29yZURpc3BsYXlMYWJlbGVkU3RhcnMiLCJkaXNwb3NlIiwiZGlzcG9zZVNjb3JlRGlzcGxheUxhYmVsZWRTdGFycyIsInNjb3JlUHJvcGVydHkiLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiZm9udCIsIkRFRkFVTFRfRk9OVCIsInRleHRGaWxsIiwic3BhY2luZyIsInRleHROb2RlIiwic2NvcmVTdHJpbmdQcm9wZXJ0eSIsImZpbGwiLCJzY29yZURpc3BsYXkiLCJjaGlsZHJlbiIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7O0NBS0MsR0FHRCxPQUFPQSxlQUFlLGtDQUFrQztBQUV4RCxPQUFPQyxlQUFlLHFDQUFxQztBQUMzRCxTQUFlQyxJQUFJLEVBQXVCQyxJQUFJLFFBQVEsOEJBQThCO0FBQ3BGLE9BQU9DLHVCQUFxRCx5QkFBeUI7QUFDckYsT0FBT0MsV0FBVyxhQUFhO0FBQy9CLE9BQU9DLGtCQUFrQixvQkFBb0I7QUFVOUIsSUFBQSxBQUFNQywyQkFBTixNQUFNQSxpQ0FBaUNMO0lBK0JwQ00sVUFBZ0I7UUFDOUIsSUFBSSxDQUFDQywrQkFBK0I7UUFDcEMsS0FBSyxDQUFDRDtJQUNSO0lBOUJBLFlBQW9CRSxhQUF3QyxFQUFFQyxlQUFpRCxDQUFHO1FBRWhILE1BQU1DLFVBQVVaLFlBQXdFO1lBRXRGLGNBQWM7WUFDZGEsTUFBTVosVUFBVWEsWUFBWTtZQUM1QkMsVUFBVTtZQUNWQyxTQUFTO1FBQ1gsR0FBR0w7UUFFSCxNQUFNTSxXQUFXLElBQUlkLEtBQU1HLGFBQWFZLG1CQUFtQixFQUFFO1lBQzNETCxNQUFNRCxRQUFRQyxJQUFJO1lBQ2xCTSxNQUFNUCxRQUFRRyxRQUFRO1FBQ3hCO1FBRUEsTUFBTUssZUFBZSxJQUFJaEIsa0JBQW1CTSxlQUFlRTtRQUUzREEsUUFBUVMsUUFBUSxHQUFHO1lBQUVKO1lBQVVHO1NBQWM7UUFFN0MsS0FBSyxDQUFFUjtRQUVQLElBQUksQ0FBQ0gsK0JBQStCLEdBQUc7WUFDckNRLFNBQVNULE9BQU87WUFDaEJZLGFBQWFaLE9BQU87UUFDdEI7SUFDRjtBQU1GO0FBbkNBLFNBQXFCRCxzQ0FtQ3BCO0FBRURGLE1BQU1pQixRQUFRLENBQUUsNEJBQTRCZiJ9

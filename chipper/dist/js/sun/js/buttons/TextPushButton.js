@@ -1,0 +1,41 @@
+// Copyright 2014-2024, University of Colorado Boulder
+/**
+ * TextPushButton is a convenience class for creating a rectangular push button with a text label.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */ import optionize, { combineOptions } from '../../../phet-core/js/optionize.js';
+import { Font, Text } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import sun from '../sun.js';
+import RectangularPushButton from './RectangularPushButton.js';
+let TextPushButton = class TextPushButton extends RectangularPushButton {
+    dispose() {
+        this.disposeTextPushButton();
+        super.dispose();
+    }
+    constructor(string, providedOptions){
+        const options = optionize()({
+            // TextPushButtonOptions
+            font: Font.DEFAULT,
+            textFill: 'black',
+            maxTextWidth: null,
+            // RectangularPushButtonOptions
+            tandem: Tandem.REQUIRED,
+            innerContent: string
+        }, providedOptions);
+        const text = new Text(string, combineOptions({
+            font: options.font,
+            fill: options.textFill,
+            maxWidth: options.maxTextWidth
+        }, options.textNodeOptions));
+        options.content = text;
+        super(options);
+        this.disposeTextPushButton = ()=>{
+            text.dispose();
+        };
+    }
+};
+export { TextPushButton as default };
+sun.register('TextPushButton', TextPushButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3N1bi9qcy9idXR0b25zL1RleHRQdXNoQnV0dG9uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE0LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFRleHRQdXNoQnV0dG9uIGlzIGEgY29udmVuaWVuY2UgY2xhc3MgZm9yIGNyZWF0aW5nIGEgcmVjdGFuZ3VsYXIgcHVzaCBidXR0b24gd2l0aCBhIHRleHQgbGFiZWwuXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jbyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgVFJlYWRPbmx5UHJvcGVydHkgZnJvbSAnLi4vLi4vLi4vYXhvbi9qcy9UUmVhZE9ubHlQcm9wZXJ0eS5qcyc7XG5pbXBvcnQgb3B0aW9uaXplLCB7IGNvbWJpbmVPcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgU3RyaWN0T21pdCBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvU3RyaWN0T21pdC5qcyc7XG5pbXBvcnQgeyBGb250LCBUZXh0LCBUZXh0T3B0aW9ucywgVFBhaW50IH0gZnJvbSAnLi4vLi4vLi4vc2NlbmVyeS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBUYW5kZW0gZnJvbSAnLi4vLi4vLi4vdGFuZGVtL2pzL1RhbmRlbS5qcyc7XG5pbXBvcnQgc3VuIGZyb20gJy4uL3N1bi5qcyc7XG5pbXBvcnQgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uLCB7IFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnMgfSBmcm9tICcuL1JlY3Rhbmd1bGFyUHVzaEJ1dHRvbi5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSB7XG4gIGZvbnQ/OiBGb250O1xuICB0ZXh0RmlsbD86IFRQYWludDtcbiAgbWF4VGV4dFdpZHRoPzogbnVtYmVyIHwgbnVsbDtcbiAgdGV4dE5vZGVPcHRpb25zPzogVGV4dE9wdGlvbnM7XG59O1xuXG5leHBvcnQgdHlwZSBUZXh0UHVzaEJ1dHRvbk9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIFN0cmljdE9taXQ8UmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9ucywgJ2NvbnRlbnQnPjtcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgVGV4dFB1c2hCdXR0b24gZXh0ZW5kcyBSZWN0YW5ndWxhclB1c2hCdXR0b24ge1xuXG4gIHByaXZhdGUgcmVhZG9ubHkgZGlzcG9zZVRleHRQdXNoQnV0dG9uOiAoKSA9PiB2b2lkO1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3Rvciggc3RyaW5nOiBzdHJpbmcgfCBUUmVhZE9ubHlQcm9wZXJ0eTxzdHJpbmc+LCBwcm92aWRlZE9wdGlvbnM/OiBUZXh0UHVzaEJ1dHRvbk9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFRleHRQdXNoQnV0dG9uT3B0aW9ucywgU3RyaWN0T21pdDxTZWxmT3B0aW9ucywgJ3RleHROb2RlT3B0aW9ucyc+LCBSZWN0YW5ndWxhclB1c2hCdXR0b25PcHRpb25zPigpKCB7XG5cbiAgICAgIC8vIFRleHRQdXNoQnV0dG9uT3B0aW9uc1xuICAgICAgZm9udDogRm9udC5ERUZBVUxULFxuICAgICAgdGV4dEZpbGw6ICdibGFjaycsXG4gICAgICBtYXhUZXh0V2lkdGg6IG51bGwsXG5cbiAgICAgIC8vIFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnNcbiAgICAgIHRhbmRlbTogVGFuZGVtLlJFUVVJUkVELFxuICAgICAgaW5uZXJDb250ZW50OiBzdHJpbmdcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIGNvbnN0IHRleHQgPSBuZXcgVGV4dCggc3RyaW5nLCBjb21iaW5lT3B0aW9uczxUZXh0T3B0aW9ucz4oIHtcbiAgICAgIGZvbnQ6IG9wdGlvbnMuZm9udCxcbiAgICAgIGZpbGw6IG9wdGlvbnMudGV4dEZpbGwsXG4gICAgICBtYXhXaWR0aDogb3B0aW9ucy5tYXhUZXh0V2lkdGhcbiAgICB9LCBvcHRpb25zLnRleHROb2RlT3B0aW9ucyApICk7XG4gICAgb3B0aW9ucy5jb250ZW50ID0gdGV4dDtcblxuICAgIHN1cGVyKCBvcHRpb25zICk7XG5cbiAgICB0aGlzLmRpc3Bvc2VUZXh0UHVzaEJ1dHRvbiA9ICgpID0+IHtcbiAgICAgIHRleHQuZGlzcG9zZSgpO1xuICAgIH07XG4gIH1cblxuICBwdWJsaWMgb3ZlcnJpZGUgZGlzcG9zZSgpOiB2b2lkIHtcbiAgICB0aGlzLmRpc3Bvc2VUZXh0UHVzaEJ1dHRvbigpO1xuICAgIHN1cGVyLmRpc3Bvc2UoKTtcbiAgfVxufVxuXG5zdW4ucmVnaXN0ZXIoICdUZXh0UHVzaEJ1dHRvbicsIFRleHRQdXNoQnV0dG9uICk7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsImNvbWJpbmVPcHRpb25zIiwiRm9udCIsIlRleHQiLCJUYW5kZW0iLCJzdW4iLCJSZWN0YW5ndWxhclB1c2hCdXR0b24iLCJUZXh0UHVzaEJ1dHRvbiIsImRpc3Bvc2UiLCJkaXNwb3NlVGV4dFB1c2hCdXR0b24iLCJzdHJpbmciLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiZm9udCIsIkRFRkFVTFQiLCJ0ZXh0RmlsbCIsIm1heFRleHRXaWR0aCIsInRhbmRlbSIsIlJFUVVJUkVEIiwiaW5uZXJDb250ZW50IiwidGV4dCIsImZpbGwiLCJtYXhXaWR0aCIsInRleHROb2RlT3B0aW9ucyIsImNvbnRlbnQiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FHRCxPQUFPQSxhQUFhQyxjQUFjLFFBQVEscUNBQXFDO0FBRS9FLFNBQVNDLElBQUksRUFBRUMsSUFBSSxRQUE2QixpQ0FBaUM7QUFDakYsT0FBT0MsWUFBWSwrQkFBK0I7QUFDbEQsT0FBT0MsU0FBUyxZQUFZO0FBQzVCLE9BQU9DLDJCQUE2RCw2QkFBNkI7QUFXbEYsSUFBQSxBQUFNQyxpQkFBTixNQUFNQSx1QkFBdUJEO0lBZ0MxQkUsVUFBZ0I7UUFDOUIsSUFBSSxDQUFDQyxxQkFBcUI7UUFDMUIsS0FBSyxDQUFDRDtJQUNSO0lBL0JBLFlBQW9CRSxNQUEwQyxFQUFFQyxlQUF1QyxDQUFHO1FBRXhHLE1BQU1DLFVBQVVaLFlBQThHO1lBRTVILHdCQUF3QjtZQUN4QmEsTUFBTVgsS0FBS1ksT0FBTztZQUNsQkMsVUFBVTtZQUNWQyxjQUFjO1lBRWQsK0JBQStCO1lBQy9CQyxRQUFRYixPQUFPYyxRQUFRO1lBQ3ZCQyxjQUFjVDtRQUNoQixHQUFHQztRQUVILE1BQU1TLE9BQU8sSUFBSWpCLEtBQU1PLFFBQVFULGVBQTZCO1lBQzFEWSxNQUFNRCxRQUFRQyxJQUFJO1lBQ2xCUSxNQUFNVCxRQUFRRyxRQUFRO1lBQ3RCTyxVQUFVVixRQUFRSSxZQUFZO1FBQ2hDLEdBQUdKLFFBQVFXLGVBQWU7UUFDMUJYLFFBQVFZLE9BQU8sR0FBR0o7UUFFbEIsS0FBSyxDQUFFUjtRQUVQLElBQUksQ0FBQ0gscUJBQXFCLEdBQUc7WUFDM0JXLEtBQUtaLE9BQU87UUFDZDtJQUNGO0FBTUY7QUFwQ0EsU0FBcUJELDRCQW9DcEI7QUFFREYsSUFBSW9CLFFBQVEsQ0FBRSxrQkFBa0JsQiJ9

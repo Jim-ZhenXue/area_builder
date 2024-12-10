@@ -1,0 +1,30 @@
+// Copyright 2019-2023, University of Colorado Boulder
+/**
+ * From wikipedia:
+ *  > A physical constant, sometimes fundamental physical constant or universal constant, is a physical quantity that is
+ *  > generally believed to be both universal in nature and have constant value in time. It is contrasted with a
+ *  > mathematical constant, which has a fixed numerical value, but does not directly involve any physical
+ *  > measurement.
+ *
+ * Here is a link to examples of these types of "universal constants"
+ * https://cosmologist.info/teaching/Cosmology/Physical_constants.pdf
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import phetCore from './phetCore.js';
+const PhysicalConstants = {
+    /**
+   * The coefficient in Newton's universal law of gravitation: F = G * m1 * m2 * r^-2
+   * The value is described in:
+   * https://en.wikipedia.org/wiki/Gravitational_constant
+   * https://physics.nist.gov/cgi-bin/cuu/Value?bg
+   * https://www.quora.com/What-is-the-value-of-gravitational-constant-G
+   */ GRAVITATIONAL_CONSTANT: 6.67430E-11,
+    /**
+   * The amount of gravity on Earth.
+   * m/s^2
+   */ GRAVITY_ON_EARTH: 9.81
+};
+phetCore.register('PhysicalConstants', PhysicalConstants);
+export default PhysicalConstants;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9QaHlzaWNhbENvbnN0YW50cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOS0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBGcm9tIHdpa2lwZWRpYTpcbiAqICA+IEEgcGh5c2ljYWwgY29uc3RhbnQsIHNvbWV0aW1lcyBmdW5kYW1lbnRhbCBwaHlzaWNhbCBjb25zdGFudCBvciB1bml2ZXJzYWwgY29uc3RhbnQsIGlzIGEgcGh5c2ljYWwgcXVhbnRpdHkgdGhhdCBpc1xuICogID4gZ2VuZXJhbGx5IGJlbGlldmVkIHRvIGJlIGJvdGggdW5pdmVyc2FsIGluIG5hdHVyZSBhbmQgaGF2ZSBjb25zdGFudCB2YWx1ZSBpbiB0aW1lLiBJdCBpcyBjb250cmFzdGVkIHdpdGggYVxuICogID4gbWF0aGVtYXRpY2FsIGNvbnN0YW50LCB3aGljaCBoYXMgYSBmaXhlZCBudW1lcmljYWwgdmFsdWUsIGJ1dCBkb2VzIG5vdCBkaXJlY3RseSBpbnZvbHZlIGFueSBwaHlzaWNhbFxuICogID4gbWVhc3VyZW1lbnQuXG4gKlxuICogSGVyZSBpcyBhIGxpbmsgdG8gZXhhbXBsZXMgb2YgdGhlc2UgdHlwZXMgb2YgXCJ1bml2ZXJzYWwgY29uc3RhbnRzXCJcbiAqIGh0dHBzOi8vY29zbW9sb2dpc3QuaW5mby90ZWFjaGluZy9Db3Ntb2xvZ3kvUGh5c2ljYWxfY29uc3RhbnRzLnBkZlxuICpcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgcGhldENvcmUgZnJvbSAnLi9waGV0Q29yZS5qcyc7XG5cbmNvbnN0IFBoeXNpY2FsQ29uc3RhbnRzID0ge1xuXG4gIC8qKlxuICAgKiBUaGUgY29lZmZpY2llbnQgaW4gTmV3dG9uJ3MgdW5pdmVyc2FsIGxhdyBvZiBncmF2aXRhdGlvbjogRiA9IEcgKiBtMSAqIG0yICogcl4tMlxuICAgKiBUaGUgdmFsdWUgaXMgZGVzY3JpYmVkIGluOlxuICAgKiBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9HcmF2aXRhdGlvbmFsX2NvbnN0YW50XG4gICAqIGh0dHBzOi8vcGh5c2ljcy5uaXN0Lmdvdi9jZ2ktYmluL2N1dS9WYWx1ZT9iZ1xuICAgKiBodHRwczovL3d3dy5xdW9yYS5jb20vV2hhdC1pcy10aGUtdmFsdWUtb2YtZ3Jhdml0YXRpb25hbC1jb25zdGFudC1HXG4gICAqL1xuICBHUkFWSVRBVElPTkFMX0NPTlNUQU5UOiA2LjY3NDMwRS0xMSwgLy8gbV4zIGtnXi0xIHNeLTJcblxuICAvKipcbiAgICogVGhlIGFtb3VudCBvZiBncmF2aXR5IG9uIEVhcnRoLlxuICAgKiBtL3NeMlxuICAgKi9cbiAgR1JBVklUWV9PTl9FQVJUSDogOS44MVxufTtcblxucGhldENvcmUucmVnaXN0ZXIoICdQaHlzaWNhbENvbnN0YW50cycsIFBoeXNpY2FsQ29uc3RhbnRzICk7XG5leHBvcnQgZGVmYXVsdCBQaHlzaWNhbENvbnN0YW50czsiXSwibmFtZXMiOlsicGhldENvcmUiLCJQaHlzaWNhbENvbnN0YW50cyIsIkdSQVZJVEFUSU9OQUxfQ09OU1RBTlQiLCJHUkFWSVRZX09OX0VBUlRIIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Q0FXQyxHQUVELE9BQU9BLGNBQWMsZ0JBQWdCO0FBRXJDLE1BQU1DLG9CQUFvQjtJQUV4Qjs7Ozs7O0dBTUMsR0FDREMsd0JBQXdCO0lBRXhCOzs7R0FHQyxHQUNEQyxrQkFBa0I7QUFDcEI7QUFFQUgsU0FBU0ksUUFBUSxDQUFFLHFCQUFxQkg7QUFDeEMsZUFBZUEsa0JBQWtCIn0=

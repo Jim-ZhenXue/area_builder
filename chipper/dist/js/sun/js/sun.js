@@ -1,0 +1,9 @@
+// Copyright 2015-2022, University of Colorado Boulder
+/**
+ * Creates the namespace for this repository.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */ import Namespace from '../../phet-core/js/Namespace.js';
+export default new Namespace('sun');
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3N1bi9qcy9zdW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTUtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQ3JlYXRlcyB0aGUgbmFtZXNwYWNlIGZvciB0aGlzIHJlcG9zaXRvcnkuXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jbyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgTmFtZXNwYWNlIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9OYW1lc3BhY2UuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBuZXcgTmFtZXNwYWNlKCAnc3VuJyApOyJdLCJuYW1lcyI6WyJOYW1lc3BhY2UiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsZUFBZSxrQ0FBa0M7QUFFeEQsZUFBZSxJQUFJQSxVQUFXLE9BQVEifQ==

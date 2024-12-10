@@ -1,0 +1,46 @@
+// Copyright 2017-2024, University of Colorado Boulder
+/**
+ * Main file for the Twixt demo.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Property from '../../axon/js/Property.js';
+import Screen from '../../joist/js/Screen.js';
+import Sim from '../../joist/js/Sim.js';
+import simLauncher from '../../joist/js/simLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import AnimationScreenView from './demo/AnimationScreenView.js';
+import DampedMotionScreenView from './demo/DampedMotionScreenView.js';
+import TransitionsScreenView from './demo/TransitionsScreenView.js';
+import TwixtStrings from './TwixtStrings.js';
+let EmptyModel = class EmptyModel {
+    reset() {
+    // do nothing
+    }
+};
+simLauncher.launch(()=>{
+    const screens = [
+        new Screen(()=>new EmptyModel(), (model)=>new AnimationScreenView(), {
+            name: TwixtStrings.screen.animationStringProperty,
+            backgroundColorProperty: new Property('white'),
+            tandem: Tandem.OPT_OUT
+        }),
+        new Screen(()=>new EmptyModel(), (model)=>new DampedMotionScreenView(), {
+            name: TwixtStrings.screen.dampedMotionStringProperty,
+            backgroundColorProperty: new Property('white'),
+            tandem: Tandem.OPT_OUT
+        }),
+        new Screen(()=>new EmptyModel(), (model)=>new TransitionsScreenView(), {
+            name: TwixtStrings.screen.transitionsStringProperty,
+            backgroundColorProperty: new Property('white'),
+            tandem: Tandem.OPT_OUT
+        })
+    ];
+    const simOptions = {
+        credits: {
+            leadDesign: 'PhET'
+        }
+    };
+    new Sim(TwixtStrings.twixt.titleStringProperty, screens, simOptions).start();
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3R3aXh0L2pzL3R3aXh0LW1haW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTctMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogTWFpbiBmaWxlIGZvciB0aGUgVHdpeHQgZGVtby5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IFByb3BlcnR5IGZyb20gJy4uLy4uL2F4b24vanMvUHJvcGVydHkuanMnO1xuaW1wb3J0IFNjcmVlbiBmcm9tICcuLi8uLi9qb2lzdC9qcy9TY3JlZW4uanMnO1xuaW1wb3J0IFNpbSwgeyBTaW1PcHRpb25zIH0gZnJvbSAnLi4vLi4vam9pc3QvanMvU2ltLmpzJztcbmltcG9ydCBzaW1MYXVuY2hlciBmcm9tICcuLi8uLi9qb2lzdC9qcy9zaW1MYXVuY2hlci5qcyc7XG5pbXBvcnQgVE1vZGVsIGZyb20gJy4uLy4uL2pvaXN0L2pzL1RNb2RlbC5qcyc7XG5pbXBvcnQgVGFuZGVtIGZyb20gJy4uLy4uL3RhbmRlbS9qcy9UYW5kZW0uanMnO1xuaW1wb3J0IEFuaW1hdGlvblNjcmVlblZpZXcgZnJvbSAnLi9kZW1vL0FuaW1hdGlvblNjcmVlblZpZXcuanMnO1xuaW1wb3J0IERhbXBlZE1vdGlvblNjcmVlblZpZXcgZnJvbSAnLi9kZW1vL0RhbXBlZE1vdGlvblNjcmVlblZpZXcuanMnO1xuaW1wb3J0IFRyYW5zaXRpb25zU2NyZWVuVmlldyBmcm9tICcuL2RlbW8vVHJhbnNpdGlvbnNTY3JlZW5WaWV3LmpzJztcbmltcG9ydCBUd2l4dFN0cmluZ3MgZnJvbSAnLi9Ud2l4dFN0cmluZ3MuanMnO1xuXG5jbGFzcyBFbXB0eU1vZGVsIGltcGxlbWVudHMgVE1vZGVsIHtcbiAgcHVibGljIHJlc2V0KCk6IHZvaWQge1xuICAgIC8vIGRvIG5vdGhpbmdcbiAgfVxufVxuXG5zaW1MYXVuY2hlci5sYXVuY2goICgpID0+IHtcblxuICBjb25zdCBzY3JlZW5zID0gW1xuICAgIG5ldyBTY3JlZW48RW1wdHlNb2RlbCwgQW5pbWF0aW9uU2NyZWVuVmlldz4oXG4gICAgICAoKSA9PiBuZXcgRW1wdHlNb2RlbCgpLFxuICAgICAgbW9kZWwgPT4gbmV3IEFuaW1hdGlvblNjcmVlblZpZXcoKSxcbiAgICAgIHtcbiAgICAgICAgbmFtZTogVHdpeHRTdHJpbmdzLnNjcmVlbi5hbmltYXRpb25TdHJpbmdQcm9wZXJ0eSxcbiAgICAgICAgYmFja2dyb3VuZENvbG9yUHJvcGVydHk6IG5ldyBQcm9wZXJ0eSggJ3doaXRlJyApLFxuICAgICAgICB0YW5kZW06IFRhbmRlbS5PUFRfT1VUXG4gICAgICB9XG4gICAgKSxcbiAgICBuZXcgU2NyZWVuKFxuICAgICAgKCkgPT4gbmV3IEVtcHR5TW9kZWwoKSxcbiAgICAgIG1vZGVsID0+IG5ldyBEYW1wZWRNb3Rpb25TY3JlZW5WaWV3KCksXG4gICAgICB7XG4gICAgICAgIG5hbWU6IFR3aXh0U3RyaW5ncy5zY3JlZW4uZGFtcGVkTW90aW9uU3RyaW5nUHJvcGVydHksXG4gICAgICAgIGJhY2tncm91bmRDb2xvclByb3BlcnR5OiBuZXcgUHJvcGVydHkoICd3aGl0ZScgKSxcbiAgICAgICAgdGFuZGVtOiBUYW5kZW0uT1BUX09VVFxuICAgICAgfVxuICAgICksXG4gICAgbmV3IFNjcmVlbihcbiAgICAgICgpID0+IG5ldyBFbXB0eU1vZGVsKCksXG4gICAgICBtb2RlbCA9PiBuZXcgVHJhbnNpdGlvbnNTY3JlZW5WaWV3KCksXG4gICAgICB7XG4gICAgICAgIG5hbWU6IFR3aXh0U3RyaW5ncy5zY3JlZW4udHJhbnNpdGlvbnNTdHJpbmdQcm9wZXJ0eSxcbiAgICAgICAgYmFja2dyb3VuZENvbG9yUHJvcGVydHk6IG5ldyBQcm9wZXJ0eSggJ3doaXRlJyApLFxuICAgICAgICB0YW5kZW06IFRhbmRlbS5PUFRfT1VUXG4gICAgICB9XG4gICAgKVxuICBdO1xuXG4gIGNvbnN0IHNpbU9wdGlvbnM6IFNpbU9wdGlvbnMgPSB7XG4gICAgY3JlZGl0czoge1xuICAgICAgbGVhZERlc2lnbjogJ1BoRVQnXG4gICAgfVxuICB9O1xuXG4gIG5ldyBTaW0oIFR3aXh0U3RyaW5ncy50d2l4dC50aXRsZVN0cmluZ1Byb3BlcnR5LCBzY3JlZW5zLCBzaW1PcHRpb25zICkuc3RhcnQoKTtcbn0gKTsiXSwibmFtZXMiOlsiUHJvcGVydHkiLCJTY3JlZW4iLCJTaW0iLCJzaW1MYXVuY2hlciIsIlRhbmRlbSIsIkFuaW1hdGlvblNjcmVlblZpZXciLCJEYW1wZWRNb3Rpb25TY3JlZW5WaWV3IiwiVHJhbnNpdGlvbnNTY3JlZW5WaWV3IiwiVHdpeHRTdHJpbmdzIiwiRW1wdHlNb2RlbCIsInJlc2V0IiwibGF1bmNoIiwic2NyZWVucyIsIm1vZGVsIiwibmFtZSIsInNjcmVlbiIsImFuaW1hdGlvblN0cmluZ1Byb3BlcnR5IiwiYmFja2dyb3VuZENvbG9yUHJvcGVydHkiLCJ0YW5kZW0iLCJPUFRfT1VUIiwiZGFtcGVkTW90aW9uU3RyaW5nUHJvcGVydHkiLCJ0cmFuc2l0aW9uc1N0cmluZ1Byb3BlcnR5Iiwic2ltT3B0aW9ucyIsImNyZWRpdHMiLCJsZWFkRGVzaWduIiwidHdpeHQiLCJ0aXRsZVN0cmluZ1Byb3BlcnR5Iiwic3RhcnQiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsY0FBYyw0QkFBNEI7QUFDakQsT0FBT0MsWUFBWSwyQkFBMkI7QUFDOUMsT0FBT0MsU0FBeUIsd0JBQXdCO0FBQ3hELE9BQU9DLGlCQUFpQixnQ0FBZ0M7QUFFeEQsT0FBT0MsWUFBWSw0QkFBNEI7QUFDL0MsT0FBT0MseUJBQXlCLGdDQUFnQztBQUNoRSxPQUFPQyw0QkFBNEIsbUNBQW1DO0FBQ3RFLE9BQU9DLDJCQUEyQixrQ0FBa0M7QUFDcEUsT0FBT0Msa0JBQWtCLG9CQUFvQjtBQUU3QyxJQUFBLEFBQU1DLGFBQU4sTUFBTUE7SUFDR0MsUUFBYztJQUNuQixhQUFhO0lBQ2Y7QUFDRjtBQUVBUCxZQUFZUSxNQUFNLENBQUU7SUFFbEIsTUFBTUMsVUFBVTtRQUNkLElBQUlYLE9BQ0YsSUFBTSxJQUFJUSxjQUNWSSxDQUFBQSxRQUFTLElBQUlSLHVCQUNiO1lBQ0VTLE1BQU1OLGFBQWFPLE1BQU0sQ0FBQ0MsdUJBQXVCO1lBQ2pEQyx5QkFBeUIsSUFBSWpCLFNBQVU7WUFDdkNrQixRQUFRZCxPQUFPZSxPQUFPO1FBQ3hCO1FBRUYsSUFBSWxCLE9BQ0YsSUFBTSxJQUFJUSxjQUNWSSxDQUFBQSxRQUFTLElBQUlQLDBCQUNiO1lBQ0VRLE1BQU1OLGFBQWFPLE1BQU0sQ0FBQ0ssMEJBQTBCO1lBQ3BESCx5QkFBeUIsSUFBSWpCLFNBQVU7WUFDdkNrQixRQUFRZCxPQUFPZSxPQUFPO1FBQ3hCO1FBRUYsSUFBSWxCLE9BQ0YsSUFBTSxJQUFJUSxjQUNWSSxDQUFBQSxRQUFTLElBQUlOLHlCQUNiO1lBQ0VPLE1BQU1OLGFBQWFPLE1BQU0sQ0FBQ00seUJBQXlCO1lBQ25ESix5QkFBeUIsSUFBSWpCLFNBQVU7WUFDdkNrQixRQUFRZCxPQUFPZSxPQUFPO1FBQ3hCO0tBRUg7SUFFRCxNQUFNRyxhQUF5QjtRQUM3QkMsU0FBUztZQUNQQyxZQUFZO1FBQ2Q7SUFDRjtJQUVBLElBQUl0QixJQUFLTSxhQUFhaUIsS0FBSyxDQUFDQyxtQkFBbUIsRUFBRWQsU0FBU1UsWUFBYUssS0FBSztBQUM5RSJ9

@@ -1,0 +1,35 @@
+// Copyright 2013-2023, University of Colorado Boulder
+/**
+ * TODO docs https://github.com/phetsims/scenery/issues/1581
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { Drawable, scenery } from '../imports.js';
+let SharedCanvasCacheDrawable = class SharedCanvasCacheDrawable extends Drawable {
+    /**
+   * @public
+   * @override
+   *
+   * @param {Trail} trail
+   * @param {number} renderer
+   * @param {Instance} instance
+   * @param {Instance} sharedInstance
+   */ initialize(trail, renderer, instance, sharedInstance) {
+        super.initialize(renderer);
+        // TODO: NOTE: may have to separate into separate drawables for separate group renderers https://github.com/phetsims/scenery/issues/1581
+        this.instance = instance; // will need this so we can get bounds for layer fitting
+        this.sharedInstance = sharedInstance;
+    }
+    /**
+   * @param {Trail} trail
+   * @param {number} renderer
+   * @param {Instance} instance
+   * @param {Instance} sharedInstance
+   */ constructor(trail, renderer, instance, sharedInstance){
+        super();
+        this.initialize(trail, renderer, instance, sharedInstance);
+    }
+};
+scenery.register('SharedCanvasCacheDrawable', SharedCanvasCacheDrawable);
+export default SharedCanvasCacheDrawable;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvZGlzcGxheS9TaGFyZWRDYW52YXNDYWNoZURyYXdhYmxlLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDEzLTIwMjMsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFRPRE8gZG9jcyBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvc2NlbmVyeS9pc3N1ZXMvMTU4MVxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgeyBEcmF3YWJsZSwgc2NlbmVyeSB9IGZyb20gJy4uL2ltcG9ydHMuanMnO1xuXG5jbGFzcyBTaGFyZWRDYW52YXNDYWNoZURyYXdhYmxlIGV4dGVuZHMgRHJhd2FibGUge1xuICAvKipcbiAgICogQHBhcmFtIHtUcmFpbH0gdHJhaWxcbiAgICogQHBhcmFtIHtudW1iZXJ9IHJlbmRlcmVyXG4gICAqIEBwYXJhbSB7SW5zdGFuY2V9IGluc3RhbmNlXG4gICAqIEBwYXJhbSB7SW5zdGFuY2V9IHNoYXJlZEluc3RhbmNlXG4gICAqL1xuICBjb25zdHJ1Y3RvciggdHJhaWwsIHJlbmRlcmVyLCBpbnN0YW5jZSwgc2hhcmVkSW5zdGFuY2UgKSB7XG4gICAgc3VwZXIoKTtcblxuICAgIHRoaXMuaW5pdGlhbGl6ZSggdHJhaWwsIHJlbmRlcmVyLCBpbnN0YW5jZSwgc2hhcmVkSW5zdGFuY2UgKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBAcHVibGljXG4gICAqIEBvdmVycmlkZVxuICAgKlxuICAgKiBAcGFyYW0ge1RyYWlsfSB0cmFpbFxuICAgKiBAcGFyYW0ge251bWJlcn0gcmVuZGVyZXJcbiAgICogQHBhcmFtIHtJbnN0YW5jZX0gaW5zdGFuY2VcbiAgICogQHBhcmFtIHtJbnN0YW5jZX0gc2hhcmVkSW5zdGFuY2VcbiAgICovXG4gIGluaXRpYWxpemUoIHRyYWlsLCByZW5kZXJlciwgaW5zdGFuY2UsIHNoYXJlZEluc3RhbmNlICkge1xuICAgIHN1cGVyLmluaXRpYWxpemUoIHJlbmRlcmVyICk7XG5cbiAgICAvLyBUT0RPOiBOT1RFOiBtYXkgaGF2ZSB0byBzZXBhcmF0ZSBpbnRvIHNlcGFyYXRlIGRyYXdhYmxlcyBmb3Igc2VwYXJhdGUgZ3JvdXAgcmVuZGVyZXJzIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xNTgxXG5cbiAgICB0aGlzLmluc3RhbmNlID0gaW5zdGFuY2U7IC8vIHdpbGwgbmVlZCB0aGlzIHNvIHdlIGNhbiBnZXQgYm91bmRzIGZvciBsYXllciBmaXR0aW5nXG4gICAgdGhpcy5zaGFyZWRJbnN0YW5jZSA9IHNoYXJlZEluc3RhbmNlO1xuICB9XG59XG5cbnNjZW5lcnkucmVnaXN0ZXIoICdTaGFyZWRDYW52YXNDYWNoZURyYXdhYmxlJywgU2hhcmVkQ2FudmFzQ2FjaGVEcmF3YWJsZSApO1xuZXhwb3J0IGRlZmF1bHQgU2hhcmVkQ2FudmFzQ2FjaGVEcmF3YWJsZTsiXSwibmFtZXMiOlsiRHJhd2FibGUiLCJzY2VuZXJ5IiwiU2hhcmVkQ2FudmFzQ2FjaGVEcmF3YWJsZSIsImluaXRpYWxpemUiLCJ0cmFpbCIsInJlbmRlcmVyIiwiaW5zdGFuY2UiLCJzaGFyZWRJbnN0YW5jZSIsImNvbnN0cnVjdG9yIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsU0FBU0EsUUFBUSxFQUFFQyxPQUFPLFFBQVEsZ0JBQWdCO0FBRWxELElBQUEsQUFBTUMsNEJBQU4sTUFBTUEsa0NBQWtDRjtJQWF0Qzs7Ozs7Ozs7R0FRQyxHQUNERyxXQUFZQyxLQUFLLEVBQUVDLFFBQVEsRUFBRUMsUUFBUSxFQUFFQyxjQUFjLEVBQUc7UUFDdEQsS0FBSyxDQUFDSixXQUFZRTtRQUVsQix3SUFBd0k7UUFFeEksSUFBSSxDQUFDQyxRQUFRLEdBQUdBLFVBQVUsd0RBQXdEO1FBQ2xGLElBQUksQ0FBQ0MsY0FBYyxHQUFHQTtJQUN4QjtJQTVCQTs7Ozs7R0FLQyxHQUNEQyxZQUFhSixLQUFLLEVBQUVDLFFBQVEsRUFBRUMsUUFBUSxFQUFFQyxjQUFjLENBQUc7UUFDdkQsS0FBSztRQUVMLElBQUksQ0FBQ0osVUFBVSxDQUFFQyxPQUFPQyxVQUFVQyxVQUFVQztJQUM5QztBQW1CRjtBQUVBTixRQUFRUSxRQUFRLENBQUUsNkJBQTZCUDtBQUMvQyxlQUFlQSwwQkFBMEIifQ==

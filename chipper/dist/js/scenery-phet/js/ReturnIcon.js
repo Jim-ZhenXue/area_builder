@@ -1,0 +1,27 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * ReturnIcon is the icon used to signify 'undo'.
+ *
+ * @author John Blanco
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import { Shape } from '../../kite/js/imports.js';
+import optionize from '../../phet-core/js/optionize.js';
+import { Path } from '../../scenery/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let ReturnIcon = class ReturnIcon extends Path {
+    constructor(providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            height: 17,
+            // PathOptions
+            fill: 'black'
+        }, providedOptions);
+        const height = options.height;
+        const shape = new Shape().moveTo(0, 0).lineTo(0, height).lineTo(height, height).lineTo(height * 0.7, height * 0.7).quadraticCurveTo(height * 1.25, -height * 0.1, height * 2, height * 0.75).quadraticCurveTo(height * 1.25, -height * 0.5, height * 0.3, height * 0.3).close();
+        super(shape, options);
+    }
+};
+export { ReturnIcon as default };
+sceneryPhet.register('ReturnIcon', ReturnIcon);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9SZXR1cm5JY29uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIyLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFJldHVybkljb24gaXMgdGhlIGljb24gdXNlZCB0byBzaWduaWZ5ICd1bmRvJy5cbiAqXG4gKiBAYXV0aG9yIEpvaG4gQmxhbmNvXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCB7IFNoYXBlIH0gZnJvbSAnLi4vLi4va2l0ZS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBvcHRpb25pemUgZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgeyBQYXRoLCBQYXRoT3B0aW9ucyB9IGZyb20gJy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi9zY2VuZXJ5UGhldC5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSB7XG4gIGhlaWdodD86IG51bWJlcjsgLy8gaGVpZ2h0IG9mIHRoZSBpY29uXG59O1xuXG5leHBvcnQgdHlwZSBSZXR1cm5JY29uT3B0aW9ucyA9IFNlbGZPcHRpb25zICYgUGF0aE9wdGlvbnM7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFJldHVybkljb24gZXh0ZW5kcyBQYXRoIHtcblxuICBwdWJsaWMgY29uc3RydWN0b3IoIHByb3ZpZGVkT3B0aW9ucz86IFJldHVybkljb25PcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxSZXR1cm5JY29uT3B0aW9ucywgU2VsZk9wdGlvbnMsIFBhdGhPcHRpb25zPigpKCB7XG5cbiAgICAgIC8vIFNlbGZPcHRpb25zXG4gICAgICBoZWlnaHQ6IDE3LFxuXG4gICAgICAvLyBQYXRoT3B0aW9uc1xuICAgICAgZmlsbDogJ2JsYWNrJ1xuICAgIH0sIHByb3ZpZGVkT3B0aW9ucyApO1xuXG4gICAgY29uc3QgaGVpZ2h0ID0gb3B0aW9ucy5oZWlnaHQ7XG4gICAgY29uc3Qgc2hhcGUgPSBuZXcgU2hhcGUoKVxuICAgICAgLm1vdmVUbyggMCwgMCApXG4gICAgICAubGluZVRvKCAwLCBoZWlnaHQgKVxuICAgICAgLmxpbmVUbyggaGVpZ2h0LCBoZWlnaHQgKVxuICAgICAgLmxpbmVUbyggaGVpZ2h0ICogMC43LCBoZWlnaHQgKiAwLjcgKVxuICAgICAgLnF1YWRyYXRpY0N1cnZlVG8oIGhlaWdodCAqIDEuMjUsIC1oZWlnaHQgKiAwLjEsIGhlaWdodCAqIDIsIGhlaWdodCAqIDAuNzUgKVxuICAgICAgLnF1YWRyYXRpY0N1cnZlVG8oIGhlaWdodCAqIDEuMjUsIC1oZWlnaHQgKiAwLjUsIGhlaWdodCAqIDAuMywgaGVpZ2h0ICogMC4zIClcbiAgICAgIC5jbG9zZSgpO1xuXG4gICAgc3VwZXIoIHNoYXBlLCBvcHRpb25zICk7XG4gIH1cbn1cblxuc2NlbmVyeVBoZXQucmVnaXN0ZXIoICdSZXR1cm5JY29uJywgUmV0dXJuSWNvbiApOyJdLCJuYW1lcyI6WyJTaGFwZSIsIm9wdGlvbml6ZSIsIlBhdGgiLCJzY2VuZXJ5UGhldCIsIlJldHVybkljb24iLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiaGVpZ2h0IiwiZmlsbCIsInNoYXBlIiwibW92ZVRvIiwibGluZVRvIiwicXVhZHJhdGljQ3VydmVUbyIsImNsb3NlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELFNBQVNBLEtBQUssUUFBUSwyQkFBMkI7QUFDakQsT0FBT0MsZUFBZSxrQ0FBa0M7QUFDeEQsU0FBU0MsSUFBSSxRQUFxQiw4QkFBOEI7QUFDaEUsT0FBT0MsaUJBQWlCLG1CQUFtQjtBQVE1QixJQUFBLEFBQU1DLGFBQU4sTUFBTUEsbUJBQW1CRjtJQUV0QyxZQUFvQkcsZUFBbUMsQ0FBRztRQUV4RCxNQUFNQyxVQUFVTCxZQUEwRDtZQUV4RSxjQUFjO1lBQ2RNLFFBQVE7WUFFUixjQUFjO1lBQ2RDLE1BQU07UUFDUixHQUFHSDtRQUVILE1BQU1FLFNBQVNELFFBQVFDLE1BQU07UUFDN0IsTUFBTUUsUUFBUSxJQUFJVCxRQUNmVSxNQUFNLENBQUUsR0FBRyxHQUNYQyxNQUFNLENBQUUsR0FBR0osUUFDWEksTUFBTSxDQUFFSixRQUFRQSxRQUNoQkksTUFBTSxDQUFFSixTQUFTLEtBQUtBLFNBQVMsS0FDL0JLLGdCQUFnQixDQUFFTCxTQUFTLE1BQU0sQ0FBQ0EsU0FBUyxLQUFLQSxTQUFTLEdBQUdBLFNBQVMsTUFDckVLLGdCQUFnQixDQUFFTCxTQUFTLE1BQU0sQ0FBQ0EsU0FBUyxLQUFLQSxTQUFTLEtBQUtBLFNBQVMsS0FDdkVNLEtBQUs7UUFFUixLQUFLLENBQUVKLE9BQU9IO0lBQ2hCO0FBQ0Y7QUF6QkEsU0FBcUJGLHdCQXlCcEI7QUFFREQsWUFBWVcsUUFBUSxDQUFFLGNBQWNWIn0=

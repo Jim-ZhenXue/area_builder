@@ -1,0 +1,9 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * to specify when `any` is actually the best type for the case (albeit slightly unfortunate). This is not a to-do
+ * to be removed.
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9JbnRlbnRpb25hbEFueS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiB0byBzcGVjaWZ5IHdoZW4gYGFueWAgaXMgYWN0dWFsbHkgdGhlIGJlc3QgdHlwZSBmb3IgdGhlIGNhc2UgKGFsYmVpdCBzbGlnaHRseSB1bmZvcnR1bmF0ZSkuIFRoaXMgaXMgbm90IGEgdG8tZG9cbiAqIHRvIGJlIHJlbW92ZWQuXG4gKlxuICogQGF1dGhvciBNaWNoYWVsIEthdXptYW5uIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbnR5cGUgSW50ZW50aW9uYWxBbnkgPSBhbnk7IC8vIGVzbGludC1kaXNhYmxlLWxpbmUgQHR5cGVzY3JpcHQtZXNsaW50L25vLWV4cGxpY2l0LWFueVxuZXhwb3J0IGRlZmF1bHQgSW50ZW50aW9uYWxBbnk7Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUdELFdBQThCIn0=

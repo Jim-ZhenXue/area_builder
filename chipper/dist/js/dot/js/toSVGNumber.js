@@ -1,0 +1,23 @@
+// Copyright 2020-2024, University of Colorado Boulder
+/**
+ * Outputs a number for use in SVG's style/transform/path strings.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import dot from './dot.js';
+/**
+ * Outputs a number for use in SVG's style/transform/path strings.
+ *
+ * We need to prevent the numbers from being in an exponential toString form, since the CSS transform does not support
+ * that.
+ *
+ * @param {number} number
+ * @returns {string}
+ */ function toSVGNumber(number) {
+    // Largest guaranteed number of digits according to https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number/toFixed
+    // See https://github.com/phetsims/dot/issues/36
+    return number.toFixed(20); // eslint-disable-line phet/bad-sim-text
+}
+dot.register('toSVGNumber', toSVGNumber);
+export default toSVGNumber;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2RvdC9qcy90b1NWR051bWJlci5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBPdXRwdXRzIGEgbnVtYmVyIGZvciB1c2UgaW4gU1ZHJ3Mgc3R5bGUvdHJhbnNmb3JtL3BhdGggc3RyaW5ncy5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IGRvdCBmcm9tICcuL2RvdC5qcyc7XG5cbi8qKlxuICogT3V0cHV0cyBhIG51bWJlciBmb3IgdXNlIGluIFNWRydzIHN0eWxlL3RyYW5zZm9ybS9wYXRoIHN0cmluZ3MuXG4gKlxuICogV2UgbmVlZCB0byBwcmV2ZW50IHRoZSBudW1iZXJzIGZyb20gYmVpbmcgaW4gYW4gZXhwb25lbnRpYWwgdG9TdHJpbmcgZm9ybSwgc2luY2UgdGhlIENTUyB0cmFuc2Zvcm0gZG9lcyBub3Qgc3VwcG9ydFxuICogdGhhdC5cbiAqXG4gKiBAcGFyYW0ge251bWJlcn0gbnVtYmVyXG4gKiBAcmV0dXJucyB7c3RyaW5nfVxuICovXG5mdW5jdGlvbiB0b1NWR051bWJlciggbnVtYmVyICkge1xuICAvLyBMYXJnZXN0IGd1YXJhbnRlZWQgbnVtYmVyIG9mIGRpZ2l0cyBhY2NvcmRpbmcgdG8gaHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9KYXZhU2NyaXB0L1JlZmVyZW5jZS9HbG9iYWxfT2JqZWN0cy9OdW1iZXIvdG9GaXhlZFxuICAvLyBTZWUgaHR0cHM6Ly9naXRodWIuY29tL3BoZXRzaW1zL2RvdC9pc3N1ZXMvMzZcbiAgcmV0dXJuIG51bWJlci50b0ZpeGVkKCAyMCApOyAvLyBlc2xpbnQtZGlzYWJsZS1saW5lIHBoZXQvYmFkLXNpbS10ZXh0XG59XG5cbmRvdC5yZWdpc3RlciggJ3RvU1ZHTnVtYmVyJywgdG9TVkdOdW1iZXIgKTtcbmV4cG9ydCBkZWZhdWx0IHRvU1ZHTnVtYmVyOyJdLCJuYW1lcyI6WyJkb3QiLCJ0b1NWR051bWJlciIsIm51bWJlciIsInRvRml4ZWQiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxPQUFPQSxTQUFTLFdBQVc7QUFFM0I7Ozs7Ozs7O0NBUUMsR0FDRCxTQUFTQyxZQUFhQyxNQUFNO0lBQzFCLCtJQUErSTtJQUMvSSxnREFBZ0Q7SUFDaEQsT0FBT0EsT0FBT0MsT0FBTyxDQUFFLEtBQU0sd0NBQXdDO0FBQ3ZFO0FBRUFILElBQUlJLFFBQVEsQ0FBRSxlQUFlSDtBQUM3QixlQUFlQSxZQUFZIn0=

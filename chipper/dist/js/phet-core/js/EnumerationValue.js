@@ -1,0 +1,65 @@
+// Copyright 2021-2024, University of Colorado Boulder
+/**
+ * EnumerationValue is the base class for enumeration value instances.
+ * See https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md#enumeration
+ *
+ * PhET's Enumeration pattern is:
+ *
+ * class MyEnumeration extends EnumerationValue {
+ *   public static readonly VALUE_1 = new MyEnumeration();
+ *   public static readonly VALUE_2 = new MyEnumeration();
+ *
+ *   // Make sure this is last, once all EnumerationValues have been declared statically.
+ *   public static readonly enumeration = new Enumeration( MyEnumeration );
+ * }
+ *
+ * // Usage
+ * console.log( MyEnumeration.VALUE_1 );
+ * const printValue = enumValue => {
+ *   assert && assert( enumValue.enumeration.values.includes(enumValue));
+ *   console.log( enumValue );
+ * };
+ * printValue( MyEnumeration.VALUE_2 );
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import phetCore from './phetCore.js';
+let EnumerationValue = class EnumerationValue {
+    toString() {
+        return this.name;
+    }
+    // This method is unused, but needs to remain here so other types don't accidentally structurally match
+    // enumeration values.  Without this, string satisfies the EnumerationValue interface, but we don't want it to.
+    isEnumerationValue() {
+        return true;
+    }
+    set name(name) {
+        assert && assert(!this._name, 'name cannot be changed once defined.');
+        this._name = name;
+    }
+    get name() {
+        assert && assert(this._name, 'name cannot be retrieved until it has been filled in by Enumeration.');
+        return this._name;
+    }
+    set enumeration(enumeration) {
+        assert && assert(!this._enumeration, 'enumeration cannot be changed once defined.');
+        this._enumeration = enumeration;
+    }
+    get enumeration() {
+        assert && assert(this._enumeration, 'enumeration cannot be retrieved until it has been filled in by Enumeration.');
+        return this._enumeration;
+    }
+    constructor(){
+        const c = this.constructor;
+        assert && assert(!EnumerationValue.sealedCache.has(c), 'cannot create instanceof of a sealed constructor');
+        this._name = null;
+        this._enumeration = null;
+    }
+};
+// After an Enumeration is constructed, no new instances of that exact type can be made (though it is OK to
+// create subtypes)
+EnumerationValue.sealedCache = new Set();
+phetCore.register('EnumerationValue', EnumerationValue);
+export default EnumerationValue;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9FbnVtZXJhdGlvblZhbHVlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIxLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEVudW1lcmF0aW9uVmFsdWUgaXMgdGhlIGJhc2UgY2xhc3MgZm9yIGVudW1lcmF0aW9uIHZhbHVlIGluc3RhbmNlcy5cbiAqIFNlZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvcGhldC1pbmZvL2Jsb2IvbWFpbi9kb2MvcGhldC1zb2Z0d2FyZS1kZXNpZ24tcGF0dGVybnMubWQjZW51bWVyYXRpb25cbiAqXG4gKiBQaEVUJ3MgRW51bWVyYXRpb24gcGF0dGVybiBpczpcbiAqXG4gKiBjbGFzcyBNeUVudW1lcmF0aW9uIGV4dGVuZHMgRW51bWVyYXRpb25WYWx1ZSB7XG4gKiAgIHB1YmxpYyBzdGF0aWMgcmVhZG9ubHkgVkFMVUVfMSA9IG5ldyBNeUVudW1lcmF0aW9uKCk7XG4gKiAgIHB1YmxpYyBzdGF0aWMgcmVhZG9ubHkgVkFMVUVfMiA9IG5ldyBNeUVudW1lcmF0aW9uKCk7XG4gKlxuICogICAvLyBNYWtlIHN1cmUgdGhpcyBpcyBsYXN0LCBvbmNlIGFsbCBFbnVtZXJhdGlvblZhbHVlcyBoYXZlIGJlZW4gZGVjbGFyZWQgc3RhdGljYWxseS5cbiAqICAgcHVibGljIHN0YXRpYyByZWFkb25seSBlbnVtZXJhdGlvbiA9IG5ldyBFbnVtZXJhdGlvbiggTXlFbnVtZXJhdGlvbiApO1xuICogfVxuICpcbiAqIC8vIFVzYWdlXG4gKiBjb25zb2xlLmxvZyggTXlFbnVtZXJhdGlvbi5WQUxVRV8xICk7XG4gKiBjb25zdCBwcmludFZhbHVlID0gZW51bVZhbHVlID0+IHtcbiAqICAgYXNzZXJ0ICYmIGFzc2VydCggZW51bVZhbHVlLmVudW1lcmF0aW9uLnZhbHVlcy5pbmNsdWRlcyhlbnVtVmFsdWUpKTtcbiAqICAgY29uc29sZS5sb2coIGVudW1WYWx1ZSApO1xuICogfTtcbiAqIHByaW50VmFsdWUoIE15RW51bWVyYXRpb24uVkFMVUVfMiApO1xuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IEVudW1lcmF0aW9uIGZyb20gJy4vRW51bWVyYXRpb24uanMnO1xuaW1wb3J0IHBoZXRDb3JlIGZyb20gJy4vcGhldENvcmUuanMnO1xuaW1wb3J0IENvbnN0cnVjdG9yIGZyb20gJy4vdHlwZXMvQ29uc3RydWN0b3IuanMnO1xuXG5jbGFzcyBFbnVtZXJhdGlvblZhbHVlIHtcblxuICAvLyBudWxsIHVudGlsIHNldCBieSBFbnVtZXJhdGlvbi4gT25jZSBzZXQsIGNhbm5vdCBiZSBjaGFuZ2VkLlxuICBwcml2YXRlIF9uYW1lOiBzdHJpbmcgfCBudWxsO1xuICBwcml2YXRlIF9lbnVtZXJhdGlvbjogRW51bWVyYXRpb248dGhpcz4gfCBudWxsO1xuXG4gIC8vIEFmdGVyIGFuIEVudW1lcmF0aW9uIGlzIGNvbnN0cnVjdGVkLCBubyBuZXcgaW5zdGFuY2VzIG9mIHRoYXQgZXhhY3QgdHlwZSBjYW4gYmUgbWFkZSAodGhvdWdoIGl0IGlzIE9LIHRvXG4gIC8vIGNyZWF0ZSBzdWJ0eXBlcylcbiAgcHVibGljIHN0YXRpYyBzZWFsZWRDYWNoZSA9IG5ldyBTZXQ8Q29uc3RydWN0b3I8RW51bWVyYXRpb25WYWx1ZT4+KCk7XG5cbiAgcHVibGljIHRvU3RyaW5nKCk6IHN0cmluZyB7XG4gICAgcmV0dXJuIHRoaXMubmFtZTtcbiAgfVxuXG4gIC8vIFRoaXMgbWV0aG9kIGlzIHVudXNlZCwgYnV0IG5lZWRzIHRvIHJlbWFpbiBoZXJlIHNvIG90aGVyIHR5cGVzIGRvbid0IGFjY2lkZW50YWxseSBzdHJ1Y3R1cmFsbHkgbWF0Y2hcbiAgLy8gZW51bWVyYXRpb24gdmFsdWVzLiAgV2l0aG91dCB0aGlzLCBzdHJpbmcgc2F0aXNmaWVzIHRoZSBFbnVtZXJhdGlvblZhbHVlIGludGVyZmFjZSwgYnV0IHdlIGRvbid0IHdhbnQgaXQgdG8uXG4gIHByaXZhdGUgaXNFbnVtZXJhdGlvblZhbHVlKCk6IGJvb2xlYW4ge3JldHVybiB0cnVlO31cblxuICBwdWJsaWMgY29uc3RydWN0b3IoKSB7XG4gICAgY29uc3QgYyA9IHRoaXMuY29uc3RydWN0b3IgYXMgQ29uc3RydWN0b3I8RW51bWVyYXRpb25WYWx1ZT47XG4gICAgYXNzZXJ0ICYmIGFzc2VydCggIUVudW1lcmF0aW9uVmFsdWUuc2VhbGVkQ2FjaGUuaGFzKCBjICksICdjYW5ub3QgY3JlYXRlIGluc3RhbmNlb2Ygb2YgYSBzZWFsZWQgY29uc3RydWN0b3InICk7XG5cbiAgICB0aGlzLl9uYW1lID0gbnVsbDtcbiAgICB0aGlzLl9lbnVtZXJhdGlvbiA9IG51bGw7XG4gIH1cblxuICBwdWJsaWMgc2V0IG5hbWUoIG5hbWU6IHN0cmluZyApIHtcbiAgICBhc3NlcnQgJiYgYXNzZXJ0KCAhdGhpcy5fbmFtZSwgJ25hbWUgY2Fubm90IGJlIGNoYW5nZWQgb25jZSBkZWZpbmVkLicgKTtcbiAgICB0aGlzLl9uYW1lID0gbmFtZTtcbiAgfVxuXG4gIHB1YmxpYyBnZXQgbmFtZSgpOiBzdHJpbmcge1xuICAgIGFzc2VydCAmJiBhc3NlcnQoIHRoaXMuX25hbWUsICduYW1lIGNhbm5vdCBiZSByZXRyaWV2ZWQgdW50aWwgaXQgaGFzIGJlZW4gZmlsbGVkIGluIGJ5IEVudW1lcmF0aW9uLicgKTtcbiAgICByZXR1cm4gdGhpcy5fbmFtZSE7XG4gIH1cblxuICBwdWJsaWMgc2V0IGVudW1lcmF0aW9uKCBlbnVtZXJhdGlvbjogRW51bWVyYXRpb248dGhpcz4gKSB7XG4gICAgYXNzZXJ0ICYmIGFzc2VydCggIXRoaXMuX2VudW1lcmF0aW9uLCAnZW51bWVyYXRpb24gY2Fubm90IGJlIGNoYW5nZWQgb25jZSBkZWZpbmVkLicgKTtcbiAgICB0aGlzLl9lbnVtZXJhdGlvbiA9IGVudW1lcmF0aW9uO1xuICB9XG5cbiAgcHVibGljIGdldCBlbnVtZXJhdGlvbigpOiBFbnVtZXJhdGlvbjx0aGlzPiB7XG4gICAgYXNzZXJ0ICYmIGFzc2VydCggdGhpcy5fZW51bWVyYXRpb24sICdlbnVtZXJhdGlvbiBjYW5ub3QgYmUgcmV0cmlldmVkIHVudGlsIGl0IGhhcyBiZWVuIGZpbGxlZCBpbiBieSBFbnVtZXJhdGlvbi4nICk7XG4gICAgcmV0dXJuIHRoaXMuX2VudW1lcmF0aW9uITtcbiAgfVxufVxuXG5waGV0Q29yZS5yZWdpc3RlciggJ0VudW1lcmF0aW9uVmFsdWUnLCBFbnVtZXJhdGlvblZhbHVlICk7XG5cbmV4cG9ydCBkZWZhdWx0IEVudW1lcmF0aW9uVmFsdWU7Il0sIm5hbWVzIjpbInBoZXRDb3JlIiwiRW51bWVyYXRpb25WYWx1ZSIsInRvU3RyaW5nIiwibmFtZSIsImlzRW51bWVyYXRpb25WYWx1ZSIsImFzc2VydCIsIl9uYW1lIiwiZW51bWVyYXRpb24iLCJfZW51bWVyYXRpb24iLCJjIiwiY29uc3RydWN0b3IiLCJzZWFsZWRDYWNoZSIsImhhcyIsIlNldCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztDQXdCQyxHQUdELE9BQU9BLGNBQWMsZ0JBQWdCO0FBR3JDLElBQUEsQUFBTUMsbUJBQU4sTUFBTUE7SUFVR0MsV0FBbUI7UUFDeEIsT0FBTyxJQUFJLENBQUNDLElBQUk7SUFDbEI7SUFFQSx1R0FBdUc7SUFDdkcsK0dBQStHO0lBQ3ZHQyxxQkFBOEI7UUFBQyxPQUFPO0lBQUs7SUFVbkQsSUFBV0QsS0FBTUEsSUFBWSxFQUFHO1FBQzlCRSxVQUFVQSxPQUFRLENBQUMsSUFBSSxDQUFDQyxLQUFLLEVBQUU7UUFDL0IsSUFBSSxDQUFDQSxLQUFLLEdBQUdIO0lBQ2Y7SUFFQSxJQUFXQSxPQUFlO1FBQ3hCRSxVQUFVQSxPQUFRLElBQUksQ0FBQ0MsS0FBSyxFQUFFO1FBQzlCLE9BQU8sSUFBSSxDQUFDQSxLQUFLO0lBQ25CO0lBRUEsSUFBV0MsWUFBYUEsV0FBOEIsRUFBRztRQUN2REYsVUFBVUEsT0FBUSxDQUFDLElBQUksQ0FBQ0csWUFBWSxFQUFFO1FBQ3RDLElBQUksQ0FBQ0EsWUFBWSxHQUFHRDtJQUN0QjtJQUVBLElBQVdBLGNBQWlDO1FBQzFDRixVQUFVQSxPQUFRLElBQUksQ0FBQ0csWUFBWSxFQUFFO1FBQ3JDLE9BQU8sSUFBSSxDQUFDQSxZQUFZO0lBQzFCO0lBMUJBLGFBQXFCO1FBQ25CLE1BQU1DLElBQUksSUFBSSxDQUFDQyxXQUFXO1FBQzFCTCxVQUFVQSxPQUFRLENBQUNKLGlCQUFpQlUsV0FBVyxDQUFDQyxHQUFHLENBQUVILElBQUs7UUFFMUQsSUFBSSxDQUFDSCxLQUFLLEdBQUc7UUFDYixJQUFJLENBQUNFLFlBQVksR0FBRztJQUN0QjtBQXFCRjtBQXZDRSwyR0FBMkc7QUFDM0csbUJBQW1CO0FBUGZQLGlCQVFVVSxjQUFjLElBQUlFO0FBdUNsQ2IsU0FBU2MsUUFBUSxDQUFFLG9CQUFvQmI7QUFFdkMsZUFBZUEsaUJBQWlCIn0=

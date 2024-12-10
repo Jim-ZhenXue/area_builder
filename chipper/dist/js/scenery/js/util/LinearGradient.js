@@ -1,0 +1,50 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * A linear gradient that can be passed into the 'fill' or 'stroke' parameters.
+ *
+ * SVG gradients, see http://www.w3.org/TR/SVG/pservers.html
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Vector2 from '../../../dot/js/Vector2.js';
+import { ColorDef, Gradient, scenery, SVGLinearGradient } from '../imports.js';
+let LinearGradient = class LinearGradient extends Gradient {
+    /**
+   * Returns a fresh gradient given the starting parameters
+   */ createCanvasGradient() {
+        // use the global scratch canvas instead of creating a new Canvas
+        // @ts-expect-error TODO scenery namespace https://github.com/phetsims/scenery/issues/1581
+        return scenery.scratchContext.createLinearGradient(this.start.x, this.start.y, this.end.x, this.end.y);
+    }
+    /**
+   * Creates an SVG paint object for creating/updating the SVG equivalent definition.
+   */ createSVGPaint(svgBlock) {
+        return SVGLinearGradient.pool.create(svgBlock, this);
+    }
+    /**
+   * Returns a string form of this object
+   */ toString() {
+        let result = `new phet.scenery.LinearGradient( ${this.start.x}, ${this.start.y}, ${this.end.x}, ${this.end.y} )`;
+        _.each(this.stops, (stop)=>{
+            result += `.addColorStop( ${stop.ratio}, ${ColorDef.scenerySerialize(stop.color)} )`;
+        });
+        return result;
+    }
+    /**
+   * TODO: add the ability to specify the color-stops inline. possibly [ [0,color1], [0.5,color2], [1,color3] ] https://github.com/phetsims/scenery/issues/1581
+   *
+   * @param x0 - X coordinate of the start point (ratio 0) in the local coordinate frame
+   * @param y0 - Y coordinate of the start point (ratio 0) in the local coordinate frame
+   * @param x1 - X coordinate of the end point (ratio 1) in the local coordinate frame
+   * @param y1 - Y coordinate of the end point (ratio 1) in the local coordinate frame
+   */ constructor(x0, y0, x1, y1){
+        assert && assert(isFinite(x0) && isFinite(y0) && isFinite(x1) && isFinite(y1));
+        super();
+        this.start = new Vector2(x0, y0);
+        this.end = new Vector2(x1, y1);
+    }
+};
+export { LinearGradient as default };
+LinearGradient.prototype.isLinearGradient = true;
+scenery.register('LinearGradient', LinearGradient);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvdXRpbC9MaW5lYXJHcmFkaWVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBBIGxpbmVhciBncmFkaWVudCB0aGF0IGNhbiBiZSBwYXNzZWQgaW50byB0aGUgJ2ZpbGwnIG9yICdzdHJva2UnIHBhcmFtZXRlcnMuXG4gKlxuICogU1ZHIGdyYWRpZW50cywgc2VlIGh0dHA6Ly93d3cudzMub3JnL1RSL1NWRy9wc2VydmVycy5odG1sXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCBWZWN0b3IyIGZyb20gJy4uLy4uLy4uL2RvdC9qcy9WZWN0b3IyLmpzJztcbmltcG9ydCB7IENvbG9yRGVmLCBHcmFkaWVudCwgc2NlbmVyeSwgU1ZHQmxvY2ssIFNWR0xpbmVhckdyYWRpZW50IH0gZnJvbSAnLi4vaW1wb3J0cy5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIExpbmVhckdyYWRpZW50IGV4dGVuZHMgR3JhZGllbnQge1xuXG4gIHB1YmxpYyBzdGFydDogVmVjdG9yMjtcbiAgcHVibGljIGVuZDogVmVjdG9yMjtcblxuICAvKipcbiAgICogVE9ETzogYWRkIHRoZSBhYmlsaXR5IHRvIHNwZWNpZnkgdGhlIGNvbG9yLXN0b3BzIGlubGluZS4gcG9zc2libHkgWyBbMCxjb2xvcjFdLCBbMC41LGNvbG9yMl0sIFsxLGNvbG9yM10gXSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvc2NlbmVyeS9pc3N1ZXMvMTU4MVxuICAgKlxuICAgKiBAcGFyYW0geDAgLSBYIGNvb3JkaW5hdGUgb2YgdGhlIHN0YXJ0IHBvaW50IChyYXRpbyAwKSBpbiB0aGUgbG9jYWwgY29vcmRpbmF0ZSBmcmFtZVxuICAgKiBAcGFyYW0geTAgLSBZIGNvb3JkaW5hdGUgb2YgdGhlIHN0YXJ0IHBvaW50IChyYXRpbyAwKSBpbiB0aGUgbG9jYWwgY29vcmRpbmF0ZSBmcmFtZVxuICAgKiBAcGFyYW0geDEgLSBYIGNvb3JkaW5hdGUgb2YgdGhlIGVuZCBwb2ludCAocmF0aW8gMSkgaW4gdGhlIGxvY2FsIGNvb3JkaW5hdGUgZnJhbWVcbiAgICogQHBhcmFtIHkxIC0gWSBjb29yZGluYXRlIG9mIHRoZSBlbmQgcG9pbnQgKHJhdGlvIDEpIGluIHRoZSBsb2NhbCBjb29yZGluYXRlIGZyYW1lXG4gICAqL1xuICBwdWJsaWMgY29uc3RydWN0b3IoIHgwOiBudW1iZXIsIHkwOiBudW1iZXIsIHgxOiBudW1iZXIsIHkxOiBudW1iZXIgKSB7XG4gICAgYXNzZXJ0ICYmIGFzc2VydCggaXNGaW5pdGUoIHgwICkgJiYgaXNGaW5pdGUoIHkwICkgJiYgaXNGaW5pdGUoIHgxICkgJiYgaXNGaW5pdGUoIHkxICkgKTtcblxuICAgIHN1cGVyKCk7XG5cbiAgICB0aGlzLnN0YXJ0ID0gbmV3IFZlY3RvcjIoIHgwLCB5MCApO1xuICAgIHRoaXMuZW5kID0gbmV3IFZlY3RvcjIoIHgxLCB5MSApO1xuICB9XG5cblxuICAvKipcbiAgICogUmV0dXJucyBhIGZyZXNoIGdyYWRpZW50IGdpdmVuIHRoZSBzdGFydGluZyBwYXJhbWV0ZXJzXG4gICAqL1xuICBwdWJsaWMgY3JlYXRlQ2FudmFzR3JhZGllbnQoKTogQ2FudmFzR3JhZGllbnQge1xuICAgIC8vIHVzZSB0aGUgZ2xvYmFsIHNjcmF0Y2ggY2FudmFzIGluc3RlYWQgb2YgY3JlYXRpbmcgYSBuZXcgQ2FudmFzXG4gICAgLy8gQHRzLWV4cGVjdC1lcnJvciBUT0RPIHNjZW5lcnkgbmFtZXNwYWNlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xNTgxXG4gICAgcmV0dXJuIHNjZW5lcnkuc2NyYXRjaENvbnRleHQuY3JlYXRlTGluZWFyR3JhZGllbnQoIHRoaXMuc3RhcnQueCwgdGhpcy5zdGFydC55LCB0aGlzLmVuZC54LCB0aGlzLmVuZC55ICk7XG4gIH1cblxuICAvKipcbiAgICogQ3JlYXRlcyBhbiBTVkcgcGFpbnQgb2JqZWN0IGZvciBjcmVhdGluZy91cGRhdGluZyB0aGUgU1ZHIGVxdWl2YWxlbnQgZGVmaW5pdGlvbi5cbiAgICovXG4gIHB1YmxpYyBjcmVhdGVTVkdQYWludCggc3ZnQmxvY2s6IFNWR0Jsb2NrICk6IFNWR0xpbmVhckdyYWRpZW50IHtcbiAgICByZXR1cm4gU1ZHTGluZWFyR3JhZGllbnQucG9vbC5jcmVhdGUoIHN2Z0Jsb2NrLCB0aGlzICk7XG4gIH1cblxuICAvKipcbiAgICogUmV0dXJucyBhIHN0cmluZyBmb3JtIG9mIHRoaXMgb2JqZWN0XG4gICAqL1xuICBwdWJsaWMgb3ZlcnJpZGUgdG9TdHJpbmcoKTogc3RyaW5nIHtcbiAgICBsZXQgcmVzdWx0ID0gYG5ldyBwaGV0LnNjZW5lcnkuTGluZWFyR3JhZGllbnQoICR7dGhpcy5zdGFydC54fSwgJHt0aGlzLnN0YXJ0Lnl9LCAke3RoaXMuZW5kLnh9LCAke3RoaXMuZW5kLnl9IClgO1xuXG4gICAgXy5lYWNoKCB0aGlzLnN0b3BzLCBzdG9wID0+IHtcbiAgICAgIHJlc3VsdCArPSBgLmFkZENvbG9yU3RvcCggJHtzdG9wLnJhdGlvfSwgJHtDb2xvckRlZi5zY2VuZXJ5U2VyaWFsaXplKCBzdG9wLmNvbG9yICl9IClgO1xuICAgIH0gKTtcblxuICAgIHJldHVybiByZXN1bHQ7XG4gIH1cblxuICBwdWJsaWMgaXNMaW5lYXJHcmFkaWVudCE6IGJvb2xlYW47XG59XG5cbkxpbmVhckdyYWRpZW50LnByb3RvdHlwZS5pc0xpbmVhckdyYWRpZW50ID0gdHJ1ZTtcblxuc2NlbmVyeS5yZWdpc3RlciggJ0xpbmVhckdyYWRpZW50JywgTGluZWFyR3JhZGllbnQgKTsiXSwibmFtZXMiOlsiVmVjdG9yMiIsIkNvbG9yRGVmIiwiR3JhZGllbnQiLCJzY2VuZXJ5IiwiU1ZHTGluZWFyR3JhZGllbnQiLCJMaW5lYXJHcmFkaWVudCIsImNyZWF0ZUNhbnZhc0dyYWRpZW50Iiwic2NyYXRjaENvbnRleHQiLCJjcmVhdGVMaW5lYXJHcmFkaWVudCIsInN0YXJ0IiwieCIsInkiLCJlbmQiLCJjcmVhdGVTVkdQYWludCIsInN2Z0Jsb2NrIiwicG9vbCIsImNyZWF0ZSIsInRvU3RyaW5nIiwicmVzdWx0IiwiXyIsImVhY2giLCJzdG9wcyIsInN0b3AiLCJyYXRpbyIsInNjZW5lcnlTZXJpYWxpemUiLCJjb2xvciIsIngwIiwieTAiLCJ4MSIsInkxIiwiYXNzZXJ0IiwiaXNGaW5pdGUiLCJwcm90b3R5cGUiLCJpc0xpbmVhckdyYWRpZW50IiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7O0NBTUMsR0FFRCxPQUFPQSxhQUFhLDZCQUE2QjtBQUNqRCxTQUFTQyxRQUFRLEVBQUVDLFFBQVEsRUFBRUMsT0FBTyxFQUFZQyxpQkFBaUIsUUFBUSxnQkFBZ0I7QUFFMUUsSUFBQSxBQUFNQyxpQkFBTixNQUFNQSx1QkFBdUJIO0lBdUIxQzs7R0FFQyxHQUNELEFBQU9JLHVCQUF1QztRQUM1QyxpRUFBaUU7UUFDakUsMEZBQTBGO1FBQzFGLE9BQU9ILFFBQVFJLGNBQWMsQ0FBQ0Msb0JBQW9CLENBQUUsSUFBSSxDQUFDQyxLQUFLLENBQUNDLENBQUMsRUFBRSxJQUFJLENBQUNELEtBQUssQ0FBQ0UsQ0FBQyxFQUFFLElBQUksQ0FBQ0MsR0FBRyxDQUFDRixDQUFDLEVBQUUsSUFBSSxDQUFDRSxHQUFHLENBQUNELENBQUM7SUFDeEc7SUFFQTs7R0FFQyxHQUNELEFBQU9FLGVBQWdCQyxRQUFrQixFQUFzQjtRQUM3RCxPQUFPVixrQkFBa0JXLElBQUksQ0FBQ0MsTUFBTSxDQUFFRixVQUFVLElBQUk7SUFDdEQ7SUFFQTs7R0FFQyxHQUNELEFBQWdCRyxXQUFtQjtRQUNqQyxJQUFJQyxTQUFTLENBQUMsaUNBQWlDLEVBQUUsSUFBSSxDQUFDVCxLQUFLLENBQUNDLENBQUMsQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDRCxLQUFLLENBQUNFLENBQUMsQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDQyxHQUFHLENBQUNGLENBQUMsQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDRSxHQUFHLENBQUNELENBQUMsQ0FBQyxFQUFFLENBQUM7UUFFaEhRLEVBQUVDLElBQUksQ0FBRSxJQUFJLENBQUNDLEtBQUssRUFBRUMsQ0FBQUE7WUFDbEJKLFVBQVUsQ0FBQyxlQUFlLEVBQUVJLEtBQUtDLEtBQUssQ0FBQyxFQUFFLEVBQUV0QixTQUFTdUIsZ0JBQWdCLENBQUVGLEtBQUtHLEtBQUssRUFBRyxFQUFFLENBQUM7UUFDeEY7UUFFQSxPQUFPUDtJQUNUO0lBN0NBOzs7Ozs7O0dBT0MsR0FDRCxZQUFvQlEsRUFBVSxFQUFFQyxFQUFVLEVBQUVDLEVBQVUsRUFBRUMsRUFBVSxDQUFHO1FBQ25FQyxVQUFVQSxPQUFRQyxTQUFVTCxPQUFRSyxTQUFVSixPQUFRSSxTQUFVSCxPQUFRRyxTQUFVRjtRQUVsRixLQUFLO1FBRUwsSUFBSSxDQUFDcEIsS0FBSyxHQUFHLElBQUlULFFBQVMwQixJQUFJQztRQUM5QixJQUFJLENBQUNmLEdBQUcsR0FBRyxJQUFJWixRQUFTNEIsSUFBSUM7SUFDOUI7QUFpQ0Y7QUFyREEsU0FBcUJ4Qiw0QkFxRHBCO0FBRURBLGVBQWUyQixTQUFTLENBQUNDLGdCQUFnQixHQUFHO0FBRTVDOUIsUUFBUStCLFFBQVEsQ0FBRSxrQkFBa0I3QiJ9

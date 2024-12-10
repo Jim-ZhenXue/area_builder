@@ -1,0 +1,8 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * Similar to the built-in NotNullable, but just for null
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9Ob3ROdWxsLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIyLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFNpbWlsYXIgdG8gdGhlIGJ1aWx0LWluIE5vdE51bGxhYmxlLCBidXQganVzdCBmb3IgbnVsbFxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG50eXBlIE5vdE51bGw8VD4gPSBUIGV4dGVuZHMgbnVsbCA/IG5ldmVyIDogVDtcbmV4cG9ydCBkZWZhdWx0IE5vdE51bGw7Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBR0QsV0FBdUIifQ==

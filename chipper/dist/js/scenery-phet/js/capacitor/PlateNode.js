@@ -1,0 +1,61 @@
+// Copyright 2019-2021, University of Colorado Boulder
+/**
+ * Visual representation of a capacitor plate.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jesse Greenberg (PhET Interactive Simulations)
+ * @author Andrew Adare (PhET Interactive Simulations)
+ */ import Bounds3 from '../../../dot/js/Bounds3.js';
+import { Color } from '../../../scenery/js/imports.js';
+import sceneryPhet from '../sceneryPhet.js';
+import BoxNode from './BoxNode.js';
+import CapacitorConstants from './CapacitorConstants.js';
+import PlateChargeNode from './PlateChargeNode.js';
+// constants
+const PLATE_COLOR = new Color(245, 245, 245); // capacitor plates
+let PlateNode = class PlateNode extends BoxNode {
+    /**
+   * Make the charges on this plate visible.
+   * @public
+   *
+   * @param {boolean} visible
+   */ setChargeVisible(visible) {
+        this.plateChargeNode.visible = visible;
+    }
+    /**
+   * Get bounds for a plate with maximum width.  Useful for layout and bounds calculations.
+   * @private
+   *
+   * @returns {Bounds3}
+   */ getMaxBoxNodeBounds() {
+        const maxWidthBoxNode = new BoxNode(this.modelViewTransform, PLATE_COLOR, new Bounds3(0, 0, 0, CapacitorConstants.PLATE_WIDTH_RANGE.max, CapacitorConstants.PLATE_HEIGHT, CapacitorConstants.PLATE_WIDTH_RANGE.max));
+        return maxWidthBoxNode.bounds;
+    }
+    /**
+   * @param {Capacitor} capacitor
+   * @param {YawPitchModelViewTransform3} modelViewTransform
+   * @param {string} polarity - 'POSITIVE' or 'NEGATIVE'
+   * @param {number} maxPlateCharge
+   * @param {string} orientation
+   * @param {boolean} [includeChargeNode=true] - if the charges can be shown.  This option was added for CCK toolbox icons, where
+   *                                           - charges are never shown, but the canvas was too large and threw off the bounds
+   */ constructor(capacitor, modelViewTransform, polarity, maxPlateCharge, orientation, includeChargeNode = true){
+        super(modelViewTransform, PLATE_COLOR, capacitor.plateSizeProperty.value);
+        // @private {YawPitchModelViewTransform3}
+        this.modelViewTransform = modelViewTransform;
+        // Charges restricted to the largest possible top face on a capacitor plate.  Bounds needed for canvas.
+        const canvasBounds = this.getMaxBoxNodeBounds();
+        // @private {PlateChargeNode}
+        this.plateChargeNode = new PlateChargeNode(capacitor, modelViewTransform, {
+            polarity: polarity,
+            maxPlateCharge: maxPlateCharge,
+            canvasBounds: canvasBounds,
+            orientation: orientation
+        });
+        includeChargeNode && this.addChild(this.plateChargeNode);
+    }
+};
+sceneryPhet.register('PlateNode', PlateNode);
+export default PlateNode;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9jYXBhY2l0b3IvUGxhdGVOb2RlLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE5LTIwMjEsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFZpc3VhbCByZXByZXNlbnRhdGlvbiBvZiBhIGNhcGFjaXRvciBwbGF0ZS5cbiAqXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICogQGF1dGhvciBKZXNzZSBHcmVlbmJlcmcgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIEFuZHJldyBBZGFyZSAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgQm91bmRzMyBmcm9tICcuLi8uLi8uLi9kb3QvanMvQm91bmRzMy5qcyc7XG5pbXBvcnQgeyBDb2xvciB9IGZyb20gJy4uLy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vc2NlbmVyeVBoZXQuanMnO1xuaW1wb3J0IEJveE5vZGUgZnJvbSAnLi9Cb3hOb2RlLmpzJztcbmltcG9ydCBDYXBhY2l0b3JDb25zdGFudHMgZnJvbSAnLi9DYXBhY2l0b3JDb25zdGFudHMuanMnO1xuaW1wb3J0IFBsYXRlQ2hhcmdlTm9kZSBmcm9tICcuL1BsYXRlQ2hhcmdlTm9kZS5qcyc7XG5cbi8vIGNvbnN0YW50c1xuY29uc3QgUExBVEVfQ09MT1IgPSBuZXcgQ29sb3IoIDI0NSwgMjQ1LCAyNDUgKTsgIC8vIGNhcGFjaXRvciBwbGF0ZXNcblxuY2xhc3MgUGxhdGVOb2RlIGV4dGVuZHMgQm94Tm9kZSB7XG5cbiAgLyoqXG4gICAqIEBwYXJhbSB7Q2FwYWNpdG9yfSBjYXBhY2l0b3JcbiAgICogQHBhcmFtIHtZYXdQaXRjaE1vZGVsVmlld1RyYW5zZm9ybTN9IG1vZGVsVmlld1RyYW5zZm9ybVxuICAgKiBAcGFyYW0ge3N0cmluZ30gcG9sYXJpdHkgLSAnUE9TSVRJVkUnIG9yICdORUdBVElWRSdcbiAgICogQHBhcmFtIHtudW1iZXJ9IG1heFBsYXRlQ2hhcmdlXG4gICAqIEBwYXJhbSB7c3RyaW5nfSBvcmllbnRhdGlvblxuICAgKiBAcGFyYW0ge2Jvb2xlYW59IFtpbmNsdWRlQ2hhcmdlTm9kZT10cnVlXSAtIGlmIHRoZSBjaGFyZ2VzIGNhbiBiZSBzaG93bi4gIFRoaXMgb3B0aW9uIHdhcyBhZGRlZCBmb3IgQ0NLIHRvb2xib3ggaWNvbnMsIHdoZXJlXG4gICAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC0gY2hhcmdlcyBhcmUgbmV2ZXIgc2hvd24sIGJ1dCB0aGUgY2FudmFzIHdhcyB0b28gbGFyZ2UgYW5kIHRocmV3IG9mZiB0aGUgYm91bmRzXG4gICAqL1xuICBjb25zdHJ1Y3RvciggY2FwYWNpdG9yLCBtb2RlbFZpZXdUcmFuc2Zvcm0sIHBvbGFyaXR5LCBtYXhQbGF0ZUNoYXJnZSwgb3JpZW50YXRpb24sIGluY2x1ZGVDaGFyZ2VOb2RlID0gdHJ1ZSApIHtcblxuICAgIHN1cGVyKCBtb2RlbFZpZXdUcmFuc2Zvcm0sIFBMQVRFX0NPTE9SLCBjYXBhY2l0b3IucGxhdGVTaXplUHJvcGVydHkudmFsdWUgKTtcblxuICAgIC8vIEBwcml2YXRlIHtZYXdQaXRjaE1vZGVsVmlld1RyYW5zZm9ybTN9XG4gICAgdGhpcy5tb2RlbFZpZXdUcmFuc2Zvcm0gPSBtb2RlbFZpZXdUcmFuc2Zvcm07XG5cbiAgICAvLyBDaGFyZ2VzIHJlc3RyaWN0ZWQgdG8gdGhlIGxhcmdlc3QgcG9zc2libGUgdG9wIGZhY2Ugb24gYSBjYXBhY2l0b3IgcGxhdGUuICBCb3VuZHMgbmVlZGVkIGZvciBjYW52YXMuXG4gICAgY29uc3QgY2FudmFzQm91bmRzID0gdGhpcy5nZXRNYXhCb3hOb2RlQm91bmRzKCk7XG5cbiAgICAvLyBAcHJpdmF0ZSB7UGxhdGVDaGFyZ2VOb2RlfVxuICAgIHRoaXMucGxhdGVDaGFyZ2VOb2RlID0gbmV3IFBsYXRlQ2hhcmdlTm9kZSggY2FwYWNpdG9yLCBtb2RlbFZpZXdUcmFuc2Zvcm0sIHtcbiAgICAgIHBvbGFyaXR5OiBwb2xhcml0eSxcbiAgICAgIG1heFBsYXRlQ2hhcmdlOiBtYXhQbGF0ZUNoYXJnZSxcbiAgICAgIGNhbnZhc0JvdW5kczogY2FudmFzQm91bmRzLFxuICAgICAgb3JpZW50YXRpb246IG9yaWVudGF0aW9uXG4gICAgfSApO1xuICAgIGluY2x1ZGVDaGFyZ2VOb2RlICYmIHRoaXMuYWRkQ2hpbGQoIHRoaXMucGxhdGVDaGFyZ2VOb2RlICk7XG4gIH1cblxuICAvKipcbiAgICogTWFrZSB0aGUgY2hhcmdlcyBvbiB0aGlzIHBsYXRlIHZpc2libGUuXG4gICAqIEBwdWJsaWNcbiAgICpcbiAgICogQHBhcmFtIHtib29sZWFufSB2aXNpYmxlXG4gICAqL1xuICBzZXRDaGFyZ2VWaXNpYmxlKCB2aXNpYmxlICkge1xuICAgIHRoaXMucGxhdGVDaGFyZ2VOb2RlLnZpc2libGUgPSB2aXNpYmxlO1xuICB9XG5cbiAgLyoqXG4gICAqIEdldCBib3VuZHMgZm9yIGEgcGxhdGUgd2l0aCBtYXhpbXVtIHdpZHRoLiAgVXNlZnVsIGZvciBsYXlvdXQgYW5kIGJvdW5kcyBjYWxjdWxhdGlvbnMuXG4gICAqIEBwcml2YXRlXG4gICAqXG4gICAqIEByZXR1cm5zIHtCb3VuZHMzfVxuICAgKi9cbiAgZ2V0TWF4Qm94Tm9kZUJvdW5kcygpIHtcbiAgICBjb25zdCBtYXhXaWR0aEJveE5vZGUgPSBuZXcgQm94Tm9kZShcbiAgICAgIHRoaXMubW9kZWxWaWV3VHJhbnNmb3JtLFxuICAgICAgUExBVEVfQ09MT1IsXG4gICAgICBuZXcgQm91bmRzMyggMCwgMCwgMCxcbiAgICAgICAgQ2FwYWNpdG9yQ29uc3RhbnRzLlBMQVRFX1dJRFRIX1JBTkdFLm1heCxcbiAgICAgICAgQ2FwYWNpdG9yQ29uc3RhbnRzLlBMQVRFX0hFSUdIVCxcbiAgICAgICAgQ2FwYWNpdG9yQ29uc3RhbnRzLlBMQVRFX1dJRFRIX1JBTkdFLm1heCApXG4gICAgKTtcbiAgICByZXR1cm4gbWF4V2lkdGhCb3hOb2RlLmJvdW5kcztcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1BsYXRlTm9kZScsIFBsYXRlTm9kZSApO1xuZXhwb3J0IGRlZmF1bHQgUGxhdGVOb2RlOyJdLCJuYW1lcyI6WyJCb3VuZHMzIiwiQ29sb3IiLCJzY2VuZXJ5UGhldCIsIkJveE5vZGUiLCJDYXBhY2l0b3JDb25zdGFudHMiLCJQbGF0ZUNoYXJnZU5vZGUiLCJQTEFURV9DT0xPUiIsIlBsYXRlTm9kZSIsInNldENoYXJnZVZpc2libGUiLCJ2aXNpYmxlIiwicGxhdGVDaGFyZ2VOb2RlIiwiZ2V0TWF4Qm94Tm9kZUJvdW5kcyIsIm1heFdpZHRoQm94Tm9kZSIsIm1vZGVsVmlld1RyYW5zZm9ybSIsIlBMQVRFX1dJRFRIX1JBTkdFIiwibWF4IiwiUExBVEVfSEVJR0hUIiwiYm91bmRzIiwiY29uc3RydWN0b3IiLCJjYXBhY2l0b3IiLCJwb2xhcml0eSIsIm1heFBsYXRlQ2hhcmdlIiwib3JpZW50YXRpb24iLCJpbmNsdWRlQ2hhcmdlTm9kZSIsInBsYXRlU2l6ZVByb3BlcnR5IiwidmFsdWUiLCJjYW52YXNCb3VuZHMiLCJhZGRDaGlsZCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7OztDQU1DLEdBRUQsT0FBT0EsYUFBYSw2QkFBNkI7QUFDakQsU0FBU0MsS0FBSyxRQUFRLGlDQUFpQztBQUN2RCxPQUFPQyxpQkFBaUIsb0JBQW9CO0FBQzVDLE9BQU9DLGFBQWEsZUFBZTtBQUNuQyxPQUFPQyx3QkFBd0IsMEJBQTBCO0FBQ3pELE9BQU9DLHFCQUFxQix1QkFBdUI7QUFFbkQsWUFBWTtBQUNaLE1BQU1DLGNBQWMsSUFBSUwsTUFBTyxLQUFLLEtBQUssTUFBUSxtQkFBbUI7QUFFcEUsSUFBQSxBQUFNTSxZQUFOLE1BQU1BLGtCQUFrQko7SUErQnRCOzs7OztHQUtDLEdBQ0RLLGlCQUFrQkMsT0FBTyxFQUFHO1FBQzFCLElBQUksQ0FBQ0MsZUFBZSxDQUFDRCxPQUFPLEdBQUdBO0lBQ2pDO0lBRUE7Ozs7O0dBS0MsR0FDREUsc0JBQXNCO1FBQ3BCLE1BQU1DLGtCQUFrQixJQUFJVCxRQUMxQixJQUFJLENBQUNVLGtCQUFrQixFQUN2QlAsYUFDQSxJQUFJTixRQUFTLEdBQUcsR0FBRyxHQUNqQkksbUJBQW1CVSxpQkFBaUIsQ0FBQ0MsR0FBRyxFQUN4Q1gsbUJBQW1CWSxZQUFZLEVBQy9CWixtQkFBbUJVLGlCQUFpQixDQUFDQyxHQUFHO1FBRTVDLE9BQU9ILGdCQUFnQkssTUFBTTtJQUMvQjtJQXZEQTs7Ozs7Ozs7R0FRQyxHQUNEQyxZQUFhQyxTQUFTLEVBQUVOLGtCQUFrQixFQUFFTyxRQUFRLEVBQUVDLGNBQWMsRUFBRUMsV0FBVyxFQUFFQyxvQkFBb0IsSUFBSSxDQUFHO1FBRTVHLEtBQUssQ0FBRVYsb0JBQW9CUCxhQUFhYSxVQUFVSyxpQkFBaUIsQ0FBQ0MsS0FBSztRQUV6RSx5Q0FBeUM7UUFDekMsSUFBSSxDQUFDWixrQkFBa0IsR0FBR0E7UUFFMUIsdUdBQXVHO1FBQ3ZHLE1BQU1hLGVBQWUsSUFBSSxDQUFDZixtQkFBbUI7UUFFN0MsNkJBQTZCO1FBQzdCLElBQUksQ0FBQ0QsZUFBZSxHQUFHLElBQUlMLGdCQUFpQmMsV0FBV04sb0JBQW9CO1lBQ3pFTyxVQUFVQTtZQUNWQyxnQkFBZ0JBO1lBQ2hCSyxjQUFjQTtZQUNkSixhQUFhQTtRQUNmO1FBQ0FDLHFCQUFxQixJQUFJLENBQUNJLFFBQVEsQ0FBRSxJQUFJLENBQUNqQixlQUFlO0lBQzFEO0FBNkJGO0FBRUFSLFlBQVkwQixRQUFRLENBQUUsYUFBYXJCO0FBQ25DLGVBQWVBLFVBQVUifQ==

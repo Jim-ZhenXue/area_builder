@@ -1,0 +1,34 @@
+// Copyright 2021-2024, University of Colorado Boulder
+/**
+ * Format a PhET-iO API file for printing.
+ *
+ * NOTE: Please be mindful of the copy in copyWithSortedKeys, see https://github.com/phetsims/phet-io/issues/1733
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ * @author Chris Klusendorf (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import assert from 'assert';
+import fixEOL from '../../../perennial-alias/js/common/fixEOL.js';
+/**
+ * Creates a new object, recursively, by sorting the keys at each level.
+ * @param unordered - jsonifiable object to be sorted by key name.  Sorting is recursive.
+ */ const copyWithSortedKeys = (unordered)=>{
+    if (Array.isArray(unordered)) {
+        return unordered.map(copyWithSortedKeys);
+    } else if (typeof unordered !== 'object' || unordered === null) {
+        return unordered;
+    }
+    const ordered = {};
+    Object.keys(unordered).sort().forEach((key)=>{
+        const value = unordered[key];
+        ordered[key] = copyWithSortedKeys(value);
+    });
+    return ordered;
+};
+export default ((api)=>{
+    assert(api, 'api expected');
+    const objectString = JSON.stringify(copyWithSortedKeys(api), null, 2);
+    return fixEOL(objectString);
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pzL3BoZXQtaW8vZm9ybWF0UGhldGlvQVBJLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIxLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEZvcm1hdCBhIFBoRVQtaU8gQVBJIGZpbGUgZm9yIHByaW50aW5nLlxuICpcbiAqIE5PVEU6IFBsZWFzZSBiZSBtaW5kZnVsIG9mIHRoZSBjb3B5IGluIGNvcHlXaXRoU29ydGVkS2V5cywgc2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9waGV0LWlvL2lzc3Vlcy8xNzMzXG4gKlxuICogQGF1dGhvciBNaWNoYWVsIEthdXptYW5uIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICogQGF1dGhvciBDaHJpcyBLbHVzZW5kb3JmIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgYXNzZXJ0IGZyb20gJ2Fzc2VydCc7XG5pbXBvcnQgZml4RU9MIGZyb20gJy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZml4RU9MLmpzJztcbmltcG9ydCBJbnRlbnRpb25hbEFueSBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvSW50ZW50aW9uYWxBbnkuanMnO1xuXG4vKipcbiAqIENyZWF0ZXMgYSBuZXcgb2JqZWN0LCByZWN1cnNpdmVseSwgYnkgc29ydGluZyB0aGUga2V5cyBhdCBlYWNoIGxldmVsLlxuICogQHBhcmFtIHVub3JkZXJlZCAtIGpzb25pZmlhYmxlIG9iamVjdCB0byBiZSBzb3J0ZWQgYnkga2V5IG5hbWUuICBTb3J0aW5nIGlzIHJlY3Vyc2l2ZS5cbiAqL1xuY29uc3QgY29weVdpdGhTb3J0ZWRLZXlzID0gKCB1bm9yZGVyZWQ6IFJlY29yZDxzdHJpbmcsIEludGVudGlvbmFsQW55PiApOiBSZWNvcmQ8c3RyaW5nLCBJbnRlbnRpb25hbEFueT4gPT4ge1xuICBpZiAoIEFycmF5LmlzQXJyYXkoIHVub3JkZXJlZCApICkge1xuICAgIHJldHVybiB1bm9yZGVyZWQubWFwKCBjb3B5V2l0aFNvcnRlZEtleXMgKTtcbiAgfVxuICBlbHNlIGlmICggdHlwZW9mIHVub3JkZXJlZCAhPT0gJ29iamVjdCcgfHwgdW5vcmRlcmVkID09PSBudWxsICkge1xuICAgIHJldHVybiB1bm9yZGVyZWQ7XG4gIH1cblxuICBjb25zdCBvcmRlcmVkOiBSZWNvcmQ8c3RyaW5nLCBJbnRlbnRpb25hbEFueT4gPSB7fTtcbiAgT2JqZWN0LmtleXMoIHVub3JkZXJlZCApLnNvcnQoKS5mb3JFYWNoKCBrZXkgPT4ge1xuICAgIGNvbnN0IHZhbHVlID0gdW5vcmRlcmVkWyBrZXkgXTtcbiAgICBvcmRlcmVkWyBrZXkgXSA9IGNvcHlXaXRoU29ydGVkS2V5cyggdmFsdWUgKTtcbiAgfSApO1xuICByZXR1cm4gb3JkZXJlZDtcbn07XG5cbmV4cG9ydCBkZWZhdWx0ICggYXBpOiBvYmplY3QgKTogc3RyaW5nID0+IHtcbiAgYXNzZXJ0KCBhcGksICdhcGkgZXhwZWN0ZWQnICk7XG4gIGNvbnN0IG9iamVjdFN0cmluZyA9IEpTT04uc3RyaW5naWZ5KCBjb3B5V2l0aFNvcnRlZEtleXMoIGFwaSApLCBudWxsLCAyICk7XG4gIHJldHVybiBmaXhFT0woIG9iamVjdFN0cmluZyApO1xufTsiXSwibmFtZXMiOlsiYXNzZXJ0IiwiZml4RU9MIiwiY29weVdpdGhTb3J0ZWRLZXlzIiwidW5vcmRlcmVkIiwiQXJyYXkiLCJpc0FycmF5IiwibWFwIiwib3JkZXJlZCIsIk9iamVjdCIsImtleXMiLCJzb3J0IiwiZm9yRWFjaCIsImtleSIsInZhbHVlIiwiYXBpIiwib2JqZWN0U3RyaW5nIiwiSlNPTiIsInN0cmluZ2lmeSJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7OztDQVFDLEdBRUQsT0FBT0EsWUFBWSxTQUFTO0FBQzVCLE9BQU9DLFlBQVksK0NBQStDO0FBR2xFOzs7Q0FHQyxHQUNELE1BQU1DLHFCQUFxQixDQUFFQztJQUMzQixJQUFLQyxNQUFNQyxPQUFPLENBQUVGLFlBQWM7UUFDaEMsT0FBT0EsVUFBVUcsR0FBRyxDQUFFSjtJQUN4QixPQUNLLElBQUssT0FBT0MsY0FBYyxZQUFZQSxjQUFjLE1BQU87UUFDOUQsT0FBT0E7SUFDVDtJQUVBLE1BQU1JLFVBQTBDLENBQUM7SUFDakRDLE9BQU9DLElBQUksQ0FBRU4sV0FBWU8sSUFBSSxHQUFHQyxPQUFPLENBQUVDLENBQUFBO1FBQ3ZDLE1BQU1DLFFBQVFWLFNBQVMsQ0FBRVMsSUFBSztRQUM5QkwsT0FBTyxDQUFFSyxJQUFLLEdBQUdWLG1CQUFvQlc7SUFDdkM7SUFDQSxPQUFPTjtBQUNUO0FBRUEsZUFBZSxDQUFBLENBQUVPO0lBQ2ZkLE9BQVFjLEtBQUs7SUFDYixNQUFNQyxlQUFlQyxLQUFLQyxTQUFTLENBQUVmLG1CQUFvQlksTUFBTyxNQUFNO0lBQ3RFLE9BQU9iLE9BQVFjO0FBQ2pCLENBQUEsRUFBRSJ9

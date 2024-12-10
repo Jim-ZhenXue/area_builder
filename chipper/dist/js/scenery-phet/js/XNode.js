@@ -1,0 +1,31 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * XNode is a specialized view for displaying a 'x'. It is used throughout the sim to indicate the center of mass
+ * of a system of Balls. Generalized to appear as a icon as well.
+ *
+ * XNode's rendering strategy is to sub-type PlusNode and rotate the Node 45 degrees.
+ *
+ * @author Brandon Li
+ * @author Alex Schor
+ */ import Dimension2 from '../../dot/js/Dimension2.js';
+import optionize from '../../phet-core/js/optionize.js';
+import PlusNode from './PlusNode.js';
+import sceneryPhet from './sceneryPhet.js';
+let XNode = class XNode extends PlusNode {
+    constructor(providedOptions){
+        const options = optionize()({
+            // XNodeOptions
+            legThickness: 6,
+            length: 22,
+            // PlusNodeOptions
+            lineWidth: 1.5
+        }, providedOptions);
+        options.size = new Dimension2(options.length, options.legThickness);
+        options.rotation = Math.PI / 4;
+        super(options);
+    }
+};
+export { XNode as default };
+sceneryPhet.register('XNode', XNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9YTm9kZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBYTm9kZSBpcyBhIHNwZWNpYWxpemVkIHZpZXcgZm9yIGRpc3BsYXlpbmcgYSAneCcuIEl0IGlzIHVzZWQgdGhyb3VnaG91dCB0aGUgc2ltIHRvIGluZGljYXRlIHRoZSBjZW50ZXIgb2YgbWFzc1xuICogb2YgYSBzeXN0ZW0gb2YgQmFsbHMuIEdlbmVyYWxpemVkIHRvIGFwcGVhciBhcyBhIGljb24gYXMgd2VsbC5cbiAqXG4gKiBYTm9kZSdzIHJlbmRlcmluZyBzdHJhdGVneSBpcyB0byBzdWItdHlwZSBQbHVzTm9kZSBhbmQgcm90YXRlIHRoZSBOb2RlIDQ1IGRlZ3JlZXMuXG4gKlxuICogQGF1dGhvciBCcmFuZG9uIExpXG4gKiBAYXV0aG9yIEFsZXggU2Nob3JcbiAqL1xuXG5pbXBvcnQgRGltZW5zaW9uMiBmcm9tICcuLi8uLi9kb3QvanMvRGltZW5zaW9uMi5qcyc7XG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFN0cmljdE9taXQgZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL3R5cGVzL1N0cmljdE9taXQuanMnO1xuaW1wb3J0IFBsdXNOb2RlLCB7IFBsdXNOb2RlT3B0aW9ucyB9IGZyb20gJy4vUGx1c05vZGUuanMnO1xuaW1wb3J0IHNjZW5lcnlQaGV0IGZyb20gJy4vc2NlbmVyeVBoZXQuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0ge1xuXG4gIC8vIHRoaWNrbmVzcyBvZiB0aGUgbGVncyBvZiB0aGUgJ3gnXG4gIGxlZ1RoaWNrbmVzcz86IG51bWJlcjtcblxuICAvLyB0aGUgbGVuZ3RoIG9mIHRoZSBkaWFnb25hbCBvZiB0aGUgJ3gnLlxuICBsZW5ndGg/OiBudW1iZXI7XG59O1xuXG5leHBvcnQgdHlwZSBYTm9kZU9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIFN0cmljdE9taXQ8UGx1c05vZGVPcHRpb25zLCAnc2l6ZScgfCAncm90YXRpb24nPjtcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgWE5vZGUgZXh0ZW5kcyBQbHVzTm9kZSB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcm92aWRlZE9wdGlvbnM/OiBYTm9kZU9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFhOb2RlT3B0aW9ucywgU2VsZk9wdGlvbnMsIFBsdXNOb2RlT3B0aW9ucz4oKSgge1xuXG4gICAgICAvLyBYTm9kZU9wdGlvbnNcbiAgICAgIGxlZ1RoaWNrbmVzczogNixcbiAgICAgIGxlbmd0aDogMjIsXG5cbiAgICAgIC8vIFBsdXNOb2RlT3B0aW9uc1xuICAgICAgbGluZVdpZHRoOiAxLjVcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIG9wdGlvbnMuc2l6ZSA9IG5ldyBEaW1lbnNpb24yKCBvcHRpb25zLmxlbmd0aCwgb3B0aW9ucy5sZWdUaGlja25lc3MgKTtcbiAgICBvcHRpb25zLnJvdGF0aW9uID0gTWF0aC5QSSAvIDQ7XG5cbiAgICBzdXBlciggb3B0aW9ucyApO1xuICB9XG59XG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1hOb2RlJywgWE5vZGUgKTsiXSwibmFtZXMiOlsiRGltZW5zaW9uMiIsIm9wdGlvbml6ZSIsIlBsdXNOb2RlIiwic2NlbmVyeVBoZXQiLCJYTm9kZSIsInByb3ZpZGVkT3B0aW9ucyIsIm9wdGlvbnMiLCJsZWdUaGlja25lc3MiLCJsZW5ndGgiLCJsaW5lV2lkdGgiLCJzaXplIiwicm90YXRpb24iLCJNYXRoIiwiUEkiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7OztDQVFDLEdBRUQsT0FBT0EsZ0JBQWdCLDZCQUE2QjtBQUNwRCxPQUFPQyxlQUFlLGtDQUFrQztBQUV4RCxPQUFPQyxjQUFtQyxnQkFBZ0I7QUFDMUQsT0FBT0MsaUJBQWlCLG1CQUFtQjtBQWE1QixJQUFBLEFBQU1DLFFBQU4sTUFBTUEsY0FBY0Y7SUFFakMsWUFBb0JHLGVBQThCLENBQUc7UUFFbkQsTUFBTUMsVUFBVUwsWUFBeUQ7WUFFdkUsZUFBZTtZQUNmTSxjQUFjO1lBQ2RDLFFBQVE7WUFFUixrQkFBa0I7WUFDbEJDLFdBQVc7UUFDYixHQUFHSjtRQUVIQyxRQUFRSSxJQUFJLEdBQUcsSUFBSVYsV0FBWU0sUUFBUUUsTUFBTSxFQUFFRixRQUFRQyxZQUFZO1FBQ25FRCxRQUFRSyxRQUFRLEdBQUdDLEtBQUtDLEVBQUUsR0FBRztRQUU3QixLQUFLLENBQUVQO0lBQ1Q7QUFDRjtBQW5CQSxTQUFxQkYsbUJBbUJwQjtBQUNERCxZQUFZVyxRQUFRLENBQUUsU0FBU1YifQ==

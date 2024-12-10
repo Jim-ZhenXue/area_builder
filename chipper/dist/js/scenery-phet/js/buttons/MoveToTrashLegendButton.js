@@ -1,0 +1,27 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * When a MoveToTrashLegendButton appears in a legend or as part of a bar chart label, typically it is smaller,
+ * flat and with more muted colors.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import optionize from '../../../phet-core/js/optionize.js';
+import ButtonNode from '../../../sun/js/buttons/ButtonNode.js';
+import sceneryPhet from '../sceneryPhet.js';
+import MoveToTrashButton from './MoveToTrashButton.js';
+let MoveToTrashLegendButton = class MoveToTrashLegendButton extends MoveToTrashButton {
+    constructor(providedOptions){
+        const options = optionize()({
+            baseColor: 'rgb( 230, 230, 240 )',
+            buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
+            cornerRadius: 6,
+            xMargin: 7,
+            yMargin: 3,
+            iconScale: 0.4
+        }, providedOptions);
+        super(options);
+    }
+};
+export { MoveToTrashLegendButton as default };
+sceneryPhet.register('MoveToTrashLegendButton', MoveToTrashLegendButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9idXR0b25zL01vdmVUb1RyYXNoTGVnZW5kQnV0dG9uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIyLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFdoZW4gYSBNb3ZlVG9UcmFzaExlZ2VuZEJ1dHRvbiBhcHBlYXJzIGluIGEgbGVnZW5kIG9yIGFzIHBhcnQgb2YgYSBiYXIgY2hhcnQgbGFiZWwsIHR5cGljYWxseSBpdCBpcyBzbWFsbGVyLFxuICogZmxhdCBhbmQgd2l0aCBtb3JlIG11dGVkIGNvbG9ycy5cbiAqXG4gKiBAYXV0aG9yIFNhbSBSZWlkIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IEJ1dHRvbk5vZGUgZnJvbSAnLi4vLi4vLi4vc3VuL2pzL2J1dHRvbnMvQnV0dG9uTm9kZS5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vc2NlbmVyeVBoZXQuanMnO1xuaW1wb3J0IE1vdmVUb1RyYXNoQnV0dG9uLCB7IE1vdmVUb1RyYXNoQnV0dG9uT3B0aW9ucyB9IGZyb20gJy4vTW92ZVRvVHJhc2hCdXR0b24uanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0gRW1wdHlTZWxmT3B0aW9ucztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgTW92ZVRvVHJhc2hMZWdlbmRCdXR0b24gZXh0ZW5kcyBNb3ZlVG9UcmFzaEJ1dHRvbiB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcm92aWRlZE9wdGlvbnM/OiBNb3ZlVG9UcmFzaEJ1dHRvbk9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPE1vdmVUb1RyYXNoQnV0dG9uT3B0aW9ucywgU2VsZk9wdGlvbnMsIE1vdmVUb1RyYXNoQnV0dG9uT3B0aW9ucz4oKSgge1xuXG4gICAgICBiYXNlQ29sb3I6ICdyZ2IoIDIzMCwgMjMwLCAyNDAgKScsXG4gICAgICBidXR0b25BcHBlYXJhbmNlU3RyYXRlZ3k6IEJ1dHRvbk5vZGUuRmxhdEFwcGVhcmFuY2VTdHJhdGVneSxcbiAgICAgIGNvcm5lclJhZGl1czogNixcbiAgICAgIHhNYXJnaW46IDcsXG4gICAgICB5TWFyZ2luOiAzLFxuICAgICAgaWNvblNjYWxlOiAwLjRcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIHN1cGVyKCBvcHRpb25zICk7XG4gIH1cbn1cblxuc2NlbmVyeVBoZXQucmVnaXN0ZXIoICdNb3ZlVG9UcmFzaExlZ2VuZEJ1dHRvbicsIE1vdmVUb1RyYXNoTGVnZW5kQnV0dG9uICk7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsIkJ1dHRvbk5vZGUiLCJzY2VuZXJ5UGhldCIsIk1vdmVUb1RyYXNoQnV0dG9uIiwiTW92ZVRvVHJhc2hMZWdlbmRCdXR0b24iLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiYmFzZUNvbG9yIiwiYnV0dG9uQXBwZWFyYW5jZVN0cmF0ZWd5IiwiRmxhdEFwcGVhcmFuY2VTdHJhdGVneSIsImNvcm5lclJhZGl1cyIsInhNYXJnaW4iLCJ5TWFyZ2luIiwiaWNvblNjYWxlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLGVBQXFDLHFDQUFxQztBQUNqRixPQUFPQyxnQkFBZ0Isd0NBQXdDO0FBQy9ELE9BQU9DLGlCQUFpQixvQkFBb0I7QUFDNUMsT0FBT0MsdUJBQXFELHlCQUF5QjtBQUl0RSxJQUFBLEFBQU1DLDBCQUFOLE1BQU1BLGdDQUFnQ0Q7SUFFbkQsWUFBb0JFLGVBQTBDLENBQUc7UUFFL0QsTUFBTUMsVUFBVU4sWUFBOEU7WUFFNUZPLFdBQVc7WUFDWEMsMEJBQTBCUCxXQUFXUSxzQkFBc0I7WUFDM0RDLGNBQWM7WUFDZEMsU0FBUztZQUNUQyxTQUFTO1lBQ1RDLFdBQVc7UUFDYixHQUFHUjtRQUVILEtBQUssQ0FBRUM7SUFDVDtBQUNGO0FBaEJBLFNBQXFCRixxQ0FnQnBCO0FBRURGLFlBQVlZLFFBQVEsQ0FBRSwyQkFBMkJWIn0=

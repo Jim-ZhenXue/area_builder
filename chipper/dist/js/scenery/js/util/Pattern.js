@@ -1,0 +1,40 @@
+// Copyright 2013-2024, University of Colorado Boulder
+/**
+ * A pattern that will deliver a fill or stroke that will repeat an image in both directions (x and y).
+ *
+ * TODO: future support for repeat-x, repeat-y or no-repeat (needs SVG support) https://github.com/phetsims/scenery/issues/1581
+ * TODO: support scene or other various content (SVG is flexible, can backport to canvas)
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { Paint, scenery, SVGPattern } from '../imports.js';
+let Pattern = class Pattern extends Paint {
+    /**
+   * Returns an object that can be passed to a Canvas context's fillStyle or strokeStyle.
+   */ getCanvasStyle() {
+        return this.canvasPattern;
+    }
+    /**
+   * Creates an SVG paint object for creating/updating the SVG equivalent definition.
+   */ createSVGPaint(svgBlock) {
+        return SVGPattern.pool.create(this);
+    }
+    /**
+   * Returns a string form of this object
+   */ toString() {
+        return `new phet.scenery.Pattern( $( '<img src="${this.image.src}"/>' )[0] )`;
+    }
+    /**
+   * @param image - The image to use as a repeated pattern.
+   */ constructor(image){
+        super();
+        this.image = image;
+        // Use the global scratch canvas instead of creating a new Canvas
+        // @ts-expect-error TODO: scenery namespace https://github.com/phetsims/scenery/issues/1581
+        this.canvasPattern = scenery.scratchContext.createPattern(image, 'repeat');
+    }
+};
+export { Pattern as default };
+Pattern.prototype.isPattern = true;
+scenery.register('Pattern', Pattern);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvdXRpbC9QYXR0ZXJuLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDEzLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEEgcGF0dGVybiB0aGF0IHdpbGwgZGVsaXZlciBhIGZpbGwgb3Igc3Ryb2tlIHRoYXQgd2lsbCByZXBlYXQgYW4gaW1hZ2UgaW4gYm90aCBkaXJlY3Rpb25zICh4IGFuZCB5KS5cbiAqXG4gKiBUT0RPOiBmdXR1cmUgc3VwcG9ydCBmb3IgcmVwZWF0LXgsIHJlcGVhdC15IG9yIG5vLXJlcGVhdCAobmVlZHMgU1ZHIHN1cHBvcnQpIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xNTgxXG4gKiBUT0RPOiBzdXBwb3J0IHNjZW5lIG9yIG90aGVyIHZhcmlvdXMgY29udGVudCAoU1ZHIGlzIGZsZXhpYmxlLCBjYW4gYmFja3BvcnQgdG8gY2FudmFzKVxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgeyBQYWludCwgc2NlbmVyeSwgU1ZHQmxvY2ssIFNWR1BhdHRlcm4gfSBmcm9tICcuLi9pbXBvcnRzLmpzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUGF0dGVybiBleHRlbmRzIFBhaW50IHtcblxuICBwdWJsaWMgaW1hZ2U6IEhUTUxJbWFnZUVsZW1lbnQ7XG4gIHB1YmxpYyBjYW52YXNQYXR0ZXJuOiBDYW52YXNQYXR0ZXJuO1xuXG4gIC8qKlxuICAgKiBAcGFyYW0gaW1hZ2UgLSBUaGUgaW1hZ2UgdG8gdXNlIGFzIGEgcmVwZWF0ZWQgcGF0dGVybi5cbiAgICovXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggaW1hZ2U6IEhUTUxJbWFnZUVsZW1lbnQgKSB7XG4gICAgc3VwZXIoKTtcblxuICAgIHRoaXMuaW1hZ2UgPSBpbWFnZTtcblxuICAgIC8vIFVzZSB0aGUgZ2xvYmFsIHNjcmF0Y2ggY2FudmFzIGluc3RlYWQgb2YgY3JlYXRpbmcgYSBuZXcgQ2FudmFzXG4gICAgLy8gQHRzLWV4cGVjdC1lcnJvciBUT0RPOiBzY2VuZXJ5IG5hbWVzcGFjZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvc2NlbmVyeS9pc3N1ZXMvMTU4MVxuICAgIHRoaXMuY2FudmFzUGF0dGVybiA9IHNjZW5lcnkuc2NyYXRjaENvbnRleHQuY3JlYXRlUGF0dGVybiggaW1hZ2UsICdyZXBlYXQnICk7XG4gIH1cblxuXG4gIC8qKlxuICAgKiBSZXR1cm5zIGFuIG9iamVjdCB0aGF0IGNhbiBiZSBwYXNzZWQgdG8gYSBDYW52YXMgY29udGV4dCdzIGZpbGxTdHlsZSBvciBzdHJva2VTdHlsZS5cbiAgICovXG4gIHB1YmxpYyBnZXRDYW52YXNTdHlsZSgpOiBDYW52YXNQYXR0ZXJuIHtcbiAgICByZXR1cm4gdGhpcy5jYW52YXNQYXR0ZXJuO1xuICB9XG5cbiAgLyoqXG4gICAqIENyZWF0ZXMgYW4gU1ZHIHBhaW50IG9iamVjdCBmb3IgY3JlYXRpbmcvdXBkYXRpbmcgdGhlIFNWRyBlcXVpdmFsZW50IGRlZmluaXRpb24uXG4gICAqL1xuICBwdWJsaWMgY3JlYXRlU1ZHUGFpbnQoIHN2Z0Jsb2NrOiBTVkdCbG9jayApOiBTVkdQYXR0ZXJuIHtcbiAgICByZXR1cm4gU1ZHUGF0dGVybi5wb29sLmNyZWF0ZSggdGhpcyApO1xuICB9XG5cbiAgLyoqXG4gICAqIFJldHVybnMgYSBzdHJpbmcgZm9ybSBvZiB0aGlzIG9iamVjdFxuICAgKi9cbiAgcHVibGljIG92ZXJyaWRlIHRvU3RyaW5nKCk6IHN0cmluZyB7XG4gICAgcmV0dXJuIGBuZXcgcGhldC5zY2VuZXJ5LlBhdHRlcm4oICQoICc8aW1nIHNyYz1cIiR7dGhpcy5pbWFnZS5zcmN9XCIvPicgKVswXSApYDtcbiAgfVxuXG4gIHB1YmxpYyBpc1BhdHRlcm4hOiBib29sZWFuO1xufVxuXG5QYXR0ZXJuLnByb3RvdHlwZS5pc1BhdHRlcm4gPSB0cnVlO1xuXG5zY2VuZXJ5LnJlZ2lzdGVyKCAnUGF0dGVybicsIFBhdHRlcm4gKTsiXSwibmFtZXMiOlsiUGFpbnQiLCJzY2VuZXJ5IiwiU1ZHUGF0dGVybiIsIlBhdHRlcm4iLCJnZXRDYW52YXNTdHlsZSIsImNhbnZhc1BhdHRlcm4iLCJjcmVhdGVTVkdQYWludCIsInN2Z0Jsb2NrIiwicG9vbCIsImNyZWF0ZSIsInRvU3RyaW5nIiwiaW1hZ2UiLCJzcmMiLCJzY3JhdGNoQ29udGV4dCIsImNyZWF0ZVBhdHRlcm4iLCJwcm90b3R5cGUiLCJpc1BhdHRlcm4iLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7O0NBT0MsR0FFRCxTQUFTQSxLQUFLLEVBQUVDLE9BQU8sRUFBWUMsVUFBVSxRQUFRLGdCQUFnQjtBQUV0RCxJQUFBLEFBQU1DLFVBQU4sTUFBTUEsZ0JBQWdCSDtJQW1CbkM7O0dBRUMsR0FDRCxBQUFPSSxpQkFBZ0M7UUFDckMsT0FBTyxJQUFJLENBQUNDLGFBQWE7SUFDM0I7SUFFQTs7R0FFQyxHQUNELEFBQU9DLGVBQWdCQyxRQUFrQixFQUFlO1FBQ3RELE9BQU9MLFdBQVdNLElBQUksQ0FBQ0MsTUFBTSxDQUFFLElBQUk7SUFDckM7SUFFQTs7R0FFQyxHQUNELEFBQWdCQyxXQUFtQjtRQUNqQyxPQUFPLENBQUMsd0NBQXdDLEVBQUUsSUFBSSxDQUFDQyxLQUFLLENBQUNDLEdBQUcsQ0FBQyxXQUFXLENBQUM7SUFDL0U7SUFqQ0E7O0dBRUMsR0FDRCxZQUFvQkQsS0FBdUIsQ0FBRztRQUM1QyxLQUFLO1FBRUwsSUFBSSxDQUFDQSxLQUFLLEdBQUdBO1FBRWIsaUVBQWlFO1FBQ2pFLDJGQUEyRjtRQUMzRixJQUFJLENBQUNOLGFBQWEsR0FBR0osUUFBUVksY0FBYyxDQUFDQyxhQUFhLENBQUVILE9BQU87SUFDcEU7QUF5QkY7QUF6Q0EsU0FBcUJSLHFCQXlDcEI7QUFFREEsUUFBUVksU0FBUyxDQUFDQyxTQUFTLEdBQUc7QUFFOUJmLFFBQVFnQixRQUFRLENBQUUsV0FBV2QifQ==

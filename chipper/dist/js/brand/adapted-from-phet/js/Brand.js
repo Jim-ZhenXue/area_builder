@@ -1,0 +1,30 @@
+// Copyright 2002-2014, University of Colorado Boulder
+// @author Michael Kauzmann (PhET Interactive Simulations)
+// Returns branding information for the simulations, see https://github.com/phetsims/brand/issues/1
+import brand from '../../js/brand.js';
+import logo_png from '../images/logo_png.js';
+import logoOnWhite_png from '../images/logoOnWhite_png.js';
+const Brand = {
+    // Nickname for the brand, which should match the brand subdirectory name, grunt option for --brand as well as the
+    // query parameter for ?brand.  This is used in Joist to provide brand-specific logic, such as what to show in the 
+    // About dialog, decorative text around the PhET button, and whether to check for updates.
+    id: 'adapted-from-phet',
+    // Optional string for the name of the brand.  If non-null, the brand name will appear in the top of the About dialog
+    // {string} For example: "My Company"
+    name: null,
+    // Optional string for the copyright statement.  If non-null, it will appear in the About dialog
+    // {string} For example: "Copyright © 2014, My Company"
+    copyright: null,
+    /**
+   * Return any links to appear in the About dialog.  The sim name and locale can be used for customization if desired.
+   * For example: { textStringProperty: new Property( "My Company Support" ), url: "https://www.mycompany.com/support" }
+   */ getLinks: function() {
+        return [];
+    },
+    logoOnBlackBackground: logo_png,
+    logoOnWhiteBackground: logoOnWhite_png
+};
+brand.register('Brand', Brand);
+export default Brand;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL2JyYW5kL2FkYXB0ZWQtZnJvbS1waGV0L2pzL0JyYW5kLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDAyLTIwMTQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vLyBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4vLyBSZXR1cm5zIGJyYW5kaW5nIGluZm9ybWF0aW9uIGZvciB0aGUgc2ltdWxhdGlvbnMsIHNlZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvYnJhbmQvaXNzdWVzLzFcblxuXG5pbXBvcnQgYnJhbmQgZnJvbSAnLi4vLi4vanMvYnJhbmQuanMnO1xuaW1wb3J0IFRCcmFuZCBmcm9tICcuLi8uLi9qcy9UQnJhbmQuanMnO1xuaW1wb3J0IGxvZ29fcG5nIGZyb20gJy4uL2ltYWdlcy9sb2dvX3BuZy5qcyc7XG5pbXBvcnQgbG9nb09uV2hpdGVfcG5nIGZyb20gJy4uL2ltYWdlcy9sb2dvT25XaGl0ZV9wbmcuanMnO1xuXG5jb25zdCBCcmFuZDogVEJyYW5kID0ge1xuXG4gIC8vIE5pY2tuYW1lIGZvciB0aGUgYnJhbmQsIHdoaWNoIHNob3VsZCBtYXRjaCB0aGUgYnJhbmQgc3ViZGlyZWN0b3J5IG5hbWUsIGdydW50IG9wdGlvbiBmb3IgLS1icmFuZCBhcyB3ZWxsIGFzIHRoZVxuICAvLyBxdWVyeSBwYXJhbWV0ZXIgZm9yID9icmFuZC4gIFRoaXMgaXMgdXNlZCBpbiBKb2lzdCB0byBwcm92aWRlIGJyYW5kLXNwZWNpZmljIGxvZ2ljLCBzdWNoIGFzIHdoYXQgdG8gc2hvdyBpbiB0aGUgXG4gIC8vIEFib3V0IGRpYWxvZywgZGVjb3JhdGl2ZSB0ZXh0IGFyb3VuZCB0aGUgUGhFVCBidXR0b24sIGFuZCB3aGV0aGVyIHRvIGNoZWNrIGZvciB1cGRhdGVzLlxuICBpZDogJ2FkYXB0ZWQtZnJvbS1waGV0JyxcblxuICAvLyBPcHRpb25hbCBzdHJpbmcgZm9yIHRoZSBuYW1lIG9mIHRoZSBicmFuZC4gIElmIG5vbi1udWxsLCB0aGUgYnJhbmQgbmFtZSB3aWxsIGFwcGVhciBpbiB0aGUgdG9wIG9mIHRoZSBBYm91dCBkaWFsb2dcbiAgLy8ge3N0cmluZ30gRm9yIGV4YW1wbGU6IFwiTXkgQ29tcGFueVwiXG4gIG5hbWU6IG51bGwsXG5cbiAgLy8gT3B0aW9uYWwgc3RyaW5nIGZvciB0aGUgY29weXJpZ2h0IHN0YXRlbWVudC4gIElmIG5vbi1udWxsLCBpdCB3aWxsIGFwcGVhciBpbiB0aGUgQWJvdXQgZGlhbG9nXG4gIC8vIHtzdHJpbmd9IEZvciBleGFtcGxlOiBcIkNvcHlyaWdodCDCqSAyMDE0LCBNeSBDb21wYW55XCJcbiAgY29weXJpZ2h0OiBudWxsLFxuXG4gIC8qKlxuICAgKiBSZXR1cm4gYW55IGxpbmtzIHRvIGFwcGVhciBpbiB0aGUgQWJvdXQgZGlhbG9nLiAgVGhlIHNpbSBuYW1lIGFuZCBsb2NhbGUgY2FuIGJlIHVzZWQgZm9yIGN1c3RvbWl6YXRpb24gaWYgZGVzaXJlZC5cbiAgICogRm9yIGV4YW1wbGU6IHsgdGV4dFN0cmluZ1Byb3BlcnR5OiBuZXcgUHJvcGVydHkoIFwiTXkgQ29tcGFueSBTdXBwb3J0XCIgKSwgdXJsOiBcImh0dHBzOi8vd3d3Lm15Y29tcGFueS5jb20vc3VwcG9ydFwiIH1cbiAgICovXG4gIGdldExpbmtzOiBmdW5jdGlvbigpIHsgcmV0dXJuIFtdOyB9LFxuICBsb2dvT25CbGFja0JhY2tncm91bmQ6IGxvZ29fcG5nLFxuICBsb2dvT25XaGl0ZUJhY2tncm91bmQ6IGxvZ29PbldoaXRlX3BuZ1xufTtcblxuYnJhbmQucmVnaXN0ZXIoICdCcmFuZCcsIEJyYW5kICk7XG5cbmV4cG9ydCBkZWZhdWx0IEJyYW5kOyJdLCJuYW1lcyI6WyJicmFuZCIsImxvZ29fcG5nIiwibG9nb09uV2hpdGVfcG5nIiwiQnJhbmQiLCJpZCIsIm5hbWUiLCJjb3B5cmlnaHQiLCJnZXRMaW5rcyIsImxvZ29PbkJsYWNrQmFja2dyb3VuZCIsImxvZ29PbldoaXRlQmFja2dyb3VuZCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQsMERBQTBEO0FBQzFELG1HQUFtRztBQUduRyxPQUFPQSxXQUFXLG9CQUFvQjtBQUV0QyxPQUFPQyxjQUFjLHdCQUF3QjtBQUM3QyxPQUFPQyxxQkFBcUIsK0JBQStCO0FBRTNELE1BQU1DLFFBQWdCO0lBRXBCLGtIQUFrSDtJQUNsSCxtSEFBbUg7SUFDbkgsMEZBQTBGO0lBQzFGQyxJQUFJO0lBRUoscUhBQXFIO0lBQ3JILHFDQUFxQztJQUNyQ0MsTUFBTTtJQUVOLGdHQUFnRztJQUNoRyx1REFBdUQ7SUFDdkRDLFdBQVc7SUFFWDs7O0dBR0MsR0FDREMsVUFBVTtRQUFhLE9BQU8sRUFBRTtJQUFFO0lBQ2xDQyx1QkFBdUJQO0lBQ3ZCUSx1QkFBdUJQO0FBQ3pCO0FBRUFGLE1BQU1VLFFBQVEsQ0FBRSxTQUFTUDtBQUV6QixlQUFlQSxNQUFNIn0=

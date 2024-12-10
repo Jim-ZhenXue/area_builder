@@ -1,0 +1,39 @@
+// Copyright 2020-2024, University of Colorado Boulder
+/**
+ * Property to control if something is enabled. This serves as a consistent class to control
+ * enabled. It also factors out PhET-iO instrumentation. Likely you should use it in cases like so:
+ *
+ * const enabledProperty = new BooleanProperty( true, {
+ *   tandem: options.tandem.createTandem( 'enabledProperty' ),
+ *   phetioFeatured: true
+ * } );
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import optionize from '../../phet-core/js/optionize.js';
+import axon from './axon.js';
+import BooleanProperty from './BooleanProperty.js';
+const TANDEM_NAME = 'enabledProperty';
+let EnabledProperty = class EnabledProperty extends BooleanProperty {
+    static get TANDEM_NAME() {
+        return TANDEM_NAME;
+    }
+    constructor(initialEnabled, providedOptions){
+        const options = optionize()({
+            phetioDocumentation: 'Determines whether the element is enabled (true) or disabled (false).',
+            phetioFeatured: true,
+            // by default, the tandem name must match. In rare occurrences (such as when one model must have 2 separate
+            // EnabledProperties, like this.mass1EnabledProperty = ..., this.mass2EnabledProperty = ...
+            // you can opt out of the name check. This should be used sparingly. For instance, for the example above, it may
+            // be better to do this.mass1.enabledProperty anyways.
+            checkTandemName: true
+        }, providedOptions);
+        if (assert && options && options.tandem && options.tandem.supplied && options.checkTandemName) {
+            assert && assert(options.tandem.name === TANDEM_NAME, `EnabledProperty tandems should be named ${TANDEM_NAME}`);
+        }
+        super(initialEnabled, options);
+    }
+};
+export { EnabledProperty as default };
+axon.register('EnabledProperty', EnabledProperty);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2F4b24vanMvRW5hYmxlZFByb3BlcnR5LnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIwLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFByb3BlcnR5IHRvIGNvbnRyb2wgaWYgc29tZXRoaW5nIGlzIGVuYWJsZWQuIFRoaXMgc2VydmVzIGFzIGEgY29uc2lzdGVudCBjbGFzcyB0byBjb250cm9sXG4gKiBlbmFibGVkLiBJdCBhbHNvIGZhY3RvcnMgb3V0IFBoRVQtaU8gaW5zdHJ1bWVudGF0aW9uLiBMaWtlbHkgeW91IHNob3VsZCB1c2UgaXQgaW4gY2FzZXMgbGlrZSBzbzpcbiAqXG4gKiBjb25zdCBlbmFibGVkUHJvcGVydHkgPSBuZXcgQm9vbGVhblByb3BlcnR5KCB0cnVlLCB7XG4gKiAgIHRhbmRlbTogb3B0aW9ucy50YW5kZW0uY3JlYXRlVGFuZGVtKCAnZW5hYmxlZFByb3BlcnR5JyApLFxuICogICBwaGV0aW9GZWF0dXJlZDogdHJ1ZVxuICogfSApO1xuICpcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IGF4b24gZnJvbSAnLi9heG9uLmpzJztcbmltcG9ydCBCb29sZWFuUHJvcGVydHksIHsgQm9vbGVhblByb3BlcnR5T3B0aW9ucyB9IGZyb20gJy4vQm9vbGVhblByb3BlcnR5LmpzJztcblxuY29uc3QgVEFOREVNX05BTUUgPSAnZW5hYmxlZFByb3BlcnR5JztcblxudHlwZSBTZWxmT3B0aW9ucyA9IHtcbiAgY2hlY2tUYW5kZW1OYW1lPzogYm9vbGVhbjtcbn07XG5cbmV4cG9ydCB0eXBlIEVuYWJsZWRQcm9wZXJ0eU9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIEJvb2xlYW5Qcm9wZXJ0eU9wdGlvbnM7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIEVuYWJsZWRQcm9wZXJ0eSBleHRlbmRzIEJvb2xlYW5Qcm9wZXJ0eSB7XG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggaW5pdGlhbEVuYWJsZWQ6IGJvb2xlYW4sIHByb3ZpZGVkT3B0aW9ucz86IEVuYWJsZWRQcm9wZXJ0eU9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPEVuYWJsZWRQcm9wZXJ0eU9wdGlvbnMsIFNlbGZPcHRpb25zLCBCb29sZWFuUHJvcGVydHlPcHRpb25zPigpKCB7XG4gICAgICBwaGV0aW9Eb2N1bWVudGF0aW9uOiAnRGV0ZXJtaW5lcyB3aGV0aGVyIHRoZSBlbGVtZW50IGlzIGVuYWJsZWQgKHRydWUpIG9yIGRpc2FibGVkIChmYWxzZSkuJyxcbiAgICAgIHBoZXRpb0ZlYXR1cmVkOiB0cnVlLFxuXG4gICAgICAvLyBieSBkZWZhdWx0LCB0aGUgdGFuZGVtIG5hbWUgbXVzdCBtYXRjaC4gSW4gcmFyZSBvY2N1cnJlbmNlcyAoc3VjaCBhcyB3aGVuIG9uZSBtb2RlbCBtdXN0IGhhdmUgMiBzZXBhcmF0ZVxuICAgICAgLy8gRW5hYmxlZFByb3BlcnRpZXMsIGxpa2UgdGhpcy5tYXNzMUVuYWJsZWRQcm9wZXJ0eSA9IC4uLiwgdGhpcy5tYXNzMkVuYWJsZWRQcm9wZXJ0eSA9IC4uLlxuICAgICAgLy8geW91IGNhbiBvcHQgb3V0IG9mIHRoZSBuYW1lIGNoZWNrLiBUaGlzIHNob3VsZCBiZSB1c2VkIHNwYXJpbmdseS4gRm9yIGluc3RhbmNlLCBmb3IgdGhlIGV4YW1wbGUgYWJvdmUsIGl0IG1heVxuICAgICAgLy8gYmUgYmV0dGVyIHRvIGRvIHRoaXMubWFzczEuZW5hYmxlZFByb3BlcnR5IGFueXdheXMuXG4gICAgICBjaGVja1RhbmRlbU5hbWU6IHRydWVcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIGlmICggYXNzZXJ0ICYmIG9wdGlvbnMgJiYgb3B0aW9ucy50YW5kZW0gJiYgb3B0aW9ucy50YW5kZW0uc3VwcGxpZWQgJiYgb3B0aW9ucy5jaGVja1RhbmRlbU5hbWUgKSB7XG4gICAgICBhc3NlcnQgJiYgYXNzZXJ0KCBvcHRpb25zLnRhbmRlbS5uYW1lID09PSBUQU5ERU1fTkFNRSwgYEVuYWJsZWRQcm9wZXJ0eSB0YW5kZW1zIHNob3VsZCBiZSBuYW1lZCAke1RBTkRFTV9OQU1FfWAgKTtcbiAgICB9XG5cbiAgICBzdXBlciggaW5pdGlhbEVuYWJsZWQsIG9wdGlvbnMgKTtcbiAgfVxuXG4gIHB1YmxpYyBzdGF0aWMgZ2V0IFRBTkRFTV9OQU1FKCk6IHN0cmluZyB7IHJldHVybiBUQU5ERU1fTkFNRTsgfVxufVxuXG5heG9uLnJlZ2lzdGVyKCAnRW5hYmxlZFByb3BlcnR5JywgRW5hYmxlZFByb3BlcnR5ICk7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsImF4b24iLCJCb29sZWFuUHJvcGVydHkiLCJUQU5ERU1fTkFNRSIsIkVuYWJsZWRQcm9wZXJ0eSIsImluaXRpYWxFbmFibGVkIiwicHJvdmlkZWRPcHRpb25zIiwib3B0aW9ucyIsInBoZXRpb0RvY3VtZW50YXRpb24iLCJwaGV0aW9GZWF0dXJlZCIsImNoZWNrVGFuZGVtTmFtZSIsImFzc2VydCIsInRhbmRlbSIsInN1cHBsaWVkIiwibmFtZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7Q0FVQyxHQUVELE9BQU9BLGVBQWUsa0NBQWtDO0FBQ3hELE9BQU9DLFVBQVUsWUFBWTtBQUM3QixPQUFPQyxxQkFBaUQsdUJBQXVCO0FBRS9FLE1BQU1DLGNBQWM7QUFRTCxJQUFBLEFBQU1DLGtCQUFOLE1BQU1BLHdCQUF3QkY7SUFxQjNDLFdBQWtCQyxjQUFzQjtRQUFFLE9BQU9BO0lBQWE7SUFwQjlELFlBQW9CRSxjQUF1QixFQUFFQyxlQUF3QyxDQUFHO1FBRXRGLE1BQU1DLFVBQVVQLFlBQTBFO1lBQ3hGUSxxQkFBcUI7WUFDckJDLGdCQUFnQjtZQUVoQiwyR0FBMkc7WUFDM0csMkZBQTJGO1lBQzNGLGdIQUFnSDtZQUNoSCxzREFBc0Q7WUFDdERDLGlCQUFpQjtRQUNuQixHQUFHSjtRQUVILElBQUtLLFVBQVVKLFdBQVdBLFFBQVFLLE1BQU0sSUFBSUwsUUFBUUssTUFBTSxDQUFDQyxRQUFRLElBQUlOLFFBQVFHLGVBQWUsRUFBRztZQUMvRkMsVUFBVUEsT0FBUUosUUFBUUssTUFBTSxDQUFDRSxJQUFJLEtBQUtYLGFBQWEsQ0FBQyx3Q0FBd0MsRUFBRUEsYUFBYTtRQUNqSDtRQUVBLEtBQUssQ0FBRUUsZ0JBQWdCRTtJQUN6QjtBQUdGO0FBdEJBLFNBQXFCSCw2QkFzQnBCO0FBRURILEtBQUtjLFFBQVEsQ0FBRSxtQkFBbUJYIn0=

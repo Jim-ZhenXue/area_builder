@@ -1,0 +1,32 @@
+// Copyright 2014-2022, University of Colorado Boulder
+/**
+ * Star shape (full, 5-pointed)
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import { Shape } from '../../kite/js/imports.js';
+import optionize from '../../phet-core/js/optionize.js';
+import sceneryPhet from './sceneryPhet.js';
+let StarShape = class StarShape extends Shape {
+    constructor(providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            outerRadius: 15,
+            innerRadius: 7.5,
+            numberStarPoints: 5
+        }, providedOptions);
+        super();
+        const numSegments = 2 * options.numberStarPoints; // number of segments
+        // start at the top and proceed clockwise
+        _.times(numSegments, (i)=>{
+            const angle = i / numSegments * Math.PI * 2 - Math.PI / 2;
+            const radius = i % 2 === 0 ? options.outerRadius : options.innerRadius;
+            this.lineTo(radius * Math.cos(angle), radius * Math.sin(angle));
+        });
+        this.close();
+        this.makeImmutable(); // So Paths won't need to add listeners
+    }
+};
+export { StarShape as default };
+sceneryPhet.register('StarShape', StarShape);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9TdGFyU2hhcGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTQtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogU3RhciBzaGFwZSAoZnVsbCwgNS1wb2ludGVkKVxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IHsgU2hhcGUgfSBmcm9tICcuLi8uLi9raXRlL2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IG9wdGlvbml6ZSBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvb3B0aW9uaXplLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuL3NjZW5lcnlQaGV0LmpzJztcblxudHlwZSBTZWxmT3B0aW9ucyA9IHtcblxuICAvLyBEaXN0YW5jZSBmcm9tIHRoZSBjZW50ZXIgdG8gdGhlIHRpcCBvZiBhIHN0YXIgbGltYlxuICBvdXRlclJhZGl1cz86IG51bWJlcjtcblxuICAvLyBEaXN0YW5jZSBmcm9tIHRoZSBjZW50ZXIgdG8gdGhlIGNsb3Nlc3QgcG9pbnQgb24gdGhlIGV4dGVyaW9yIG9mIHRoZSBzdGFyLiAgU2V0cyB0aGUgXCJ0aGlja25lc3NcIiBvZiB0aGUgc3RhciBsaW1ic1xuICBpbm5lclJhZGl1cz86IG51bWJlcjtcblxuICAvLyBOdW1iZXIgb2Ygc3RhciBwb2ludHMsIG11c3QgYmUgYW4gaW50ZWdlclxuICBudW1iZXJTdGFyUG9pbnRzPzogbnVtYmVyO1xufTtcblxuZXhwb3J0IHR5cGUgU3RhclNoYXBlT3B0aW9ucyA9IFNlbGZPcHRpb25zO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTdGFyU2hhcGUgZXh0ZW5kcyBTaGFwZSB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcm92aWRlZE9wdGlvbnM/OiBTdGFyU2hhcGVPcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxTdGFyU2hhcGVPcHRpb25zLCBTZWxmT3B0aW9ucz4oKSgge1xuXG4gICAgICAvLyBTZWxmT3B0aW9uc1xuICAgICAgb3V0ZXJSYWRpdXM6IDE1LFxuICAgICAgaW5uZXJSYWRpdXM6IDcuNSxcbiAgICAgIG51bWJlclN0YXJQb2ludHM6IDVcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIHN1cGVyKCk7XG5cbiAgICBjb25zdCBudW1TZWdtZW50cyA9IDIgKiBvcHRpb25zLm51bWJlclN0YXJQb2ludHM7IC8vIG51bWJlciBvZiBzZWdtZW50c1xuXG4gICAgLy8gc3RhcnQgYXQgdGhlIHRvcCBhbmQgcHJvY2VlZCBjbG9ja3dpc2VcbiAgICBfLnRpbWVzKCBudW1TZWdtZW50cywgaSA9PiB7XG4gICAgICBjb25zdCBhbmdsZSA9IGkgLyBudW1TZWdtZW50cyAqIE1hdGguUEkgKiAyIC0gTWF0aC5QSSAvIDI7XG4gICAgICBjb25zdCByYWRpdXMgPSBpICUgMiA9PT0gMCA/IG9wdGlvbnMub3V0ZXJSYWRpdXMgOiBvcHRpb25zLmlubmVyUmFkaXVzO1xuXG4gICAgICB0aGlzLmxpbmVUbyhcbiAgICAgICAgcmFkaXVzICogTWF0aC5jb3MoIGFuZ2xlICksXG4gICAgICAgIHJhZGl1cyAqIE1hdGguc2luKCBhbmdsZSApXG4gICAgICApO1xuICAgIH0gKTtcbiAgICB0aGlzLmNsb3NlKCk7XG4gICAgdGhpcy5tYWtlSW1tdXRhYmxlKCk7IC8vIFNvIFBhdGhzIHdvbid0IG5lZWQgdG8gYWRkIGxpc3RlbmVyc1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnU3RhclNoYXBlJywgU3RhclNoYXBlICk7Il0sIm5hbWVzIjpbIlNoYXBlIiwib3B0aW9uaXplIiwic2NlbmVyeVBoZXQiLCJTdGFyU2hhcGUiLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwib3V0ZXJSYWRpdXMiLCJpbm5lclJhZGl1cyIsIm51bWJlclN0YXJQb2ludHMiLCJudW1TZWdtZW50cyIsIl8iLCJ0aW1lcyIsImkiLCJhbmdsZSIsIk1hdGgiLCJQSSIsInJhZGl1cyIsImxpbmVUbyIsImNvcyIsInNpbiIsImNsb3NlIiwibWFrZUltbXV0YWJsZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELFNBQVNBLEtBQUssUUFBUSwyQkFBMkI7QUFDakQsT0FBT0MsZUFBZSxrQ0FBa0M7QUFDeEQsT0FBT0MsaUJBQWlCLG1CQUFtQjtBQWdCNUIsSUFBQSxBQUFNQyxZQUFOLE1BQU1BLGtCQUFrQkg7SUFFckMsWUFBb0JJLGVBQWtDLENBQUc7UUFFdkQsTUFBTUMsVUFBVUosWUFBNEM7WUFFMUQsY0FBYztZQUNkSyxhQUFhO1lBQ2JDLGFBQWE7WUFDYkMsa0JBQWtCO1FBQ3BCLEdBQUdKO1FBRUgsS0FBSztRQUVMLE1BQU1LLGNBQWMsSUFBSUosUUFBUUcsZ0JBQWdCLEVBQUUscUJBQXFCO1FBRXZFLHlDQUF5QztRQUN6Q0UsRUFBRUMsS0FBSyxDQUFFRixhQUFhRyxDQUFBQTtZQUNwQixNQUFNQyxRQUFRRCxJQUFJSCxjQUFjSyxLQUFLQyxFQUFFLEdBQUcsSUFBSUQsS0FBS0MsRUFBRSxHQUFHO1lBQ3hELE1BQU1DLFNBQVNKLElBQUksTUFBTSxJQUFJUCxRQUFRQyxXQUFXLEdBQUdELFFBQVFFLFdBQVc7WUFFdEUsSUFBSSxDQUFDVSxNQUFNLENBQ1RELFNBQVNGLEtBQUtJLEdBQUcsQ0FBRUwsUUFDbkJHLFNBQVNGLEtBQUtLLEdBQUcsQ0FBRU47UUFFdkI7UUFDQSxJQUFJLENBQUNPLEtBQUs7UUFDVixJQUFJLENBQUNDLGFBQWEsSUFBSSx1Q0FBdUM7SUFDL0Q7QUFDRjtBQTdCQSxTQUFxQmxCLHVCQTZCcEI7QUFFREQsWUFBWW9CLFFBQVEsQ0FBRSxhQUFhbkIifQ==

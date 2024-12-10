@@ -1,0 +1,26 @@
+// Copyright 2020-2024, University of Colorado Boulder
+import Property from '../../../axon/js/Property.js';
+import optionize from '../../../phet-core/js/optionize.js';
+import { Color, scenery } from '../imports.js';
+let ColorProperty = class ColorProperty extends Property {
+    constructor(color, providedOptions){
+        // client cannot specify superclass options that are controlled by this type
+        if (providedOptions) {
+            assert && assert(!providedOptions.hasOwnProperty('valueType'), 'ColorProperty sets valueType');
+            assert && assert(!providedOptions.hasOwnProperty('phetioType'), 'ColorProperty sets phetioType');
+        }
+        const options = optionize()({
+            valueType: Color,
+            phetioValueType: Color.ColorIO
+        }, providedOptions);
+        super(color, options);
+    }
+};
+/**
+ * Convenience type for creating Property.<Color>
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ export { ColorProperty as default };
+scenery.register('ColorProperty', ColorProperty);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvdXRpbC9Db2xvclByb3BlcnR5LnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIwLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG5pbXBvcnQgUHJvcGVydHksIHsgUHJvcGVydHlPcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vYXhvbi9qcy9Qcm9wZXJ0eS5qcyc7XG5pbXBvcnQgb3B0aW9uaXplLCB7IEVtcHR5U2VsZk9wdGlvbnMgfSBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvb3B0aW9uaXplLmpzJztcbmltcG9ydCB7IENvbG9yLCBzY2VuZXJ5IH0gZnJvbSAnLi4vaW1wb3J0cy5qcyc7XG5cbi8qKlxuICogQ29udmVuaWVuY2UgdHlwZSBmb3IgY3JlYXRpbmcgUHJvcGVydHkuPENvbG9yPlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIENvbG9yUHJvcGVydHkgZXh0ZW5kcyBQcm9wZXJ0eTxDb2xvcj4ge1xuICBwdWJsaWMgY29uc3RydWN0b3IoIGNvbG9yOiBDb2xvciwgcHJvdmlkZWRPcHRpb25zPzogUHJvcGVydHlPcHRpb25zPENvbG9yPiApIHtcblxuICAgIC8vIGNsaWVudCBjYW5ub3Qgc3BlY2lmeSBzdXBlcmNsYXNzIG9wdGlvbnMgdGhhdCBhcmUgY29udHJvbGxlZCBieSB0aGlzIHR5cGVcbiAgICBpZiAoIHByb3ZpZGVkT3B0aW9ucyApIHtcbiAgICAgIGFzc2VydCAmJiBhc3NlcnQoICFwcm92aWRlZE9wdGlvbnMuaGFzT3duUHJvcGVydHkoICd2YWx1ZVR5cGUnICksICdDb2xvclByb3BlcnR5IHNldHMgdmFsdWVUeXBlJyApO1xuICAgICAgYXNzZXJ0ICYmIGFzc2VydCggIXByb3ZpZGVkT3B0aW9ucy5oYXNPd25Qcm9wZXJ0eSggJ3BoZXRpb1R5cGUnICksICdDb2xvclByb3BlcnR5IHNldHMgcGhldGlvVHlwZScgKTtcbiAgICB9XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFByb3BlcnR5T3B0aW9uczxDb2xvcj4sIEVtcHR5U2VsZk9wdGlvbnMsIFByb3BlcnR5T3B0aW9uczxDb2xvcj4+KCkoIHtcbiAgICAgIHZhbHVlVHlwZTogQ29sb3IsXG4gICAgICBwaGV0aW9WYWx1ZVR5cGU6IENvbG9yLkNvbG9ySU9cbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcbiAgICBzdXBlciggY29sb3IsIG9wdGlvbnMgKTtcbiAgfVxufVxuXG5zY2VuZXJ5LnJlZ2lzdGVyKCAnQ29sb3JQcm9wZXJ0eScsIENvbG9yUHJvcGVydHkgKTsiXSwibmFtZXMiOlsiUHJvcGVydHkiLCJvcHRpb25pemUiLCJDb2xvciIsInNjZW5lcnkiLCJDb2xvclByb3BlcnR5IiwiY29sb3IiLCJwcm92aWRlZE9wdGlvbnMiLCJhc3NlcnQiLCJoYXNPd25Qcm9wZXJ0eSIsIm9wdGlvbnMiLCJ2YWx1ZVR5cGUiLCJwaGV0aW9WYWx1ZVR5cGUiLCJDb2xvcklPIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RCxPQUFPQSxjQUFtQywrQkFBK0I7QUFDekUsT0FBT0MsZUFBcUMscUNBQXFDO0FBQ2pGLFNBQVNDLEtBQUssRUFBRUMsT0FBTyxRQUFRLGdCQUFnQjtBQU9oQyxJQUFBLEFBQU1DLGdCQUFOLE1BQU1BLHNCQUFzQko7SUFDekMsWUFBb0JLLEtBQVksRUFBRUMsZUFBd0MsQ0FBRztRQUUzRSw0RUFBNEU7UUFDNUUsSUFBS0EsaUJBQWtCO1lBQ3JCQyxVQUFVQSxPQUFRLENBQUNELGdCQUFnQkUsY0FBYyxDQUFFLGNBQWU7WUFDbEVELFVBQVVBLE9BQVEsQ0FBQ0QsZ0JBQWdCRSxjQUFjLENBQUUsZUFBZ0I7UUFDckU7UUFFQSxNQUFNQyxVQUFVUixZQUErRTtZQUM3RlMsV0FBV1I7WUFDWFMsaUJBQWlCVCxNQUFNVSxPQUFPO1FBQ2hDLEdBQUdOO1FBQ0gsS0FBSyxDQUFFRCxPQUFPSTtJQUNoQjtBQUNGO0FBcEJBOzs7O0NBSUMsR0FDRCxTQUFxQkwsMkJBZXBCO0FBRURELFFBQVFVLFFBQVEsQ0FBRSxpQkFBaUJUIn0=

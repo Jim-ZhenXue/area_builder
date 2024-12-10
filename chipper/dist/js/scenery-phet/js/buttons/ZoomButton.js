@@ -1,0 +1,47 @@
+// Copyright 2014-2024, University of Colorado Boulder
+/**
+ * Zoom button, has an icon with a magnifying glass, with either a plus or minus sign in the center of the glass.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import Dimension2 from '../../../dot/js/Dimension2.js';
+import InstanceRegistry from '../../../phet-core/js/documentation/InstanceRegistry.js';
+import optionize, { combineOptions } from '../../../phet-core/js/optionize.js';
+import RectangularPushButton from '../../../sun/js/buttons/RectangularPushButton.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import MagnifyingGlassNode from '../MagnifyingGlassNode.js';
+import MinusNode from '../MinusNode.js';
+import PhetColorScheme from '../PhetColorScheme.js';
+import PlusNode from '../PlusNode.js';
+import sceneryPhet from '../sceneryPhet.js';
+let ZoomButton = class ZoomButton extends RectangularPushButton {
+    constructor(providedOptions){
+        var _window_phet_chipper_queryParameters, _window_phet_chipper, _window_phet;
+        const options = optionize()({
+            // SelfOptions
+            in: true,
+            magnifyingGlassOptions: {
+                glassRadius: 15
+            },
+            // RectangularPushButtonOptions
+            baseColor: PhetColorScheme.BUTTON_YELLOW,
+            tandem: Tandem.REQUIRED,
+            tandemNameSuffix: 'Button'
+        }, providedOptions);
+        // Plus or minus sign in middle of magnifying glass
+        const glassRadius = options.magnifyingGlassOptions.glassRadius;
+        const signOptions = {
+            size: new Dimension2(1.3 * glassRadius, glassRadius / 3)
+        };
+        const icon = options.in ? new PlusNode(signOptions) : new MinusNode(signOptions);
+        options.content = new MagnifyingGlassNode(combineOptions({
+            icon: icon
+        }, options.magnifyingGlassOptions));
+        super(options);
+        // support for binder documentation, stripped out in builds and only runs when ?binder is specified
+        assert && ((_window_phet = window.phet) == null ? void 0 : (_window_phet_chipper = _window_phet.chipper) == null ? void 0 : (_window_phet_chipper_queryParameters = _window_phet_chipper.queryParameters) == null ? void 0 : _window_phet_chipper_queryParameters.binder) && InstanceRegistry.registerDataURL('scenery-phet', 'ZoomButton', this);
+    }
+};
+export { ZoomButton as default };
+sceneryPhet.register('ZoomButton', ZoomButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9idXR0b25zL1pvb21CdXR0b24udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTQtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogWm9vbSBidXR0b24sIGhhcyBhbiBpY29uIHdpdGggYSBtYWduaWZ5aW5nIGdsYXNzLCB3aXRoIGVpdGhlciBhIHBsdXMgb3IgbWludXMgc2lnbiBpbiB0aGUgY2VudGVyIG9mIHRoZSBnbGFzcy5cbiAqXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBEaW1lbnNpb24yIGZyb20gJy4uLy4uLy4uL2RvdC9qcy9EaW1lbnNpb24yLmpzJztcbmltcG9ydCBJbnN0YW5jZVJlZ2lzdHJ5IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9kb2N1bWVudGF0aW9uL0luc3RhbmNlUmVnaXN0cnkuanMnO1xuaW1wb3J0IG9wdGlvbml6ZSwgeyBjb21iaW5lT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFN0cmljdE9taXQgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL3R5cGVzL1N0cmljdE9taXQuanMnO1xuaW1wb3J0IFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbiwgeyBSZWN0YW5ndWxhclB1c2hCdXR0b25PcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vc3VuL2pzL2J1dHRvbnMvUmVjdGFuZ3VsYXJQdXNoQnV0dG9uLmpzJztcbmltcG9ydCBUYW5kZW0gZnJvbSAnLi4vLi4vLi4vdGFuZGVtL2pzL1RhbmRlbS5qcyc7XG5pbXBvcnQgTWFnbmlmeWluZ0dsYXNzTm9kZSwgeyBNYWduaWZ5aW5nR2xhc3NOb2RlT3B0aW9ucyB9IGZyb20gJy4uL01hZ25pZnlpbmdHbGFzc05vZGUuanMnO1xuaW1wb3J0IE1pbnVzTm9kZSBmcm9tICcuLi9NaW51c05vZGUuanMnO1xuaW1wb3J0IFBoZXRDb2xvclNjaGVtZSBmcm9tICcuLi9QaGV0Q29sb3JTY2hlbWUuanMnO1xuaW1wb3J0IFBsdXNOb2RlIGZyb20gJy4uL1BsdXNOb2RlLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuLi9zY2VuZXJ5UGhldC5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSB7XG4gIGluPzogYm9vbGVhbjsgLy8gdHJ1ZTogem9vbS1pbiBidXR0b24sIGZhbHNlOiB6b29tLW91dCBidXR0b25cbiAgbWFnbmlmeWluZ0dsYXNzT3B0aW9ucz86IFN0cmljdE9taXQ8TWFnbmlmeWluZ0dsYXNzTm9kZU9wdGlvbnMsICdpY29uJz47XG59O1xuXG5leHBvcnQgdHlwZSBab29tQnV0dG9uT3B0aW9ucyA9IFNlbGZPcHRpb25zICYgU3RyaWN0T21pdDxSZWN0YW5ndWxhclB1c2hCdXR0b25PcHRpb25zLCAnY29udGVudCc+O1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBab29tQnV0dG9uIGV4dGVuZHMgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uIHtcblxuICBwdWJsaWMgY29uc3RydWN0b3IoIHByb3ZpZGVkT3B0aW9ucz86IFpvb21CdXR0b25PcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxab29tQnV0dG9uT3B0aW9ucywgU2VsZk9wdGlvbnMsIFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnM+KCkoIHtcblxuICAgICAgLy8gU2VsZk9wdGlvbnNcbiAgICAgIGluOiB0cnVlLFxuICAgICAgbWFnbmlmeWluZ0dsYXNzT3B0aW9uczogeyBnbGFzc1JhZGl1czogMTUgfSxcblxuICAgICAgLy8gUmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9uc1xuICAgICAgYmFzZUNvbG9yOiBQaGV0Q29sb3JTY2hlbWUuQlVUVE9OX1lFTExPVyxcbiAgICAgIHRhbmRlbTogVGFuZGVtLlJFUVVJUkVELFxuICAgICAgdGFuZGVtTmFtZVN1ZmZpeDogJ0J1dHRvbidcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIC8vIFBsdXMgb3IgbWludXMgc2lnbiBpbiBtaWRkbGUgb2YgbWFnbmlmeWluZyBnbGFzc1xuICAgIGNvbnN0IGdsYXNzUmFkaXVzID0gb3B0aW9ucy5tYWduaWZ5aW5nR2xhc3NPcHRpb25zLmdsYXNzUmFkaXVzITtcbiAgICBjb25zdCBzaWduT3B0aW9ucyA9IHtcbiAgICAgIHNpemU6IG5ldyBEaW1lbnNpb24yKCAxLjMgKiBnbGFzc1JhZGl1cywgZ2xhc3NSYWRpdXMgLyAzIClcbiAgICB9O1xuICAgIGNvbnN0IGljb24gPSBvcHRpb25zLmluID8gbmV3IFBsdXNOb2RlKCBzaWduT3B0aW9ucyApIDogbmV3IE1pbnVzTm9kZSggc2lnbk9wdGlvbnMgKTtcblxuICAgIG9wdGlvbnMuY29udGVudCA9IG5ldyBNYWduaWZ5aW5nR2xhc3NOb2RlKCBjb21iaW5lT3B0aW9uczxNYWduaWZ5aW5nR2xhc3NOb2RlT3B0aW9ucz4oIHtcbiAgICAgIGljb246IGljb25cbiAgICB9LCBvcHRpb25zLm1hZ25pZnlpbmdHbGFzc09wdGlvbnMgKSApO1xuXG4gICAgc3VwZXIoIG9wdGlvbnMgKTtcblxuICAgIC8vIHN1cHBvcnQgZm9yIGJpbmRlciBkb2N1bWVudGF0aW9uLCBzdHJpcHBlZCBvdXQgaW4gYnVpbGRzIGFuZCBvbmx5IHJ1bnMgd2hlbiA/YmluZGVyIGlzIHNwZWNpZmllZFxuICAgIGFzc2VydCAmJiB3aW5kb3cucGhldD8uY2hpcHBlcj8ucXVlcnlQYXJhbWV0ZXJzPy5iaW5kZXIgJiYgSW5zdGFuY2VSZWdpc3RyeS5yZWdpc3RlckRhdGFVUkwoICdzY2VuZXJ5LXBoZXQnLCAnWm9vbUJ1dHRvbicsIHRoaXMgKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1pvb21CdXR0b24nLCBab29tQnV0dG9uICk7Il0sIm5hbWVzIjpbIkRpbWVuc2lvbjIiLCJJbnN0YW5jZVJlZ2lzdHJ5Iiwib3B0aW9uaXplIiwiY29tYmluZU9wdGlvbnMiLCJSZWN0YW5ndWxhclB1c2hCdXR0b24iLCJUYW5kZW0iLCJNYWduaWZ5aW5nR2xhc3NOb2RlIiwiTWludXNOb2RlIiwiUGhldENvbG9yU2NoZW1lIiwiUGx1c05vZGUiLCJzY2VuZXJ5UGhldCIsIlpvb21CdXR0b24iLCJwcm92aWRlZE9wdGlvbnMiLCJ3aW5kb3ciLCJvcHRpb25zIiwiaW4iLCJtYWduaWZ5aW5nR2xhc3NPcHRpb25zIiwiZ2xhc3NSYWRpdXMiLCJiYXNlQ29sb3IiLCJCVVRUT05fWUVMTE9XIiwidGFuZGVtIiwiUkVRVUlSRUQiLCJ0YW5kZW1OYW1lU3VmZml4Iiwic2lnbk9wdGlvbnMiLCJzaXplIiwiaWNvbiIsImNvbnRlbnQiLCJhc3NlcnQiLCJwaGV0IiwiY2hpcHBlciIsInF1ZXJ5UGFyYW1ldGVycyIsImJpbmRlciIsInJlZ2lzdGVyRGF0YVVSTCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGdCQUFnQixnQ0FBZ0M7QUFDdkQsT0FBT0Msc0JBQXNCLDBEQUEwRDtBQUN2RixPQUFPQyxhQUFhQyxjQUFjLFFBQVEscUNBQXFDO0FBRS9FLE9BQU9DLDJCQUE2RCxtREFBbUQ7QUFDdkgsT0FBT0MsWUFBWSwrQkFBK0I7QUFDbEQsT0FBT0MseUJBQXlELDRCQUE0QjtBQUM1RixPQUFPQyxlQUFlLGtCQUFrQjtBQUN4QyxPQUFPQyxxQkFBcUIsd0JBQXdCO0FBQ3BELE9BQU9DLGNBQWMsaUJBQWlCO0FBQ3RDLE9BQU9DLGlCQUFpQixvQkFBb0I7QUFTN0IsSUFBQSxBQUFNQyxhQUFOLE1BQU1BLG1CQUFtQlA7SUFFdEMsWUFBb0JRLGVBQW1DLENBQUc7WUE0QjlDQyxzQ0FBQUEsc0JBQUFBO1FBMUJWLE1BQU1DLFVBQVVaLFlBQTJFO1lBRXpGLGNBQWM7WUFDZGEsSUFBSTtZQUNKQyx3QkFBd0I7Z0JBQUVDLGFBQWE7WUFBRztZQUUxQywrQkFBK0I7WUFDL0JDLFdBQVdWLGdCQUFnQlcsYUFBYTtZQUN4Q0MsUUFBUWYsT0FBT2dCLFFBQVE7WUFDdkJDLGtCQUFrQjtRQUNwQixHQUFHVjtRQUVILG1EQUFtRDtRQUNuRCxNQUFNSyxjQUFjSCxRQUFRRSxzQkFBc0IsQ0FBQ0MsV0FBVztRQUM5RCxNQUFNTSxjQUFjO1lBQ2xCQyxNQUFNLElBQUl4QixXQUFZLE1BQU1pQixhQUFhQSxjQUFjO1FBQ3pEO1FBQ0EsTUFBTVEsT0FBT1gsUUFBUUMsRUFBRSxHQUFHLElBQUlOLFNBQVVjLGVBQWdCLElBQUloQixVQUFXZ0I7UUFFdkVULFFBQVFZLE9BQU8sR0FBRyxJQUFJcEIsb0JBQXFCSCxlQUE0QztZQUNyRnNCLE1BQU1BO1FBQ1IsR0FBR1gsUUFBUUUsc0JBQXNCO1FBRWpDLEtBQUssQ0FBRUY7UUFFUCxtR0FBbUc7UUFDbkdhLFlBQVVkLGVBQUFBLE9BQU9lLElBQUksc0JBQVhmLHVCQUFBQSxhQUFhZ0IsT0FBTyxzQkFBcEJoQix1Q0FBQUEscUJBQXNCaUIsZUFBZSxxQkFBckNqQixxQ0FBdUNrQixNQUFNLEtBQUk5QixpQkFBaUIrQixlQUFlLENBQUUsZ0JBQWdCLGNBQWMsSUFBSTtJQUNqSTtBQUNGO0FBaENBLFNBQXFCckIsd0JBZ0NwQjtBQUVERCxZQUFZdUIsUUFBUSxDQUFFLGNBQWN0QiJ9

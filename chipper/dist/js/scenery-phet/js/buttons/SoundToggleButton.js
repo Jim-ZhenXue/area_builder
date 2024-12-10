@@ -1,0 +1,76 @@
+// Copyright 2014-2024, University of Colorado Boulder
+/**
+ * Button for toggling sound on and off.
+ *
+ * @author John Blanco
+ * @author Chris Malley (PixelZoom, Inc.)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import { Shape } from '../../../kite/js/imports.js';
+import InstanceRegistry from '../../../phet-core/js/documentation/InstanceRegistry.js';
+import optionize from '../../../phet-core/js/optionize.js';
+import { Node, Path } from '../../../scenery/js/imports.js';
+import volumeOffSolidShape from '../../../sherpa/js/fontawesome-5/volumeOffSolidShape.js';
+import volumeUpSolidShape from '../../../sherpa/js/fontawesome-5/volumeUpSolidShape.js';
+import BooleanRectangularToggleButton from '../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import PhetColorScheme from '../PhetColorScheme.js';
+import sceneryPhet from '../sceneryPhet.js';
+import SceneryPhetStrings from '../SceneryPhetStrings.js';
+// constants
+const WIDTH = 45;
+const HEIGHT = 45;
+const MARGIN = 4;
+const X_WIDTH = WIDTH * 0.25; // Empirically determined.
+let SoundToggleButton = class SoundToggleButton extends BooleanRectangularToggleButton {
+    dispose() {
+        this.disposeSoundToggleButton();
+        super.dispose();
+    }
+    constructor(property, provideOptions){
+        var _window_phet_chipper_queryParameters, _window_phet_chipper, _window_phet;
+        const options = optionize()({
+            // BooleanRectangularToggleButtonOptions
+            baseColor: PhetColorScheme.BUTTON_YELLOW,
+            minWidth: WIDTH,
+            minHeight: HEIGHT,
+            xMargin: MARGIN,
+            yMargin: MARGIN,
+            tagName: 'button',
+            innerContent: SceneryPhetStrings.a11y.soundToggle.labelStringProperty
+        }, provideOptions);
+        // 'on' icon is a font-awesome icon
+        const soundOnNode = new Path(volumeUpSolidShape, {
+            fill: 'black'
+        });
+        const contentScale = (WIDTH - 2 * MARGIN) / soundOnNode.width;
+        soundOnNode.scale(contentScale);
+        // 'off' icon is a font-awesome icon, with an 'x' added to the right.
+        const soundOffNode = new Node();
+        soundOffNode.addChild(new Path(volumeOffSolidShape, {
+            scale: contentScale,
+            fill: 'black'
+        }));
+        const soundOffX = new Path(new Shape().moveTo(0, 0).lineTo(X_WIDTH, X_WIDTH).moveTo(0, X_WIDTH).lineTo(X_WIDTH, 0), {
+            stroke: 'black',
+            lineWidth: 3,
+            right: soundOnNode.width,
+            centerY: soundOffNode.centerY
+        });
+        soundOffNode.addChild(soundOffX);
+        super(property, soundOnNode, soundOffNode, options);
+        // pdom attribute lets user know when the toggle is pressed
+        const pressedListener = (value)=>{
+            this.setPDOMAttribute('aria-pressed', !value);
+        };
+        property.lazyLink(pressedListener);
+        this.setPDOMAttribute('aria-pressed', !property.get());
+        this.disposeSoundToggleButton = ()=>{
+            property.unlink(pressedListener);
+        };
+        // support for binder documentation, stripped out in builds and only runs when ?binder is specified
+        assert && ((_window_phet = window.phet) == null ? void 0 : (_window_phet_chipper = _window_phet.chipper) == null ? void 0 : (_window_phet_chipper_queryParameters = _window_phet_chipper.queryParameters) == null ? void 0 : _window_phet_chipper_queryParameters.binder) && InstanceRegistry.registerDataURL('scenery-phet', 'SoundToggleButton', this);
+    }
+};
+export { SoundToggleButton as default };
+sceneryPhet.register('SoundToggleButton', SoundToggleButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9idXR0b25zL1NvdW5kVG9nZ2xlQnV0dG9uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE0LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEJ1dHRvbiBmb3IgdG9nZ2xpbmcgc291bmQgb24gYW5kIG9mZi5cbiAqXG4gKiBAYXV0aG9yIEpvaG4gQmxhbmNvXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgUHJvcGVydHkgZnJvbSAnLi4vLi4vLi4vYXhvbi9qcy9Qcm9wZXJ0eS5qcyc7XG5pbXBvcnQgeyBTaGFwZSB9IGZyb20gJy4uLy4uLy4uL2tpdGUvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgSW5zdGFuY2VSZWdpc3RyeSBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvZG9jdW1lbnRhdGlvbi9JbnN0YW5jZVJlZ2lzdHJ5LmpzJztcbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IHsgTm9kZSwgUGF0aCB9IGZyb20gJy4uLy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgdm9sdW1lT2ZmU29saWRTaGFwZSBmcm9tICcuLi8uLi8uLi9zaGVycGEvanMvZm9udGF3ZXNvbWUtNS92b2x1bWVPZmZTb2xpZFNoYXBlLmpzJztcbmltcG9ydCB2b2x1bWVVcFNvbGlkU2hhcGUgZnJvbSAnLi4vLi4vLi4vc2hlcnBhL2pzL2ZvbnRhd2Vzb21lLTUvdm9sdW1lVXBTb2xpZFNoYXBlLmpzJztcbmltcG9ydCBCb29sZWFuUmVjdGFuZ3VsYXJUb2dnbGVCdXR0b24sIHsgQm9vbGVhblJlY3Rhbmd1bGFyVG9nZ2xlQnV0dG9uT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3N1bi9qcy9idXR0b25zL0Jvb2xlYW5SZWN0YW5ndWxhclRvZ2dsZUJ1dHRvbi5qcyc7XG5pbXBvcnQgUGhldENvbG9yU2NoZW1lIGZyb20gJy4uL1BoZXRDb2xvclNjaGVtZS5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vc2NlbmVyeVBoZXQuanMnO1xuaW1wb3J0IFNjZW5lcnlQaGV0U3RyaW5ncyBmcm9tICcuLi9TY2VuZXJ5UGhldFN0cmluZ3MuanMnO1xuXG4vLyBjb25zdGFudHNcbmNvbnN0IFdJRFRIID0gNDU7XG5jb25zdCBIRUlHSFQgPSA0NTtcbmNvbnN0IE1BUkdJTiA9IDQ7XG5jb25zdCBYX1dJRFRIID0gV0lEVEggKiAwLjI1OyAvLyBFbXBpcmljYWxseSBkZXRlcm1pbmVkLlxuXG50eXBlIFNlbGZPcHRpb25zID0gRW1wdHlTZWxmT3B0aW9ucztcblxuZXhwb3J0IHR5cGUgU291bmRUb2dnbGVCdXR0b25PcHRpb25zID0gU2VsZk9wdGlvbnMgJiBCb29sZWFuUmVjdGFuZ3VsYXJUb2dnbGVCdXR0b25PcHRpb25zO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTb3VuZFRvZ2dsZUJ1dHRvbiBleHRlbmRzIEJvb2xlYW5SZWN0YW5ndWxhclRvZ2dsZUJ1dHRvbiB7XG5cbiAgcHJpdmF0ZSByZWFkb25seSBkaXNwb3NlU291bmRUb2dnbGVCdXR0b246ICgpID0+IHZvaWQ7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBwcm9wZXJ0eTogUHJvcGVydHk8Ym9vbGVhbj4sIHByb3ZpZGVPcHRpb25zPzogU291bmRUb2dnbGVCdXR0b25PcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxTb3VuZFRvZ2dsZUJ1dHRvbk9wdGlvbnMsIFNlbGZPcHRpb25zLCBCb29sZWFuUmVjdGFuZ3VsYXJUb2dnbGVCdXR0b25PcHRpb25zPigpKCB7XG5cbiAgICAgIC8vIEJvb2xlYW5SZWN0YW5ndWxhclRvZ2dsZUJ1dHRvbk9wdGlvbnNcbiAgICAgIGJhc2VDb2xvcjogUGhldENvbG9yU2NoZW1lLkJVVFRPTl9ZRUxMT1csXG4gICAgICBtaW5XaWR0aDogV0lEVEgsXG4gICAgICBtaW5IZWlnaHQ6IEhFSUdIVCxcbiAgICAgIHhNYXJnaW46IE1BUkdJTixcbiAgICAgIHlNYXJnaW46IE1BUkdJTixcbiAgICAgIHRhZ05hbWU6ICdidXR0b24nLFxuICAgICAgaW5uZXJDb250ZW50OiBTY2VuZXJ5UGhldFN0cmluZ3MuYTExeS5zb3VuZFRvZ2dsZS5sYWJlbFN0cmluZ1Byb3BlcnR5XG4gICAgfSwgcHJvdmlkZU9wdGlvbnMgKTtcblxuICAgIC8vICdvbicgaWNvbiBpcyBhIGZvbnQtYXdlc29tZSBpY29uXG4gICAgY29uc3Qgc291bmRPbk5vZGUgPSBuZXcgUGF0aCggdm9sdW1lVXBTb2xpZFNoYXBlLCB7XG4gICAgICBmaWxsOiAnYmxhY2snXG4gICAgfSApO1xuICAgIGNvbnN0IGNvbnRlbnRTY2FsZSA9ICggV0lEVEggLSAoIDIgKiBNQVJHSU4gKSApIC8gc291bmRPbk5vZGUud2lkdGg7XG4gICAgc291bmRPbk5vZGUuc2NhbGUoIGNvbnRlbnRTY2FsZSApO1xuXG4gICAgLy8gJ29mZicgaWNvbiBpcyBhIGZvbnQtYXdlc29tZSBpY29uLCB3aXRoIGFuICd4JyBhZGRlZCB0byB0aGUgcmlnaHQuXG4gICAgY29uc3Qgc291bmRPZmZOb2RlID0gbmV3IE5vZGUoKTtcbiAgICBzb3VuZE9mZk5vZGUuYWRkQ2hpbGQoIG5ldyBQYXRoKCB2b2x1bWVPZmZTb2xpZFNoYXBlLCB7XG4gICAgICBzY2FsZTogY29udGVudFNjYWxlLFxuICAgICAgZmlsbDogJ2JsYWNrJ1xuICAgIH0gKSApO1xuICAgIGNvbnN0IHNvdW5kT2ZmWCA9IG5ldyBQYXRoKCBuZXcgU2hhcGUoKS5tb3ZlVG8oIDAsIDAgKS5saW5lVG8oIFhfV0lEVEgsIFhfV0lEVEggKS5tb3ZlVG8oIDAsIFhfV0lEVEggKS5saW5lVG8oIFhfV0lEVEgsIDAgKSwge1xuICAgICAgc3Ryb2tlOiAnYmxhY2snLFxuICAgICAgbGluZVdpZHRoOiAzLFxuICAgICAgcmlnaHQ6IHNvdW5kT25Ob2RlLndpZHRoLCAvLyBwb3NpdGlvbiB0aGUgJ3gnIHNvIHRoYXQgYm90aCBpY29ucyBoYXZlIHRoZSBzYW1lIHdpZHRoLCBzZWUgc2NlbmVyeS1waGV0IzMyOVxuICAgICAgY2VudGVyWTogc291bmRPZmZOb2RlLmNlbnRlcllcbiAgICB9ICk7XG4gICAgc291bmRPZmZOb2RlLmFkZENoaWxkKCBzb3VuZE9mZlggKTtcblxuICAgIHN1cGVyKCBwcm9wZXJ0eSwgc291bmRPbk5vZGUsIHNvdW5kT2ZmTm9kZSwgb3B0aW9ucyApO1xuXG4gICAgLy8gcGRvbSBhdHRyaWJ1dGUgbGV0cyB1c2VyIGtub3cgd2hlbiB0aGUgdG9nZ2xlIGlzIHByZXNzZWRcbiAgICBjb25zdCBwcmVzc2VkTGlzdGVuZXIgPSAoIHZhbHVlOiBib29sZWFuICkgPT4ge1xuICAgICAgdGhpcy5zZXRQRE9NQXR0cmlidXRlKCAnYXJpYS1wcmVzc2VkJywgIXZhbHVlICk7XG4gICAgfTtcbiAgICBwcm9wZXJ0eS5sYXp5TGluayggcHJlc3NlZExpc3RlbmVyICk7XG4gICAgdGhpcy5zZXRQRE9NQXR0cmlidXRlKCAnYXJpYS1wcmVzc2VkJywgIXByb3BlcnR5LmdldCgpICk7XG5cbiAgICB0aGlzLmRpc3Bvc2VTb3VuZFRvZ2dsZUJ1dHRvbiA9ICgpID0+IHtcbiAgICAgIHByb3BlcnR5LnVubGluayggcHJlc3NlZExpc3RlbmVyICk7XG4gICAgfTtcblxuICAgIC8vIHN1cHBvcnQgZm9yIGJpbmRlciBkb2N1bWVudGF0aW9uLCBzdHJpcHBlZCBvdXQgaW4gYnVpbGRzIGFuZCBvbmx5IHJ1bnMgd2hlbiA/YmluZGVyIGlzIHNwZWNpZmllZFxuICAgIGFzc2VydCAmJiB3aW5kb3cucGhldD8uY2hpcHBlcj8ucXVlcnlQYXJhbWV0ZXJzPy5iaW5kZXIgJiYgSW5zdGFuY2VSZWdpc3RyeS5yZWdpc3RlckRhdGFVUkwoICdzY2VuZXJ5LXBoZXQnLCAnU291bmRUb2dnbGVCdXR0b24nLCB0aGlzICk7XG4gIH1cblxuICBwdWJsaWMgb3ZlcnJpZGUgZGlzcG9zZSgpOiB2b2lkIHtcbiAgICB0aGlzLmRpc3Bvc2VTb3VuZFRvZ2dsZUJ1dHRvbigpO1xuICAgIHN1cGVyLmRpc3Bvc2UoKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1NvdW5kVG9nZ2xlQnV0dG9uJywgU291bmRUb2dnbGVCdXR0b24gKTsiXSwibmFtZXMiOlsiU2hhcGUiLCJJbnN0YW5jZVJlZ2lzdHJ5Iiwib3B0aW9uaXplIiwiTm9kZSIsIlBhdGgiLCJ2b2x1bWVPZmZTb2xpZFNoYXBlIiwidm9sdW1lVXBTb2xpZFNoYXBlIiwiQm9vbGVhblJlY3Rhbmd1bGFyVG9nZ2xlQnV0dG9uIiwiUGhldENvbG9yU2NoZW1lIiwic2NlbmVyeVBoZXQiLCJTY2VuZXJ5UGhldFN0cmluZ3MiLCJXSURUSCIsIkhFSUdIVCIsIk1BUkdJTiIsIlhfV0lEVEgiLCJTb3VuZFRvZ2dsZUJ1dHRvbiIsImRpc3Bvc2UiLCJkaXNwb3NlU291bmRUb2dnbGVCdXR0b24iLCJwcm9wZXJ0eSIsInByb3ZpZGVPcHRpb25zIiwid2luZG93Iiwib3B0aW9ucyIsImJhc2VDb2xvciIsIkJVVFRPTl9ZRUxMT1ciLCJtaW5XaWR0aCIsIm1pbkhlaWdodCIsInhNYXJnaW4iLCJ5TWFyZ2luIiwidGFnTmFtZSIsImlubmVyQ29udGVudCIsImExMXkiLCJzb3VuZFRvZ2dsZSIsImxhYmVsU3RyaW5nUHJvcGVydHkiLCJzb3VuZE9uTm9kZSIsImZpbGwiLCJjb250ZW50U2NhbGUiLCJ3aWR0aCIsInNjYWxlIiwic291bmRPZmZOb2RlIiwiYWRkQ2hpbGQiLCJzb3VuZE9mZlgiLCJtb3ZlVG8iLCJsaW5lVG8iLCJzdHJva2UiLCJsaW5lV2lkdGgiLCJyaWdodCIsImNlbnRlclkiLCJwcmVzc2VkTGlzdGVuZXIiLCJ2YWx1ZSIsInNldFBET01BdHRyaWJ1dGUiLCJsYXp5TGluayIsImdldCIsInVubGluayIsImFzc2VydCIsInBoZXQiLCJjaGlwcGVyIiwicXVlcnlQYXJhbWV0ZXJzIiwiYmluZGVyIiwicmVnaXN0ZXJEYXRhVVJMIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7O0NBTUMsR0FHRCxTQUFTQSxLQUFLLFFBQVEsOEJBQThCO0FBQ3BELE9BQU9DLHNCQUFzQiwwREFBMEQ7QUFDdkYsT0FBT0MsZUFBcUMscUNBQXFDO0FBQ2pGLFNBQVNDLElBQUksRUFBRUMsSUFBSSxRQUFRLGlDQUFpQztBQUM1RCxPQUFPQyx5QkFBeUIsMERBQTBEO0FBQzFGLE9BQU9DLHdCQUF3Qix5REFBeUQ7QUFDeEYsT0FBT0Msb0NBQStFLDREQUE0RDtBQUNsSixPQUFPQyxxQkFBcUIsd0JBQXdCO0FBQ3BELE9BQU9DLGlCQUFpQixvQkFBb0I7QUFDNUMsT0FBT0Msd0JBQXdCLDJCQUEyQjtBQUUxRCxZQUFZO0FBQ1osTUFBTUMsUUFBUTtBQUNkLE1BQU1DLFNBQVM7QUFDZixNQUFNQyxTQUFTO0FBQ2YsTUFBTUMsVUFBVUgsUUFBUSxNQUFNLDBCQUEwQjtBQU16QyxJQUFBLEFBQU1JLG9CQUFOLE1BQU1BLDBCQUEwQlI7SUF3RDdCUyxVQUFnQjtRQUM5QixJQUFJLENBQUNDLHdCQUF3QjtRQUM3QixLQUFLLENBQUNEO0lBQ1I7SUF2REEsWUFBb0JFLFFBQTJCLEVBQUVDLGNBQXlDLENBQUc7WUFpRGpGQyxzQ0FBQUEsc0JBQUFBO1FBL0NWLE1BQU1DLFVBQVVuQixZQUEyRjtZQUV6Ryx3Q0FBd0M7WUFDeENvQixXQUFXZCxnQkFBZ0JlLGFBQWE7WUFDeENDLFVBQVViO1lBQ1ZjLFdBQVdiO1lBQ1hjLFNBQVNiO1lBQ1RjLFNBQVNkO1lBQ1RlLFNBQVM7WUFDVEMsY0FBY25CLG1CQUFtQm9CLElBQUksQ0FBQ0MsV0FBVyxDQUFDQyxtQkFBbUI7UUFDdkUsR0FBR2I7UUFFSCxtQ0FBbUM7UUFDbkMsTUFBTWMsY0FBYyxJQUFJN0IsS0FBTUUsb0JBQW9CO1lBQ2hENEIsTUFBTTtRQUNSO1FBQ0EsTUFBTUMsZUFBZSxBQUFFeEIsQ0FBQUEsUUFBVSxJQUFJRSxNQUFPLElBQU1vQixZQUFZRyxLQUFLO1FBQ25FSCxZQUFZSSxLQUFLLENBQUVGO1FBRW5CLHFFQUFxRTtRQUNyRSxNQUFNRyxlQUFlLElBQUluQztRQUN6Qm1DLGFBQWFDLFFBQVEsQ0FBRSxJQUFJbkMsS0FBTUMscUJBQXFCO1lBQ3BEZ0MsT0FBT0Y7WUFDUEQsTUFBTTtRQUNSO1FBQ0EsTUFBTU0sWUFBWSxJQUFJcEMsS0FBTSxJQUFJSixRQUFReUMsTUFBTSxDQUFFLEdBQUcsR0FBSUMsTUFBTSxDQUFFNUIsU0FBU0EsU0FBVTJCLE1BQU0sQ0FBRSxHQUFHM0IsU0FBVTRCLE1BQU0sQ0FBRTVCLFNBQVMsSUFBSztZQUMzSDZCLFFBQVE7WUFDUkMsV0FBVztZQUNYQyxPQUFPWixZQUFZRyxLQUFLO1lBQ3hCVSxTQUFTUixhQUFhUSxPQUFPO1FBQy9CO1FBQ0FSLGFBQWFDLFFBQVEsQ0FBRUM7UUFFdkIsS0FBSyxDQUFFdEIsVUFBVWUsYUFBYUssY0FBY2pCO1FBRTVDLDJEQUEyRDtRQUMzRCxNQUFNMEIsa0JBQWtCLENBQUVDO1lBQ3hCLElBQUksQ0FBQ0MsZ0JBQWdCLENBQUUsZ0JBQWdCLENBQUNEO1FBQzFDO1FBQ0E5QixTQUFTZ0MsUUFBUSxDQUFFSDtRQUNuQixJQUFJLENBQUNFLGdCQUFnQixDQUFFLGdCQUFnQixDQUFDL0IsU0FBU2lDLEdBQUc7UUFFcEQsSUFBSSxDQUFDbEMsd0JBQXdCLEdBQUc7WUFDOUJDLFNBQVNrQyxNQUFNLENBQUVMO1FBQ25CO1FBRUEsbUdBQW1HO1FBQ25HTSxZQUFVakMsZUFBQUEsT0FBT2tDLElBQUksc0JBQVhsQyx1QkFBQUEsYUFBYW1DLE9BQU8sc0JBQXBCbkMsdUNBQUFBLHFCQUFzQm9DLGVBQWUscUJBQXJDcEMscUNBQXVDcUMsTUFBTSxLQUFJeEQsaUJBQWlCeUQsZUFBZSxDQUFFLGdCQUFnQixxQkFBcUIsSUFBSTtJQUN4STtBQU1GO0FBNURBLFNBQXFCM0MsK0JBNERwQjtBQUVETixZQUFZa0QsUUFBUSxDQUFFLHFCQUFxQjVDIn0=

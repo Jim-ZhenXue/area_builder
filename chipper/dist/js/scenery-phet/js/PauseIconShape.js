@@ -1,0 +1,20 @@
+// Copyright 2018-2022, University of Colorado Boulder
+/**
+ * Shape for the 'pause' icon that appears on buttons and other UI components.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import { Shape } from '../../kite/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let PauseIconShape = class PauseIconShape extends Shape {
+    constructor(width, height){
+        super();
+        // 2 vertical bars
+        const barWidth = width / 3;
+        this.rect(0, 0, barWidth, height);
+        this.rect(2 * barWidth, 0, barWidth, height);
+    }
+};
+export { PauseIconShape as default };
+sceneryPhet.register('PauseIconShape', PauseIconShape);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9QYXVzZUljb25TaGFwZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDIyLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBTaGFwZSBmb3IgdGhlICdwYXVzZScgaWNvbiB0aGF0IGFwcGVhcnMgb24gYnV0dG9ucyBhbmQgb3RoZXIgVUkgY29tcG9uZW50cy5cbiAqXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCB7IFNoYXBlIH0gZnJvbSAnLi4vLi4va2l0ZS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuL3NjZW5lcnlQaGV0LmpzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUGF1c2VJY29uU2hhcGUgZXh0ZW5kcyBTaGFwZSB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCB3aWR0aDogbnVtYmVyLCBoZWlnaHQ6IG51bWJlciApIHtcbiAgICBzdXBlcigpO1xuXG4gICAgLy8gMiB2ZXJ0aWNhbCBiYXJzXG4gICAgY29uc3QgYmFyV2lkdGggPSB3aWR0aCAvIDM7XG4gICAgdGhpcy5yZWN0KCAwLCAwLCBiYXJXaWR0aCwgaGVpZ2h0ICk7XG4gICAgdGhpcy5yZWN0KCAyICogYmFyV2lkdGgsIDAsIGJhcldpZHRoLCBoZWlnaHQgKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1BhdXNlSWNvblNoYXBlJywgUGF1c2VJY29uU2hhcGUgKTsiXSwibmFtZXMiOlsiU2hhcGUiLCJzY2VuZXJ5UGhldCIsIlBhdXNlSWNvblNoYXBlIiwid2lkdGgiLCJoZWlnaHQiLCJiYXJXaWR0aCIsInJlY3QiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxTQUFTQSxLQUFLLFFBQVEsMkJBQTJCO0FBQ2pELE9BQU9DLGlCQUFpQixtQkFBbUI7QUFFNUIsSUFBQSxBQUFNQyxpQkFBTixNQUFNQSx1QkFBdUJGO0lBRTFDLFlBQW9CRyxLQUFhLEVBQUVDLE1BQWMsQ0FBRztRQUNsRCxLQUFLO1FBRUwsa0JBQWtCO1FBQ2xCLE1BQU1DLFdBQVdGLFFBQVE7UUFDekIsSUFBSSxDQUFDRyxJQUFJLENBQUUsR0FBRyxHQUFHRCxVQUFVRDtRQUMzQixJQUFJLENBQUNFLElBQUksQ0FBRSxJQUFJRCxVQUFVLEdBQUdBLFVBQVVEO0lBQ3hDO0FBQ0Y7QUFWQSxTQUFxQkYsNEJBVXBCO0FBRURELFlBQVlNLFFBQVEsQ0FBRSxrQkFBa0JMIn0=

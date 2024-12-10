@@ -1,0 +1,26 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Represents a path up to a PDOMInstance.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { scenery } from '../../imports.js';
+let PartialPDOMTrail = class PartialPDOMTrail {
+    constructor(pdomInstance, trail, isRoot// TODO: remove this, since it can be computed from the pdomInstance https://github.com/phetsims/scenery/issues/1581
+    ){
+        this.pdomInstance = pdomInstance;
+        this.trail = trail;
+        this.isRoot = isRoot;
+        this.isRoot = isRoot;
+        this.fullTrail = this.pdomInstance.trail.copy();
+        // NOTE: Only if the parent instance is the root instance do we want to include our partial trail's root.
+        // For other instances, this node in the trail will already be included
+        // TODO: add Trail.concat() https://github.com/phetsims/scenery/issues/1581
+        for(let j = this.isRoot ? 0 : 1; j < this.trail.length; j++){
+            this.fullTrail.addDescendant(this.trail.nodes[j]);
+        }
+    }
+};
+export { PartialPDOMTrail as default };
+scenery.register('PartialPDOMTrail', PartialPDOMTrail);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvYWNjZXNzaWJpbGl0eS9wZG9tL1BhcnRpYWxQRE9NVHJhaWwudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTgtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogUmVwcmVzZW50cyBhIHBhdGggdXAgdG8gYSBQRE9NSW5zdGFuY2UuXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCB7IFBET01JbnN0YW5jZSwgc2NlbmVyeSwgVHJhaWwgfSBmcm9tICcuLi8uLi9pbXBvcnRzLmpzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUGFydGlhbFBET01UcmFpbCB7XG5cbiAgLy8gYSBmdWxsIFRyYWlsIChyb290ZWQgYXQgb3VyIGRpc3BsYXkpIHRvIG91ciB0cmFpbCdzIGZpbmFsIG5vZGUuXG4gIHB1YmxpYyByZWFkb25seSBmdWxsVHJhaWw6IFRyYWlsO1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvcihcbiAgICBwdWJsaWMgcmVhZG9ubHkgcGRvbUluc3RhbmNlOiBQRE9NSW5zdGFuY2UsXG4gICAgcHVibGljIHJlYWRvbmx5IHRyYWlsOiBUcmFpbCxcbiAgICBwdWJsaWMgcmVhZG9ubHkgaXNSb290OiBib29sZWFuIC8vIFRPRE86IHJlbW92ZSB0aGlzLCBzaW5jZSBpdCBjYW4gYmUgY29tcHV0ZWQgZnJvbSB0aGUgcGRvbUluc3RhbmNlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xNTgxXG4gICkge1xuXG4gICAgdGhpcy5pc1Jvb3QgPSBpc1Jvb3Q7XG4gICAgdGhpcy5mdWxsVHJhaWwgPSB0aGlzLnBkb21JbnN0YW5jZS50cmFpbCEuY29weSgpO1xuXG4gICAgLy8gTk9URTogT25seSBpZiB0aGUgcGFyZW50IGluc3RhbmNlIGlzIHRoZSByb290IGluc3RhbmNlIGRvIHdlIHdhbnQgdG8gaW5jbHVkZSBvdXIgcGFydGlhbCB0cmFpbCdzIHJvb3QuXG4gICAgLy8gRm9yIG90aGVyIGluc3RhbmNlcywgdGhpcyBub2RlIGluIHRoZSB0cmFpbCB3aWxsIGFscmVhZHkgYmUgaW5jbHVkZWRcbiAgICAvLyBUT0RPOiBhZGQgVHJhaWwuY29uY2F0KCkgaHR0cHM6Ly9naXRodWIuY29tL3BoZXRzaW1zL3NjZW5lcnkvaXNzdWVzLzE1ODFcbiAgICBmb3IgKCBsZXQgaiA9ICggdGhpcy5pc1Jvb3QgPyAwIDogMSApOyBqIDwgdGhpcy50cmFpbC5sZW5ndGg7IGorKyApIHtcbiAgICAgIHRoaXMuZnVsbFRyYWlsLmFkZERlc2NlbmRhbnQoIHRoaXMudHJhaWwubm9kZXNbIGogXSApO1xuICAgIH1cbiAgfVxufVxuXG5zY2VuZXJ5LnJlZ2lzdGVyKCAnUGFydGlhbFBET01UcmFpbCcsIFBhcnRpYWxQRE9NVHJhaWwgKTsiXSwibmFtZXMiOlsic2NlbmVyeSIsIlBhcnRpYWxQRE9NVHJhaWwiLCJwZG9tSW5zdGFuY2UiLCJ0cmFpbCIsImlzUm9vdCIsImZ1bGxUcmFpbCIsImNvcHkiLCJqIiwibGVuZ3RoIiwiYWRkRGVzY2VuZGFudCIsIm5vZGVzIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsU0FBdUJBLE9BQU8sUUFBZSxtQkFBbUI7QUFFakQsSUFBQSxBQUFNQyxtQkFBTixNQUFNQTtJQUtuQixZQUNFLEFBQWdCQyxZQUEwQixFQUMxQyxBQUFnQkMsS0FBWSxFQUM1QixBQUFnQkMsTUFBZSxBQUFDLG9IQUFvSDtLQUNwSjthQUhnQkYsZUFBQUE7YUFDQUMsUUFBQUE7YUFDQUMsU0FBQUE7UUFHaEIsSUFBSSxDQUFDQSxNQUFNLEdBQUdBO1FBQ2QsSUFBSSxDQUFDQyxTQUFTLEdBQUcsSUFBSSxDQUFDSCxZQUFZLENBQUNDLEtBQUssQ0FBRUcsSUFBSTtRQUU5Qyx5R0FBeUc7UUFDekcsdUVBQXVFO1FBQ3ZFLDJFQUEyRTtRQUMzRSxJQUFNLElBQUlDLElBQU0sSUFBSSxDQUFDSCxNQUFNLEdBQUcsSUFBSSxHQUFLRyxJQUFJLElBQUksQ0FBQ0osS0FBSyxDQUFDSyxNQUFNLEVBQUVELElBQU07WUFDbEUsSUFBSSxDQUFDRixTQUFTLENBQUNJLGFBQWEsQ0FBRSxJQUFJLENBQUNOLEtBQUssQ0FBQ08sS0FBSyxDQUFFSCxFQUFHO1FBQ3JEO0lBQ0Y7QUFDRjtBQXJCQSxTQUFxQk4sOEJBcUJwQjtBQUVERCxRQUFRVyxRQUFRLENBQUUsb0JBQW9CViJ9

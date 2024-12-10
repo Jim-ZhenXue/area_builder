@@ -1,0 +1,32 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * Stores a record of all global hotkeys (Hotkey instances that should be available regardless of focus).
+ *
+ * @author Jesse Greenberg (PhET Interactive Simulations)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import TinyProperty from '../../../axon/js/TinyProperty.js';
+import { scenery } from '../imports.js';
+let GlobalHotkeyRegistry = class GlobalHotkeyRegistry {
+    add(hotkey) {
+        assert && assert(!this.hotkeysProperty.value.has(hotkey), 'Hotkey already added');
+        this.hotkeysProperty.value = new Set([
+            ...this.hotkeysProperty.value,
+            hotkey
+        ]);
+    }
+    remove(hotkey) {
+        assert && assert(this.hotkeysProperty.value.has(hotkey), 'Hotkey not found');
+        this.hotkeysProperty.value = new Set([
+            ...this.hotkeysProperty.value
+        ].filter((value)=>value !== hotkey));
+    }
+    constructor(){
+        // (read-only) The set of hotkeys that are currently available globally
+        this.hotkeysProperty = new TinyProperty(new Set());
+    }
+};
+scenery.register('GlobalHotkeyRegistry', GlobalHotkeyRegistry);
+const globalHotkeyRegistry = new GlobalHotkeyRegistry();
+export default globalHotkeyRegistry;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvaW5wdXQvZ2xvYmFsSG90a2V5UmVnaXN0cnkudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFN0b3JlcyBhIHJlY29yZCBvZiBhbGwgZ2xvYmFsIGhvdGtleXMgKEhvdGtleSBpbnN0YW5jZXMgdGhhdCBzaG91bGQgYmUgYXZhaWxhYmxlIHJlZ2FyZGxlc3Mgb2YgZm9jdXMpLlxuICpcbiAqIEBhdXRob3IgSmVzc2UgR3JlZW5iZXJnIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCBUaW55UHJvcGVydHkgZnJvbSAnLi4vLi4vLi4vYXhvbi9qcy9UaW55UHJvcGVydHkuanMnO1xuaW1wb3J0IFRQcm9wZXJ0eSBmcm9tICcuLi8uLi8uLi9heG9uL2pzL1RQcm9wZXJ0eS5qcyc7XG5pbXBvcnQgeyBIb3RrZXksIHNjZW5lcnkgfSBmcm9tICcuLi9pbXBvcnRzLmpzJztcblxuY2xhc3MgR2xvYmFsSG90a2V5UmVnaXN0cnkge1xuXG4gIC8vIChyZWFkLW9ubHkpIFRoZSBzZXQgb2YgaG90a2V5cyB0aGF0IGFyZSBjdXJyZW50bHkgYXZhaWxhYmxlIGdsb2JhbGx5XG4gIHB1YmxpYyByZWFkb25seSBob3RrZXlzUHJvcGVydHk6IFRQcm9wZXJ0eTxTZXQ8SG90a2V5Pj4gPSBuZXcgVGlueVByb3BlcnR5KCBuZXcgU2V0PEhvdGtleT4oKSApO1xuXG4gIHB1YmxpYyBhZGQoIGhvdGtleTogSG90a2V5ICk6IHZvaWQge1xuICAgIGFzc2VydCAmJiBhc3NlcnQoICF0aGlzLmhvdGtleXNQcm9wZXJ0eS52YWx1ZS5oYXMoIGhvdGtleSApLCAnSG90a2V5IGFscmVhZHkgYWRkZWQnICk7XG5cbiAgICB0aGlzLmhvdGtleXNQcm9wZXJ0eS52YWx1ZSA9IG5ldyBTZXQoIFsgLi4udGhpcy5ob3RrZXlzUHJvcGVydHkudmFsdWUsIGhvdGtleSBdICk7XG4gIH1cblxuICBwdWJsaWMgcmVtb3ZlKCBob3RrZXk6IEhvdGtleSApOiB2b2lkIHtcbiAgICBhc3NlcnQgJiYgYXNzZXJ0KCB0aGlzLmhvdGtleXNQcm9wZXJ0eS52YWx1ZS5oYXMoIGhvdGtleSApLCAnSG90a2V5IG5vdCBmb3VuZCcgKTtcblxuICAgIHRoaXMuaG90a2V5c1Byb3BlcnR5LnZhbHVlID0gbmV3IFNldCggWyAuLi50aGlzLmhvdGtleXNQcm9wZXJ0eS52YWx1ZSBdLmZpbHRlciggdmFsdWUgPT4gdmFsdWUgIT09IGhvdGtleSApICk7XG4gIH1cbn1cblxuc2NlbmVyeS5yZWdpc3RlciggJ0dsb2JhbEhvdGtleVJlZ2lzdHJ5JywgR2xvYmFsSG90a2V5UmVnaXN0cnkgKTtcblxuY29uc3QgZ2xvYmFsSG90a2V5UmVnaXN0cnkgPSBuZXcgR2xvYmFsSG90a2V5UmVnaXN0cnkoKTtcblxuZXhwb3J0IGRlZmF1bHQgZ2xvYmFsSG90a2V5UmVnaXN0cnk7Il0sIm5hbWVzIjpbIlRpbnlQcm9wZXJ0eSIsInNjZW5lcnkiLCJHbG9iYWxIb3RrZXlSZWdpc3RyeSIsImFkZCIsImhvdGtleSIsImFzc2VydCIsImhvdGtleXNQcm9wZXJ0eSIsInZhbHVlIiwiaGFzIiwiU2V0IiwicmVtb3ZlIiwiZmlsdGVyIiwicmVnaXN0ZXIiLCJnbG9iYWxIb3RrZXlSZWdpc3RyeSJdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBRWpEOzs7OztDQUtDLEdBRUQsT0FBT0Esa0JBQWtCLG1DQUFtQztBQUU1RCxTQUFpQkMsT0FBTyxRQUFRLGdCQUFnQjtBQUVoRCxJQUFBLEFBQU1DLHVCQUFOLE1BQU1BO0lBS0dDLElBQUtDLE1BQWMsRUFBUztRQUNqQ0MsVUFBVUEsT0FBUSxDQUFDLElBQUksQ0FBQ0MsZUFBZSxDQUFDQyxLQUFLLENBQUNDLEdBQUcsQ0FBRUosU0FBVTtRQUU3RCxJQUFJLENBQUNFLGVBQWUsQ0FBQ0MsS0FBSyxHQUFHLElBQUlFLElBQUs7ZUFBSyxJQUFJLENBQUNILGVBQWUsQ0FBQ0MsS0FBSztZQUFFSDtTQUFRO0lBQ2pGO0lBRU9NLE9BQVFOLE1BQWMsRUFBUztRQUNwQ0MsVUFBVUEsT0FBUSxJQUFJLENBQUNDLGVBQWUsQ0FBQ0MsS0FBSyxDQUFDQyxHQUFHLENBQUVKLFNBQVU7UUFFNUQsSUFBSSxDQUFDRSxlQUFlLENBQUNDLEtBQUssR0FBRyxJQUFJRSxJQUFLO2VBQUssSUFBSSxDQUFDSCxlQUFlLENBQUNDLEtBQUs7U0FBRSxDQUFDSSxNQUFNLENBQUVKLENBQUFBLFFBQVNBLFVBQVVIO0lBQ3JHOztRQWJBLHVFQUF1RTthQUN2REUsa0JBQTBDLElBQUlOLGFBQWMsSUFBSVM7O0FBYWxGO0FBRUFSLFFBQVFXLFFBQVEsQ0FBRSx3QkFBd0JWO0FBRTFDLE1BQU1XLHVCQUF1QixJQUFJWDtBQUVqQyxlQUFlVyxxQkFBcUIifQ==

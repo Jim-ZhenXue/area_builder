@@ -1,0 +1,24 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * Demo for SliderControlsKeyboardHelpSection
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import { HBox } from '../../../../scenery/js/imports.js';
+import SliderControlsKeyboardHelpSection from '../../keyboard/help/SliderControlsKeyboardHelpSection.js';
+export default function demoSliderControlsKeyboardHelpSection(layoutBounds, providedOptions) {
+    return new HBox({
+        children: [
+            new SliderControlsKeyboardHelpSection(),
+            new SliderControlsKeyboardHelpSection({
+                verbStringProperty: new TinyProperty('Move custom'),
+                headingStringProperty: new TinyProperty('Custom Title About This Slidable'),
+                sliderStringProperty: new TinyProperty('stuff and things')
+            })
+        ],
+        spacing: 10,
+        center: layoutBounds.center
+    });
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9kZW1vL2tleWJvYXJkL2RlbW9TbGlkZXJDb250cm9sc0tleWJvYXJkSGVscFNlY3Rpb24udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjItMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogRGVtbyBmb3IgU2xpZGVyQ29udHJvbHNLZXlib2FyZEhlbHBTZWN0aW9uXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgVGlueVByb3BlcnR5IGZyb20gJy4uLy4uLy4uLy4uL2F4b24vanMvVGlueVByb3BlcnR5LmpzJztcbmltcG9ydCBCb3VuZHMyIGZyb20gJy4uLy4uLy4uLy4uL2RvdC9qcy9Cb3VuZHMyLmpzJztcbmltcG9ydCB7IEhCb3gsIE5vZGUgfSBmcm9tICcuLi8uLi8uLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IHsgU3VuRGVtb09wdGlvbnMgfSBmcm9tICcuLi8uLi8uLi8uLi9zdW4vanMvZGVtby9EZW1vc1NjcmVlblZpZXcuanMnO1xuaW1wb3J0IFNsaWRlckNvbnRyb2xzS2V5Ym9hcmRIZWxwU2VjdGlvbiBmcm9tICcuLi8uLi9rZXlib2FyZC9oZWxwL1NsaWRlckNvbnRyb2xzS2V5Ym9hcmRIZWxwU2VjdGlvbi5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGRlbW9TbGlkZXJDb250cm9sc0tleWJvYXJkSGVscFNlY3Rpb24oIGxheW91dEJvdW5kczogQm91bmRzMiwgcHJvdmlkZWRPcHRpb25zPzogU3VuRGVtb09wdGlvbnMgKTogTm9kZSB7XG4gIHJldHVybiBuZXcgSEJveCgge1xuICAgIGNoaWxkcmVuOiBbXG4gICAgICBuZXcgU2xpZGVyQ29udHJvbHNLZXlib2FyZEhlbHBTZWN0aW9uKCksXG4gICAgICBuZXcgU2xpZGVyQ29udHJvbHNLZXlib2FyZEhlbHBTZWN0aW9uKCB7XG4gICAgICAgIHZlcmJTdHJpbmdQcm9wZXJ0eTogbmV3IFRpbnlQcm9wZXJ0eSggJ01vdmUgY3VzdG9tJyApLFxuICAgICAgICBoZWFkaW5nU3RyaW5nUHJvcGVydHk6IG5ldyBUaW55UHJvcGVydHkoICdDdXN0b20gVGl0bGUgQWJvdXQgVGhpcyBTbGlkYWJsZScgKSxcbiAgICAgICAgc2xpZGVyU3RyaW5nUHJvcGVydHk6IG5ldyBUaW55UHJvcGVydHkoICdzdHVmZiBhbmQgdGhpbmdzJyApXG4gICAgICB9IClcbiAgICBdLFxuICAgIHNwYWNpbmc6IDEwLFxuICAgIGNlbnRlcjogbGF5b3V0Qm91bmRzLmNlbnRlclxuICB9ICk7XG59Il0sIm5hbWVzIjpbIlRpbnlQcm9wZXJ0eSIsIkhCb3giLCJTbGlkZXJDb250cm9sc0tleWJvYXJkSGVscFNlY3Rpb24iLCJkZW1vU2xpZGVyQ29udHJvbHNLZXlib2FyZEhlbHBTZWN0aW9uIiwibGF5b3V0Qm91bmRzIiwicHJvdmlkZWRPcHRpb25zIiwiY2hpbGRyZW4iLCJ2ZXJiU3RyaW5nUHJvcGVydHkiLCJoZWFkaW5nU3RyaW5nUHJvcGVydHkiLCJzbGlkZXJTdHJpbmdQcm9wZXJ0eSIsInNwYWNpbmciLCJjZW50ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0Esa0JBQWtCLHNDQUFzQztBQUUvRCxTQUFTQyxJQUFJLFFBQWMsb0NBQW9DO0FBRS9ELE9BQU9DLHVDQUF1QywyREFBMkQ7QUFFekcsZUFBZSxTQUFTQyxzQ0FBdUNDLFlBQXFCLEVBQUVDLGVBQWdDO0lBQ3BILE9BQU8sSUFBSUosS0FBTTtRQUNmSyxVQUFVO1lBQ1IsSUFBSUo7WUFDSixJQUFJQSxrQ0FBbUM7Z0JBQ3JDSyxvQkFBb0IsSUFBSVAsYUFBYztnQkFDdENRLHVCQUF1QixJQUFJUixhQUFjO2dCQUN6Q1Msc0JBQXNCLElBQUlULGFBQWM7WUFDMUM7U0FDRDtRQUNEVSxTQUFTO1FBQ1RDLFFBQVFQLGFBQWFPLE1BQU07SUFDN0I7QUFDRiJ9

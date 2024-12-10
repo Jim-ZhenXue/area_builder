@@ -1,0 +1,13 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * Alias for the type-check task.
+ *
+ * @deprecated, please use type-check.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ console.log('check is deprecated, please use type-check');
+import { typeCheckPromise } from './type-check.js';
+export default typeCheckPromise;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9ncnVudC90YXNrcy9jaGVjay50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG4vKipcbiAqIEFsaWFzIGZvciB0aGUgdHlwZS1jaGVjayB0YXNrLlxuICpcbiAqIEBkZXByZWNhdGVkLCBwbGVhc2UgdXNlIHR5cGUtY2hlY2suXG4gKlxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5jb25zb2xlLmxvZyggJ2NoZWNrIGlzIGRlcHJlY2F0ZWQsIHBsZWFzZSB1c2UgdHlwZS1jaGVjaycgKTtcbmltcG9ydCB7IHR5cGVDaGVja1Byb21pc2UgfSBmcm9tICcuL3R5cGUtY2hlY2suanMnO1xuXG5leHBvcnQgZGVmYXVsdCB0eXBlQ2hlY2tQcm9taXNlOyJdLCJuYW1lcyI6WyJjb25zb2xlIiwibG9nIiwidHlwZUNoZWNrUHJvbWlzZSJdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBQ2pEOzs7Ozs7O0NBT0MsR0FFREEsUUFBUUMsR0FBRyxDQUFFO0FBQ2IsU0FBU0MsZ0JBQWdCLFFBQVEsa0JBQWtCO0FBRW5ELGVBQWVBLGlCQUFpQiJ9

@@ -1,0 +1,39 @@
+// Copyright 2021-2023, University of Colorado Boulder
+/**
+ * LockNode shows a padlock that is either open or closed, depending on the state of a boolean Property.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import { AlignBox, AlignGroup, HBox, HStrut, Image } from '../../scenery/js/imports.js';
+import BooleanToggleNode from '../../sun/js/BooleanToggleNode.js';
+import lockClosed_png from '../images/lockClosed_png.js';
+import lockOpened_png from '../images/lockOpened_png.js';
+import sceneryPhet from './sceneryPhet.js';
+let LockNode = class LockNode extends BooleanToggleNode {
+    /**
+   * @param isLockedProperty - true=lock closed, false=lock open
+   * @param providedOptions
+   */ constructor(isLockedProperty, providedOptions){
+        const alignBoxOptions = {
+            // To make both icons have the same effective dimensions
+            group: new AlignGroup(),
+            xAlign: 'center',
+            yAlign: 'bottom'
+        };
+        const lockClosedImage = new Image(lockClosed_png);
+        const lockClosedNode = new AlignBox(lockClosedImage, alignBoxOptions);
+        // For the 'open' icon, add a strut to the left, so that the lock body is in the center of lockOpenedNode.
+        const lockOpenedImage = new Image(lockOpened_png);
+        const lockOpenedNode = new AlignBox(new HBox({
+            children: [
+                new HStrut(lockOpenedImage.width - lockClosedImage.width),
+                lockOpenedImage
+            ],
+            spacing: 0
+        }), alignBoxOptions);
+        super(isLockedProperty, lockClosedNode, lockOpenedNode, providedOptions);
+    }
+};
+export { LockNode as default };
+sceneryPhet.register('LockNode', LockNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9Mb2NrTm9kZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMS0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBMb2NrTm9kZSBzaG93cyBhIHBhZGxvY2sgdGhhdCBpcyBlaXRoZXIgb3BlbiBvciBjbG9zZWQsIGRlcGVuZGluZyBvbiB0aGUgc3RhdGUgb2YgYSBib29sZWFuIFByb3BlcnR5LlxuICpcbiAqIEBhdXRob3IgQ2hyaXMgTWFsbGV5IChQaXhlbFpvb20sIEluYy4pXG4gKi9cblxuaW1wb3J0IFRQcm9wZXJ0eSBmcm9tICcuLi8uLi9heG9uL2pzL1RQcm9wZXJ0eS5qcyc7XG5pbXBvcnQgeyBFbXB0eVNlbGZPcHRpb25zIH0gZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgeyBBbGlnbkJveCwgQWxpZ25Cb3hPcHRpb25zLCBBbGlnbkdyb3VwLCBIQm94LCBIU3RydXQsIEltYWdlIH0gZnJvbSAnLi4vLi4vc2NlbmVyeS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBCb29sZWFuVG9nZ2xlTm9kZSwgeyBCb29sZWFuVG9nZ2xlTm9kZU9wdGlvbnMgfSBmcm9tICcuLi8uLi9zdW4vanMvQm9vbGVhblRvZ2dsZU5vZGUuanMnO1xuaW1wb3J0IGxvY2tDbG9zZWRfcG5nIGZyb20gJy4uL2ltYWdlcy9sb2NrQ2xvc2VkX3BuZy5qcyc7XG5pbXBvcnQgbG9ja09wZW5lZF9wbmcgZnJvbSAnLi4vaW1hZ2VzL2xvY2tPcGVuZWRfcG5nLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuL3NjZW5lcnlQaGV0LmpzJztcblxudHlwZSBTZWxmT3B0aW9ucyA9IEVtcHR5U2VsZk9wdGlvbnM7XG5cbmV4cG9ydCB0eXBlIExvY2tOb2RlT3B0aW9ucyA9IFNlbGZPcHRpb25zICYgQm9vbGVhblRvZ2dsZU5vZGVPcHRpb25zO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBMb2NrTm9kZSBleHRlbmRzIEJvb2xlYW5Ub2dnbGVOb2RlIHtcblxuICAvKipcbiAgICogQHBhcmFtIGlzTG9ja2VkUHJvcGVydHkgLSB0cnVlPWxvY2sgY2xvc2VkLCBmYWxzZT1sb2NrIG9wZW5cbiAgICogQHBhcmFtIHByb3ZpZGVkT3B0aW9uc1xuICAgKi9cbiAgcHVibGljIGNvbnN0cnVjdG9yKCBpc0xvY2tlZFByb3BlcnR5OiBUUHJvcGVydHk8Ym9vbGVhbj4sIHByb3ZpZGVkT3B0aW9ucz86IExvY2tOb2RlT3B0aW9ucyApIHtcblxuICAgIGNvbnN0IGFsaWduQm94T3B0aW9uczogQWxpZ25Cb3hPcHRpb25zID0ge1xuXG4gICAgICAvLyBUbyBtYWtlIGJvdGggaWNvbnMgaGF2ZSB0aGUgc2FtZSBlZmZlY3RpdmUgZGltZW5zaW9uc1xuICAgICAgZ3JvdXA6IG5ldyBBbGlnbkdyb3VwKCksXG5cbiAgICAgIHhBbGlnbjogJ2NlbnRlcicsXG4gICAgICB5QWxpZ246ICdib3R0b20nXG4gICAgfTtcblxuICAgIGNvbnN0IGxvY2tDbG9zZWRJbWFnZSA9IG5ldyBJbWFnZSggbG9ja0Nsb3NlZF9wbmcgKTtcbiAgICBjb25zdCBsb2NrQ2xvc2VkTm9kZSA9IG5ldyBBbGlnbkJveCggbG9ja0Nsb3NlZEltYWdlLCBhbGlnbkJveE9wdGlvbnMgKTtcblxuICAgIC8vIEZvciB0aGUgJ29wZW4nIGljb24sIGFkZCBhIHN0cnV0IHRvIHRoZSBsZWZ0LCBzbyB0aGF0IHRoZSBsb2NrIGJvZHkgaXMgaW4gdGhlIGNlbnRlciBvZiBsb2NrT3BlbmVkTm9kZS5cbiAgICBjb25zdCBsb2NrT3BlbmVkSW1hZ2UgPSBuZXcgSW1hZ2UoIGxvY2tPcGVuZWRfcG5nICk7XG4gICAgY29uc3QgbG9ja09wZW5lZE5vZGUgPSBuZXcgQWxpZ25Cb3goIG5ldyBIQm94KCB7XG4gICAgICBjaGlsZHJlbjogW1xuICAgICAgICBuZXcgSFN0cnV0KCBsb2NrT3BlbmVkSW1hZ2Uud2lkdGggLSBsb2NrQ2xvc2VkSW1hZ2Uud2lkdGggKSxcbiAgICAgICAgbG9ja09wZW5lZEltYWdlXG4gICAgICBdLFxuICAgICAgc3BhY2luZzogMFxuICAgIH0gKSwgYWxpZ25Cb3hPcHRpb25zICk7XG5cbiAgICBzdXBlciggaXNMb2NrZWRQcm9wZXJ0eSwgbG9ja0Nsb3NlZE5vZGUsIGxvY2tPcGVuZWROb2RlLCBwcm92aWRlZE9wdGlvbnMgKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ0xvY2tOb2RlJywgTG9ja05vZGUgKTsiXSwibmFtZXMiOlsiQWxpZ25Cb3giLCJBbGlnbkdyb3VwIiwiSEJveCIsIkhTdHJ1dCIsIkltYWdlIiwiQm9vbGVhblRvZ2dsZU5vZGUiLCJsb2NrQ2xvc2VkX3BuZyIsImxvY2tPcGVuZWRfcG5nIiwic2NlbmVyeVBoZXQiLCJMb2NrTm9kZSIsImlzTG9ja2VkUHJvcGVydHkiLCJwcm92aWRlZE9wdGlvbnMiLCJhbGlnbkJveE9wdGlvbnMiLCJncm91cCIsInhBbGlnbiIsInlBbGlnbiIsImxvY2tDbG9zZWRJbWFnZSIsImxvY2tDbG9zZWROb2RlIiwibG9ja09wZW5lZEltYWdlIiwibG9ja09wZW5lZE5vZGUiLCJjaGlsZHJlbiIsIndpZHRoIiwic3BhY2luZyIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUlELFNBQVNBLFFBQVEsRUFBbUJDLFVBQVUsRUFBRUMsSUFBSSxFQUFFQyxNQUFNLEVBQUVDLEtBQUssUUFBUSw4QkFBOEI7QUFDekcsT0FBT0MsdUJBQXFELG9DQUFvQztBQUNoRyxPQUFPQyxvQkFBb0IsOEJBQThCO0FBQ3pELE9BQU9DLG9CQUFvQiw4QkFBOEI7QUFDekQsT0FBT0MsaUJBQWlCLG1CQUFtQjtBQU01QixJQUFBLEFBQU1DLFdBQU4sTUFBTUEsaUJBQWlCSjtJQUVwQzs7O0dBR0MsR0FDRCxZQUFvQkssZ0JBQW9DLEVBQUVDLGVBQWlDLENBQUc7UUFFNUYsTUFBTUMsa0JBQW1DO1lBRXZDLHdEQUF3RDtZQUN4REMsT0FBTyxJQUFJWjtZQUVYYSxRQUFRO1lBQ1JDLFFBQVE7UUFDVjtRQUVBLE1BQU1DLGtCQUFrQixJQUFJWixNQUFPRTtRQUNuQyxNQUFNVyxpQkFBaUIsSUFBSWpCLFNBQVVnQixpQkFBaUJKO1FBRXRELDBHQUEwRztRQUMxRyxNQUFNTSxrQkFBa0IsSUFBSWQsTUFBT0c7UUFDbkMsTUFBTVksaUJBQWlCLElBQUluQixTQUFVLElBQUlFLEtBQU07WUFDN0NrQixVQUFVO2dCQUNSLElBQUlqQixPQUFRZSxnQkFBZ0JHLEtBQUssR0FBR0wsZ0JBQWdCSyxLQUFLO2dCQUN6REg7YUFDRDtZQUNESSxTQUFTO1FBQ1gsSUFBS1Y7UUFFTCxLQUFLLENBQUVGLGtCQUFrQk8sZ0JBQWdCRSxnQkFBZ0JSO0lBQzNEO0FBQ0Y7QUFoQ0EsU0FBcUJGLHNCQWdDcEI7QUFFREQsWUFBWWUsUUFBUSxDQUFFLFlBQVlkIn0=

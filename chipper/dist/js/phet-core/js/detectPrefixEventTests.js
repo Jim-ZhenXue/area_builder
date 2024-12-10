@@ -1,0 +1,19 @@
+// Copyright 2017-2023, University of Colorado Boulder
+/**
+ * detectPrefixEvent tests
+ *
+ * @author Jonathan Olson (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import detectPrefixEvent from './detectPrefixEvent.js';
+QUnit.module('detectPrefixEvent');
+QUnit.test('detectPrefixEvent', (assert)=>{
+    const obj = {
+        onmain: false,
+        onmozprop: ''
+    };
+    assert.equal(detectPrefixEvent(obj, 'main'), 'main');
+    assert.equal(detectPrefixEvent(obj, 'prop'), 'mozprop');
+    assert.equal(detectPrefixEvent(obj, 'nothing'), undefined);
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9kZXRlY3RQcmVmaXhFdmVudFRlc3RzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE3LTIwMjMsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIGRldGVjdFByZWZpeEV2ZW50IHRlc3RzXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IGRldGVjdFByZWZpeEV2ZW50IGZyb20gJy4vZGV0ZWN0UHJlZml4RXZlbnQuanMnO1xuXG5RVW5pdC5tb2R1bGUoICdkZXRlY3RQcmVmaXhFdmVudCcgKTtcblxuUVVuaXQudGVzdCggJ2RldGVjdFByZWZpeEV2ZW50JywgYXNzZXJ0ID0+IHtcbiAgY29uc3Qgb2JqID0ge1xuICAgIG9ubWFpbjogZmFsc2UsXG4gICAgb25tb3pwcm9wOiAnJ1xuICB9O1xuXG4gIGFzc2VydC5lcXVhbCggZGV0ZWN0UHJlZml4RXZlbnQoIG9iaiwgJ21haW4nICksICdtYWluJyApO1xuICBhc3NlcnQuZXF1YWwoIGRldGVjdFByZWZpeEV2ZW50KCBvYmosICdwcm9wJyApLCAnbW96cHJvcCcgKTtcbiAgYXNzZXJ0LmVxdWFsKCBkZXRlY3RQcmVmaXhFdmVudCggb2JqLCAnbm90aGluZycgKSwgdW5kZWZpbmVkICk7XG59ICk7Il0sIm5hbWVzIjpbImRldGVjdFByZWZpeEV2ZW50IiwiUVVuaXQiLCJtb2R1bGUiLCJ0ZXN0IiwiYXNzZXJ0Iiwib2JqIiwib25tYWluIiwib25tb3pwcm9wIiwiZXF1YWwiLCJ1bmRlZmluZWQiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLHVCQUF1Qix5QkFBeUI7QUFFdkRDLE1BQU1DLE1BQU0sQ0FBRTtBQUVkRCxNQUFNRSxJQUFJLENBQUUscUJBQXFCQyxDQUFBQTtJQUMvQixNQUFNQyxNQUFNO1FBQ1ZDLFFBQVE7UUFDUkMsV0FBVztJQUNiO0lBRUFILE9BQU9JLEtBQUssQ0FBRVIsa0JBQW1CSyxLQUFLLFNBQVU7SUFDaERELE9BQU9JLEtBQUssQ0FBRVIsa0JBQW1CSyxLQUFLLFNBQVU7SUFDaERELE9BQU9JLEtBQUssQ0FBRVIsa0JBQW1CSyxLQUFLLFlBQWFJO0FBQ3JEIn0=

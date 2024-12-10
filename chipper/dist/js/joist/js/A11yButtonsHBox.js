@@ -1,0 +1,67 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Creates an HBox that can have the sound toggle button, a11y button, or be empty
+ *
+ * @author Chris Klusendorf (PhET Interactive Simulations)
+ */ import optionize from '../../phet-core/js/optionize.js';
+import platform from '../../phet-core/js/platform.js';
+import { HBox } from '../../scenery/js/imports.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import audioManager from './audioManager.js';
+import joist from './joist.js';
+import KeyboardHelpButton from './KeyboardHelpButton.js';
+import NavigationBarAudioToggleButton from './NavigationBarAudioToggleButton.js';
+import NavigationBarPreferencesButton from './preferences/NavigationBarPreferencesButton.js';
+let A11yButtonsHBox = class A11yButtonsHBox extends HBox {
+    constructor(sim, backgroundColorProperty, providedOptions){
+        const options = optionize()({
+            align: 'center',
+            spacing: 2,
+            // This Node is not instrumented! This tandem is instead just used to instrument child elements.
+            tandem: Tandem.REQUIRED
+        }, providedOptions);
+        // list of optional buttons added for a11y
+        const a11yButtons = [];
+        if (sim.preferencesModel.shouldShowDialog()) {
+            const preferencesButton = new NavigationBarPreferencesButton(sim.preferencesModel, backgroundColorProperty, {
+                tandem: options.tandem.createTandem('preferencesButton'),
+                pointerAreaDilationX: 1,
+                pointerAreaDilationY: 1
+            });
+            a11yButtons.push(preferencesButton);
+        }
+        const supportsAudioPreferences = sim.preferencesModel.supportsAudioPreferences();
+        // only put the audio on/off button on the nav bar if audio features are enabled
+        if (supportsAudioPreferences) {
+            a11yButtons.push(new NavigationBarAudioToggleButton(audioManager.audioEnabledProperty, backgroundColorProperty, {
+                tandem: options.tandem.createTandem('audioToggleButton'),
+                pointerAreaDilationX: 1,
+                pointerAreaDilationY: 0.15,
+                supportsAudioPreferences: supportsAudioPreferences
+            }));
+        }
+        // Create a keyboard help button/dialog if there is keyboard help content.
+        if (sim.hasKeyboardHelpContent) {
+            // Create the KeyboardHelpButton (pops open a dialog with information about keyboard navigation) if there is content
+            // and the sim has supports Interactive Description. Eagerly create this to support a consistent PhET-iO API, but
+            // only conditionally add it to the nav bar if in the proper runtime.
+            const keyboardHelpButton = new KeyboardHelpButton(sim.screens, sim.selectedScreenProperty, backgroundColorProperty, {
+                tandem: options.tandem.createTandem('keyboardHelpButton'),
+                pointerAreaDilationX: 1,
+                pointerAreaDilationY: 1
+            });
+            // only show the keyboard help button if the sim supports interactive description and we are not in mobile safari
+            // See https://github.com/phetsims/scenery/issues/1659
+            if (phet.chipper.queryParameters.supportsInteractiveDescription && !platform.mobileSafari) {
+                a11yButtons.push(keyboardHelpButton);
+            }
+        }
+        options.children = a11yButtons;
+        // Don't instrument this Node, only its child elements.
+        super(_.omit(options, 'tandem'));
+    }
+};
+joist.register('A11yButtonsHBox', A11yButtonsHBox);
+export default A11yButtonsHBox;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL0ExMXlCdXR0b25zSEJveC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBDcmVhdGVzIGFuIEhCb3ggdGhhdCBjYW4gaGF2ZSB0aGUgc291bmQgdG9nZ2xlIGJ1dHRvbiwgYTExeSBidXR0b24sIG9yIGJlIGVtcHR5XG4gKlxuICogQGF1dGhvciBDaHJpcyBLbHVzZW5kb3JmIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBUUmVhZE9ubHlQcm9wZXJ0eSBmcm9tICcuLi8uLi9heG9uL2pzL1RSZWFkT25seVByb3BlcnR5LmpzJztcbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IHBsYXRmb3JtIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9wbGF0Zm9ybS5qcyc7XG5pbXBvcnQgU3RyaWN0T21pdCBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvU3RyaWN0T21pdC5qcyc7XG5pbXBvcnQgeyBDb2xvciwgSEJveCwgSEJveE9wdGlvbnMgfSBmcm9tICcuLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IFRhbmRlbSBmcm9tICcuLi8uLi90YW5kZW0vanMvVGFuZGVtLmpzJztcbmltcG9ydCBhdWRpb01hbmFnZXIgZnJvbSAnLi9hdWRpb01hbmFnZXIuanMnO1xuaW1wb3J0IGpvaXN0IGZyb20gJy4vam9pc3QuanMnO1xuaW1wb3J0IEtleWJvYXJkSGVscEJ1dHRvbiBmcm9tICcuL0tleWJvYXJkSGVscEJ1dHRvbi5qcyc7XG5pbXBvcnQgTmF2aWdhdGlvbkJhckF1ZGlvVG9nZ2xlQnV0dG9uIGZyb20gJy4vTmF2aWdhdGlvbkJhckF1ZGlvVG9nZ2xlQnV0dG9uLmpzJztcbmltcG9ydCBOYXZpZ2F0aW9uQmFyUHJlZmVyZW5jZXNCdXR0b24gZnJvbSAnLi9wcmVmZXJlbmNlcy9OYXZpZ2F0aW9uQmFyUHJlZmVyZW5jZXNCdXR0b24uanMnO1xuaW1wb3J0IFNpbSBmcm9tICcuL1NpbS5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSBFbXB0eVNlbGZPcHRpb25zO1xuZXhwb3J0IHR5cGUgQTExeUJ1dHRvbnNIQm94T3B0aW9ucyA9IFNlbGZPcHRpb25zICYgU3RyaWN0T21pdDxIQm94T3B0aW9ucywgJ2NoaWxkcmVuJz47XG5cbmNsYXNzIEExMXlCdXR0b25zSEJveCBleHRlbmRzIEhCb3gge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3Rvciggc2ltOiBTaW0sIGJhY2tncm91bmRDb2xvclByb3BlcnR5OiBUUmVhZE9ubHlQcm9wZXJ0eTxDb2xvcj4sIHByb3ZpZGVkT3B0aW9ucz86IEExMXlCdXR0b25zSEJveE9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPEExMXlCdXR0b25zSEJveE9wdGlvbnMsIFNlbGZPcHRpb25zLCBIQm94T3B0aW9ucz4oKSgge1xuICAgICAgYWxpZ246ICdjZW50ZXInLFxuICAgICAgc3BhY2luZzogMixcblxuICAgICAgLy8gVGhpcyBOb2RlIGlzIG5vdCBpbnN0cnVtZW50ZWQhIFRoaXMgdGFuZGVtIGlzIGluc3RlYWQganVzdCB1c2VkIHRvIGluc3RydW1lbnQgY2hpbGQgZWxlbWVudHMuXG4gICAgICB0YW5kZW06IFRhbmRlbS5SRVFVSVJFRFxuICAgIH0sIHByb3ZpZGVkT3B0aW9ucyApO1xuXG4gICAgLy8gbGlzdCBvZiBvcHRpb25hbCBidXR0b25zIGFkZGVkIGZvciBhMTF5XG4gICAgY29uc3QgYTExeUJ1dHRvbnMgPSBbXTtcblxuICAgIGlmICggc2ltLnByZWZlcmVuY2VzTW9kZWwuc2hvdWxkU2hvd0RpYWxvZygpICkge1xuXG4gICAgICBjb25zdCBwcmVmZXJlbmNlc0J1dHRvbiA9IG5ldyBOYXZpZ2F0aW9uQmFyUHJlZmVyZW5jZXNCdXR0b24oIHNpbS5wcmVmZXJlbmNlc01vZGVsLCBiYWNrZ3JvdW5kQ29sb3JQcm9wZXJ0eSwge1xuICAgICAgICB0YW5kZW06IG9wdGlvbnMudGFuZGVtLmNyZWF0ZVRhbmRlbSggJ3ByZWZlcmVuY2VzQnV0dG9uJyApLFxuICAgICAgICBwb2ludGVyQXJlYURpbGF0aW9uWDogMSxcbiAgICAgICAgcG9pbnRlckFyZWFEaWxhdGlvblk6IDFcbiAgICAgIH0gKTtcblxuICAgICAgYTExeUJ1dHRvbnMucHVzaCggcHJlZmVyZW5jZXNCdXR0b24gKTtcbiAgICB9XG5cbiAgICBjb25zdCBzdXBwb3J0c0F1ZGlvUHJlZmVyZW5jZXMgPSBzaW0ucHJlZmVyZW5jZXNNb2RlbC5zdXBwb3J0c0F1ZGlvUHJlZmVyZW5jZXMoKTtcblxuICAgIC8vIG9ubHkgcHV0IHRoZSBhdWRpbyBvbi9vZmYgYnV0dG9uIG9uIHRoZSBuYXYgYmFyIGlmIGF1ZGlvIGZlYXR1cmVzIGFyZSBlbmFibGVkXG4gICAgaWYgKCBzdXBwb3J0c0F1ZGlvUHJlZmVyZW5jZXMgKSB7XG4gICAgICBhMTF5QnV0dG9ucy5wdXNoKCBuZXcgTmF2aWdhdGlvbkJhckF1ZGlvVG9nZ2xlQnV0dG9uKCBhdWRpb01hbmFnZXIuYXVkaW9FbmFibGVkUHJvcGVydHksIGJhY2tncm91bmRDb2xvclByb3BlcnR5LCB7XG4gICAgICAgIHRhbmRlbTogb3B0aW9ucy50YW5kZW0uY3JlYXRlVGFuZGVtKCAnYXVkaW9Ub2dnbGVCdXR0b24nICksXG4gICAgICAgIHBvaW50ZXJBcmVhRGlsYXRpb25YOiAxLFxuICAgICAgICBwb2ludGVyQXJlYURpbGF0aW9uWTogMC4xNSxcbiAgICAgICAgc3VwcG9ydHNBdWRpb1ByZWZlcmVuY2VzOiBzdXBwb3J0c0F1ZGlvUHJlZmVyZW5jZXNcbiAgICAgIH0gKSApO1xuICAgIH1cblxuICAgIC8vIENyZWF0ZSBhIGtleWJvYXJkIGhlbHAgYnV0dG9uL2RpYWxvZyBpZiB0aGVyZSBpcyBrZXlib2FyZCBoZWxwIGNvbnRlbnQuXG4gICAgaWYgKCBzaW0uaGFzS2V5Ym9hcmRIZWxwQ29udGVudCApIHtcblxuICAgICAgLy8gQ3JlYXRlIHRoZSBLZXlib2FyZEhlbHBCdXR0b24gKHBvcHMgb3BlbiBhIGRpYWxvZyB3aXRoIGluZm9ybWF0aW9uIGFib3V0IGtleWJvYXJkIG5hdmlnYXRpb24pIGlmIHRoZXJlIGlzIGNvbnRlbnRcbiAgICAgIC8vIGFuZCB0aGUgc2ltIGhhcyBzdXBwb3J0cyBJbnRlcmFjdGl2ZSBEZXNjcmlwdGlvbi4gRWFnZXJseSBjcmVhdGUgdGhpcyB0byBzdXBwb3J0IGEgY29uc2lzdGVudCBQaEVULWlPIEFQSSwgYnV0XG4gICAgICAvLyBvbmx5IGNvbmRpdGlvbmFsbHkgYWRkIGl0IHRvIHRoZSBuYXYgYmFyIGlmIGluIHRoZSBwcm9wZXIgcnVudGltZS5cbiAgICAgIGNvbnN0IGtleWJvYXJkSGVscEJ1dHRvbiA9IG5ldyBLZXlib2FyZEhlbHBCdXR0b24oIHNpbS5zY3JlZW5zLCBzaW0uc2VsZWN0ZWRTY3JlZW5Qcm9wZXJ0eSwgYmFja2dyb3VuZENvbG9yUHJvcGVydHksIHtcbiAgICAgICAgdGFuZGVtOiBvcHRpb25zLnRhbmRlbS5jcmVhdGVUYW5kZW0oICdrZXlib2FyZEhlbHBCdXR0b24nICksXG4gICAgICAgIHBvaW50ZXJBcmVhRGlsYXRpb25YOiAxLFxuICAgICAgICBwb2ludGVyQXJlYURpbGF0aW9uWTogMVxuICAgICAgfSApO1xuXG4gICAgICAvLyBvbmx5IHNob3cgdGhlIGtleWJvYXJkIGhlbHAgYnV0dG9uIGlmIHRoZSBzaW0gc3VwcG9ydHMgaW50ZXJhY3RpdmUgZGVzY3JpcHRpb24gYW5kIHdlIGFyZSBub3QgaW4gbW9iaWxlIHNhZmFyaVxuICAgICAgLy8gU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xNjU5XG4gICAgICBpZiAoIHBoZXQuY2hpcHBlci5xdWVyeVBhcmFtZXRlcnMuc3VwcG9ydHNJbnRlcmFjdGl2ZURlc2NyaXB0aW9uICYmICFwbGF0Zm9ybS5tb2JpbGVTYWZhcmkgKSB7XG4gICAgICAgIGExMXlCdXR0b25zLnB1c2goIGtleWJvYXJkSGVscEJ1dHRvbiApO1xuICAgICAgfVxuICAgIH1cblxuICAgIG9wdGlvbnMuY2hpbGRyZW4gPSBhMTF5QnV0dG9ucztcblxuICAgIC8vIERvbid0IGluc3RydW1lbnQgdGhpcyBOb2RlLCBvbmx5IGl0cyBjaGlsZCBlbGVtZW50cy5cbiAgICBzdXBlciggXy5vbWl0KCBvcHRpb25zLCAndGFuZGVtJyApICk7XG4gIH1cbn1cblxuam9pc3QucmVnaXN0ZXIoICdBMTF5QnV0dG9uc0hCb3gnLCBBMTF5QnV0dG9uc0hCb3ggKTtcbmV4cG9ydCBkZWZhdWx0IEExMXlCdXR0b25zSEJveDsiXSwibmFtZXMiOlsib3B0aW9uaXplIiwicGxhdGZvcm0iLCJIQm94IiwiVGFuZGVtIiwiYXVkaW9NYW5hZ2VyIiwiam9pc3QiLCJLZXlib2FyZEhlbHBCdXR0b24iLCJOYXZpZ2F0aW9uQmFyQXVkaW9Ub2dnbGVCdXR0b24iLCJOYXZpZ2F0aW9uQmFyUHJlZmVyZW5jZXNCdXR0b24iLCJBMTF5QnV0dG9uc0hCb3giLCJzaW0iLCJiYWNrZ3JvdW5kQ29sb3JQcm9wZXJ0eSIsInByb3ZpZGVkT3B0aW9ucyIsIm9wdGlvbnMiLCJhbGlnbiIsInNwYWNpbmciLCJ0YW5kZW0iLCJSRVFVSVJFRCIsImExMXlCdXR0b25zIiwicHJlZmVyZW5jZXNNb2RlbCIsInNob3VsZFNob3dEaWFsb2ciLCJwcmVmZXJlbmNlc0J1dHRvbiIsImNyZWF0ZVRhbmRlbSIsInBvaW50ZXJBcmVhRGlsYXRpb25YIiwicG9pbnRlckFyZWFEaWxhdGlvblkiLCJwdXNoIiwic3VwcG9ydHNBdWRpb1ByZWZlcmVuY2VzIiwiYXVkaW9FbmFibGVkUHJvcGVydHkiLCJoYXNLZXlib2FyZEhlbHBDb250ZW50Iiwia2V5Ym9hcmRIZWxwQnV0dG9uIiwic2NyZWVucyIsInNlbGVjdGVkU2NyZWVuUHJvcGVydHkiLCJwaGV0IiwiY2hpcHBlciIsInF1ZXJ5UGFyYW1ldGVycyIsInN1cHBvcnRzSW50ZXJhY3RpdmVEZXNjcmlwdGlvbiIsIm1vYmlsZVNhZmFyaSIsImNoaWxkcmVuIiwiXyIsIm9taXQiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FHRCxPQUFPQSxlQUFxQyxrQ0FBa0M7QUFDOUUsT0FBT0MsY0FBYyxpQ0FBaUM7QUFFdEQsU0FBZ0JDLElBQUksUUFBcUIsOEJBQThCO0FBQ3ZFLE9BQU9DLFlBQVksNEJBQTRCO0FBQy9DLE9BQU9DLGtCQUFrQixvQkFBb0I7QUFDN0MsT0FBT0MsV0FBVyxhQUFhO0FBQy9CLE9BQU9DLHdCQUF3QiwwQkFBMEI7QUFDekQsT0FBT0Msb0NBQW9DLHNDQUFzQztBQUNqRixPQUFPQyxvQ0FBb0Msa0RBQWtEO0FBTTdGLElBQUEsQUFBTUMsa0JBQU4sTUFBTUEsd0JBQXdCUDtJQUU1QixZQUFvQlEsR0FBUSxFQUFFQyx1QkFBaUQsRUFBRUMsZUFBd0MsQ0FBRztRQUUxSCxNQUFNQyxVQUFVYixZQUErRDtZQUM3RWMsT0FBTztZQUNQQyxTQUFTO1lBRVQsZ0dBQWdHO1lBQ2hHQyxRQUFRYixPQUFPYyxRQUFRO1FBQ3pCLEdBQUdMO1FBRUgsMENBQTBDO1FBQzFDLE1BQU1NLGNBQWMsRUFBRTtRQUV0QixJQUFLUixJQUFJUyxnQkFBZ0IsQ0FBQ0MsZ0JBQWdCLElBQUs7WUFFN0MsTUFBTUMsb0JBQW9CLElBQUliLCtCQUFnQ0UsSUFBSVMsZ0JBQWdCLEVBQUVSLHlCQUF5QjtnQkFDM0dLLFFBQVFILFFBQVFHLE1BQU0sQ0FBQ00sWUFBWSxDQUFFO2dCQUNyQ0Msc0JBQXNCO2dCQUN0QkMsc0JBQXNCO1lBQ3hCO1lBRUFOLFlBQVlPLElBQUksQ0FBRUo7UUFDcEI7UUFFQSxNQUFNSywyQkFBMkJoQixJQUFJUyxnQkFBZ0IsQ0FBQ08sd0JBQXdCO1FBRTlFLGdGQUFnRjtRQUNoRixJQUFLQSwwQkFBMkI7WUFDOUJSLFlBQVlPLElBQUksQ0FBRSxJQUFJbEIsK0JBQWdDSCxhQUFhdUIsb0JBQW9CLEVBQUVoQix5QkFBeUI7Z0JBQ2hISyxRQUFRSCxRQUFRRyxNQUFNLENBQUNNLFlBQVksQ0FBRTtnQkFDckNDLHNCQUFzQjtnQkFDdEJDLHNCQUFzQjtnQkFDdEJFLDBCQUEwQkE7WUFDNUI7UUFDRjtRQUVBLDBFQUEwRTtRQUMxRSxJQUFLaEIsSUFBSWtCLHNCQUFzQixFQUFHO1lBRWhDLG9IQUFvSDtZQUNwSCxpSEFBaUg7WUFDakgscUVBQXFFO1lBQ3JFLE1BQU1DLHFCQUFxQixJQUFJdkIsbUJBQW9CSSxJQUFJb0IsT0FBTyxFQUFFcEIsSUFBSXFCLHNCQUFzQixFQUFFcEIseUJBQXlCO2dCQUNuSEssUUFBUUgsUUFBUUcsTUFBTSxDQUFDTSxZQUFZLENBQUU7Z0JBQ3JDQyxzQkFBc0I7Z0JBQ3RCQyxzQkFBc0I7WUFDeEI7WUFFQSxpSEFBaUg7WUFDakgsc0RBQXNEO1lBQ3RELElBQUtRLEtBQUtDLE9BQU8sQ0FBQ0MsZUFBZSxDQUFDQyw4QkFBOEIsSUFBSSxDQUFDbEMsU0FBU21DLFlBQVksRUFBRztnQkFDM0ZsQixZQUFZTyxJQUFJLENBQUVJO1lBQ3BCO1FBQ0Y7UUFFQWhCLFFBQVF3QixRQUFRLEdBQUduQjtRQUVuQix1REFBdUQ7UUFDdkQsS0FBSyxDQUFFb0IsRUFBRUMsSUFBSSxDQUFFMUIsU0FBUztJQUMxQjtBQUNGO0FBRUFSLE1BQU1tQyxRQUFRLENBQUUsbUJBQW1CL0I7QUFDbkMsZUFBZUEsZ0JBQWdCIn0=

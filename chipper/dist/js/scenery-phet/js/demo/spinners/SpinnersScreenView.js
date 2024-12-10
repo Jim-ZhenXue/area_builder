@@ -1,0 +1,30 @@
+// Copyright 2020-2024, University of Colorado Boulder
+/**
+ * Demonstration of various spinners.
+ * Demos are selected from a combo box, and are instantiated on demand.
+ * Use the 'component' query parameter to set the initial selection of the combo box.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import optionize from '../../../../phet-core/js/optionize.js';
+import DemosScreenView from '../../../../sun/js/demo/DemosScreenView.js';
+import sceneryPhet from '../../sceneryPhet.js';
+import demoFineCoarseSpinner from './demoFineCoarseSpinner.js';
+let SpinnersScreenView = class SpinnersScreenView extends DemosScreenView {
+    constructor(providedOptions){
+        const options = optionize()({
+        }, providedOptions);
+        // To add a demo, add an entry here of type DemoItemData.
+        const demos = [
+            {
+                label: 'FineCoarseSpinner',
+                createNode: demoFineCoarseSpinner
+            }
+        ];
+        super(demos, options);
+    }
+};
+export { SpinnersScreenView as default };
+sceneryPhet.register('SpinnersScreenView', SpinnersScreenView);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9kZW1vL3NwaW5uZXJzL1NwaW5uZXJzU2NyZWVuVmlldy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMC0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBEZW1vbnN0cmF0aW9uIG9mIHZhcmlvdXMgc3Bpbm5lcnMuXG4gKiBEZW1vcyBhcmUgc2VsZWN0ZWQgZnJvbSBhIGNvbWJvIGJveCwgYW5kIGFyZSBpbnN0YW50aWF0ZWQgb24gZGVtYW5kLlxuICogVXNlIHRoZSAnY29tcG9uZW50JyBxdWVyeSBwYXJhbWV0ZXIgdG8gc2V0IHRoZSBpbml0aWFsIHNlbGVjdGlvbiBvZiB0aGUgY29tYm8gYm94LlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIENocmlzIE1hbGxleSAoUGl4ZWxab29tLCBJbmMuKVxuICovXG5cbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFBpY2tSZXF1aXJlZCBmcm9tICcuLi8uLi8uLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvUGlja1JlcXVpcmVkLmpzJztcbmltcG9ydCBEZW1vc1NjcmVlblZpZXcsIHsgRGVtb3NTY3JlZW5WaWV3T3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uLy4uL3N1bi9qcy9kZW1vL0RlbW9zU2NyZWVuVmlldy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vLi4vc2NlbmVyeVBoZXQuanMnO1xuaW1wb3J0IGRlbW9GaW5lQ29hcnNlU3Bpbm5lciBmcm9tICcuL2RlbW9GaW5lQ29hcnNlU3Bpbm5lci5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSBFbXB0eVNlbGZPcHRpb25zO1xudHlwZSBTcGlubmVyc1NjcmVlblZpZXdPcHRpb25zID0gU2VsZk9wdGlvbnMgJiBQaWNrUmVxdWlyZWQ8RGVtb3NTY3JlZW5WaWV3T3B0aW9ucywgJ3RhbmRlbSc+O1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTcGlubmVyc1NjcmVlblZpZXcgZXh0ZW5kcyBEZW1vc1NjcmVlblZpZXcge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvdmlkZWRPcHRpb25zOiBTcGlubmVyc1NjcmVlblZpZXdPcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxTcGlubmVyc1NjcmVlblZpZXdPcHRpb25zLCBTZWxmT3B0aW9ucywgRGVtb3NTY3JlZW5WaWV3T3B0aW9ucz4oKSgge1xuICAgICAgLy8gbm90aGluZyBmb3Igbm93XG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICAvLyBUbyBhZGQgYSBkZW1vLCBhZGQgYW4gZW50cnkgaGVyZSBvZiB0eXBlIERlbW9JdGVtRGF0YS5cbiAgICBjb25zdCBkZW1vcyA9IFtcbiAgICAgIHsgbGFiZWw6ICdGaW5lQ29hcnNlU3Bpbm5lcicsIGNyZWF0ZU5vZGU6IGRlbW9GaW5lQ29hcnNlU3Bpbm5lciB9XG4gICAgXTtcblxuICAgIHN1cGVyKCBkZW1vcywgb3B0aW9ucyApO1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnU3Bpbm5lcnNTY3JlZW5WaWV3JywgU3Bpbm5lcnNTY3JlZW5WaWV3ICk7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsIkRlbW9zU2NyZWVuVmlldyIsInNjZW5lcnlQaGV0IiwiZGVtb0ZpbmVDb2Fyc2VTcGlubmVyIiwiU3Bpbm5lcnNTY3JlZW5WaWV3IiwicHJvdmlkZWRPcHRpb25zIiwib3B0aW9ucyIsImRlbW9zIiwibGFiZWwiLCJjcmVhdGVOb2RlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7OztDQU9DLEdBRUQsT0FBT0EsZUFBcUMsd0NBQXdDO0FBRXBGLE9BQU9DLHFCQUFpRCw2Q0FBNkM7QUFDckcsT0FBT0MsaUJBQWlCLHVCQUF1QjtBQUMvQyxPQUFPQywyQkFBMkIsNkJBQTZCO0FBS2hELElBQUEsQUFBTUMscUJBQU4sTUFBTUEsMkJBQTJCSDtJQUU5QyxZQUFvQkksZUFBMEMsQ0FBRztRQUUvRCxNQUFNQyxVQUFVTixZQUE2RTtRQUU3RixHQUFHSztRQUVILHlEQUF5RDtRQUN6RCxNQUFNRSxRQUFRO1lBQ1o7Z0JBQUVDLE9BQU87Z0JBQXFCQyxZQUFZTjtZQUFzQjtTQUNqRTtRQUVELEtBQUssQ0FBRUksT0FBT0Q7SUFDaEI7QUFDRjtBQWZBLFNBQXFCRixnQ0FlcEI7QUFFREYsWUFBWVEsUUFBUSxDQUFFLHNCQUFzQk4ifQ==

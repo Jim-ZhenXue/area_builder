@@ -1,0 +1,28 @@
+// Copyright 2014-2023, University of Colorado Boulder
+/**
+ * Minus sign, created using phet.scenery.Rectangle because scenery.Text("-") looks awful on Windows and cannot be accurately
+ * centered. The origin is at the upper left.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import Dimension2 from '../../dot/js/Dimension2.js';
+import optionize from '../../phet-core/js/optionize.js';
+import { Rectangle } from '../../scenery/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+// constants
+const DEFAULT_SIZE = new Dimension2(20, 5);
+let MinusNode = class MinusNode extends Rectangle {
+    constructor(providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            size: DEFAULT_SIZE,
+            // RectangleOptions
+            fill: 'black'
+        }, providedOptions);
+        assert && assert(options.size.width >= options.size.height);
+        super(0, 0, options.size.width, options.size.height, options);
+    }
+};
+sceneryPhet.register('MinusNode', MinusNode);
+export default MinusNode;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9NaW51c05vZGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTQtMjAyMywgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogTWludXMgc2lnbiwgY3JlYXRlZCB1c2luZyBwaGV0LnNjZW5lcnkuUmVjdGFuZ2xlIGJlY2F1c2Ugc2NlbmVyeS5UZXh0KFwiLVwiKSBsb29rcyBhd2Z1bCBvbiBXaW5kb3dzIGFuZCBjYW5ub3QgYmUgYWNjdXJhdGVseVxuICogY2VudGVyZWQuIFRoZSBvcmlnaW4gaXMgYXQgdGhlIHVwcGVyIGxlZnQuXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgRGltZW5zaW9uMiBmcm9tICcuLi8uLi9kb3QvanMvRGltZW5zaW9uMi5qcyc7XG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IHsgUmVjdGFuZ2xlLCBSZWN0YW5nbGVPcHRpb25zIH0gZnJvbSAnLi4vLi4vc2NlbmVyeS9qcy9pbXBvcnRzLmpzJztcbmltcG9ydCBzY2VuZXJ5UGhldCBmcm9tICcuL3NjZW5lcnlQaGV0LmpzJztcblxuLy8gY29uc3RhbnRzXG5jb25zdCBERUZBVUxUX1NJWkUgPSBuZXcgRGltZW5zaW9uMiggMjAsIDUgKTtcblxudHlwZSBTZWxmT3B0aW9ucyA9IHtcbiAgc2l6ZT86IERpbWVuc2lvbjI7XG59O1xuXG5leHBvcnQgdHlwZSBNaW51c05vZGVPcHRpb25zID0gU2VsZk9wdGlvbnMgJiBSZWN0YW5nbGVPcHRpb25zO1xuXG5jbGFzcyBNaW51c05vZGUgZXh0ZW5kcyBSZWN0YW5nbGUge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvdmlkZWRPcHRpb25zOiBNaW51c05vZGVPcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxNaW51c05vZGVPcHRpb25zLCBTZWxmT3B0aW9ucywgUmVjdGFuZ2xlT3B0aW9ucz4oKSgge1xuXG4gICAgICAvLyBTZWxmT3B0aW9uc1xuICAgICAgc2l6ZTogREVGQVVMVF9TSVpFLFxuXG4gICAgICAvLyBSZWN0YW5nbGVPcHRpb25zXG4gICAgICBmaWxsOiAnYmxhY2snXG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICBhc3NlcnQgJiYgYXNzZXJ0KCBvcHRpb25zLnNpemUud2lkdGggPj0gb3B0aW9ucy5zaXplLmhlaWdodCApO1xuXG4gICAgc3VwZXIoIDAsIDAsIG9wdGlvbnMuc2l6ZS53aWR0aCwgb3B0aW9ucy5zaXplLmhlaWdodCwgb3B0aW9ucyApO1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnTWludXNOb2RlJywgTWludXNOb2RlICk7XG5leHBvcnQgZGVmYXVsdCBNaW51c05vZGU7Il0sIm5hbWVzIjpbIkRpbWVuc2lvbjIiLCJvcHRpb25pemUiLCJSZWN0YW5nbGUiLCJzY2VuZXJ5UGhldCIsIkRFRkFVTFRfU0laRSIsIk1pbnVzTm9kZSIsInByb3ZpZGVkT3B0aW9ucyIsIm9wdGlvbnMiLCJzaXplIiwiZmlsbCIsImFzc2VydCIsIndpZHRoIiwiaGVpZ2h0IiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLGdCQUFnQiw2QkFBNkI7QUFDcEQsT0FBT0MsZUFBZSxrQ0FBa0M7QUFDeEQsU0FBU0MsU0FBUyxRQUEwQiw4QkFBOEI7QUFDMUUsT0FBT0MsaUJBQWlCLG1CQUFtQjtBQUUzQyxZQUFZO0FBQ1osTUFBTUMsZUFBZSxJQUFJSixXQUFZLElBQUk7QUFRekMsSUFBQSxBQUFNSyxZQUFOLE1BQU1BLGtCQUFrQkg7SUFFdEIsWUFBb0JJLGVBQWlDLENBQUc7UUFFdEQsTUFBTUMsVUFBVU4sWUFBOEQ7WUFFNUUsY0FBYztZQUNkTyxNQUFNSjtZQUVOLG1CQUFtQjtZQUNuQkssTUFBTTtRQUNSLEdBQUdIO1FBRUhJLFVBQVVBLE9BQVFILFFBQVFDLElBQUksQ0FBQ0csS0FBSyxJQUFJSixRQUFRQyxJQUFJLENBQUNJLE1BQU07UUFFM0QsS0FBSyxDQUFFLEdBQUcsR0FBR0wsUUFBUUMsSUFBSSxDQUFDRyxLQUFLLEVBQUVKLFFBQVFDLElBQUksQ0FBQ0ksTUFBTSxFQUFFTDtJQUN4RDtBQUNGO0FBRUFKLFlBQVlVLFFBQVEsQ0FBRSxhQUFhUjtBQUNuQyxlQUFlQSxVQUFVIn0=

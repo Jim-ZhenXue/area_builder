@@ -1,0 +1,24 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * A trait for subtypes of Node, used to prevent children being added/removed to that subtype of Node.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import memoize from '../../../phet-core/js/memoize.js';
+import { scenery } from '../imports.js';
+const Leaf = memoize((type)=>{
+    return class LeafMixin extends type {
+        insertChild(index, node) {
+            throw new Error('Attempt to insert child into Leaf');
+        }
+        removeChildWithIndex(node, indexOfChild) {
+            throw new Error('Attempt to remove child from Leaf');
+        }
+        constructor(...args){
+            super(...args);
+        }
+    };
+});
+scenery.register('Leaf', Leaf);
+export default Leaf;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvbm9kZXMvTGVhZi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBBIHRyYWl0IGZvciBzdWJ0eXBlcyBvZiBOb2RlLCB1c2VkIHRvIHByZXZlbnQgY2hpbGRyZW4gYmVpbmcgYWRkZWQvcmVtb3ZlZCB0byB0aGF0IHN1YnR5cGUgb2YgTm9kZS5cbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IG1lbW9pemUgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL21lbW9pemUuanMnO1xuaW1wb3J0IENvbnN0cnVjdG9yIGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9Db25zdHJ1Y3Rvci5qcyc7XG5pbXBvcnQgSW50ZW50aW9uYWxBbnkgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL3R5cGVzL0ludGVudGlvbmFsQW55LmpzJztcbmltcG9ydCB7IE5vZGUsIHNjZW5lcnkgfSBmcm9tICcuLi9pbXBvcnRzLmpzJztcblxuY29uc3QgTGVhZiA9IG1lbW9pemUoIDxTdXBlclR5cGUgZXh0ZW5kcyBDb25zdHJ1Y3RvcjxOb2RlPj4oIHR5cGU6IFN1cGVyVHlwZSApOiBTdXBlclR5cGUgPT4ge1xuXG4gIHJldHVybiBjbGFzcyBMZWFmTWl4aW4gZXh0ZW5kcyB0eXBlIHtcbiAgICBwdWJsaWMgY29uc3RydWN0b3IoIC4uLmFyZ3M6IEludGVudGlvbmFsQW55W10gKSB7XG4gICAgICBzdXBlciggLi4uYXJncyApO1xuICAgIH1cblxuICAgIHB1YmxpYyBvdmVycmlkZSBpbnNlcnRDaGlsZCggaW5kZXg6IG51bWJlciwgbm9kZTogTm9kZSApOiB0aGlzIHtcbiAgICAgIHRocm93IG5ldyBFcnJvciggJ0F0dGVtcHQgdG8gaW5zZXJ0IGNoaWxkIGludG8gTGVhZicgKTtcbiAgICB9XG5cbiAgICBwdWJsaWMgb3ZlcnJpZGUgcmVtb3ZlQ2hpbGRXaXRoSW5kZXgoIG5vZGU6IE5vZGUsIGluZGV4T2ZDaGlsZDogbnVtYmVyICk6IHZvaWQge1xuICAgICAgdGhyb3cgbmV3IEVycm9yKCAnQXR0ZW1wdCB0byByZW1vdmUgY2hpbGQgZnJvbSBMZWFmJyApO1xuICAgIH1cbiAgfTtcbn0gKTtcblxuc2NlbmVyeS5yZWdpc3RlciggJ0xlYWYnLCBMZWFmICk7XG5cbmV4cG9ydCBkZWZhdWx0IExlYWY7Il0sIm5hbWVzIjpbIm1lbW9pemUiLCJzY2VuZXJ5IiwiTGVhZiIsInR5cGUiLCJMZWFmTWl4aW4iLCJpbnNlcnRDaGlsZCIsImluZGV4Iiwibm9kZSIsIkVycm9yIiwicmVtb3ZlQ2hpbGRXaXRoSW5kZXgiLCJpbmRleE9mQ2hpbGQiLCJhcmdzIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsYUFBYSxtQ0FBbUM7QUFHdkQsU0FBZUMsT0FBTyxRQUFRLGdCQUFnQjtBQUU5QyxNQUFNQyxPQUFPRixRQUFTLENBQXVDRztJQUUzRCxPQUFPLE1BQU1DLGtCQUFrQkQ7UUFLYkUsWUFBYUMsS0FBYSxFQUFFQyxJQUFVLEVBQVM7WUFDN0QsTUFBTSxJQUFJQyxNQUFPO1FBQ25CO1FBRWdCQyxxQkFBc0JGLElBQVUsRUFBRUcsWUFBb0IsRUFBUztZQUM3RSxNQUFNLElBQUlGLE1BQU87UUFDbkI7UUFWQSxZQUFvQixHQUFHRyxJQUFzQixDQUFHO1lBQzlDLEtBQUssSUFBS0E7UUFDWjtJQVNGO0FBQ0Y7QUFFQVYsUUFBUVcsUUFBUSxDQUFFLFFBQVFWO0FBRTFCLGVBQWVBLEtBQUsifQ==

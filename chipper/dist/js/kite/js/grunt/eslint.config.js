@@ -1,0 +1,13 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * ESLint configuration for kite grunt.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import nodeEslintConfig from '../../../perennial-alias/js/eslint/config/node.eslint.config.mjs';
+import { mutateForNestedConfig } from '../../../perennial-alias/js/eslint/config/root.eslint.config.mjs';
+export default [
+    ...mutateForNestedConfig(nodeEslintConfig)
+];
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL2tpdGUvanMvZ3J1bnQvZXNsaW50LmNvbmZpZy5tanMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEVTTGludCBjb25maWd1cmF0aW9uIGZvciBraXRlIGdydW50LlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IG5vZGVFc2xpbnRDb25maWcgZnJvbSAnLi4vLi4vLi4vcGVyZW5uaWFsLWFsaWFzL2pzL2VzbGludC9jb25maWcvbm9kZS5lc2xpbnQuY29uZmlnLm1qcyc7XG5pbXBvcnQgeyBtdXRhdGVGb3JOZXN0ZWRDb25maWcgfSBmcm9tICcuLi8uLi8uLi9wZXJlbm5pYWwtYWxpYXMvanMvZXNsaW50L2NvbmZpZy9yb290LmVzbGludC5jb25maWcubWpzJztcblxuZXhwb3J0IGRlZmF1bHQgW1xuICAuLi5tdXRhdGVGb3JOZXN0ZWRDb25maWcoIG5vZGVFc2xpbnRDb25maWcgKVxuXTsiXSwibmFtZXMiOlsibm9kZUVzbGludENvbmZpZyIsIm11dGF0ZUZvck5lc3RlZENvbmZpZyJdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBRWpEOzs7OztDQUtDLEdBRUQsT0FBT0Esc0JBQXNCLG1FQUFtRTtBQUNoRyxTQUFTQyxxQkFBcUIsUUFBUSxtRUFBbUU7QUFFekcsZUFBZTtPQUNWQSxzQkFBdUJEO0NBQzNCLENBQUMifQ==

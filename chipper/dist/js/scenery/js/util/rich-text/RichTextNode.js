@@ -1,0 +1,36 @@
+// Copyright 2023-2024, University of Colorado Boulder
+/**
+ * A leaf node element in the RichText, which will display a Node (e.g. with the `nodes` or `tags` feature)
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Pool from '../../../../phet-core/js/Pool.js';
+import { Node, RichTextCleanable, scenery } from '../../imports.js';
+let RichTextNode = class RichTextNode extends RichTextCleanable(Node) {
+    initialize(content) {
+        this.addChild(content);
+        return this;
+    }
+    /**
+   * Cleans references that could cause memory leaks (as those things may contain other references).
+   */ clean() {
+        super.clean();
+        this.removeAllChildren();
+    }
+    /**
+   * Whether this leaf will fit in the specified amount of space
+   */ fitsIn(widthAvailable) {
+        return this.width <= widthAvailable;
+    }
+    freeToPool() {
+        RichTextNode.pool.freeToPool(this);
+    }
+    constructor(content){
+        super(), this.leftSpacing = 0, this.rightSpacing = 0;
+        this.initialize(content);
+    }
+};
+RichTextNode.pool = new Pool(RichTextNode);
+export { RichTextNode as default };
+scenery.register('RichTextNode', RichTextNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvdXRpbC9yaWNoLXRleHQvUmljaFRleHROb2RlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIzLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEEgbGVhZiBub2RlIGVsZW1lbnQgaW4gdGhlIFJpY2hUZXh0LCB3aGljaCB3aWxsIGRpc3BsYXkgYSBOb2RlIChlLmcuIHdpdGggdGhlIGBub2Rlc2Agb3IgYHRhZ3NgIGZlYXR1cmUpXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5pbXBvcnQgUG9vbCwgeyBUUG9vbGFibGUgfSBmcm9tICcuLi8uLi8uLi8uLi9waGV0LWNvcmUvanMvUG9vbC5qcyc7XG5pbXBvcnQgeyBOb2RlLCBSaWNoVGV4dENsZWFuYWJsZSwgc2NlbmVyeSB9IGZyb20gJy4uLy4uL2ltcG9ydHMuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBSaWNoVGV4dE5vZGUgZXh0ZW5kcyBSaWNoVGV4dENsZWFuYWJsZSggTm9kZSApIGltcGxlbWVudHMgVFBvb2xhYmxlIHtcblxuICBwdWJsaWMgcmVhZG9ubHkgbGVmdFNwYWNpbmcgPSAwO1xuICBwdWJsaWMgcmVhZG9ubHkgcmlnaHRTcGFjaW5nID0gMDtcblxuICBwdWJsaWMgY29uc3RydWN0b3IoIGNvbnRlbnQ6IE5vZGUgKSB7XG4gICAgc3VwZXIoKTtcblxuICAgIHRoaXMuaW5pdGlhbGl6ZSggY29udGVudCApO1xuICB9XG5cbiAgcHVibGljIGluaXRpYWxpemUoIGNvbnRlbnQ6IE5vZGUgKTogdGhpcyB7XG4gICAgdGhpcy5hZGRDaGlsZCggY29udGVudCApO1xuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogQ2xlYW5zIHJlZmVyZW5jZXMgdGhhdCBjb3VsZCBjYXVzZSBtZW1vcnkgbGVha3MgKGFzIHRob3NlIHRoaW5ncyBtYXkgY29udGFpbiBvdGhlciByZWZlcmVuY2VzKS5cbiAgICovXG4gIHB1YmxpYyBvdmVycmlkZSBjbGVhbigpOiB2b2lkIHtcbiAgICBzdXBlci5jbGVhbigpO1xuXG4gICAgdGhpcy5yZW1vdmVBbGxDaGlsZHJlbigpO1xuICB9XG5cbiAgLyoqXG4gICAqIFdoZXRoZXIgdGhpcyBsZWFmIHdpbGwgZml0IGluIHRoZSBzcGVjaWZpZWQgYW1vdW50IG9mIHNwYWNlXG4gICAqL1xuICBwdWJsaWMgZml0c0luKCB3aWR0aEF2YWlsYWJsZTogbnVtYmVyICk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0aGlzLndpZHRoIDw9IHdpZHRoQXZhaWxhYmxlO1xuICB9XG5cbiAgcHVibGljIGZyZWVUb1Bvb2woKTogdm9pZCB7XG4gICAgUmljaFRleHROb2RlLnBvb2wuZnJlZVRvUG9vbCggdGhpcyApO1xuICB9XG5cbiAgcHVibGljIHN0YXRpYyByZWFkb25seSBwb29sID0gbmV3IFBvb2woIFJpY2hUZXh0Tm9kZSApO1xufVxuXG5zY2VuZXJ5LnJlZ2lzdGVyKCAnUmljaFRleHROb2RlJywgUmljaFRleHROb2RlICk7Il0sIm5hbWVzIjpbIlBvb2wiLCJOb2RlIiwiUmljaFRleHRDbGVhbmFibGUiLCJzY2VuZXJ5IiwiUmljaFRleHROb2RlIiwiaW5pdGlhbGl6ZSIsImNvbnRlbnQiLCJhZGRDaGlsZCIsImNsZWFuIiwicmVtb3ZlQWxsQ2hpbGRyZW4iLCJmaXRzSW4iLCJ3aWR0aEF2YWlsYWJsZSIsIndpZHRoIiwiZnJlZVRvUG9vbCIsInBvb2wiLCJsZWZ0U3BhY2luZyIsInJpZ2h0U3BhY2luZyIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUNELE9BQU9BLFVBQXlCLG1DQUFtQztBQUNuRSxTQUFTQyxJQUFJLEVBQUVDLGlCQUFpQixFQUFFQyxPQUFPLFFBQVEsbUJBQW1CO0FBRXJELElBQUEsQUFBTUMsZUFBTixNQUFNQSxxQkFBcUJGLGtCQUFtQkQ7SUFXcERJLFdBQVlDLE9BQWEsRUFBUztRQUN2QyxJQUFJLENBQUNDLFFBQVEsQ0FBRUQ7UUFFZixPQUFPLElBQUk7SUFDYjtJQUVBOztHQUVDLEdBQ0QsQUFBZ0JFLFFBQWM7UUFDNUIsS0FBSyxDQUFDQTtRQUVOLElBQUksQ0FBQ0MsaUJBQWlCO0lBQ3hCO0lBRUE7O0dBRUMsR0FDRCxBQUFPQyxPQUFRQyxjQUFzQixFQUFZO1FBQy9DLE9BQU8sSUFBSSxDQUFDQyxLQUFLLElBQUlEO0lBQ3ZCO0lBRU9FLGFBQW1CO1FBQ3hCVCxhQUFhVSxJQUFJLENBQUNELFVBQVUsQ0FBRSxJQUFJO0lBQ3BDO0lBOUJBLFlBQW9CUCxPQUFhLENBQUc7UUFDbEMsS0FBSyxTQUpTUyxjQUFjLFFBQ2RDLGVBQWU7UUFLN0IsSUFBSSxDQUFDWCxVQUFVLENBQUVDO0lBQ25CO0FBNkJGO0FBdENxQkYsYUFxQ0lVLE9BQU8sSUFBSWQsS0FBTUk7QUFyQzFDLFNBQXFCQSwwQkFzQ3BCO0FBRURELFFBQVFjLFFBQVEsQ0FBRSxnQkFBZ0JiIn0=

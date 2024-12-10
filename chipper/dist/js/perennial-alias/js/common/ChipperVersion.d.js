@@ -1,0 +1,7 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * This stub was generated while working on https://github.com/phetsims/chipper/issues/1424.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ 
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vQ2hpcHBlclZlcnNpb24uZC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG4vKipcbiAqIFRoaXMgc3R1YiB3YXMgZ2VuZXJhdGVkIHdoaWxlIHdvcmtpbmcgb24gaHR0cHM6Ly9naXRodWIuY29tL3BoZXRzaW1zL2NoaXBwZXIvaXNzdWVzLzE0MjQuXG4gKlxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqLyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFDakQ7Ozs7Q0FJQyxHQUxEIn0=

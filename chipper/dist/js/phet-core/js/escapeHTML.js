@@ -1,0 +1,17 @@
+// Copyright 2013-2024, University of Colorado Boulder
+/**
+ * Escaping of HTML content that will be placed in the body, inside an element as a node.
+ *
+ * This is NOT for escaping something in other HTML contexts, for example as an attribute value
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import phetCore from './phetCore.js';
+function escapeHTML(str) {
+    // see https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+    // HTML Entity Encoding
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/\//g, '&#x2F;').replace(/ /g, '&nbsp;');
+}
+phetCore.register('escapeHTML', escapeHTML);
+export default escapeHTML;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9lc2NhcGVIVE1MLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDEzLTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEVzY2FwaW5nIG9mIEhUTUwgY29udGVudCB0aGF0IHdpbGwgYmUgcGxhY2VkIGluIHRoZSBib2R5LCBpbnNpZGUgYW4gZWxlbWVudCBhcyBhIG5vZGUuXG4gKlxuICogVGhpcyBpcyBOT1QgZm9yIGVzY2FwaW5nIHNvbWV0aGluZyBpbiBvdGhlciBIVE1MIGNvbnRleHRzLCBmb3IgZXhhbXBsZSBhcyBhbiBhdHRyaWJ1dGUgdmFsdWVcbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IHBoZXRDb3JlIGZyb20gJy4vcGhldENvcmUuanMnO1xuXG5mdW5jdGlvbiBlc2NhcGVIVE1MKCBzdHI6IHN0cmluZyApOiBzdHJpbmcge1xuICAvLyBzZWUgaHR0cHM6Ly93d3cub3dhc3Aub3JnL2luZGV4LnBocC9YU1NfKENyb3NzX1NpdGVfU2NyaXB0aW5nKV9QcmV2ZW50aW9uX0NoZWF0X1NoZWV0XG4gIC8vIEhUTUwgRW50aXR5IEVuY29kaW5nXG4gIHJldHVybiBzdHJcbiAgICAucmVwbGFjZSggLyYvZywgJyZhbXA7JyApXG4gICAgLnJlcGxhY2UoIC88L2csICcmbHQ7JyApXG4gICAgLnJlcGxhY2UoIC8+L2csICcmZ3Q7JyApXG4gICAgLnJlcGxhY2UoIC9cIi9nLCAnJnF1b3Q7JyApXG4gICAgLnJlcGxhY2UoIC8nL2csICcmI3gyNzsnIClcbiAgICAucmVwbGFjZSggL1xcLy9nLCAnJiN4MkY7JyApXG4gICAgLnJlcGxhY2UoIC8gL2csICcmbmJzcDsnICk7XG59XG5cbnBoZXRDb3JlLnJlZ2lzdGVyKCAnZXNjYXBlSFRNTCcsIGVzY2FwZUhUTUwgKTtcblxuZXhwb3J0IGRlZmF1bHQgZXNjYXBlSFRNTDsiXSwibmFtZXMiOlsicGhldENvcmUiLCJlc2NhcGVIVE1MIiwic3RyIiwicmVwbGFjZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7OztDQU1DLEdBRUQsT0FBT0EsY0FBYyxnQkFBZ0I7QUFFckMsU0FBU0MsV0FBWUMsR0FBVztJQUM5Qix3RkFBd0Y7SUFDeEYsdUJBQXVCO0lBQ3ZCLE9BQU9BLElBQ0pDLE9BQU8sQ0FBRSxNQUFNLFNBQ2ZBLE9BQU8sQ0FBRSxNQUFNLFFBQ2ZBLE9BQU8sQ0FBRSxNQUFNLFFBQ2ZBLE9BQU8sQ0FBRSxNQUFNLFVBQ2ZBLE9BQU8sQ0FBRSxNQUFNLFVBQ2ZBLE9BQU8sQ0FBRSxPQUFPLFVBQ2hCQSxPQUFPLENBQUUsTUFBTTtBQUNwQjtBQUVBSCxTQUFTSSxRQUFRLENBQUUsY0FBY0g7QUFFakMsZUFBZUEsV0FBVyJ9

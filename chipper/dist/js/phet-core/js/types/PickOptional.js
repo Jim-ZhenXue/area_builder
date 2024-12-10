@@ -1,0 +1,17 @@
+// Copyright 2022, University of Colorado Boulder
+/**
+ * Use PickOptional to pick properties of a type T and make them optional.
+ * This is useful when picking superclass options that you want to expose in a subclass API.
+ * (Careful if you pick a required superclass option and make it optional - you'll need to provide a default!)
+ * It makes life a little easier because you have to fiddle with fewer '<' and '>' characters,
+ * and PickOptional makes a little more sense than Pick<Partial> in the context of options.
+ *
+ * Example:
+ * type MyClassOptions = PickOptional<PathOptions, 'stroke', 'lineWidth'>;
+ * Result:
+ * { stroke?: ColorDef, lineWidth?: number }
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9QaWNrT3B0aW9uYWwudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFVzZSBQaWNrT3B0aW9uYWwgdG8gcGljayBwcm9wZXJ0aWVzIG9mIGEgdHlwZSBUIGFuZCBtYWtlIHRoZW0gb3B0aW9uYWwuXG4gKiBUaGlzIGlzIHVzZWZ1bCB3aGVuIHBpY2tpbmcgc3VwZXJjbGFzcyBvcHRpb25zIHRoYXQgeW91IHdhbnQgdG8gZXhwb3NlIGluIGEgc3ViY2xhc3MgQVBJLlxuICogKENhcmVmdWwgaWYgeW91IHBpY2sgYSByZXF1aXJlZCBzdXBlcmNsYXNzIG9wdGlvbiBhbmQgbWFrZSBpdCBvcHRpb25hbCAtIHlvdSdsbCBuZWVkIHRvIHByb3ZpZGUgYSBkZWZhdWx0ISlcbiAqIEl0IG1ha2VzIGxpZmUgYSBsaXR0bGUgZWFzaWVyIGJlY2F1c2UgeW91IGhhdmUgdG8gZmlkZGxlIHdpdGggZmV3ZXIgJzwnIGFuZCAnPicgY2hhcmFjdGVycyxcbiAqIGFuZCBQaWNrT3B0aW9uYWwgbWFrZXMgYSBsaXR0bGUgbW9yZSBzZW5zZSB0aGFuIFBpY2s8UGFydGlhbD4gaW4gdGhlIGNvbnRleHQgb2Ygb3B0aW9ucy5cbiAqXG4gKiBFeGFtcGxlOlxuICogdHlwZSBNeUNsYXNzT3B0aW9ucyA9IFBpY2tPcHRpb25hbDxQYXRoT3B0aW9ucywgJ3N0cm9rZScsICdsaW5lV2lkdGgnPjtcbiAqIFJlc3VsdDpcbiAqIHsgc3Ryb2tlPzogQ29sb3JEZWYsIGxpbmVXaWR0aD86IG51bWJlciB9XG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG50eXBlIFBpY2tPcHRpb25hbDxULCBsaXN0IGV4dGVuZHMga2V5b2YgVD4gPSBQaWNrPFBhcnRpYWw8VD4sIGxpc3Q+O1xuZXhwb3J0IGRlZmF1bHQgUGlja09wdGlvbmFsOyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Q0FhQyxHQUdELFdBQTRCIn0=

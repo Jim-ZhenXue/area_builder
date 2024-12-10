@@ -1,0 +1,21 @@
+// Copyright 2021-2024, University of Colorado Boulder
+/**
+ * A horizontal line for separating items in a vertical layout container.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { scenery, Separator, WidthSizable } from '../../imports.js';
+let HSeparator = class HSeparator extends WidthSizable(Separator) {
+    constructor(options){
+        super();
+        this.localPreferredWidthProperty.link((width)=>{
+            if (width !== null) {
+                this.x2 = width;
+            }
+        });
+        this.mutate(options);
+    }
+};
+export { HSeparator as default };
+scenery.register('HSeparator', HSeparator);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvbGF5b3V0L25vZGVzL0hTZXBhcmF0b3IudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjEtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQSBob3Jpem9udGFsIGxpbmUgZm9yIHNlcGFyYXRpbmcgaXRlbXMgaW4gYSB2ZXJ0aWNhbCBsYXlvdXQgY29udGFpbmVyLlxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgeyBFbXB0eVNlbGZPcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgeyBzY2VuZXJ5LCBTZXBhcmF0b3IsIFNlcGFyYXRvck9wdGlvbnMsIFdpZHRoU2l6YWJsZSwgV2lkdGhTaXphYmxlT3B0aW9ucyB9IGZyb20gJy4uLy4uL2ltcG9ydHMuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0gRW1wdHlTZWxmT3B0aW9ucztcbnR5cGUgUGFyZW50T3B0aW9ucyA9IFdpZHRoU2l6YWJsZU9wdGlvbnMgJiBTZXBhcmF0b3JPcHRpb25zO1xuZXhwb3J0IHR5cGUgSFNlcGFyYXRvck9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIFBhcmVudE9wdGlvbnM7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIEhTZXBhcmF0b3IgZXh0ZW5kcyBXaWR0aFNpemFibGUoIFNlcGFyYXRvciApIHtcbiAgcHVibGljIGNvbnN0cnVjdG9yKCBvcHRpb25zPzogSFNlcGFyYXRvck9wdGlvbnMgKSB7XG4gICAgc3VwZXIoKTtcblxuICAgIHRoaXMubG9jYWxQcmVmZXJyZWRXaWR0aFByb3BlcnR5LmxpbmsoIHdpZHRoID0+IHtcbiAgICAgIGlmICggd2lkdGggIT09IG51bGwgKSB7XG4gICAgICAgIHRoaXMueDIgPSB3aWR0aDtcbiAgICAgIH1cbiAgICB9ICk7XG5cbiAgICB0aGlzLm11dGF0ZSggb3B0aW9ucyApO1xuICB9XG59XG5cbnNjZW5lcnkucmVnaXN0ZXIoICdIU2VwYXJhdG9yJywgSFNlcGFyYXRvciApOyJdLCJuYW1lcyI6WyJzY2VuZXJ5IiwiU2VwYXJhdG9yIiwiV2lkdGhTaXphYmxlIiwiSFNlcGFyYXRvciIsIm9wdGlvbnMiLCJsb2NhbFByZWZlcnJlZFdpZHRoUHJvcGVydHkiLCJsaW5rIiwid2lkdGgiLCJ4MiIsIm11dGF0ZSIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUdELFNBQVNBLE9BQU8sRUFBRUMsU0FBUyxFQUFvQkMsWUFBWSxRQUE2QixtQkFBbUI7QUFNNUYsSUFBQSxBQUFNQyxhQUFOLE1BQU1BLG1CQUFtQkQsYUFBY0Q7SUFDcEQsWUFBb0JHLE9BQTJCLENBQUc7UUFDaEQsS0FBSztRQUVMLElBQUksQ0FBQ0MsMkJBQTJCLENBQUNDLElBQUksQ0FBRUMsQ0FBQUE7WUFDckMsSUFBS0EsVUFBVSxNQUFPO2dCQUNwQixJQUFJLENBQUNDLEVBQUUsR0FBR0Q7WUFDWjtRQUNGO1FBRUEsSUFBSSxDQUFDRSxNQUFNLENBQUVMO0lBQ2Y7QUFDRjtBQVpBLFNBQXFCRCx3QkFZcEI7QUFFREgsUUFBUVUsUUFBUSxDQUFFLGNBQWNQIn0=

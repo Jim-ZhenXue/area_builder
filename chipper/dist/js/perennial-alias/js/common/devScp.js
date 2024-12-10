@@ -1,0 +1,20 @@
+// Copyright 2017, University of Colorado Boulder
+/**
+ * Transfers a file (or directory recursively) to the dev server
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ const buildLocal = require('./buildLocal');
+const scp = require('./scp');
+/**
+ * Transfers a file (or directory recursively) to the dev server
+ * @public
+ *
+ * @param {string} localFile - A file, directory or glob pattern. Basically the first part of the SCP command
+ * @param {string} remoteFile - A file or directory. Basically the second part of the SCP command (minus the host/username)
+ * @returns {Promise.<string>} - Stdout
+ * @rejects {ExecuteError}
+ */ module.exports = function(localFile, remoteFile) {
+    return scp(buildLocal.devUsername, buildLocal.devDeployServer, localFile, remoteFile);
+};
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vZGV2U2NwLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE3LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBUcmFuc2ZlcnMgYSBmaWxlIChvciBkaXJlY3RvcnkgcmVjdXJzaXZlbHkpIHRvIHRoZSBkZXYgc2VydmVyXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmNvbnN0IGJ1aWxkTG9jYWwgPSByZXF1aXJlKCAnLi9idWlsZExvY2FsJyApO1xuY29uc3Qgc2NwID0gcmVxdWlyZSggJy4vc2NwJyApO1xuXG4vKipcbiAqIFRyYW5zZmVycyBhIGZpbGUgKG9yIGRpcmVjdG9yeSByZWN1cnNpdmVseSkgdG8gdGhlIGRldiBzZXJ2ZXJcbiAqIEBwdWJsaWNcbiAqXG4gKiBAcGFyYW0ge3N0cmluZ30gbG9jYWxGaWxlIC0gQSBmaWxlLCBkaXJlY3Rvcnkgb3IgZ2xvYiBwYXR0ZXJuLiBCYXNpY2FsbHkgdGhlIGZpcnN0IHBhcnQgb2YgdGhlIFNDUCBjb21tYW5kXG4gKiBAcGFyYW0ge3N0cmluZ30gcmVtb3RlRmlsZSAtIEEgZmlsZSBvciBkaXJlY3RvcnkuIEJhc2ljYWxseSB0aGUgc2Vjb25kIHBhcnQgb2YgdGhlIFNDUCBjb21tYW5kIChtaW51cyB0aGUgaG9zdC91c2VybmFtZSlcbiAqIEByZXR1cm5zIHtQcm9taXNlLjxzdHJpbmc+fSAtIFN0ZG91dFxuICogQHJlamVjdHMge0V4ZWN1dGVFcnJvcn1cbiAqL1xubW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiggbG9jYWxGaWxlLCByZW1vdGVGaWxlICkge1xuICByZXR1cm4gc2NwKCBidWlsZExvY2FsLmRldlVzZXJuYW1lLCBidWlsZExvY2FsLmRldkRlcGxveVNlcnZlciwgbG9jYWxGaWxlLCByZW1vdGVGaWxlICk7XG59OyJdLCJuYW1lcyI6WyJidWlsZExvY2FsIiwicmVxdWlyZSIsInNjcCIsIm1vZHVsZSIsImV4cG9ydHMiLCJsb2NhbEZpbGUiLCJyZW1vdGVGaWxlIiwiZGV2VXNlcm5hbWUiLCJkZXZEZXBsb3lTZXJ2ZXIiXSwibWFwcGluZ3MiOiJBQUFBLGlEQUFpRDtBQUVqRDs7OztDQUlDLEdBRUQsTUFBTUEsYUFBYUMsUUFBUztBQUM1QixNQUFNQyxNQUFNRCxRQUFTO0FBRXJCOzs7Ozs7OztDQVFDLEdBQ0RFLE9BQU9DLE9BQU8sR0FBRyxTQUFVQyxTQUFTLEVBQUVDLFVBQVU7SUFDOUMsT0FBT0osSUFBS0YsV0FBV08sV0FBVyxFQUFFUCxXQUFXUSxlQUFlLEVBQUVILFdBQVdDO0FBQzdFIn0=

@@ -1,0 +1,9 @@
+// Copyright 2016-2021, University of Colorado Boulder
+/**
+ * Creates the namespace for this simulation.
+ *
+ * @author John Blanco
+ */ import Namespace from '../../phet-core/js/Namespace.js';
+export default new Namespace('areaBuilder');
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2FyZWEtYnVpbGRlci9qcy9hcmVhQnVpbGRlci5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNi0yMDIxLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBDcmVhdGVzIHRoZSBuYW1lc3BhY2UgZm9yIHRoaXMgc2ltdWxhdGlvbi5cbiAqXG4gKiBAYXV0aG9yIEpvaG4gQmxhbmNvXG4gKi9cblxuaW1wb3J0IE5hbWVzcGFjZSBmcm9tICcuLi8uLi9waGV0LWNvcmUvanMvTmFtZXNwYWNlLmpzJztcblxuZXhwb3J0IGRlZmF1bHQgbmV3IE5hbWVzcGFjZSggJ2FyZWFCdWlsZGVyJyApOyJdLCJuYW1lcyI6WyJOYW1lc3BhY2UiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsT0FBT0EsZUFBZSxrQ0FBa0M7QUFFeEQsZUFBZSxJQUFJQSxVQUFXLGVBQWdCIn0=

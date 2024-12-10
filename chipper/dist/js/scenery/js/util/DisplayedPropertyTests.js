@@ -1,0 +1,69 @@
+// Copyright 2021-2022, University of Colorado Boulder
+/**
+ * DisplayedProperty Tests
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import Display from '../display/Display.js';
+import Node from '../nodes/Node.js';
+import DisplayedProperty from './DisplayedProperty.js';
+QUnit.module('DisplayedProperty');
+QUnit.test('basics', (assert)=>{
+    const rootNode = new Node();
+    var display = new Display(rootNode); // eslint-disable-line no-var
+    display.initializeEvents();
+    document.body.appendChild(display.domElement);
+    const aNode = new Node();
+    const aDisplayedProperty = new DisplayedProperty(aNode);
+    assert.ok(aDisplayedProperty.value === false, 'not connected, not displayed');
+    rootNode.addChild(aNode);
+    display.updateDisplay();
+    assert.ok(aDisplayedProperty.value === true, 'connected, displayed');
+    rootNode.visible = false;
+    display.updateDisplay();
+    assert.ok(aDisplayedProperty.value === false, 'connected, parent not visible, not displayed');
+    aNode.visible = false;
+    rootNode.visible = true;
+    display.updateDisplay();
+    assert.ok(aDisplayedProperty.value === false, 'connected, not visible, not displayed');
+    aNode.visible = true;
+    display.updateDisplay();
+    assert.ok(aDisplayedProperty.value === true, 'back to visible, displayed');
+    display.dispose();
+    display.domElement.parentElement.removeChild(display.domElement);
+});
+QUnit.test('pdom visibility', (assert)=>{
+    const rootNode = new Node();
+    var display = new Display(rootNode); // eslint-disable-line no-var
+    display.initializeEvents();
+    document.body.appendChild(display.domElement);
+    const aNode = new Node({
+        tagName: 'p'
+    });
+    const aDisplayedProperty = new DisplayedProperty(aNode);
+    const aParent = new Node({
+        children: [
+            aNode
+        ]
+    });
+    rootNode.addChild(aParent);
+    const pdomParentForA = new Node({
+        tagName: 'div'
+    });
+    rootNode.addChild(pdomParentForA);
+    pdomParentForA.pdomOrder = [
+        aNode
+    ];
+    display.updateDisplay();
+    assert.ok(aDisplayedProperty.value === true, 'visible even with pdomOrder, displayed');
+    aParent.visible = false;
+    display.updateDisplay();
+    // This test fails and @zepumph doesn't think it should! // TODO support pdom visibility, https://github.com/phetsims/scenery/issues/1167
+    // assert.ok( aDisplayedProperty.value === true, 'pdomOrder makes it visible, displayed' );
+    // Some more tests to run:
+    // toggle instance visibility in the PDOM trail
+    // swap pdom order and make sure DisplayedProperty updates
+    display.dispose();
+    display.domElement.parentElement.removeChild(display.domElement);
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvdXRpbC9EaXNwbGF5ZWRQcm9wZXJ0eVRlc3RzLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDIxLTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIERpc3BsYXllZFByb3BlcnR5IFRlc3RzXG4gKlxuICogQGF1dGhvciBNaWNoYWVsIEthdXptYW5uIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBEaXNwbGF5IGZyb20gJy4uL2Rpc3BsYXkvRGlzcGxheS5qcyc7XG5pbXBvcnQgTm9kZSBmcm9tICcuLi9ub2Rlcy9Ob2RlLmpzJztcbmltcG9ydCBEaXNwbGF5ZWRQcm9wZXJ0eSBmcm9tICcuL0Rpc3BsYXllZFByb3BlcnR5LmpzJztcblxuUVVuaXQubW9kdWxlKCAnRGlzcGxheWVkUHJvcGVydHknICk7XG5cblFVbml0LnRlc3QoICdiYXNpY3MnLCBhc3NlcnQgPT4ge1xuXG4gIGNvbnN0IHJvb3ROb2RlID0gbmV3IE5vZGUoKTtcbiAgdmFyIGRpc3BsYXkgPSBuZXcgRGlzcGxheSggcm9vdE5vZGUgKTsgLy8gZXNsaW50LWRpc2FibGUtbGluZSBuby12YXJcbiAgZGlzcGxheS5pbml0aWFsaXplRXZlbnRzKCk7XG4gIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoIGRpc3BsYXkuZG9tRWxlbWVudCApO1xuXG4gIGNvbnN0IGFOb2RlID0gbmV3IE5vZGUoKTtcbiAgY29uc3QgYURpc3BsYXllZFByb3BlcnR5ID0gbmV3IERpc3BsYXllZFByb3BlcnR5KCBhTm9kZSApO1xuICBhc3NlcnQub2soIGFEaXNwbGF5ZWRQcm9wZXJ0eS52YWx1ZSA9PT0gZmFsc2UsICdub3QgY29ubmVjdGVkLCBub3QgZGlzcGxheWVkJyApO1xuXG4gIHJvb3ROb2RlLmFkZENoaWxkKCBhTm9kZSApO1xuICBkaXNwbGF5LnVwZGF0ZURpc3BsYXkoKTtcblxuICBhc3NlcnQub2soIGFEaXNwbGF5ZWRQcm9wZXJ0eS52YWx1ZSA9PT0gdHJ1ZSwgJ2Nvbm5lY3RlZCwgZGlzcGxheWVkJyApO1xuXG4gIHJvb3ROb2RlLnZpc2libGUgPSBmYWxzZTtcbiAgZGlzcGxheS51cGRhdGVEaXNwbGF5KCk7XG5cbiAgYXNzZXJ0Lm9rKCBhRGlzcGxheWVkUHJvcGVydHkudmFsdWUgPT09IGZhbHNlLCAnY29ubmVjdGVkLCBwYXJlbnQgbm90IHZpc2libGUsIG5vdCBkaXNwbGF5ZWQnICk7XG5cbiAgYU5vZGUudmlzaWJsZSA9IGZhbHNlO1xuICByb290Tm9kZS52aXNpYmxlID0gdHJ1ZTtcbiAgZGlzcGxheS51cGRhdGVEaXNwbGF5KCk7XG5cbiAgYXNzZXJ0Lm9rKCBhRGlzcGxheWVkUHJvcGVydHkudmFsdWUgPT09IGZhbHNlLCAnY29ubmVjdGVkLCBub3QgdmlzaWJsZSwgbm90IGRpc3BsYXllZCcgKTtcblxuICBhTm9kZS52aXNpYmxlID0gdHJ1ZTtcbiAgZGlzcGxheS51cGRhdGVEaXNwbGF5KCk7XG5cbiAgYXNzZXJ0Lm9rKCBhRGlzcGxheWVkUHJvcGVydHkudmFsdWUgPT09IHRydWUsICdiYWNrIHRvIHZpc2libGUsIGRpc3BsYXllZCcgKTtcblxuICBkaXNwbGF5LmRpc3Bvc2UoKTtcbiAgZGlzcGxheS5kb21FbGVtZW50LnBhcmVudEVsZW1lbnQucmVtb3ZlQ2hpbGQoIGRpc3BsYXkuZG9tRWxlbWVudCApO1xufSApO1xuXG5cblFVbml0LnRlc3QoICdwZG9tIHZpc2liaWxpdHknLCBhc3NlcnQgPT4ge1xuXG4gIGNvbnN0IHJvb3ROb2RlID0gbmV3IE5vZGUoKTtcbiAgdmFyIGRpc3BsYXkgPSBuZXcgRGlzcGxheSggcm9vdE5vZGUgKTsgLy8gZXNsaW50LWRpc2FibGUtbGluZSBuby12YXJcbiAgZGlzcGxheS5pbml0aWFsaXplRXZlbnRzKCk7XG4gIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoIGRpc3BsYXkuZG9tRWxlbWVudCApO1xuXG4gIGNvbnN0IGFOb2RlID0gbmV3IE5vZGUoIHsgdGFnTmFtZTogJ3AnIH0gKTtcbiAgY29uc3QgYURpc3BsYXllZFByb3BlcnR5ID0gbmV3IERpc3BsYXllZFByb3BlcnR5KCBhTm9kZSApO1xuXG4gIGNvbnN0IGFQYXJlbnQgPSBuZXcgTm9kZSggeyBjaGlsZHJlbjogWyBhTm9kZSBdIH0gKTtcbiAgcm9vdE5vZGUuYWRkQ2hpbGQoIGFQYXJlbnQgKTtcblxuICBjb25zdCBwZG9tUGFyZW50Rm9yQSA9IG5ldyBOb2RlKCB7IHRhZ05hbWU6ICdkaXYnIH0gKTtcbiAgcm9vdE5vZGUuYWRkQ2hpbGQoIHBkb21QYXJlbnRGb3JBICk7XG5cbiAgcGRvbVBhcmVudEZvckEucGRvbU9yZGVyID0gWyBhTm9kZSBdO1xuICBkaXNwbGF5LnVwZGF0ZURpc3BsYXkoKTtcblxuICBhc3NlcnQub2soIGFEaXNwbGF5ZWRQcm9wZXJ0eS52YWx1ZSA9PT0gdHJ1ZSwgJ3Zpc2libGUgZXZlbiB3aXRoIHBkb21PcmRlciwgZGlzcGxheWVkJyApO1xuXG4gIGFQYXJlbnQudmlzaWJsZSA9IGZhbHNlO1xuICBkaXNwbGF5LnVwZGF0ZURpc3BsYXkoKTtcblxuXG4gIC8vIFRoaXMgdGVzdCBmYWlscyBhbmQgQHplcHVtcGggZG9lc24ndCB0aGluayBpdCBzaG91bGQhIC8vIFRPRE8gc3VwcG9ydCBwZG9tIHZpc2liaWxpdHksIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy9zY2VuZXJ5L2lzc3Vlcy8xMTY3XG4gIC8vIGFzc2VydC5vayggYURpc3BsYXllZFByb3BlcnR5LnZhbHVlID09PSB0cnVlLCAncGRvbU9yZGVyIG1ha2VzIGl0IHZpc2libGUsIGRpc3BsYXllZCcgKTtcblxuXG4gIC8vIFNvbWUgbW9yZSB0ZXN0cyB0byBydW46XG5cbiAgLy8gdG9nZ2xlIGluc3RhbmNlIHZpc2liaWxpdHkgaW4gdGhlIFBET00gdHJhaWxcblxuICAvLyBzd2FwIHBkb20gb3JkZXIgYW5kIG1ha2Ugc3VyZSBEaXNwbGF5ZWRQcm9wZXJ0eSB1cGRhdGVzXG5cbiAgZGlzcGxheS5kaXNwb3NlKCk7XG4gIGRpc3BsYXkuZG9tRWxlbWVudC5wYXJlbnRFbGVtZW50LnJlbW92ZUNoaWxkKCBkaXNwbGF5LmRvbUVsZW1lbnQgKTtcbn0gKTsiXSwibmFtZXMiOlsiRGlzcGxheSIsIk5vZGUiLCJEaXNwbGF5ZWRQcm9wZXJ0eSIsIlFVbml0IiwibW9kdWxlIiwidGVzdCIsImFzc2VydCIsInJvb3ROb2RlIiwiZGlzcGxheSIsImluaXRpYWxpemVFdmVudHMiLCJkb2N1bWVudCIsImJvZHkiLCJhcHBlbmRDaGlsZCIsImRvbUVsZW1lbnQiLCJhTm9kZSIsImFEaXNwbGF5ZWRQcm9wZXJ0eSIsIm9rIiwidmFsdWUiLCJhZGRDaGlsZCIsInVwZGF0ZURpc3BsYXkiLCJ2aXNpYmxlIiwiZGlzcG9zZSIsInBhcmVudEVsZW1lbnQiLCJyZW1vdmVDaGlsZCIsInRhZ05hbWUiLCJhUGFyZW50IiwiY2hpbGRyZW4iLCJwZG9tUGFyZW50Rm9yQSIsInBkb21PcmRlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxPQUFPQSxhQUFhLHdCQUF3QjtBQUM1QyxPQUFPQyxVQUFVLG1CQUFtQjtBQUNwQyxPQUFPQyx1QkFBdUIseUJBQXlCO0FBRXZEQyxNQUFNQyxNQUFNLENBQUU7QUFFZEQsTUFBTUUsSUFBSSxDQUFFLFVBQVVDLENBQUFBO0lBRXBCLE1BQU1DLFdBQVcsSUFBSU47SUFDckIsSUFBSU8sVUFBVSxJQUFJUixRQUFTTyxXQUFZLDZCQUE2QjtJQUNwRUMsUUFBUUMsZ0JBQWdCO0lBQ3hCQyxTQUFTQyxJQUFJLENBQUNDLFdBQVcsQ0FBRUosUUFBUUssVUFBVTtJQUU3QyxNQUFNQyxRQUFRLElBQUliO0lBQ2xCLE1BQU1jLHFCQUFxQixJQUFJYixrQkFBbUJZO0lBQ2xEUixPQUFPVSxFQUFFLENBQUVELG1CQUFtQkUsS0FBSyxLQUFLLE9BQU87SUFFL0NWLFNBQVNXLFFBQVEsQ0FBRUo7SUFDbkJOLFFBQVFXLGFBQWE7SUFFckJiLE9BQU9VLEVBQUUsQ0FBRUQsbUJBQW1CRSxLQUFLLEtBQUssTUFBTTtJQUU5Q1YsU0FBU2EsT0FBTyxHQUFHO0lBQ25CWixRQUFRVyxhQUFhO0lBRXJCYixPQUFPVSxFQUFFLENBQUVELG1CQUFtQkUsS0FBSyxLQUFLLE9BQU87SUFFL0NILE1BQU1NLE9BQU8sR0FBRztJQUNoQmIsU0FBU2EsT0FBTyxHQUFHO0lBQ25CWixRQUFRVyxhQUFhO0lBRXJCYixPQUFPVSxFQUFFLENBQUVELG1CQUFtQkUsS0FBSyxLQUFLLE9BQU87SUFFL0NILE1BQU1NLE9BQU8sR0FBRztJQUNoQlosUUFBUVcsYUFBYTtJQUVyQmIsT0FBT1UsRUFBRSxDQUFFRCxtQkFBbUJFLEtBQUssS0FBSyxNQUFNO0lBRTlDVCxRQUFRYSxPQUFPO0lBQ2ZiLFFBQVFLLFVBQVUsQ0FBQ1MsYUFBYSxDQUFDQyxXQUFXLENBQUVmLFFBQVFLLFVBQVU7QUFDbEU7QUFHQVYsTUFBTUUsSUFBSSxDQUFFLG1CQUFtQkMsQ0FBQUE7SUFFN0IsTUFBTUMsV0FBVyxJQUFJTjtJQUNyQixJQUFJTyxVQUFVLElBQUlSLFFBQVNPLFdBQVksNkJBQTZCO0lBQ3BFQyxRQUFRQyxnQkFBZ0I7SUFDeEJDLFNBQVNDLElBQUksQ0FBQ0MsV0FBVyxDQUFFSixRQUFRSyxVQUFVO0lBRTdDLE1BQU1DLFFBQVEsSUFBSWIsS0FBTTtRQUFFdUIsU0FBUztJQUFJO0lBQ3ZDLE1BQU1ULHFCQUFxQixJQUFJYixrQkFBbUJZO0lBRWxELE1BQU1XLFVBQVUsSUFBSXhCLEtBQU07UUFBRXlCLFVBQVU7WUFBRVo7U0FBTztJQUFDO0lBQ2hEUCxTQUFTVyxRQUFRLENBQUVPO0lBRW5CLE1BQU1FLGlCQUFpQixJQUFJMUIsS0FBTTtRQUFFdUIsU0FBUztJQUFNO0lBQ2xEakIsU0FBU1csUUFBUSxDQUFFUztJQUVuQkEsZUFBZUMsU0FBUyxHQUFHO1FBQUVkO0tBQU87SUFDcENOLFFBQVFXLGFBQWE7SUFFckJiLE9BQU9VLEVBQUUsQ0FBRUQsbUJBQW1CRSxLQUFLLEtBQUssTUFBTTtJQUU5Q1EsUUFBUUwsT0FBTyxHQUFHO0lBQ2xCWixRQUFRVyxhQUFhO0lBR3JCLHlJQUF5STtJQUN6SSwyRkFBMkY7SUFHM0YsMEJBQTBCO0lBRTFCLCtDQUErQztJQUUvQywwREFBMEQ7SUFFMURYLFFBQVFhLE9BQU87SUFDZmIsUUFBUUssVUFBVSxDQUFDUyxhQUFhLENBQUNDLFdBQVcsQ0FBRWYsUUFBUUssVUFBVTtBQUNsRSJ9

@@ -1,0 +1,52 @@
+// Copyright 2021-2023, University of Colorado Boulder
+/**
+ * PeakDetectorAudioNode is a Web Audio node that can be used to detect peak audio output values in an audio signal
+ * chain.  The detected peak audio values are output to the console.  This file contains the portion that runs in the
+ * main JavaScript thread, which is referred to as the "AudioWorklet Node" in the online documentation.  There is a
+ * counterpart portion that runs in the Web Audio rendering thread that is referred to as the "AudioWorklet Processor".
+ *
+ * This is intended for diagnostic purposes only, and should not be included in production code.  It likely won't work
+ * in built code anyway, since it makes a direct file reference for including the worklet processor code.
+ *
+ * Also note that as of this writing (Apr 2021), audio worklets are not supported in Safari.
+ *
+ * To use, create an instance and connect the node whose output you want to measure.  Example:
+ *
+ *    const peakDetector = new PeakDetectorAudioNode();
+ *    this.mainGainNode.connect( peakDetector );
+ *
+ * TODO: !!! This does not work on all of PhET's supported platforms, so it should not be incorporated into any
+ *       production code.  It should be used for debugging only.  See https://github.com/phetsims/tambo/issues/133#issuecomment-861042659.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */ import optionize from '../../phet-core/js/optionize.js';
+import phetAudioContext from './phetAudioContext.js';
+import tambo from './tambo.js';
+let PeakDetectorAudioNode = class PeakDetectorAudioNode extends AudioWorkletNode {
+    constructor(providedOptions){
+        const options = optionize()({
+            logZeroValues: false
+        }, providedOptions);
+        super(phetAudioContext, 'peak-detector');
+        // Listen for messages from the audio worklet processor and log peak values to the console.
+        this.port.onmessage = (event)=>{
+            if (event.data.peak !== undefined) {
+                const peak = event.data.peak;
+                if (peak > 0 || options.logZeroValues) {
+                    console.log(`peak = ${peak}`);
+                }
+            }
+        };
+    }
+};
+// Load the worklet code that will run on the audio rendering thread.
+console.log('loading peak-detector module on audio rendering thread...');
+phetAudioContext.audioWorklet.addModule('../../tambo/js/peak-detector.js').then(()=>{
+    console.log('peak detector worklet loaded successfully');
+}).catch((err)=>{
+    console.warn(`error while loading peak detector worklet, peak detector probably won't work, error: ${err}`);
+});
+tambo.register('PeakDetectorAudioNode', PeakDetectorAudioNode);
+export default PeakDetectorAudioNode;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3RhbWJvL2pzL1BlYWtEZXRlY3RvckF1ZGlvTm9kZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMS0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBQZWFrRGV0ZWN0b3JBdWRpb05vZGUgaXMgYSBXZWIgQXVkaW8gbm9kZSB0aGF0IGNhbiBiZSB1c2VkIHRvIGRldGVjdCBwZWFrIGF1ZGlvIG91dHB1dCB2YWx1ZXMgaW4gYW4gYXVkaW8gc2lnbmFsXG4gKiBjaGFpbi4gIFRoZSBkZXRlY3RlZCBwZWFrIGF1ZGlvIHZhbHVlcyBhcmUgb3V0cHV0IHRvIHRoZSBjb25zb2xlLiAgVGhpcyBmaWxlIGNvbnRhaW5zIHRoZSBwb3J0aW9uIHRoYXQgcnVucyBpbiB0aGVcbiAqIG1haW4gSmF2YVNjcmlwdCB0aHJlYWQsIHdoaWNoIGlzIHJlZmVycmVkIHRvIGFzIHRoZSBcIkF1ZGlvV29ya2xldCBOb2RlXCIgaW4gdGhlIG9ubGluZSBkb2N1bWVudGF0aW9uLiAgVGhlcmUgaXMgYVxuICogY291bnRlcnBhcnQgcG9ydGlvbiB0aGF0IHJ1bnMgaW4gdGhlIFdlYiBBdWRpbyByZW5kZXJpbmcgdGhyZWFkIHRoYXQgaXMgcmVmZXJyZWQgdG8gYXMgdGhlIFwiQXVkaW9Xb3JrbGV0IFByb2Nlc3NvclwiLlxuICpcbiAqIFRoaXMgaXMgaW50ZW5kZWQgZm9yIGRpYWdub3N0aWMgcHVycG9zZXMgb25seSwgYW5kIHNob3VsZCBub3QgYmUgaW5jbHVkZWQgaW4gcHJvZHVjdGlvbiBjb2RlLiAgSXQgbGlrZWx5IHdvbid0IHdvcmtcbiAqIGluIGJ1aWx0IGNvZGUgYW55d2F5LCBzaW5jZSBpdCBtYWtlcyBhIGRpcmVjdCBmaWxlIHJlZmVyZW5jZSBmb3IgaW5jbHVkaW5nIHRoZSB3b3JrbGV0IHByb2Nlc3NvciBjb2RlLlxuICpcbiAqIEFsc28gbm90ZSB0aGF0IGFzIG9mIHRoaXMgd3JpdGluZyAoQXByIDIwMjEpLCBhdWRpbyB3b3JrbGV0cyBhcmUgbm90IHN1cHBvcnRlZCBpbiBTYWZhcmkuXG4gKlxuICogVG8gdXNlLCBjcmVhdGUgYW4gaW5zdGFuY2UgYW5kIGNvbm5lY3QgdGhlIG5vZGUgd2hvc2Ugb3V0cHV0IHlvdSB3YW50IHRvIG1lYXN1cmUuICBFeGFtcGxlOlxuICpcbiAqICAgIGNvbnN0IHBlYWtEZXRlY3RvciA9IG5ldyBQZWFrRGV0ZWN0b3JBdWRpb05vZGUoKTtcbiAqICAgIHRoaXMubWFpbkdhaW5Ob2RlLmNvbm5lY3QoIHBlYWtEZXRlY3RvciApO1xuICpcbiAqIFRPRE86ICEhISBUaGlzIGRvZXMgbm90IHdvcmsgb24gYWxsIG9mIFBoRVQncyBzdXBwb3J0ZWQgcGxhdGZvcm1zLCBzbyBpdCBzaG91bGQgbm90IGJlIGluY29ycG9yYXRlZCBpbnRvIGFueVxuICogICAgICAgcHJvZHVjdGlvbiBjb2RlLiAgSXQgc2hvdWxkIGJlIHVzZWQgZm9yIGRlYnVnZ2luZyBvbmx5LiAgU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy90YW1iby9pc3N1ZXMvMTMzI2lzc3VlY29tbWVudC04NjEwNDI2NTkuXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jbyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IHBoZXRBdWRpb0NvbnRleHQgZnJvbSAnLi9waGV0QXVkaW9Db250ZXh0LmpzJztcbmltcG9ydCB0YW1ibyBmcm9tICcuL3RhbWJvLmpzJztcblxuZXhwb3J0IHR5cGUgUGVha0RldGVjdG9yQXVkaW9Ob2RlT3B0aW9ucyA9IHtcblxuICAvLyBJZiB0cnVlLCB6ZXJvIHZhbHVlcyB3aWxsIGJlIG91dHB1dCwgb3RoZXJ3aXNlIG5vIG91dHB1dCB3aWxsIG9jY3VyIGlmIHRoZSBwZWFrIHZhbHVlIGRldGVjdGVkIGZvciBhIGdpdmVuIHRpbWVcbiAgLy8gaW50ZXJ2YWwgaXMgemVyby5cbiAgbG9nWmVyb1ZhbHVlcz86IGJvb2xlYW47XG59O1xuXG5jbGFzcyBQZWFrRGV0ZWN0b3JBdWRpb05vZGUgZXh0ZW5kcyBBdWRpb1dvcmtsZXROb2RlIHtcblxuICBwdWJsaWMgY29uc3RydWN0b3IoIHByb3ZpZGVkT3B0aW9ucz86IFBlYWtEZXRlY3RvckF1ZGlvTm9kZU9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFBlYWtEZXRlY3RvckF1ZGlvTm9kZU9wdGlvbnMsIFBlYWtEZXRlY3RvckF1ZGlvTm9kZU9wdGlvbnM+KCkoIHtcbiAgICAgIGxvZ1plcm9WYWx1ZXM6IGZhbHNlXG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICBzdXBlciggcGhldEF1ZGlvQ29udGV4dCwgJ3BlYWstZGV0ZWN0b3InICk7XG5cbiAgICAvLyBMaXN0ZW4gZm9yIG1lc3NhZ2VzIGZyb20gdGhlIGF1ZGlvIHdvcmtsZXQgcHJvY2Vzc29yIGFuZCBsb2cgcGVhayB2YWx1ZXMgdG8gdGhlIGNvbnNvbGUuXG4gICAgdGhpcy5wb3J0Lm9ubWVzc2FnZSA9IGV2ZW50ID0+IHtcbiAgICAgIGlmICggZXZlbnQuZGF0YS5wZWFrICE9PSB1bmRlZmluZWQgKSB7XG4gICAgICAgIGNvbnN0IHBlYWsgPSBldmVudC5kYXRhLnBlYWs7XG4gICAgICAgIGlmICggcGVhayA+IDAgfHwgb3B0aW9ucy5sb2daZXJvVmFsdWVzICkge1xuICAgICAgICAgIGNvbnNvbGUubG9nKCBgcGVhayA9ICR7cGVha31gICk7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9O1xuICB9XG59XG5cbi8vIExvYWQgdGhlIHdvcmtsZXQgY29kZSB0aGF0IHdpbGwgcnVuIG9uIHRoZSBhdWRpbyByZW5kZXJpbmcgdGhyZWFkLlxuY29uc29sZS5sb2coICdsb2FkaW5nIHBlYWstZGV0ZWN0b3IgbW9kdWxlIG9uIGF1ZGlvIHJlbmRlcmluZyB0aHJlYWQuLi4nICk7XG5waGV0QXVkaW9Db250ZXh0LmF1ZGlvV29ya2xldC5hZGRNb2R1bGUoICcuLi8uLi90YW1iby9qcy9wZWFrLWRldGVjdG9yLmpzJyApXG4gIC50aGVuKCAoKSA9PiB7XG4gICAgY29uc29sZS5sb2coICdwZWFrIGRldGVjdG9yIHdvcmtsZXQgbG9hZGVkIHN1Y2Nlc3NmdWxseScgKTtcbiAgfSApXG4gIC5jYXRjaCggZXJyID0+IHtcbiAgICBjb25zb2xlLndhcm4oIGBlcnJvciB3aGlsZSBsb2FkaW5nIHBlYWsgZGV0ZWN0b3Igd29ya2xldCwgcGVhayBkZXRlY3RvciBwcm9iYWJseSB3b24ndCB3b3JrLCBlcnJvcjogJHtlcnJ9YCApO1xuICB9ICk7XG5cbnRhbWJvLnJlZ2lzdGVyKCAnUGVha0RldGVjdG9yQXVkaW9Ob2RlJywgUGVha0RldGVjdG9yQXVkaW9Ob2RlICk7XG5leHBvcnQgZGVmYXVsdCBQZWFrRGV0ZWN0b3JBdWRpb05vZGU7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsInBoZXRBdWRpb0NvbnRleHQiLCJ0YW1ibyIsIlBlYWtEZXRlY3RvckF1ZGlvTm9kZSIsIkF1ZGlvV29ya2xldE5vZGUiLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwibG9nWmVyb1ZhbHVlcyIsInBvcnQiLCJvbm1lc3NhZ2UiLCJldmVudCIsImRhdGEiLCJwZWFrIiwidW5kZWZpbmVkIiwiY29uc29sZSIsImxvZyIsImF1ZGlvV29ya2xldCIsImFkZE1vZHVsZSIsInRoZW4iLCJjYXRjaCIsImVyciIsIndhcm4iLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztDQW9CQyxHQUVELE9BQU9BLGVBQWUsa0NBQWtDO0FBQ3hELE9BQU9DLHNCQUFzQix3QkFBd0I7QUFDckQsT0FBT0MsV0FBVyxhQUFhO0FBUy9CLElBQUEsQUFBTUMsd0JBQU4sTUFBTUEsOEJBQThCQztJQUVsQyxZQUFvQkMsZUFBOEMsQ0FBRztRQUVuRSxNQUFNQyxVQUFVTixZQUF5RTtZQUN2Rk8sZUFBZTtRQUNqQixHQUFHRjtRQUVILEtBQUssQ0FBRUosa0JBQWtCO1FBRXpCLDJGQUEyRjtRQUMzRixJQUFJLENBQUNPLElBQUksQ0FBQ0MsU0FBUyxHQUFHQyxDQUFBQTtZQUNwQixJQUFLQSxNQUFNQyxJQUFJLENBQUNDLElBQUksS0FBS0MsV0FBWTtnQkFDbkMsTUFBTUQsT0FBT0YsTUFBTUMsSUFBSSxDQUFDQyxJQUFJO2dCQUM1QixJQUFLQSxPQUFPLEtBQUtOLFFBQVFDLGFBQWEsRUFBRztvQkFDdkNPLFFBQVFDLEdBQUcsQ0FBRSxDQUFDLE9BQU8sRUFBRUgsTUFBTTtnQkFDL0I7WUFDRjtRQUNGO0lBQ0Y7QUFDRjtBQUVBLHFFQUFxRTtBQUNyRUUsUUFBUUMsR0FBRyxDQUFFO0FBQ2JkLGlCQUFpQmUsWUFBWSxDQUFDQyxTQUFTLENBQUUsbUNBQ3RDQyxJQUFJLENBQUU7SUFDTEosUUFBUUMsR0FBRyxDQUFFO0FBQ2YsR0FDQ0ksS0FBSyxDQUFFQyxDQUFBQTtJQUNOTixRQUFRTyxJQUFJLENBQUUsQ0FBQyxxRkFBcUYsRUFBRUQsS0FBSztBQUM3RztBQUVGbEIsTUFBTW9CLFFBQVEsQ0FBRSx5QkFBeUJuQjtBQUN6QyxlQUFlQSxzQkFBc0IifQ==

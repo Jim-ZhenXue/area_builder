@@ -1,0 +1,5 @@
+// Copyright 2021, University of Colorado Boulder
+// blank file for jsondiffpatch.js
+// @author Sam Reid (PhET Interactive Simulations)
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NoZXJwYS9saWIvZW1wdHkuanMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjEsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuLy8gYmxhbmsgZmlsZSBmb3IganNvbmRpZmZwYXRjaC5qc1xuLy8gQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucykiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBQ2pELGtDQUFrQztBQUNsQyxrREFBa0QifQ==

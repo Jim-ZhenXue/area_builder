@@ -1,0 +1,5 @@
+/**
+ * This stub was generated while working on https://github.com/phetsims/chipper/issues/1424.
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ 
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NoZXJwYS9saWIvanNvbmRpZmZwYXRjaC12MC4zLjExLnVtZC5kLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogVGhpcyBzdHViIHdhcyBnZW5lcmF0ZWQgd2hpbGUgd29ya2luZyBvbiBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvY2hpcHBlci9pc3N1ZXMvMTQyNC5cbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqLyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0NBR0MsR0FIRCJ9

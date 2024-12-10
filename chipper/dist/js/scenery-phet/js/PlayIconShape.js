@@ -1,0 +1,21 @@
+// Copyright 2018-2022, University of Colorado Boulder
+/**
+ * Shape for the 'play' icon that appears on buttons and other UI components.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import { Shape } from '../../kite/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let PlayIconShape = class PlayIconShape extends Shape {
+    constructor(width, height){
+        super();
+        // triangle that points to the right
+        this.moveTo(0, 0);
+        this.lineTo(width, height / 2);
+        this.lineTo(0, height);
+        this.close();
+    }
+};
+export { PlayIconShape as default };
+sceneryPhet.register('PlayIconShape', PlayIconShape);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9QbGF5SWNvblNoYXBlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFNoYXBlIGZvciB0aGUgJ3BsYXknIGljb24gdGhhdCBhcHBlYXJzIG9uIGJ1dHRvbnMgYW5kIG90aGVyIFVJIGNvbXBvbmVudHMuXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgeyBTaGFwZSB9IGZyb20gJy4uLy4uL2tpdGUvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi9zY2VuZXJ5UGhldC5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFBsYXlJY29uU2hhcGUgZXh0ZW5kcyBTaGFwZSB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCB3aWR0aDogbnVtYmVyLCBoZWlnaHQ6IG51bWJlciApIHtcbiAgICBzdXBlcigpO1xuXG4gICAgLy8gdHJpYW5nbGUgdGhhdCBwb2ludHMgdG8gdGhlIHJpZ2h0XG4gICAgdGhpcy5tb3ZlVG8oIDAsIDAgKTtcbiAgICB0aGlzLmxpbmVUbyggd2lkdGgsIGhlaWdodCAvIDIgKTtcbiAgICB0aGlzLmxpbmVUbyggMCwgaGVpZ2h0ICk7XG4gICAgdGhpcy5jbG9zZSgpO1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnUGxheUljb25TaGFwZScsIFBsYXlJY29uU2hhcGUgKTsiXSwibmFtZXMiOlsiU2hhcGUiLCJzY2VuZXJ5UGhldCIsIlBsYXlJY29uU2hhcGUiLCJ3aWR0aCIsImhlaWdodCIsIm1vdmVUbyIsImxpbmVUbyIsImNsb3NlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBRUQsU0FBU0EsS0FBSyxRQUFRLDJCQUEyQjtBQUNqRCxPQUFPQyxpQkFBaUIsbUJBQW1CO0FBRTVCLElBQUEsQUFBTUMsZ0JBQU4sTUFBTUEsc0JBQXNCRjtJQUV6QyxZQUFvQkcsS0FBYSxFQUFFQyxNQUFjLENBQUc7UUFDbEQsS0FBSztRQUVMLG9DQUFvQztRQUNwQyxJQUFJLENBQUNDLE1BQU0sQ0FBRSxHQUFHO1FBQ2hCLElBQUksQ0FBQ0MsTUFBTSxDQUFFSCxPQUFPQyxTQUFTO1FBQzdCLElBQUksQ0FBQ0UsTUFBTSxDQUFFLEdBQUdGO1FBQ2hCLElBQUksQ0FBQ0csS0FBSztJQUNaO0FBQ0Y7QUFYQSxTQUFxQkwsMkJBV3BCO0FBRURELFlBQVlPLFFBQVEsQ0FBRSxpQkFBaUJOIn0=

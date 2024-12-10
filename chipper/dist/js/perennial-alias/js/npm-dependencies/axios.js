@@ -1,0 +1,9 @@
+// Copyright 2019, University of Colorado Boulder
+/**
+ * To be used when trying to import axios from other repos.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import axios from 'axios';
+export default axios;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9ucG0tZGVwZW5kZW5jaWVzL2F4aW9zLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE5LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBUbyBiZSB1c2VkIHdoZW4gdHJ5aW5nIHRvIGltcG9ydCBheGlvcyBmcm9tIG90aGVyIHJlcG9zLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IGF4aW9zIGZyb20gJ2F4aW9zJztcblxuZXhwb3J0IGRlZmF1bHQgYXhpb3M7Il0sIm5hbWVzIjpbImF4aW9zIl0sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFFakQ7Ozs7Q0FJQyxHQUVELE9BQU9BLFdBQVcsUUFBUTtBQUUxQixlQUFlQSxNQUFNIn0=

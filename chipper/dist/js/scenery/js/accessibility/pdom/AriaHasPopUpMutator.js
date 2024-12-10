@@ -1,0 +1,29 @@
+// Copyright 2021-2022, University of Colorado Boulder
+/**
+ * Sets ParallelDOM.js fields for an Node that uses aria-haspopup. It was discovered that
+ * this attribute changes how iOS 14 VoiceOver interacts with elements - elements with
+ * aria-haspopup must be positioned in the viewport to receive pointer and click
+ * events.
+ *
+ * See https://github.com/phetsims/scenery/issues/1094 for more information.
+ *
+ * @author Jesse Greenberg
+ */ import { scenery } from '../../imports.js';
+const AriaHasPopUpMutator = {
+    /**
+   * @param node - Node whose ParallelDOM.js fields will change
+   * @param value - Valid value for aria-haspopup attribute, or false to remove the attribute
+   */ mutateNode (node, value) {
+        if (value) {
+            node.setPDOMAttribute('aria-haspopup', value);
+        } else {
+            assert && assert(node.hasPDOMAttribute('aria-haspopup'), 'Set aria-haspopup once before removing it.');
+            node.removePDOMAttribute('aria-haspopup');
+        }
+        node.positionInPDOM = !!value;
+    }
+};
+scenery.register('AriaHasPopUpMutator', AriaHasPopUpMutator);
+export default AriaHasPopUpMutator;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvYWNjZXNzaWJpbGl0eS9wZG9tL0FyaWFIYXNQb3BVcE11dGF0b3IudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjEtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogU2V0cyBQYXJhbGxlbERPTS5qcyBmaWVsZHMgZm9yIGFuIE5vZGUgdGhhdCB1c2VzIGFyaWEtaGFzcG9wdXAuIEl0IHdhcyBkaXNjb3ZlcmVkIHRoYXRcbiAqIHRoaXMgYXR0cmlidXRlIGNoYW5nZXMgaG93IGlPUyAxNCBWb2ljZU92ZXIgaW50ZXJhY3RzIHdpdGggZWxlbWVudHMgLSBlbGVtZW50cyB3aXRoXG4gKiBhcmlhLWhhc3BvcHVwIG11c3QgYmUgcG9zaXRpb25lZCBpbiB0aGUgdmlld3BvcnQgdG8gcmVjZWl2ZSBwb2ludGVyIGFuZCBjbGlja1xuICogZXZlbnRzLlxuICpcbiAqIFNlZSBodHRwczovL2dpdGh1Yi5jb20vcGhldHNpbXMvc2NlbmVyeS9pc3N1ZXMvMTA5NCBmb3IgbW9yZSBpbmZvcm1hdGlvbi5cbiAqXG4gKiBAYXV0aG9yIEplc3NlIEdyZWVuYmVyZ1xuICovXG5pbXBvcnQgeyBOb2RlLCBzY2VuZXJ5IH0gZnJvbSAnLi4vLi4vaW1wb3J0cy5qcyc7XG5cbmNvbnN0IEFyaWFIYXNQb3BVcE11dGF0b3IgPSB7XG5cbiAgLyoqXG4gICAqIEBwYXJhbSBub2RlIC0gTm9kZSB3aG9zZSBQYXJhbGxlbERPTS5qcyBmaWVsZHMgd2lsbCBjaGFuZ2VcbiAgICogQHBhcmFtIHZhbHVlIC0gVmFsaWQgdmFsdWUgZm9yIGFyaWEtaGFzcG9wdXAgYXR0cmlidXRlLCBvciBmYWxzZSB0byByZW1vdmUgdGhlIGF0dHJpYnV0ZVxuICAgKi9cbiAgbXV0YXRlTm9kZSggbm9kZTogTm9kZSwgdmFsdWU6IGJvb2xlYW4gfCBzdHJpbmcgKTogdm9pZCB7XG4gICAgaWYgKCB2YWx1ZSApIHtcbiAgICAgIG5vZGUuc2V0UERPTUF0dHJpYnV0ZSggJ2FyaWEtaGFzcG9wdXAnLCB2YWx1ZSApO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgIGFzc2VydCAmJiBhc3NlcnQoIG5vZGUuaGFzUERPTUF0dHJpYnV0ZSggJ2FyaWEtaGFzcG9wdXAnICksICdTZXQgYXJpYS1oYXNwb3B1cCBvbmNlIGJlZm9yZSByZW1vdmluZyBpdC4nICk7XG4gICAgICBub2RlLnJlbW92ZVBET01BdHRyaWJ1dGUoICdhcmlhLWhhc3BvcHVwJyApO1xuICAgIH1cblxuICAgIG5vZGUucG9zaXRpb25JblBET00gPSAhIXZhbHVlO1xuICB9XG59O1xuXG5zY2VuZXJ5LnJlZ2lzdGVyKCAnQXJpYUhhc1BvcFVwTXV0YXRvcicsIEFyaWFIYXNQb3BVcE11dGF0b3IgKTtcbmV4cG9ydCBkZWZhdWx0IEFyaWFIYXNQb3BVcE11dGF0b3I7Il0sIm5hbWVzIjpbInNjZW5lcnkiLCJBcmlhSGFzUG9wVXBNdXRhdG9yIiwibXV0YXRlTm9kZSIsIm5vZGUiLCJ2YWx1ZSIsInNldFBET01BdHRyaWJ1dGUiLCJhc3NlcnQiLCJoYXNQRE9NQXR0cmlidXRlIiwicmVtb3ZlUERPTUF0dHJpYnV0ZSIsInBvc2l0aW9uSW5QRE9NIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Ozs7O0NBU0MsR0FDRCxTQUFlQSxPQUFPLFFBQVEsbUJBQW1CO0FBRWpELE1BQU1DLHNCQUFzQjtJQUUxQjs7O0dBR0MsR0FDREMsWUFBWUMsSUFBVSxFQUFFQyxLQUF1QjtRQUM3QyxJQUFLQSxPQUFRO1lBQ1hELEtBQUtFLGdCQUFnQixDQUFFLGlCQUFpQkQ7UUFDMUMsT0FDSztZQUNIRSxVQUFVQSxPQUFRSCxLQUFLSSxnQkFBZ0IsQ0FBRSxrQkFBbUI7WUFDNURKLEtBQUtLLG1CQUFtQixDQUFFO1FBQzVCO1FBRUFMLEtBQUtNLGNBQWMsR0FBRyxDQUFDLENBQUNMO0lBQzFCO0FBQ0Y7QUFFQUosUUFBUVUsUUFBUSxDQUFFLHVCQUF1QlQ7QUFDekMsZUFBZUEsb0JBQW9CIn0=

@@ -1,0 +1,15 @@
+// Copyright 2013-2022, University of Colorado Boulder
+/**
+ * The main 'kite' namespace object for the exported (non-Require.js) API. Used internally
+ * since it prevents Require.js issues with circular dependencies.
+ *
+ * The returned kite object namespace may be incomplete if not all modules are listed as
+ * dependencies. Please use the 'main' module for that purpose if all of Kite is desired.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import Namespace from '../../phet-core/js/Namespace.js';
+const kite = new Namespace('kite');
+// will be filled in by other modules
+export default kite;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2tpdGUvanMva2l0ZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxMy0yMDIyLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBUaGUgbWFpbiAna2l0ZScgbmFtZXNwYWNlIG9iamVjdCBmb3IgdGhlIGV4cG9ydGVkIChub24tUmVxdWlyZS5qcykgQVBJLiBVc2VkIGludGVybmFsbHlcbiAqIHNpbmNlIGl0IHByZXZlbnRzIFJlcXVpcmUuanMgaXNzdWVzIHdpdGggY2lyY3VsYXIgZGVwZW5kZW5jaWVzLlxuICpcbiAqIFRoZSByZXR1cm5lZCBraXRlIG9iamVjdCBuYW1lc3BhY2UgbWF5IGJlIGluY29tcGxldGUgaWYgbm90IGFsbCBtb2R1bGVzIGFyZSBsaXN0ZWQgYXNcbiAqIGRlcGVuZGVuY2llcy4gUGxlYXNlIHVzZSB0aGUgJ21haW4nIG1vZHVsZSBmb3IgdGhhdCBwdXJwb3NlIGlmIGFsbCBvZiBLaXRlIGlzIGRlc2lyZWQuXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbmltcG9ydCBOYW1lc3BhY2UgZnJvbSAnLi4vLi4vcGhldC1jb3JlL2pzL05hbWVzcGFjZS5qcyc7XG5cbmNvbnN0IGtpdGUgPSBuZXcgTmFtZXNwYWNlKCAna2l0ZScgKTtcblxuLy8gd2lsbCBiZSBmaWxsZWQgaW4gYnkgb3RoZXIgbW9kdWxlc1xuZXhwb3J0IGRlZmF1bHQga2l0ZTsiXSwibmFtZXMiOlsiTmFtZXNwYWNlIiwia2l0ZSJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7OztDQVFDLEdBRUQsT0FBT0EsZUFBZSxrQ0FBa0M7QUFFeEQsTUFBTUMsT0FBTyxJQUFJRCxVQUFXO0FBRTVCLHFDQUFxQztBQUNyQyxlQUFlQyxLQUFLIn0=

@@ -1,0 +1,11 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Unit tests. Please run once in phet brand and once in brand=phet-io to cover all functionality.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import qunitStart from '../../chipper/js/browser/sim-tests/qunitStart.js';
+import './AnimationTests.js';
+// Since our tests are loaded asynchronously, we must direct QUnit to begin the tests
+qunitStart();
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3R3aXh0L2pzL3R3aXh0LXRlc3RzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFVuaXQgdGVzdHMuIFBsZWFzZSBydW4gb25jZSBpbiBwaGV0IGJyYW5kIGFuZCBvbmNlIGluIGJyYW5kPXBoZXQtaW8gdG8gY292ZXIgYWxsIGZ1bmN0aW9uYWxpdHkuXG4gKlxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgcXVuaXRTdGFydCBmcm9tICcuLi8uLi9jaGlwcGVyL2pzL2Jyb3dzZXIvc2ltLXRlc3RzL3F1bml0U3RhcnQuanMnO1xuaW1wb3J0ICcuL0FuaW1hdGlvblRlc3RzLmpzJztcblxuLy8gU2luY2Ugb3VyIHRlc3RzIGFyZSBsb2FkZWQgYXN5bmNocm9ub3VzbHksIHdlIG11c3QgZGlyZWN0IFFVbml0IHRvIGJlZ2luIHRoZSB0ZXN0c1xucXVuaXRTdGFydCgpOyJdLCJuYW1lcyI6WyJxdW5pdFN0YXJ0Il0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGdCQUFnQixtREFBbUQ7QUFDMUUsT0FBTyxzQkFBc0I7QUFFN0IscUZBQXFGO0FBQ3JGQSJ9

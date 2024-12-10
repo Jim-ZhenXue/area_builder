@@ -1,0 +1,14 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * Allows grabbing *the type* of a required option out of a type. For example if we have
+ *
+ * type SelfOptions = { something?: number | string | Property<Ray2>; };
+ *
+ * This can be used in a field of the type as:
+ *
+ * something: RequiredOption<SelfOptions, 'something'>;
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9SZXF1aXJlZE9wdGlvbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBBbGxvd3MgZ3JhYmJpbmcgKnRoZSB0eXBlKiBvZiBhIHJlcXVpcmVkIG9wdGlvbiBvdXQgb2YgYSB0eXBlLiBGb3IgZXhhbXBsZSBpZiB3ZSBoYXZlXG4gKlxuICogdHlwZSBTZWxmT3B0aW9ucyA9IHsgc29tZXRoaW5nPzogbnVtYmVyIHwgc3RyaW5nIHwgUHJvcGVydHk8UmF5Mj47IH07XG4gKlxuICogVGhpcyBjYW4gYmUgdXNlZCBpbiBhIGZpZWxkIG9mIHRoZSB0eXBlIGFzOlxuICpcbiAqIHNvbWV0aGluZzogUmVxdWlyZWRPcHRpb248U2VsZk9wdGlvbnMsICdzb21ldGhpbmcnPjtcbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIDxqb25hdGhhbi5vbHNvbkBjb2xvcmFkby5lZHU+XG4gKi9cblxuaW1wb3J0IE5vdFVuZGVmaW5lZCBmcm9tICcuL05vdFVuZGVmaW5lZC5qcyc7XG5cbnR5cGUgUmVxdWlyZWRPcHRpb248T3B0aW9ucyBleHRlbmRzIG9iamVjdCwgTmFtZSBleHRlbmRzIGtleW9mIE9wdGlvbnM+ID0gTm90VW5kZWZpbmVkPE9wdGlvbnNbIE5hbWUgXT47XG5leHBvcnQgZGVmYXVsdCBSZXF1aXJlZE9wdGlvbjsiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7O0NBVUMsR0FLRCxXQUE4QiJ9

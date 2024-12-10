@@ -1,0 +1,24 @@
+// Copyright 2014-2024, University of Colorado Boulder
+/**
+ * Base type for nodes that are used as the background on a tab and that have
+ * some sort of gradient to it.  Example include ground and sky.
+ *
+ * @author John Blanco
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import { LinearGradient, Rectangle } from '../../scenery/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let GradientBackgroundNode = class GradientBackgroundNode extends Rectangle {
+    constructor(x, y, width, height, color1, color2, y1, y2){
+        const centerX = x + width / 2;
+        const gradient = new LinearGradient(centerX, y1, centerX, y2);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
+        super(x, y, width, height, 0, 0, {
+            fill: gradient
+        });
+    }
+};
+export { GradientBackgroundNode as default };
+sceneryPhet.register('GradientBackgroundNode', GradientBackgroundNode);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9HcmFkaWVudEJhY2tncm91bmROb2RlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE0LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEJhc2UgdHlwZSBmb3Igbm9kZXMgdGhhdCBhcmUgdXNlZCBhcyB0aGUgYmFja2dyb3VuZCBvbiBhIHRhYiBhbmQgdGhhdCBoYXZlXG4gKiBzb21lIHNvcnQgb2YgZ3JhZGllbnQgdG8gaXQuICBFeGFtcGxlIGluY2x1ZGUgZ3JvdW5kIGFuZCBza3kuXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jb1xuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgeyBMaW5lYXJHcmFkaWVudCwgUmVjdGFuZ2xlLCBUQ29sb3IgfSBmcm9tICcuLi8uLi9zY2VuZXJ5L2pzL2ltcG9ydHMuanMnO1xuaW1wb3J0IHNjZW5lcnlQaGV0IGZyb20gJy4vc2NlbmVyeVBoZXQuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBHcmFkaWVudEJhY2tncm91bmROb2RlIGV4dGVuZHMgUmVjdGFuZ2xlIHtcbiAgcHVibGljIGNvbnN0cnVjdG9yKCB4OiBudW1iZXIsIHk6IG51bWJlciwgd2lkdGg6IG51bWJlciwgaGVpZ2h0OiBudW1iZXIsIGNvbG9yMTogVENvbG9yLCBjb2xvcjI6IFRDb2xvciwgeTE6IG51bWJlciwgeTI6IG51bWJlciApIHtcbiAgICBjb25zdCBjZW50ZXJYID0geCArIHdpZHRoIC8gMjtcbiAgICBjb25zdCBncmFkaWVudCA9IG5ldyBMaW5lYXJHcmFkaWVudCggY2VudGVyWCwgeTEsIGNlbnRlclgsIHkyICk7XG4gICAgZ3JhZGllbnQuYWRkQ29sb3JTdG9wKCAwLCBjb2xvcjEgKTtcbiAgICBncmFkaWVudC5hZGRDb2xvclN0b3AoIDEsIGNvbG9yMiApO1xuICAgIHN1cGVyKCB4LCB5LCB3aWR0aCwgaGVpZ2h0LCAwLCAwLCB7IGZpbGw6IGdyYWRpZW50IH0gKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ0dyYWRpZW50QmFja2dyb3VuZE5vZGUnLCBHcmFkaWVudEJhY2tncm91bmROb2RlICk7Il0sIm5hbWVzIjpbIkxpbmVhckdyYWRpZW50IiwiUmVjdGFuZ2xlIiwic2NlbmVyeVBoZXQiLCJHcmFkaWVudEJhY2tncm91bmROb2RlIiwieCIsInkiLCJ3aWR0aCIsImhlaWdodCIsImNvbG9yMSIsImNvbG9yMiIsInkxIiwieTIiLCJjZW50ZXJYIiwiZ3JhZGllbnQiLCJhZGRDb2xvclN0b3AiLCJmaWxsIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7O0NBTUMsR0FFRCxTQUFTQSxjQUFjLEVBQUVDLFNBQVMsUUFBZ0IsOEJBQThCO0FBQ2hGLE9BQU9DLGlCQUFpQixtQkFBbUI7QUFFNUIsSUFBQSxBQUFNQyx5QkFBTixNQUFNQSwrQkFBK0JGO0lBQ2xELFlBQW9CRyxDQUFTLEVBQUVDLENBQVMsRUFBRUMsS0FBYSxFQUFFQyxNQUFjLEVBQUVDLE1BQWMsRUFBRUMsTUFBYyxFQUFFQyxFQUFVLEVBQUVDLEVBQVUsQ0FBRztRQUNoSSxNQUFNQyxVQUFVUixJQUFJRSxRQUFRO1FBQzVCLE1BQU1PLFdBQVcsSUFBSWIsZUFBZ0JZLFNBQVNGLElBQUlFLFNBQVNEO1FBQzNERSxTQUFTQyxZQUFZLENBQUUsR0FBR047UUFDMUJLLFNBQVNDLFlBQVksQ0FBRSxHQUFHTDtRQUMxQixLQUFLLENBQUVMLEdBQUdDLEdBQUdDLE9BQU9DLFFBQVEsR0FBRyxHQUFHO1lBQUVRLE1BQU1GO1FBQVM7SUFDckQ7QUFDRjtBQVJBLFNBQXFCVixvQ0FRcEI7QUFFREQsWUFBWWMsUUFBUSxDQUFFLDBCQUEwQmIifQ==

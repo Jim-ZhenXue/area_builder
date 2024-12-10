@@ -1,0 +1,11 @@
+/**
+ Copyright (c) 2013, Dave Gandy - http://fontawesome.io
+ with Reserved Font Name Font Awesome.
+
+ This Font Software is licensed under the SIL Open Font License, Version 1.1.
+ This license is copied below, and is also available with a FAQ at:
+ http://scripts.sil.org/OFL
+ */ import { Shape } from '../../../kite/js/imports.js';
+export default new Shape('M1120 1280h-832q-66 0 -113 -47t-47 -113v-832q0 -66 47 -113t113 -47h832q66 0 113 47t47 113v832q0 66 -47 113t-113 47zM1408 1120v-832q0 -119 -84.5 -203.5t-203.5 -84.5h-832q-119 0 -203.5 84.5t-84.5 203.5v832q0 119 84.5 203.5t203.5 84.5h832 q119 0 203.5 -84.5t84.5 -203.5z').makeImmutable();
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NoZXJwYS9qcy9mb250YXdlc29tZS00L2NoZWNrRW1wdHlTb2xpZFNoYXBlLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuIENvcHlyaWdodCAoYykgMjAxMywgRGF2ZSBHYW5keSAtIGh0dHA6Ly9mb250YXdlc29tZS5pb1xuIHdpdGggUmVzZXJ2ZWQgRm9udCBOYW1lIEZvbnQgQXdlc29tZS5cblxuIFRoaXMgRm9udCBTb2Z0d2FyZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgU0lMIE9wZW4gRm9udCBMaWNlbnNlLCBWZXJzaW9uIDEuMS5cbiBUaGlzIGxpY2Vuc2UgaXMgY29waWVkIGJlbG93LCBhbmQgaXMgYWxzbyBhdmFpbGFibGUgd2l0aCBhIEZBUSBhdDpcbiBodHRwOi8vc2NyaXB0cy5zaWwub3JnL09GTFxuICovXG5pbXBvcnQgeyBTaGFwZSB9IGZyb20gJy4uLy4uLy4uL2tpdGUvanMvaW1wb3J0cy5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IG5ldyBTaGFwZSggJ00xMTIwIDEyODBoLTgzMnEtNjYgMCAtMTEzIC00N3QtNDcgLTExM3YtODMycTAgLTY2IDQ3IC0xMTN0MTEzIC00N2g4MzJxNjYgMCAxMTMgNDd0NDcgMTEzdjgzMnEwIDY2IC00NyAxMTN0LTExMyA0N3pNMTQwOCAxMTIwdi04MzJxMCAtMTE5IC04NC41IC0yMDMuNXQtMjAzLjUgLTg0LjVoLTgzMnEtMTE5IDAgLTIwMy41IDg0LjV0LTg0LjUgMjAzLjV2ODMycTAgMTE5IDg0LjUgMjAzLjV0MjAzLjUgODQuNWg4MzIgcTExOSAwIDIwMy41IC04NC41dDg0LjUgLTIwMy41eicgKS5tYWtlSW1tdXRhYmxlKCk7Il0sIm5hbWVzIjpbIlNoYXBlIiwibWFrZUltbXV0YWJsZSJdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Q0FPQyxHQUNELFNBQVNBLEtBQUssUUFBUSw4QkFBOEI7QUFFcEQsZUFBZSxJQUFJQSxNQUFPLCtRQUFnUkMsYUFBYSxHQUFHIn0=

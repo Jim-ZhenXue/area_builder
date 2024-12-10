@@ -1,0 +1,33 @@
+// Copyright 2019-2022, University of Colorado Boulder
+/**
+ * Used by EngagementMetrics to keep track of the seconds in which activity occurs. For example, with a binSize of 1000,
+ * calling onEvent with three values within the range of 1000 will result in a single "count" because they were all in a
+ * bin. See unit tests for more examples.
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ * @author Chris Klusendorf (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import joist from './joist.js';
+let TemporalCounter = class TemporalCounter {
+    onEvent(time) {
+        assert && this.previousTime && assert(time >= this.previousTime, 'time must increase each event');
+        assert && assert(Number.isInteger(time), 'time must be an integer');
+        const currentBinIndex = Math.floor(time / this.binSize);
+        if (currentBinIndex !== this.lastBinIndex) {
+            // Increment the time on the current screen (if home screen not showing)
+            this.counts++;
+            this.lastBinIndex = currentBinIndex;
+        }
+        this.previousTime = time;
+    }
+    constructor(binSize){
+        this.previousTime = null;
+        this.binSize = binSize;
+        this.lastBinIndex = null;
+        this.counts = 0;
+    }
+};
+joist.register('TemporalCounter', TemporalCounter);
+export default TemporalCounter;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pvaXN0L2pzL1RlbXBvcmFsQ291bnRlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOS0yMDIyLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBVc2VkIGJ5IEVuZ2FnZW1lbnRNZXRyaWNzIHRvIGtlZXAgdHJhY2sgb2YgdGhlIHNlY29uZHMgaW4gd2hpY2ggYWN0aXZpdHkgb2NjdXJzLiBGb3IgZXhhbXBsZSwgd2l0aCBhIGJpblNpemUgb2YgMTAwMCxcbiAqIGNhbGxpbmcgb25FdmVudCB3aXRoIHRocmVlIHZhbHVlcyB3aXRoaW4gdGhlIHJhbmdlIG9mIDEwMDAgd2lsbCByZXN1bHQgaW4gYSBzaW5nbGUgXCJjb3VudFwiIGJlY2F1c2UgdGhleSB3ZXJlIGFsbCBpbiBhXG4gKiBiaW4uIFNlZSB1bml0IHRlc3RzIGZvciBtb3JlIGV4YW1wbGVzLlxuICpcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgQ2hyaXMgS2x1c2VuZG9yZiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IGpvaXN0IGZyb20gJy4vam9pc3QuanMnO1xuXG5jbGFzcyBUZW1wb3JhbENvdW50ZXIge1xuXG4gIHByaXZhdGUgcHJldmlvdXNUaW1lOiBudW1iZXIgfCBudWxsO1xuICBwcml2YXRlIHJlYWRvbmx5IGJpblNpemU6IG51bWJlcjtcbiAgcHJpdmF0ZSBsYXN0QmluSW5kZXg6IG51bWJlciB8IG51bGw7XG5cbiAgcHVibGljIGNvdW50czogbnVtYmVyO1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggYmluU2l6ZTogbnVtYmVyICkge1xuICAgIHRoaXMucHJldmlvdXNUaW1lID0gbnVsbDtcbiAgICB0aGlzLmJpblNpemUgPSBiaW5TaXplO1xuICAgIHRoaXMubGFzdEJpbkluZGV4ID0gbnVsbDtcbiAgICB0aGlzLmNvdW50cyA9IDA7XG4gIH1cblxuICBwdWJsaWMgb25FdmVudCggdGltZTogbnVtYmVyICk6IHZvaWQge1xuICAgIGFzc2VydCAmJiB0aGlzLnByZXZpb3VzVGltZSAmJiBhc3NlcnQoIHRpbWUgPj0gdGhpcy5wcmV2aW91c1RpbWUsICd0aW1lIG11c3QgaW5jcmVhc2UgZWFjaCBldmVudCcgKTtcblxuICAgIGFzc2VydCAmJiBhc3NlcnQoIE51bWJlci5pc0ludGVnZXIoIHRpbWUgKSwgJ3RpbWUgbXVzdCBiZSBhbiBpbnRlZ2VyJyApO1xuXG4gICAgY29uc3QgY3VycmVudEJpbkluZGV4ID0gTWF0aC5mbG9vciggdGltZSAvIHRoaXMuYmluU2l6ZSApO1xuXG4gICAgaWYgKCBjdXJyZW50QmluSW5kZXggIT09IHRoaXMubGFzdEJpbkluZGV4ICkge1xuXG4gICAgICAvLyBJbmNyZW1lbnQgdGhlIHRpbWUgb24gdGhlIGN1cnJlbnQgc2NyZWVuIChpZiBob21lIHNjcmVlbiBub3Qgc2hvd2luZylcbiAgICAgIHRoaXMuY291bnRzKys7XG4gICAgICB0aGlzLmxhc3RCaW5JbmRleCA9IGN1cnJlbnRCaW5JbmRleDtcbiAgICB9XG4gICAgdGhpcy5wcmV2aW91c1RpbWUgPSB0aW1lO1xuICB9XG59XG5cbmpvaXN0LnJlZ2lzdGVyKCAnVGVtcG9yYWxDb3VudGVyJywgVGVtcG9yYWxDb3VudGVyICk7XG5leHBvcnQgZGVmYXVsdCBUZW1wb3JhbENvdW50ZXI7Il0sIm5hbWVzIjpbImpvaXN0IiwiVGVtcG9yYWxDb3VudGVyIiwib25FdmVudCIsInRpbWUiLCJhc3NlcnQiLCJwcmV2aW91c1RpbWUiLCJOdW1iZXIiLCJpc0ludGVnZXIiLCJjdXJyZW50QmluSW5kZXgiLCJNYXRoIiwiZmxvb3IiLCJiaW5TaXplIiwibGFzdEJpbkluZGV4IiwiY291bnRzIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Ozs7Q0FRQyxHQUVELE9BQU9BLFdBQVcsYUFBYTtBQUUvQixJQUFBLEFBQU1DLGtCQUFOLE1BQU1BO0lBZUdDLFFBQVNDLElBQVksRUFBUztRQUNuQ0MsVUFBVSxJQUFJLENBQUNDLFlBQVksSUFBSUQsT0FBUUQsUUFBUSxJQUFJLENBQUNFLFlBQVksRUFBRTtRQUVsRUQsVUFBVUEsT0FBUUUsT0FBT0MsU0FBUyxDQUFFSixPQUFRO1FBRTVDLE1BQU1LLGtCQUFrQkMsS0FBS0MsS0FBSyxDQUFFUCxPQUFPLElBQUksQ0FBQ1EsT0FBTztRQUV2RCxJQUFLSCxvQkFBb0IsSUFBSSxDQUFDSSxZQUFZLEVBQUc7WUFFM0Msd0VBQXdFO1lBQ3hFLElBQUksQ0FBQ0MsTUFBTTtZQUNYLElBQUksQ0FBQ0QsWUFBWSxHQUFHSjtRQUN0QjtRQUNBLElBQUksQ0FBQ0gsWUFBWSxHQUFHRjtJQUN0QjtJQXJCQSxZQUFvQlEsT0FBZSxDQUFHO1FBQ3BDLElBQUksQ0FBQ04sWUFBWSxHQUFHO1FBQ3BCLElBQUksQ0FBQ00sT0FBTyxHQUFHQTtRQUNmLElBQUksQ0FBQ0MsWUFBWSxHQUFHO1FBQ3BCLElBQUksQ0FBQ0MsTUFBTSxHQUFHO0lBQ2hCO0FBaUJGO0FBRUFiLE1BQU1jLFFBQVEsQ0FBRSxtQkFBbUJiO0FBQ25DLGVBQWVBLGdCQUFnQiJ9

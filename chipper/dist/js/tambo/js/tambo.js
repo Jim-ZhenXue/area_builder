@@ -1,0 +1,9 @@
+// Copyright 2017-2022, University of Colorado Boulder
+/**
+ * Creates the namespace for this repository.
+ *
+ * @author John Blanco
+ */ import Namespace from '../../phet-core/js/Namespace.js';
+export default new Namespace('tambo');
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3RhbWJvL2pzL3RhbWJvLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE3LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIENyZWF0ZXMgdGhlIG5hbWVzcGFjZSBmb3IgdGhpcyByZXBvc2l0b3J5LlxuICpcbiAqIEBhdXRob3IgSm9obiBCbGFuY29cbiAqL1xuXG5pbXBvcnQgTmFtZXNwYWNlIGZyb20gJy4uLy4uL3BoZXQtY29yZS9qcy9OYW1lc3BhY2UuanMnO1xuXG5leHBvcnQgZGVmYXVsdCBuZXcgTmFtZXNwYWNlKCAndGFtYm8nICk7Il0sIm5hbWVzIjpbIk5hbWVzcGFjZSJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxPQUFPQSxlQUFlLGtDQUFrQztBQUV4RCxlQUFlLElBQUlBLFVBQVcsU0FBVSJ9

@@ -1,0 +1,18 @@
+// Copyright 2016-2024, University of Colorado Boulder
+/**
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import '../../axon/js/main.js';
+import '../../dot/js/main.js';
+import '../../kite/js/main.js';
+import '../../phet-core/js/main.js';
+import '../../utterance-queue/js/main.js';
+import './main.js';
+if (!window.hasOwnProperty('_')) {
+    throw new Error('Underscore/Lodash not found: _');
+}
+if (!window.hasOwnProperty('$')) {
+    throw new Error('jQuery not found: $');
+}
+phet.scenery.Utils.polyfillRequestAnimationFrame();
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvc2NlbmVyeS1tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE2LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgJy4uLy4uL2F4b24vanMvbWFpbi5qcyc7XG5pbXBvcnQgJy4uLy4uL2RvdC9qcy9tYWluLmpzJztcbmltcG9ydCAnLi4vLi4va2l0ZS9qcy9tYWluLmpzJztcbmltcG9ydCAnLi4vLi4vcGhldC1jb3JlL2pzL21haW4uanMnO1xuaW1wb3J0ICcuLi8uLi91dHRlcmFuY2UtcXVldWUvanMvbWFpbi5qcyc7XG5pbXBvcnQgJy4vbWFpbi5qcyc7XG5cbmlmICggIXdpbmRvdy5oYXNPd25Qcm9wZXJ0eSggJ18nICkgKSB7XG4gIHRocm93IG5ldyBFcnJvciggJ1VuZGVyc2NvcmUvTG9kYXNoIG5vdCBmb3VuZDogXycgKTtcbn1cbmlmICggIXdpbmRvdy5oYXNPd25Qcm9wZXJ0eSggJyQnICkgKSB7XG4gIHRocm93IG5ldyBFcnJvciggJ2pRdWVyeSBub3QgZm91bmQ6ICQnICk7XG59XG5cbnBoZXQuc2NlbmVyeS5VdGlscy5wb2x5ZmlsbFJlcXVlc3RBbmltYXRpb25GcmFtZSgpOyJdLCJuYW1lcyI6WyJ3aW5kb3ciLCJoYXNPd25Qcm9wZXJ0eSIsIkVycm9yIiwicGhldCIsInNjZW5lcnkiLCJVdGlscyIsInBvbHlmaWxsUmVxdWVzdEFuaW1hdGlvbkZyYW1lIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7O0NBRUMsR0FFRCxPQUFPLHdCQUF3QjtBQUMvQixPQUFPLHVCQUF1QjtBQUM5QixPQUFPLHdCQUF3QjtBQUMvQixPQUFPLDZCQUE2QjtBQUNwQyxPQUFPLG1DQUFtQztBQUMxQyxPQUFPLFlBQVk7QUFFbkIsSUFBSyxDQUFDQSxPQUFPQyxjQUFjLENBQUUsTUFBUTtJQUNuQyxNQUFNLElBQUlDLE1BQU87QUFDbkI7QUFDQSxJQUFLLENBQUNGLE9BQU9DLGNBQWMsQ0FBRSxNQUFRO0lBQ25DLE1BQU0sSUFBSUMsTUFBTztBQUNuQjtBQUVBQyxLQUFLQyxPQUFPLENBQUNDLEtBQUssQ0FBQ0MsNkJBQTZCIn0=

@@ -1,0 +1,42 @@
+// Copyright 2019-2024, University of Colorado Boulder
+/**
+ * A sound generator that plays sounds each time a property changes to a new value.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */ import optionize from '../../../phet-core/js/optionize.js';
+import tambo from '../tambo.js';
+import MultiClip from './MultiClip.js';
+let PropertyMultiClip = class PropertyMultiClip extends MultiClip {
+    /**
+   * dispose function
+   */ dispose() {
+        this.disposePropertyMultiClip();
+    }
+    /**
+   * @param property - the property for which sounds are played on value changes
+   * @param valueToSoundMap - a map of values to WrappedAudioBuffer objects that is used to define the association
+   *                          between values and sounds.
+   * @param [providedOptions]
+   */ constructor(property, valueToSoundMap, providedOptions){
+        const options = optionize()({
+            linkLazily: true
+        }, providedOptions);
+        super(valueToSoundMap, options);
+        const playSoundForValue = (value)=>{
+            this.playAssociatedSound(value);
+        };
+        if (options.linkLazily) {
+            property.lazyLink(playSoundForValue);
+        } else {
+            property.link(playSoundForValue);
+        }
+        // dispose function
+        this.disposePropertyMultiClip = ()=>{
+            property.unlink(playSoundForValue);
+        };
+    }
+};
+tambo.register('PropertyMultiClip', PropertyMultiClip);
+export default PropertyMultiClip;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3RhbWJvL2pzL3NvdW5kLWdlbmVyYXRvcnMvUHJvcGVydHlNdWx0aUNsaXAudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTktMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQSBzb3VuZCBnZW5lcmF0b3IgdGhhdCBwbGF5cyBzb3VuZHMgZWFjaCB0aW1lIGEgcHJvcGVydHkgY2hhbmdlcyB0byBhIG5ldyB2YWx1ZS5cbiAqXG4gKiBAYXV0aG9yIEpvaG4gQmxhbmNvIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBQcm9wZXJ0eSBmcm9tICcuLi8uLi8uLi9heG9uL2pzL1Byb3BlcnR5LmpzJztcbmltcG9ydCBvcHRpb25pemUgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgdGFtYm8gZnJvbSAnLi4vdGFtYm8uanMnO1xuaW1wb3J0IFdyYXBwZWRBdWRpb0J1ZmZlciBmcm9tICcuLi9XcmFwcGVkQXVkaW9CdWZmZXIuanMnO1xuaW1wb3J0IE11bHRpQ2xpcCwgeyBNdWx0aUNsaXBPcHRpb25zIH0gZnJvbSAnLi9NdWx0aUNsaXAuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0ge1xuXG4gIC8vIENvbnRyb2xzIHdoZXRoZXIgdGhlIGxpbmthZ2UgdG8gdGhlIHByb3BlcnR5IGlzIFwibGF6eVwiLCBtZWFuaW5nIHRoYXQgdGhlIGZpcnN0IHNvdW5kIGlzbid0IHBsYXllZCB1bnRpbCBhXG4gIC8vIGNoYW5nZSBvZiB2YWx1ZSBvY2N1cnMuICBJZiBzZXQgdG8gZmFsc2UsIHRoaXMgd2lsbCBhdHRlbXB0IHRvIHBsYXkgYSBzb3VuZCB3aGVuIHRoZSBsaW5rIGlzIGluaXRpYWxseSBzZXQgdXAuXG4gIGxpbmtMYXppbHk/OiBib29sZWFuO1xufTtcblxuZXhwb3J0IHR5cGUgUHJvcGVydHlNdWx0aUNsaXBPcHRpb25zID0gU2VsZk9wdGlvbnMgJiBNdWx0aUNsaXBPcHRpb25zO1xuXG5jbGFzcyBQcm9wZXJ0eU11bHRpQ2xpcDxUPiBleHRlbmRzIE11bHRpQ2xpcDxUPiB7XG5cbiAgcHJpdmF0ZSByZWFkb25seSBkaXNwb3NlUHJvcGVydHlNdWx0aUNsaXA6ICgpID0+IHZvaWQ7XG5cbiAgLyoqXG4gICAqIEBwYXJhbSBwcm9wZXJ0eSAtIHRoZSBwcm9wZXJ0eSBmb3Igd2hpY2ggc291bmRzIGFyZSBwbGF5ZWQgb24gdmFsdWUgY2hhbmdlc1xuICAgKiBAcGFyYW0gdmFsdWVUb1NvdW5kTWFwIC0gYSBtYXAgb2YgdmFsdWVzIHRvIFdyYXBwZWRBdWRpb0J1ZmZlciBvYmplY3RzIHRoYXQgaXMgdXNlZCB0byBkZWZpbmUgdGhlIGFzc29jaWF0aW9uXG4gICAqICAgICAgICAgICAgICAgICAgICAgICAgICBiZXR3ZWVuIHZhbHVlcyBhbmQgc291bmRzLlxuICAgKiBAcGFyYW0gW3Byb3ZpZGVkT3B0aW9uc11cbiAgICovXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvcGVydHk6IFByb3BlcnR5PFQ+LCB2YWx1ZVRvU291bmRNYXA6IE1hcDxULCBXcmFwcGVkQXVkaW9CdWZmZXI+LCBwcm92aWRlZE9wdGlvbnM/OiBQcm9wZXJ0eU11bHRpQ2xpcE9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFByb3BlcnR5TXVsdGlDbGlwT3B0aW9ucywgU2VsZk9wdGlvbnMsIE11bHRpQ2xpcE9wdGlvbnM+KCkoIHtcbiAgICAgIGxpbmtMYXppbHk6IHRydWVcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIHN1cGVyKCB2YWx1ZVRvU291bmRNYXAsIG9wdGlvbnMgKTtcblxuICAgIGNvbnN0IHBsYXlTb3VuZEZvclZhbHVlID0gKCB2YWx1ZTogVCApID0+IHsgdGhpcy5wbGF5QXNzb2NpYXRlZFNvdW5kKCB2YWx1ZSApOyB9O1xuXG4gICAgaWYgKCBvcHRpb25zLmxpbmtMYXppbHkgKSB7XG4gICAgICBwcm9wZXJ0eS5sYXp5TGluayggcGxheVNvdW5kRm9yVmFsdWUgKTtcbiAgICB9XG4gICAgZWxzZSB7XG4gICAgICBwcm9wZXJ0eS5saW5rKCBwbGF5U291bmRGb3JWYWx1ZSApO1xuICAgIH1cblxuICAgIC8vIGRpc3Bvc2UgZnVuY3Rpb25cbiAgICB0aGlzLmRpc3Bvc2VQcm9wZXJ0eU11bHRpQ2xpcCA9ICgpID0+IHsgcHJvcGVydHkudW5saW5rKCBwbGF5U291bmRGb3JWYWx1ZSApOyB9O1xuICB9XG5cbiAgLyoqXG4gICAqIGRpc3Bvc2UgZnVuY3Rpb25cbiAgICovXG4gIHB1YmxpYyBvdmVycmlkZSBkaXNwb3NlKCk6IHZvaWQge1xuICAgIHRoaXMuZGlzcG9zZVByb3BlcnR5TXVsdGlDbGlwKCk7XG4gIH1cbn1cblxudGFtYm8ucmVnaXN0ZXIoICdQcm9wZXJ0eU11bHRpQ2xpcCcsIFByb3BlcnR5TXVsdGlDbGlwICk7XG5cbmV4cG9ydCBkZWZhdWx0IFByb3BlcnR5TXVsdGlDbGlwOyJdLCJuYW1lcyI6WyJvcHRpb25pemUiLCJ0YW1ibyIsIk11bHRpQ2xpcCIsIlByb3BlcnR5TXVsdGlDbGlwIiwiZGlzcG9zZSIsImRpc3Bvc2VQcm9wZXJ0eU11bHRpQ2xpcCIsInByb3BlcnR5IiwidmFsdWVUb1NvdW5kTWFwIiwicHJvdmlkZWRPcHRpb25zIiwib3B0aW9ucyIsImxpbmtMYXppbHkiLCJwbGF5U291bmRGb3JWYWx1ZSIsInZhbHVlIiwicGxheUFzc29jaWF0ZWRTb3VuZCIsImxhenlMaW5rIiwibGluayIsInVubGluayIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUdELE9BQU9BLGVBQWUscUNBQXFDO0FBQzNELE9BQU9DLFdBQVcsY0FBYztBQUVoQyxPQUFPQyxlQUFxQyxpQkFBaUI7QUFXN0QsSUFBQSxBQUFNQyxvQkFBTixNQUFNQSwwQkFBNkJEO0lBK0JqQzs7R0FFQyxHQUNELEFBQWdCRSxVQUFnQjtRQUM5QixJQUFJLENBQUNDLHdCQUF3QjtJQUMvQjtJQWhDQTs7Ozs7R0FLQyxHQUNELFlBQW9CQyxRQUFxQixFQUFFQyxlQUEyQyxFQUFFQyxlQUEwQyxDQUFHO1FBRW5JLE1BQU1DLFVBQVVULFlBQXNFO1lBQ3BGVSxZQUFZO1FBQ2QsR0FBR0Y7UUFFSCxLQUFLLENBQUVELGlCQUFpQkU7UUFFeEIsTUFBTUUsb0JBQW9CLENBQUVDO1lBQWdCLElBQUksQ0FBQ0MsbUJBQW1CLENBQUVEO1FBQVM7UUFFL0UsSUFBS0gsUUFBUUMsVUFBVSxFQUFHO1lBQ3hCSixTQUFTUSxRQUFRLENBQUVIO1FBQ3JCLE9BQ0s7WUFDSEwsU0FBU1MsSUFBSSxDQUFFSjtRQUNqQjtRQUVBLG1CQUFtQjtRQUNuQixJQUFJLENBQUNOLHdCQUF3QixHQUFHO1lBQVFDLFNBQVNVLE1BQU0sQ0FBRUw7UUFBcUI7SUFDaEY7QUFRRjtBQUVBVixNQUFNZ0IsUUFBUSxDQUFFLHFCQUFxQmQ7QUFFckMsZUFBZUEsa0JBQWtCIn0=

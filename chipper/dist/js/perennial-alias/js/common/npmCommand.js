@@ -1,0 +1,9 @@
+// Copyright 2017, University of Colorado Boulder
+/**
+ * The npm "command" based on the platform.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ // {string} - needs to be a slightly different command for Windows
+module.exports = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BlcmVubmlhbC1hbGlhcy9qcy9jb21tb24vbnBtQ29tbWFuZC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNywgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogVGhlIG5wbSBcImNvbW1hbmRcIiBiYXNlZCBvbiB0aGUgcGxhdGZvcm0uXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbi8vIHtzdHJpbmd9IC0gbmVlZHMgdG8gYmUgYSBzbGlnaHRseSBkaWZmZXJlbnQgY29tbWFuZCBmb3IgV2luZG93c1xubW9kdWxlLmV4cG9ydHMgPSAvXndpbi8udGVzdCggcHJvY2Vzcy5wbGF0Zm9ybSApID8gJ25wbS5jbWQnIDogJ25wbSc7Il0sIm5hbWVzIjpbIm1vZHVsZSIsImV4cG9ydHMiLCJ0ZXN0IiwicHJvY2VzcyIsInBsYXRmb3JtIl0sIm1hcHBpbmdzIjoiQUFBQSxpREFBaUQ7QUFFakQ7Ozs7Q0FJQyxHQUVELGtFQUFrRTtBQUNsRUEsT0FBT0MsT0FBTyxHQUFHLE9BQU9DLElBQUksQ0FBRUMsUUFBUUMsUUFBUSxJQUFLLFlBQVkifQ==

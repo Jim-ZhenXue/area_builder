@@ -1,0 +1,17 @@
+// Copyright 2019-2024, University of Colorado Boulder
+/**
+ * launch point to load any tests located around the chipper repo. This is to support running `qunit` with no args
+ * from the top level of chipper, as is the recommended way to run chipper tests.
+ *
+ * On May 12, 2021, @samreid ran tests like so:
+ * npm install --save-dev qunit
+ * node node_modules/qunit/bin/qunit.js test/generalTests.js
+ *
+ * I didn't use a global qunit, since it seems we will eventually need a way to version qunit with chipper.
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import '../common/ChipperStringUtilTests.js';
+import '../phet-io/phetioCompareAPIsTests.js';
+import '../phet-io/isInitialStateCompatibleTests.js';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2pzL3Rlc3QvY2hpcHBlci10ZXN0cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOS0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBsYXVuY2ggcG9pbnQgdG8gbG9hZCBhbnkgdGVzdHMgbG9jYXRlZCBhcm91bmQgdGhlIGNoaXBwZXIgcmVwby4gVGhpcyBpcyB0byBzdXBwb3J0IHJ1bm5pbmcgYHF1bml0YCB3aXRoIG5vIGFyZ3NcbiAqIGZyb20gdGhlIHRvcCBsZXZlbCBvZiBjaGlwcGVyLCBhcyBpcyB0aGUgcmVjb21tZW5kZWQgd2F5IHRvIHJ1biBjaGlwcGVyIHRlc3RzLlxuICpcbiAqIE9uIE1heSAxMiwgMjAyMSwgQHNhbXJlaWQgcmFuIHRlc3RzIGxpa2Ugc286XG4gKiBucG0gaW5zdGFsbCAtLXNhdmUtZGV2IHF1bml0XG4gKiBub2RlIG5vZGVfbW9kdWxlcy9xdW5pdC9iaW4vcXVuaXQuanMgdGVzdC9nZW5lcmFsVGVzdHMuanNcbiAqXG4gKiBJIGRpZG4ndCB1c2UgYSBnbG9iYWwgcXVuaXQsIHNpbmNlIGl0IHNlZW1zIHdlIHdpbGwgZXZlbnR1YWxseSBuZWVkIGEgd2F5IHRvIHZlcnNpb24gcXVuaXQgd2l0aCBjaGlwcGVyLlxuICpcbiAqIEBhdXRob3IgTWljaGFlbCBLYXV6bWFubiAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5cbmltcG9ydCAnLi4vY29tbW9uL0NoaXBwZXJTdHJpbmdVdGlsVGVzdHMuanMnO1xuaW1wb3J0ICcuLi9waGV0LWlvL3BoZXRpb0NvbXBhcmVBUElzVGVzdHMuanMnO1xuaW1wb3J0ICcuLi9waGV0LWlvL2lzSW5pdGlhbFN0YXRlQ29tcGF0aWJsZVRlc3RzLmpzJzsiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7OztDQVdDLEdBR0QsT0FBTyxzQ0FBc0M7QUFDN0MsT0FBTyx1Q0FBdUM7QUFDOUMsT0FBTyw4Q0FBOEMifQ==

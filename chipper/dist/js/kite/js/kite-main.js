@@ -1,0 +1,12 @@
+// Copyright 2016-2024, University of Colorado Boulder
+/**
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import '../../axon/js/main.js';
+import '../../dot/js/main.js';
+import '../../phet-core/js/main.js';
+import './main.js';
+if (!window.hasOwnProperty('_')) {
+    throw new Error('Underscore/Lodash not found: _');
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2tpdGUvanMva2l0ZS1tYWluLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE2LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgJy4uLy4uL2F4b24vanMvbWFpbi5qcyc7XG5pbXBvcnQgJy4uLy4uL2RvdC9qcy9tYWluLmpzJztcbmltcG9ydCAnLi4vLi4vcGhldC1jb3JlL2pzL21haW4uanMnO1xuaW1wb3J0ICcuL21haW4uanMnO1xuXG5pZiAoICF3aW5kb3cuaGFzT3duUHJvcGVydHkoICdfJyApICkge1xuICB0aHJvdyBuZXcgRXJyb3IoICdVbmRlcnNjb3JlL0xvZGFzaCBub3QgZm91bmQ6IF8nICk7XG59Il0sIm5hbWVzIjpbIndpbmRvdyIsImhhc093blByb3BlcnR5IiwiRXJyb3IiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Q0FFQyxHQUVELE9BQU8sd0JBQXdCO0FBQy9CLE9BQU8sdUJBQXVCO0FBQzlCLE9BQU8sNkJBQTZCO0FBQ3BDLE9BQU8sWUFBWTtBQUVuQixJQUFLLENBQUNBLE9BQU9DLGNBQWMsQ0FBRSxNQUFRO0lBQ25DLE1BQU0sSUFBSUMsTUFBTztBQUNuQiJ9

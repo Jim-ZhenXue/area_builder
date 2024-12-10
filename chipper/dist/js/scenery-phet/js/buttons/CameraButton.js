@@ -1,0 +1,33 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * CameraButton is a push button with a camera icon.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import optionize from '../../../phet-core/js/optionize.js';
+import { Path } from '../../../scenery/js/imports.js';
+import cameraSolidShape from '../../../sherpa/js/fontawesome-5/cameraSolidShape.js';
+import RectangularPushButton from '../../../sun/js/buttons/RectangularPushButton.js';
+import PhetColorScheme from '../PhetColorScheme.js';
+import sceneryPhet from '../sceneryPhet.js';
+let CameraButton = class CameraButton extends RectangularPushButton {
+    constructor(providedOptions){
+        const options = optionize()({
+            // SelfOptions
+            iconFill: 'black',
+            iconScale: 0.037,
+            // RectangularPushButtonOptions
+            baseColor: PhetColorScheme.BUTTON_YELLOW,
+            xMargin: 8,
+            yMargin: 4
+        }, providedOptions);
+        options.content = new Path(cameraSolidShape, {
+            scale: options.iconScale,
+            fill: options.iconFill
+        });
+        super(options);
+    }
+};
+export { CameraButton as default };
+sceneryPhet.register('CameraButton', CameraButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9idXR0b25zL0NhbWVyYUJ1dHRvbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyMi0yMDI0LCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBDYW1lcmFCdXR0b24gaXMgYSBwdXNoIGJ1dHRvbiB3aXRoIGEgY2FtZXJhIGljb24uXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgb3B0aW9uaXplIGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFBpY2tSZXF1aXJlZCBmcm9tICcuLi8uLi8uLi9waGV0LWNvcmUvanMvdHlwZXMvUGlja1JlcXVpcmVkLmpzJztcbmltcG9ydCBTdHJpY3RPbWl0IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy90eXBlcy9TdHJpY3RPbWl0LmpzJztcbmltcG9ydCB7IFBhdGgsIFRDb2xvciB9IGZyb20gJy4uLy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgY2FtZXJhU29saWRTaGFwZSBmcm9tICcuLi8uLi8uLi9zaGVycGEvanMvZm9udGF3ZXNvbWUtNS9jYW1lcmFTb2xpZFNoYXBlLmpzJztcbmltcG9ydCBSZWN0YW5ndWxhclB1c2hCdXR0b24sIHsgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3N1bi9qcy9idXR0b25zL1JlY3Rhbmd1bGFyUHVzaEJ1dHRvbi5qcyc7XG5pbXBvcnQgUGhldENvbG9yU2NoZW1lIGZyb20gJy4uL1BoZXRDb2xvclNjaGVtZS5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi4vc2NlbmVyeVBoZXQuanMnO1xuXG50eXBlIFNlbGZPcHRpb25zID0ge1xuICBpY29uRmlsbD86IFRDb2xvcjtcbiAgaWNvblNjYWxlPzogbnVtYmVyO1xufTtcblxudHlwZSBDYW1lcmFCdXR0b25PcHRpb25zID0gU2VsZk9wdGlvbnMgJlxuICBTdHJpY3RPbWl0PFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnMsICdjb250ZW50Jz4gJlxuICBQaWNrUmVxdWlyZWQ8UmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9ucywgJ3RhbmRlbSc+O1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBDYW1lcmFCdXR0b24gZXh0ZW5kcyBSZWN0YW5ndWxhclB1c2hCdXR0b24ge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvdmlkZWRPcHRpb25zOiBDYW1lcmFCdXR0b25PcHRpb25zICkge1xuXG4gICAgY29uc3Qgb3B0aW9ucyA9IG9wdGlvbml6ZTxDYW1lcmFCdXR0b25PcHRpb25zLCBTZWxmT3B0aW9ucywgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9ucz4oKSgge1xuXG4gICAgICAvLyBTZWxmT3B0aW9uc1xuICAgICAgaWNvbkZpbGw6ICdibGFjaycsXG4gICAgICBpY29uU2NhbGU6IDAuMDM3LFxuXG4gICAgICAvLyBSZWN0YW5ndWxhclB1c2hCdXR0b25PcHRpb25zXG4gICAgICBiYXNlQ29sb3I6IFBoZXRDb2xvclNjaGVtZS5CVVRUT05fWUVMTE9XLFxuICAgICAgeE1hcmdpbjogOCxcbiAgICAgIHlNYXJnaW46IDRcbiAgICB9LCBwcm92aWRlZE9wdGlvbnMgKTtcblxuICAgIG9wdGlvbnMuY29udGVudCA9IG5ldyBQYXRoKCBjYW1lcmFTb2xpZFNoYXBlLCB7XG4gICAgICBzY2FsZTogb3B0aW9ucy5pY29uU2NhbGUsXG4gICAgICBmaWxsOiBvcHRpb25zLmljb25GaWxsXG4gICAgfSApO1xuXG4gICAgc3VwZXIoIG9wdGlvbnMgKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ0NhbWVyYUJ1dHRvbicsIENhbWVyYUJ1dHRvbiApOyJdLCJuYW1lcyI6WyJvcHRpb25pemUiLCJQYXRoIiwiY2FtZXJhU29saWRTaGFwZSIsIlJlY3Rhbmd1bGFyUHVzaEJ1dHRvbiIsIlBoZXRDb2xvclNjaGVtZSIsInNjZW5lcnlQaGV0IiwiQ2FtZXJhQnV0dG9uIiwicHJvdmlkZWRPcHRpb25zIiwib3B0aW9ucyIsImljb25GaWxsIiwiaWNvblNjYWxlIiwiYmFzZUNvbG9yIiwiQlVUVE9OX1lFTExPVyIsInhNYXJnaW4iLCJ5TWFyZ2luIiwiY29udGVudCIsInNjYWxlIiwiZmlsbCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGVBQWUscUNBQXFDO0FBRzNELFNBQVNDLElBQUksUUFBZ0IsaUNBQWlDO0FBQzlELE9BQU9DLHNCQUFzQix1REFBdUQ7QUFDcEYsT0FBT0MsMkJBQTZELG1EQUFtRDtBQUN2SCxPQUFPQyxxQkFBcUIsd0JBQXdCO0FBQ3BELE9BQU9DLGlCQUFpQixvQkFBb0I7QUFXN0IsSUFBQSxBQUFNQyxlQUFOLE1BQU1BLHFCQUFxQkg7SUFFeEMsWUFBb0JJLGVBQW9DLENBQUc7UUFFekQsTUFBTUMsVUFBVVIsWUFBNkU7WUFFM0YsY0FBYztZQUNkUyxVQUFVO1lBQ1ZDLFdBQVc7WUFFWCwrQkFBK0I7WUFDL0JDLFdBQVdQLGdCQUFnQlEsYUFBYTtZQUN4Q0MsU0FBUztZQUNUQyxTQUFTO1FBQ1gsR0FBR1A7UUFFSEMsUUFBUU8sT0FBTyxHQUFHLElBQUlkLEtBQU1DLGtCQUFrQjtZQUM1Q2MsT0FBT1IsUUFBUUUsU0FBUztZQUN4Qk8sTUFBTVQsUUFBUUMsUUFBUTtRQUN4QjtRQUVBLEtBQUssQ0FBRUQ7SUFDVDtBQUNGO0FBdkJBLFNBQXFCRiwwQkF1QnBCO0FBRURELFlBQVlhLFFBQVEsQ0FBRSxnQkFBZ0JaIn0=

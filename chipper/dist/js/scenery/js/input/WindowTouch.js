@@ -1,0 +1,11 @@
+// Copyright 2022-2024, University of Colorado Boulder
+/**
+ * A listener for common button usage, providing the fire() method/callback and helpful properties. NOTE that it doesn't
+ * need to be an actual button (or look like a button), this is useful whenever that type of "fire" behavior is helpful.
+ *
+ * For example usage, see scenery/examples/input.html. Usually you can just pass a fire callback and things work.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ export { };
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvaW5wdXQvV2luZG93VG91Y2gudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjItMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQSBsaXN0ZW5lciBmb3IgY29tbW9uIGJ1dHRvbiB1c2FnZSwgcHJvdmlkaW5nIHRoZSBmaXJlKCkgbWV0aG9kL2NhbGxiYWNrIGFuZCBoZWxwZnVsIHByb3BlcnRpZXMuIE5PVEUgdGhhdCBpdCBkb2Vzbid0XG4gKiBuZWVkIHRvIGJlIGFuIGFjdHVhbCBidXR0b24gKG9yIGxvb2sgbGlrZSBhIGJ1dHRvbiksIHRoaXMgaXMgdXNlZnVsIHdoZW5ldmVyIHRoYXQgdHlwZSBvZiBcImZpcmVcIiBiZWhhdmlvciBpcyBoZWxwZnVsLlxuICpcbiAqIEZvciBleGFtcGxlIHVzYWdlLCBzZWUgc2NlbmVyeS9leGFtcGxlcy9pbnB1dC5odG1sLiBVc3VhbGx5IHlvdSBjYW4ganVzdCBwYXNzIGEgZmlyZSBjYWxsYmFjayBhbmQgdGhpbmdzIHdvcmsuXG4gKlxuICogQGF1dGhvciBKb25hdGhhbiBPbHNvbiA8am9uYXRoYW4ub2xzb25AY29sb3JhZG8uZWR1PlxuICovXG5cbnR5cGUgV2luZG93VG91Y2ggPSBUb3VjaDtcblxuZXhwb3J0IGRlZmF1bHQgV2luZG93VG91Y2g7Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7OztDQU9DLEdBSUQsV0FBMkIifQ==

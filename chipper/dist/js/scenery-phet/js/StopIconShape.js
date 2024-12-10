@@ -1,0 +1,18 @@
+// Copyright 2018-2022, University of Colorado Boulder
+/**
+ * Shape for the 'stop' icon that appears on buttons and other UI components.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */ import { Shape } from '../../kite/js/imports.js';
+import sceneryPhet from './sceneryPhet.js';
+let StopIconShape = class StopIconShape extends Shape {
+    constructor(width){
+        super();
+        // rectangle
+        this.rect(0, 0, width, width);
+    }
+};
+export { StopIconShape as default };
+sceneryPhet.register('StopIconShape', StopIconShape);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9TdG9wSWNvblNoYXBlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjIsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFNoYXBlIGZvciB0aGUgJ3N0b3AnIGljb24gdGhhdCBhcHBlYXJzIG9uIGJ1dHRvbnMgYW5kIG90aGVyIFVJIGNvbXBvbmVudHMuXG4gKlxuICogQGF1dGhvciBDaHJpcyBNYWxsZXkgKFBpeGVsWm9vbSwgSW5jLilcbiAqL1xuXG5pbXBvcnQgeyBTaGFwZSB9IGZyb20gJy4uLy4uL2tpdGUvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgc2NlbmVyeVBoZXQgZnJvbSAnLi9zY2VuZXJ5UGhldC5qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0b3BJY29uU2hhcGUgZXh0ZW5kcyBTaGFwZSB7XG5cbiAgcHVibGljIGNvbnN0cnVjdG9yKCB3aWR0aDogbnVtYmVyICkge1xuICAgIHN1cGVyKCk7XG5cbiAgICAvLyByZWN0YW5nbGVcbiAgICB0aGlzLnJlY3QoIDAsIDAsIHdpZHRoLCB3aWR0aCApO1xuICB9XG59XG5cbnNjZW5lcnlQaGV0LnJlZ2lzdGVyKCAnU3RvcEljb25TaGFwZScsIFN0b3BJY29uU2hhcGUgKTsiXSwibmFtZXMiOlsiU2hhcGUiLCJzY2VuZXJ5UGhldCIsIlN0b3BJY29uU2hhcGUiLCJ3aWR0aCIsInJlY3QiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7O0NBSUMsR0FFRCxTQUFTQSxLQUFLLFFBQVEsMkJBQTJCO0FBQ2pELE9BQU9DLGlCQUFpQixtQkFBbUI7QUFFNUIsSUFBQSxBQUFNQyxnQkFBTixNQUFNQSxzQkFBc0JGO0lBRXpDLFlBQW9CRyxLQUFhLENBQUc7UUFDbEMsS0FBSztRQUVMLFlBQVk7UUFDWixJQUFJLENBQUNDLElBQUksQ0FBRSxHQUFHLEdBQUdELE9BQU9BO0lBQzFCO0FBQ0Y7QUFSQSxTQUFxQkQsMkJBUXBCO0FBRURELFlBQVlJLFFBQVEsQ0FBRSxpQkFBaUJIIn0=

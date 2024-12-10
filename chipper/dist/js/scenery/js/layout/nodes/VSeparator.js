@@ -1,0 +1,21 @@
+// Copyright 2021-2024, University of Colorado Boulder
+/**
+ * A vertical line for separating items in a horizontal layout container.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */ import { HeightSizable, scenery, Separator } from '../../imports.js';
+let VSeparator = class VSeparator extends HeightSizable(Separator) {
+    constructor(options){
+        super();
+        this.localPreferredHeightProperty.link((height)=>{
+            if (height !== null) {
+                this.y2 = height;
+            }
+        });
+        this.mutate(options);
+    }
+};
+export { VSeparator as default };
+scenery.register('VSeparator', VSeparator);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvbGF5b3V0L25vZGVzL1ZTZXBhcmF0b3IudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMjEtMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQSB2ZXJ0aWNhbCBsaW5lIGZvciBzZXBhcmF0aW5nIGl0ZW1zIGluIGEgaG9yaXpvbnRhbCBsYXlvdXQgY29udGFpbmVyLlxuICpcbiAqIEBhdXRob3IgSm9uYXRoYW4gT2xzb24gPGpvbmF0aGFuLm9sc29uQGNvbG9yYWRvLmVkdT5cbiAqL1xuXG5pbXBvcnQgeyBFbXB0eVNlbGZPcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vLi4vcGhldC1jb3JlL2pzL29wdGlvbml6ZS5qcyc7XG5pbXBvcnQgeyBIZWlnaHRTaXphYmxlLCBIZWlnaHRTaXphYmxlT3B0aW9ucywgc2NlbmVyeSwgU2VwYXJhdG9yLCBTZXBhcmF0b3JPcHRpb25zIH0gZnJvbSAnLi4vLi4vaW1wb3J0cy5qcyc7XG5cbnR5cGUgU2VsZk9wdGlvbnMgPSBFbXB0eVNlbGZPcHRpb25zO1xudHlwZSBQYXJlbnRPcHRpb25zID0gSGVpZ2h0U2l6YWJsZU9wdGlvbnMgJiBTZXBhcmF0b3JPcHRpb25zO1xuZXhwb3J0IHR5cGUgVlNlcGFyYXRvck9wdGlvbnMgPSBTZWxmT3B0aW9ucyAmIFBhcmVudE9wdGlvbnM7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFZTZXBhcmF0b3IgZXh0ZW5kcyBIZWlnaHRTaXphYmxlKCBTZXBhcmF0b3IgKSB7XG4gIHB1YmxpYyBjb25zdHJ1Y3Rvciggb3B0aW9ucz86IFZTZXBhcmF0b3JPcHRpb25zICkge1xuICAgIHN1cGVyKCk7XG5cbiAgICB0aGlzLmxvY2FsUHJlZmVycmVkSGVpZ2h0UHJvcGVydHkubGluayggaGVpZ2h0ID0+IHtcbiAgICAgIGlmICggaGVpZ2h0ICE9PSBudWxsICkge1xuICAgICAgICB0aGlzLnkyID0gaGVpZ2h0O1xuICAgICAgfVxuICAgIH0gKTtcblxuICAgIHRoaXMubXV0YXRlKCBvcHRpb25zICk7XG4gIH1cbn1cblxuc2NlbmVyeS5yZWdpc3RlciggJ1ZTZXBhcmF0b3InLCBWU2VwYXJhdG9yICk7Il0sIm5hbWVzIjpbIkhlaWdodFNpemFibGUiLCJzY2VuZXJ5IiwiU2VwYXJhdG9yIiwiVlNlcGFyYXRvciIsIm9wdGlvbnMiLCJsb2NhbFByZWZlcnJlZEhlaWdodFByb3BlcnR5IiwibGluayIsImhlaWdodCIsInkyIiwibXV0YXRlIiwicmVnaXN0ZXIiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7OztDQUlDLEdBR0QsU0FBU0EsYUFBYSxFQUF3QkMsT0FBTyxFQUFFQyxTQUFTLFFBQTBCLG1CQUFtQjtBQU05RixJQUFBLEFBQU1DLGFBQU4sTUFBTUEsbUJBQW1CSCxjQUFlRTtJQUNyRCxZQUFvQkUsT0FBMkIsQ0FBRztRQUNoRCxLQUFLO1FBRUwsSUFBSSxDQUFDQyw0QkFBNEIsQ0FBQ0MsSUFBSSxDQUFFQyxDQUFBQTtZQUN0QyxJQUFLQSxXQUFXLE1BQU87Z0JBQ3JCLElBQUksQ0FBQ0MsRUFBRSxHQUFHRDtZQUNaO1FBQ0Y7UUFFQSxJQUFJLENBQUNFLE1BQU0sQ0FBRUw7SUFDZjtBQUNGO0FBWkEsU0FBcUJELHdCQVlwQjtBQUVERixRQUFRUyxRQUFRLENBQUUsY0FBY1AifQ==

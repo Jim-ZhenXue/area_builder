@@ -1,0 +1,46 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * Parametric IOType that adds support for null values in toStateObject/fromStateObject. This type is to
+ * prevent the propagation of null handling, mainly in to/fromStateObject, in each type. This also makes null
+ * explicit for phet-io.
+ *
+ * Sample usage:
+ *
+ *  this.ageProperty = new Property( null, {
+ *    tandem: tandem.createTandem( 'ageProperty' ),
+ *    phetioValueType: NullableIO( NumberIO ) // signifies that the Property can be Number or null
+ * } );
+ *
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import Validation from '../../../axon/js/Validation.js';
+import IOTypeCache from '../IOTypeCache.js';
+import tandemNamespace from '../tandemNamespace.js';
+import IOType from './IOType.js';
+import StateSchema from './StateSchema.js';
+// Cache each parameterized IOType so that it is only created once
+const cache = new IOTypeCache();
+const NullableIO = (parameterType)=>{
+    assert && assert(parameterType, 'NullableIO needs parameterType');
+    if (!cache.has(parameterType)) {
+        cache.set(parameterType, new IOType(`NullableIO<${parameterType.typeName}>`, {
+            documentation: 'A PhET-iO Type adding support for null in addition to the behavior of its parameter.',
+            isValidValue: (instance)=>instance === null || Validation.isValueValid(instance, parameterType.validator),
+            parameterTypes: [
+                parameterType
+            ],
+            // If the argument is null, returns null. Otherwise, converts the instance to a state object for serialization.
+            toStateObject: (instance)=>instance === null ? null : parameterType.toStateObject(instance),
+            // If the argument is null, returns null. Otherwise, converts a state object to an instance of the underlying type.
+            fromStateObject: (stateObject)=>stateObject === null ? null : parameterType.fromStateObject(stateObject),
+            stateSchema: StateSchema.asValue(`null|<${parameterType.typeName}>`, {
+                isValidValue: (value)=>value === null || parameterType.isStateObjectValid(value)
+            })
+        }));
+    }
+    return cache.get(parameterType);
+};
+tandemNamespace.register('NullableIO', NullableIO);
+export default NullableIO;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3RhbmRlbS9qcy90eXBlcy9OdWxsYWJsZUlPLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFBhcmFtZXRyaWMgSU9UeXBlIHRoYXQgYWRkcyBzdXBwb3J0IGZvciBudWxsIHZhbHVlcyBpbiB0b1N0YXRlT2JqZWN0L2Zyb21TdGF0ZU9iamVjdC4gVGhpcyB0eXBlIGlzIHRvXG4gKiBwcmV2ZW50IHRoZSBwcm9wYWdhdGlvbiBvZiBudWxsIGhhbmRsaW5nLCBtYWlubHkgaW4gdG8vZnJvbVN0YXRlT2JqZWN0LCBpbiBlYWNoIHR5cGUuIFRoaXMgYWxzbyBtYWtlcyBudWxsXG4gKiBleHBsaWNpdCBmb3IgcGhldC1pby5cbiAqXG4gKiBTYW1wbGUgdXNhZ2U6XG4gKlxuICogIHRoaXMuYWdlUHJvcGVydHkgPSBuZXcgUHJvcGVydHkoIG51bGwsIHtcbiAqICAgIHRhbmRlbTogdGFuZGVtLmNyZWF0ZVRhbmRlbSggJ2FnZVByb3BlcnR5JyApLFxuICogICAgcGhldGlvVmFsdWVUeXBlOiBOdWxsYWJsZUlPKCBOdW1iZXJJTyApIC8vIHNpZ25pZmllcyB0aGF0IHRoZSBQcm9wZXJ0eSBjYW4gYmUgTnVtYmVyIG9yIG51bGxcbiAqIH0gKTtcbiAqXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIFNhbSBSZWlkIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICovXG5cbmltcG9ydCBWYWxpZGF0aW9uIGZyb20gJy4uLy4uLy4uL2F4b24vanMvVmFsaWRhdGlvbi5qcyc7XG5pbXBvcnQgSU9UeXBlQ2FjaGUgZnJvbSAnLi4vSU9UeXBlQ2FjaGUuanMnO1xuaW1wb3J0IHRhbmRlbU5hbWVzcGFjZSBmcm9tICcuLi90YW5kZW1OYW1lc3BhY2UuanMnO1xuaW1wb3J0IElPVHlwZSBmcm9tICcuL0lPVHlwZS5qcyc7XG5pbXBvcnQgU3RhdGVTY2hlbWEgZnJvbSAnLi9TdGF0ZVNjaGVtYS5qcyc7XG5cbi8vIENhY2hlIGVhY2ggcGFyYW1ldGVyaXplZCBJT1R5cGUgc28gdGhhdCBpdCBpcyBvbmx5IGNyZWF0ZWQgb25jZVxuY29uc3QgY2FjaGUgPSBuZXcgSU9UeXBlQ2FjaGUoKTtcblxuY29uc3QgTnVsbGFibGVJTyA9IDxQYXJhbWV0ZXJUeXBlLCBQYXJhbWV0ZXJTdGF0ZVR5cGUgZXh0ZW5kcyBQYXR0ZXJuU3RhdGVTZWxmVHlwZSwgUGF0dGVyblN0YXRlU2VsZlR5cGU+KCBwYXJhbWV0ZXJUeXBlOiBJT1R5cGU8UGFyYW1ldGVyVHlwZSwgUGFyYW1ldGVyU3RhdGVUeXBlLCBQYXR0ZXJuU3RhdGVTZWxmVHlwZT4gKTogSU9UeXBlID0+IHtcblxuICBhc3NlcnQgJiYgYXNzZXJ0KCBwYXJhbWV0ZXJUeXBlLCAnTnVsbGFibGVJTyBuZWVkcyBwYXJhbWV0ZXJUeXBlJyApO1xuXG4gIGlmICggIWNhY2hlLmhhcyggcGFyYW1ldGVyVHlwZSApICkge1xuICAgIGNhY2hlLnNldCggcGFyYW1ldGVyVHlwZSwgbmV3IElPVHlwZTxQYXJhbWV0ZXJUeXBlIHwgbnVsbCwgUGFyYW1ldGVyU3RhdGVUeXBlIHwgbnVsbD4oIGBOdWxsYWJsZUlPPCR7cGFyYW1ldGVyVHlwZS50eXBlTmFtZX0+YCwge1xuICAgICAgZG9jdW1lbnRhdGlvbjogJ0EgUGhFVC1pTyBUeXBlIGFkZGluZyBzdXBwb3J0IGZvciBudWxsIGluIGFkZGl0aW9uIHRvIHRoZSBiZWhhdmlvciBvZiBpdHMgcGFyYW1ldGVyLicsXG4gICAgICBpc1ZhbGlkVmFsdWU6IGluc3RhbmNlID0+IGluc3RhbmNlID09PSBudWxsIHx8IFZhbGlkYXRpb24uaXNWYWx1ZVZhbGlkKCBpbnN0YW5jZSwgcGFyYW1ldGVyVHlwZS52YWxpZGF0b3IgKSxcbiAgICAgIHBhcmFtZXRlclR5cGVzOiBbIHBhcmFtZXRlclR5cGUgXSxcblxuICAgICAgLy8gSWYgdGhlIGFyZ3VtZW50IGlzIG51bGwsIHJldHVybnMgbnVsbC4gT3RoZXJ3aXNlLCBjb252ZXJ0cyB0aGUgaW5zdGFuY2UgdG8gYSBzdGF0ZSBvYmplY3QgZm9yIHNlcmlhbGl6YXRpb24uXG4gICAgICB0b1N0YXRlT2JqZWN0OiBpbnN0YW5jZSA9PiBpbnN0YW5jZSA9PT0gbnVsbCA/IG51bGwgOiBwYXJhbWV0ZXJUeXBlLnRvU3RhdGVPYmplY3QoIGluc3RhbmNlICksXG5cbiAgICAgIC8vIElmIHRoZSBhcmd1bWVudCBpcyBudWxsLCByZXR1cm5zIG51bGwuIE90aGVyd2lzZSwgY29udmVydHMgYSBzdGF0ZSBvYmplY3QgdG8gYW4gaW5zdGFuY2Ugb2YgdGhlIHVuZGVybHlpbmcgdHlwZS5cbiAgICAgIGZyb21TdGF0ZU9iamVjdDogc3RhdGVPYmplY3QgPT4gc3RhdGVPYmplY3QgPT09IG51bGwgPyBudWxsIDogcGFyYW1ldGVyVHlwZS5mcm9tU3RhdGVPYmplY3QoIHN0YXRlT2JqZWN0ICksXG4gICAgICBzdGF0ZVNjaGVtYTogU3RhdGVTY2hlbWEuYXNWYWx1ZSggYG51bGx8PCR7cGFyYW1ldGVyVHlwZS50eXBlTmFtZX0+YCwge1xuICAgICAgICAgIGlzVmFsaWRWYWx1ZTogdmFsdWUgPT4gdmFsdWUgPT09IG51bGwgfHwgcGFyYW1ldGVyVHlwZS5pc1N0YXRlT2JqZWN0VmFsaWQoIHZhbHVlIClcbiAgICAgICAgfVxuICAgICAgKVxuICAgIH0gKSApO1xuICB9XG5cbiAgcmV0dXJuIGNhY2hlLmdldCggcGFyYW1ldGVyVHlwZSApITtcbn07XG5cbnRhbmRlbU5hbWVzcGFjZS5yZWdpc3RlciggJ051bGxhYmxlSU8nLCBOdWxsYWJsZUlPICk7XG5leHBvcnQgZGVmYXVsdCBOdWxsYWJsZUlPOyJdLCJuYW1lcyI6WyJWYWxpZGF0aW9uIiwiSU9UeXBlQ2FjaGUiLCJ0YW5kZW1OYW1lc3BhY2UiLCJJT1R5cGUiLCJTdGF0ZVNjaGVtYSIsImNhY2hlIiwiTnVsbGFibGVJTyIsInBhcmFtZXRlclR5cGUiLCJhc3NlcnQiLCJoYXMiLCJzZXQiLCJ0eXBlTmFtZSIsImRvY3VtZW50YXRpb24iLCJpc1ZhbGlkVmFsdWUiLCJpbnN0YW5jZSIsImlzVmFsdWVWYWxpZCIsInZhbGlkYXRvciIsInBhcmFtZXRlclR5cGVzIiwidG9TdGF0ZU9iamVjdCIsImZyb21TdGF0ZU9iamVjdCIsInN0YXRlT2JqZWN0Iiwic3RhdGVTY2hlbWEiLCJhc1ZhbHVlIiwidmFsdWUiLCJpc1N0YXRlT2JqZWN0VmFsaWQiLCJnZXQiLCJyZWdpc3RlciJdLCJtYXBwaW5ncyI6IkFBQUEsc0RBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7OztDQWNDLEdBRUQsT0FBT0EsZ0JBQWdCLGlDQUFpQztBQUN4RCxPQUFPQyxpQkFBaUIsb0JBQW9CO0FBQzVDLE9BQU9DLHFCQUFxQix3QkFBd0I7QUFDcEQsT0FBT0MsWUFBWSxjQUFjO0FBQ2pDLE9BQU9DLGlCQUFpQixtQkFBbUI7QUFFM0Msa0VBQWtFO0FBQ2xFLE1BQU1DLFFBQVEsSUFBSUo7QUFFbEIsTUFBTUssYUFBYSxDQUF3RkM7SUFFekdDLFVBQVVBLE9BQVFELGVBQWU7SUFFakMsSUFBSyxDQUFDRixNQUFNSSxHQUFHLENBQUVGLGdCQUFrQjtRQUNqQ0YsTUFBTUssR0FBRyxDQUFFSCxlQUFlLElBQUlKLE9BQXlELENBQUMsV0FBVyxFQUFFSSxjQUFjSSxRQUFRLENBQUMsQ0FBQyxDQUFDLEVBQUU7WUFDOUhDLGVBQWU7WUFDZkMsY0FBY0MsQ0FBQUEsV0FBWUEsYUFBYSxRQUFRZCxXQUFXZSxZQUFZLENBQUVELFVBQVVQLGNBQWNTLFNBQVM7WUFDekdDLGdCQUFnQjtnQkFBRVY7YUFBZTtZQUVqQywrR0FBK0c7WUFDL0dXLGVBQWVKLENBQUFBLFdBQVlBLGFBQWEsT0FBTyxPQUFPUCxjQUFjVyxhQUFhLENBQUVKO1lBRW5GLG1IQUFtSDtZQUNuSEssaUJBQWlCQyxDQUFBQSxjQUFlQSxnQkFBZ0IsT0FBTyxPQUFPYixjQUFjWSxlQUFlLENBQUVDO1lBQzdGQyxhQUFhakIsWUFBWWtCLE9BQU8sQ0FBRSxDQUFDLE1BQU0sRUFBRWYsY0FBY0ksUUFBUSxDQUFDLENBQUMsQ0FBQyxFQUFFO2dCQUNsRUUsY0FBY1UsQ0FBQUEsUUFBU0EsVUFBVSxRQUFRaEIsY0FBY2lCLGtCQUFrQixDQUFFRDtZQUM3RTtRQUVKO0lBQ0Y7SUFFQSxPQUFPbEIsTUFBTW9CLEdBQUcsQ0FBRWxCO0FBQ3BCO0FBRUFMLGdCQUFnQndCLFFBQVEsQ0FBRSxjQUFjcEI7QUFDeEMsZUFBZUEsV0FBVyJ9

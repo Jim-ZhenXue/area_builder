@@ -1,0 +1,26 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * @author Jesse Greenberg (PhET Interactive Simulations)
+ */ import Utils from '../../../dot/js/Utils.js';
+import { Rectangle } from '../imports.js';
+const RECT_WIDTH = 100;
+const RECT_HEIGHT = 25;
+const LayoutTestUtils = {
+    RECT_WIDTH: RECT_WIDTH,
+    RECT_HEIGHT: RECT_HEIGHT,
+    createRectangles: (count, indexToOptions)=>{
+        return _.times(count, (index)=>{
+            const options = indexToOptions ? indexToOptions(index) : {};
+            return new Rectangle(0, 0, RECT_WIDTH, RECT_HEIGHT, options);
+        });
+    },
+    /**
+   * Convenience method for comparing two numbers with an epsilon. Layout calculations often have floating point
+   * errors, so this method is useful for comparing two numbers that should be equal within a small epsilon.
+   */ aboutEqual (a, b, epsilon = 0.0001) {
+        return Utils.equalsEpsilon(a, b, epsilon);
+    }
+};
+export default LayoutTestUtils;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnkvanMvbGF5b3V0L0xheW91dFRlc3RVdGlscy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cblxuLyoqXG4gKiBAYXV0aG9yIEplc3NlIEdyZWVuYmVyZyAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgVXRpbHMgZnJvbSAnLi4vLi4vLi4vZG90L2pzL1V0aWxzLmpzJztcbmltcG9ydCB7IFJlY3RhbmdsZSwgUmVjdGFuZ2xlT3B0aW9ucyB9IGZyb20gJy4uL2ltcG9ydHMuanMnO1xuXG5jb25zdCBSRUNUX1dJRFRIID0gMTAwO1xuY29uc3QgUkVDVF9IRUlHSFQgPSAyNTtcblxuY29uc3QgTGF5b3V0VGVzdFV0aWxzID0ge1xuXG4gIFJFQ1RfV0lEVEg6IFJFQ1RfV0lEVEgsXG4gIFJFQ1RfSEVJR0hUOiBSRUNUX0hFSUdIVCxcblxuICBjcmVhdGVSZWN0YW5nbGVzOiAoIGNvdW50OiBudW1iZXIsIGluZGV4VG9PcHRpb25zPzogKCBpbmRleDogbnVtYmVyICkgPT4gUmVjdGFuZ2xlT3B0aW9ucyApOiBSZWN0YW5nbGVbXSA9PiB7XG4gICAgcmV0dXJuIF8udGltZXMoIGNvdW50LCAoIGluZGV4OiBudW1iZXIgKSA9PiB7XG4gICAgICBjb25zdCBvcHRpb25zID0gaW5kZXhUb09wdGlvbnMgPyBpbmRleFRvT3B0aW9ucyggaW5kZXggKSA6IHt9O1xuICAgICAgcmV0dXJuIG5ldyBSZWN0YW5nbGUoIDAsIDAsIFJFQ1RfV0lEVEgsIFJFQ1RfSEVJR0hULCBvcHRpb25zICk7XG4gICAgfSApO1xuICB9LFxuXG4gIC8qKlxuICAgKiBDb252ZW5pZW5jZSBtZXRob2QgZm9yIGNvbXBhcmluZyB0d28gbnVtYmVycyB3aXRoIGFuIGVwc2lsb24uIExheW91dCBjYWxjdWxhdGlvbnMgb2Z0ZW4gaGF2ZSBmbG9hdGluZyBwb2ludFxuICAgKiBlcnJvcnMsIHNvIHRoaXMgbWV0aG9kIGlzIHVzZWZ1bCBmb3IgY29tcGFyaW5nIHR3byBudW1iZXJzIHRoYXQgc2hvdWxkIGJlIGVxdWFsIHdpdGhpbiBhIHNtYWxsIGVwc2lsb24uXG4gICAqL1xuICBhYm91dEVxdWFsKCBhOiBudW1iZXIsIGI6IG51bWJlciwgZXBzaWxvbiA9IDAuMDAwMSApOiBib29sZWFuIHtcbiAgICByZXR1cm4gVXRpbHMuZXF1YWxzRXBzaWxvbiggYSwgYiwgZXBzaWxvbiApO1xuICB9XG59O1xuXG5leHBvcnQgZGVmYXVsdCBMYXlvdXRUZXN0VXRpbHM7Il0sIm5hbWVzIjpbIlV0aWxzIiwiUmVjdGFuZ2xlIiwiUkVDVF9XSURUSCIsIlJFQ1RfSEVJR0hUIiwiTGF5b3V0VGVzdFV0aWxzIiwiY3JlYXRlUmVjdGFuZ2xlcyIsImNvdW50IiwiaW5kZXhUb09wdGlvbnMiLCJfIiwidGltZXMiLCJpbmRleCIsIm9wdGlvbnMiLCJhYm91dEVxdWFsIiwiYSIsImIiLCJlcHNpbG9uIiwiZXF1YWxzRXBzaWxvbiJdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBR2pEOztDQUVDLEdBRUQsT0FBT0EsV0FBVywyQkFBMkI7QUFDN0MsU0FBU0MsU0FBUyxRQUEwQixnQkFBZ0I7QUFFNUQsTUFBTUMsYUFBYTtBQUNuQixNQUFNQyxjQUFjO0FBRXBCLE1BQU1DLGtCQUFrQjtJQUV0QkYsWUFBWUE7SUFDWkMsYUFBYUE7SUFFYkUsa0JBQWtCLENBQUVDLE9BQWVDO1FBQ2pDLE9BQU9DLEVBQUVDLEtBQUssQ0FBRUgsT0FBTyxDQUFFSTtZQUN2QixNQUFNQyxVQUFVSixpQkFBaUJBLGVBQWdCRyxTQUFVLENBQUM7WUFDNUQsT0FBTyxJQUFJVCxVQUFXLEdBQUcsR0FBR0MsWUFBWUMsYUFBYVE7UUFDdkQ7SUFDRjtJQUVBOzs7R0FHQyxHQUNEQyxZQUFZQyxDQUFTLEVBQUVDLENBQVMsRUFBRUMsVUFBVSxNQUFNO1FBQ2hELE9BQU9mLE1BQU1nQixhQUFhLENBQUVILEdBQUdDLEdBQUdDO0lBQ3BDO0FBQ0Y7QUFFQSxlQUFlWCxnQkFBZ0IifQ==

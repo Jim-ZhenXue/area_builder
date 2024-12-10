@@ -1,0 +1,19 @@
+// Copyright 2017-2023, University of Colorado Boulder
+/**
+ * detectPrefix tests
+ *
+ * @author Jonathan Olson (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
+ */ import detectPrefix from './detectPrefix.js';
+QUnit.module('detectPrefix');
+QUnit.test('detectPrefix', (assert)=>{
+    const obj = {
+        main: false,
+        mozProp: ''
+    };
+    assert.equal(detectPrefix(obj, 'main'), 'main');
+    assert.equal(detectPrefix(obj, 'prop'), 'mozProp');
+    assert.equal(detectPrefix(obj, 'nothing'), undefined);
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BoZXQtY29yZS9qcy9kZXRlY3RQcmVmaXhUZXN0cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxNy0yMDIzLCBVbml2ZXJzaXR5IG9mIENvbG9yYWRvIEJvdWxkZXJcblxuLyoqXG4gKiBkZXRlY3RQcmVmaXggdGVzdHNcbiAqXG4gKiBAYXV0aG9yIEpvbmF0aGFuIE9sc29uIChQaEVUIEludGVyYWN0aXZlIFNpbXVsYXRpb25zKVxuICogQGF1dGhvciBTYW0gUmVpZCAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgZGV0ZWN0UHJlZml4IGZyb20gJy4vZGV0ZWN0UHJlZml4LmpzJztcblxuUVVuaXQubW9kdWxlKCAnZGV0ZWN0UHJlZml4JyApO1xuXG5RVW5pdC50ZXN0KCAnZGV0ZWN0UHJlZml4JywgYXNzZXJ0ID0+IHtcbiAgY29uc3Qgb2JqID0ge1xuICAgIG1haW46IGZhbHNlLFxuICAgIG1velByb3A6ICcnXG4gIH07XG4gIGFzc2VydC5lcXVhbCggZGV0ZWN0UHJlZml4KCBvYmosICdtYWluJyApLCAnbWFpbicgKTtcbiAgYXNzZXJ0LmVxdWFsKCBkZXRlY3RQcmVmaXgoIG9iaiwgJ3Byb3AnICksICdtb3pQcm9wJyApO1xuICBhc3NlcnQuZXF1YWwoIGRldGVjdFByZWZpeCggb2JqLCAnbm90aGluZycgKSwgdW5kZWZpbmVkICk7XG59ICk7Il0sIm5hbWVzIjpbImRldGVjdFByZWZpeCIsIlFVbml0IiwibW9kdWxlIiwidGVzdCIsImFzc2VydCIsIm9iaiIsIm1haW4iLCJtb3pQcm9wIiwiZXF1YWwiLCJ1bmRlZmluZWQiXSwibWFwcGluZ3MiOiJBQUFBLHNEQUFzRDtBQUV0RDs7Ozs7Q0FLQyxHQUVELE9BQU9BLGtCQUFrQixvQkFBb0I7QUFFN0NDLE1BQU1DLE1BQU0sQ0FBRTtBQUVkRCxNQUFNRSxJQUFJLENBQUUsZ0JBQWdCQyxDQUFBQTtJQUMxQixNQUFNQyxNQUFNO1FBQ1ZDLE1BQU07UUFDTkMsU0FBUztJQUNYO0lBQ0FILE9BQU9JLEtBQUssQ0FBRVIsYUFBY0ssS0FBSyxTQUFVO0lBQzNDRCxPQUFPSSxLQUFLLENBQUVSLGFBQWNLLEtBQUssU0FBVTtJQUMzQ0QsT0FBT0ksS0FBSyxDQUFFUixhQUFjSyxLQUFLLFlBQWFJO0FBQ2hEIn0=

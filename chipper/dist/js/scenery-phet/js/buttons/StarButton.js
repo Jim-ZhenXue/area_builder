@@ -1,0 +1,30 @@
+// Copyright 2014-2022, University of Colorado Boulder
+/**
+ * Button for returning to the level selection screen.
+ *
+ * @author John Blanco
+ */ import optionize from '../../../phet-core/js/optionize.js';
+import { Path } from '../../../scenery/js/imports.js';
+import RectangularPushButton from '../../../sun/js/buttons/RectangularPushButton.js';
+import PhetColorScheme from '../PhetColorScheme.js';
+import sceneryPhet from '../sceneryPhet.js';
+import StarShape from '../StarShape.js';
+let StarButton = class StarButton extends RectangularPushButton {
+    constructor(providedOptions){
+        const options = optionize()({
+            // RectangularPushButtonOptions
+            baseColor: PhetColorScheme.BUTTON_YELLOW,
+            // Match the size of the star button to the refresh buttons, since they often appear together.
+            // see https://github.com/phetsims/scenery-phet/issues/44
+            xMargin: 8.134152255572697
+        }, providedOptions);
+        options.content = new Path(new StarShape(), {
+            fill: 'black'
+        });
+        super(options);
+    }
+};
+export { StarButton as default };
+sceneryPhet.register('StarButton', StarButton);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NjZW5lcnktcGhldC9qcy9idXR0b25zL1N0YXJCdXR0b24udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTQtMjAyMiwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogQnV0dG9uIGZvciByZXR1cm5pbmcgdG8gdGhlIGxldmVsIHNlbGVjdGlvbiBzY3JlZW4uXG4gKlxuICogQGF1dGhvciBKb2huIEJsYW5jb1xuICovXG5cbmltcG9ydCBvcHRpb25pemUsIHsgRW1wdHlTZWxmT3B0aW9ucyB9IGZyb20gJy4uLy4uLy4uL3BoZXQtY29yZS9qcy9vcHRpb25pemUuanMnO1xuaW1wb3J0IFN0cmljdE9taXQgZnJvbSAnLi4vLi4vLi4vcGhldC1jb3JlL2pzL3R5cGVzL1N0cmljdE9taXQuanMnO1xuaW1wb3J0IHsgUGF0aCB9IGZyb20gJy4uLy4uLy4uL3NjZW5lcnkvanMvaW1wb3J0cy5qcyc7XG5pbXBvcnQgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uLCB7IFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnMgfSBmcm9tICcuLi8uLi8uLi9zdW4vanMvYnV0dG9ucy9SZWN0YW5ndWxhclB1c2hCdXR0b24uanMnO1xuaW1wb3J0IFBoZXRDb2xvclNjaGVtZSBmcm9tICcuLi9QaGV0Q29sb3JTY2hlbWUuanMnO1xuaW1wb3J0IHNjZW5lcnlQaGV0IGZyb20gJy4uL3NjZW5lcnlQaGV0LmpzJztcbmltcG9ydCBTdGFyU2hhcGUgZnJvbSAnLi4vU3RhclNoYXBlLmpzJztcblxudHlwZSBTZWxmT3B0aW9ucyA9IEVtcHR5U2VsZk9wdGlvbnM7XG5cbmV4cG9ydCB0eXBlIFN0YXJCdXR0b25PcHRpb25zID0gU2VsZk9wdGlvbnMgJiBTdHJpY3RPbWl0PFJlY3Rhbmd1bGFyUHVzaEJ1dHRvbk9wdGlvbnMsICdjb250ZW50Jz47XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0YXJCdXR0b24gZXh0ZW5kcyBSZWN0YW5ndWxhclB1c2hCdXR0b24ge1xuXG4gIHB1YmxpYyBjb25zdHJ1Y3RvciggcHJvdmlkZWRPcHRpb25zPzogU3RhckJ1dHRvbk9wdGlvbnMgKSB7XG5cbiAgICBjb25zdCBvcHRpb25zID0gb3B0aW9uaXplPFN0YXJCdXR0b25PcHRpb25zLCBTZWxmT3B0aW9ucywgUmVjdGFuZ3VsYXJQdXNoQnV0dG9uT3B0aW9ucz4oKSgge1xuXG4gICAgICAvLyBSZWN0YW5ndWxhclB1c2hCdXR0b25PcHRpb25zXG4gICAgICBiYXNlQ29sb3I6IFBoZXRDb2xvclNjaGVtZS5CVVRUT05fWUVMTE9XLFxuXG4gICAgICAvLyBNYXRjaCB0aGUgc2l6ZSBvZiB0aGUgc3RhciBidXR0b24gdG8gdGhlIHJlZnJlc2ggYnV0dG9ucywgc2luY2UgdGhleSBvZnRlbiBhcHBlYXIgdG9nZXRoZXIuXG4gICAgICAvLyBzZWUgaHR0cHM6Ly9naXRodWIuY29tL3BoZXRzaW1zL3NjZW5lcnktcGhldC9pc3N1ZXMvNDRcbiAgICAgIHhNYXJnaW46IDguMTM0MTUyMjU1NTcyNjk3XG4gICAgfSwgcHJvdmlkZWRPcHRpb25zICk7XG5cbiAgICBvcHRpb25zLmNvbnRlbnQgPSBuZXcgUGF0aCggbmV3IFN0YXJTaGFwZSgpLCB7IGZpbGw6ICdibGFjaycgfSApO1xuXG4gICAgc3VwZXIoIG9wdGlvbnMgKTtcbiAgfVxufVxuXG5zY2VuZXJ5UGhldC5yZWdpc3RlciggJ1N0YXJCdXR0b24nLCBTdGFyQnV0dG9uICk7Il0sIm5hbWVzIjpbIm9wdGlvbml6ZSIsIlBhdGgiLCJSZWN0YW5ndWxhclB1c2hCdXR0b24iLCJQaGV0Q29sb3JTY2hlbWUiLCJzY2VuZXJ5UGhldCIsIlN0YXJTaGFwZSIsIlN0YXJCdXR0b24iLCJwcm92aWRlZE9wdGlvbnMiLCJvcHRpb25zIiwiYmFzZUNvbG9yIiwiQlVUVE9OX1lFTExPVyIsInhNYXJnaW4iLCJjb250ZW50IiwiZmlsbCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7Q0FJQyxHQUVELE9BQU9BLGVBQXFDLHFDQUFxQztBQUVqRixTQUFTQyxJQUFJLFFBQVEsaUNBQWlDO0FBQ3RELE9BQU9DLDJCQUE2RCxtREFBbUQ7QUFDdkgsT0FBT0MscUJBQXFCLHdCQUF3QjtBQUNwRCxPQUFPQyxpQkFBaUIsb0JBQW9CO0FBQzVDLE9BQU9DLGVBQWUsa0JBQWtCO0FBTXpCLElBQUEsQUFBTUMsYUFBTixNQUFNQSxtQkFBbUJKO0lBRXRDLFlBQW9CSyxlQUFtQyxDQUFHO1FBRXhELE1BQU1DLFVBQVVSLFlBQTJFO1lBRXpGLCtCQUErQjtZQUMvQlMsV0FBV04sZ0JBQWdCTyxhQUFhO1lBRXhDLDhGQUE4RjtZQUM5Rix5REFBeUQ7WUFDekRDLFNBQVM7UUFDWCxHQUFHSjtRQUVIQyxRQUFRSSxPQUFPLEdBQUcsSUFBSVgsS0FBTSxJQUFJSSxhQUFhO1lBQUVRLE1BQU07UUFBUTtRQUU3RCxLQUFLLENBQUVMO0lBQ1Q7QUFDRjtBQWxCQSxTQUFxQkYsd0JBa0JwQjtBQUVERixZQUFZVSxRQUFRLENBQUUsY0FBY1IifQ==

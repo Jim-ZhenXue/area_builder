@@ -1,0 +1,50 @@
+// Copyright 2018-2024, University of Colorado Boulder
+/**
+ * PhET-iO Type for JS's built-in function type.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Andrew Adare (PhET Interactive Simulations)
+ */ import IOTypeCache from '../IOTypeCache.js';
+import tandemNamespace from '../tandemNamespace.js';
+import IOType from './IOType.js';
+// cache each parameterized IOType so that it is only created once
+const cache = new IOTypeCache();
+/**
+ * Parametric IOType constructor--given return type and parameter types, this function returns a type wrapped IOType for
+ * that "class" of functions. "Class" here refers to the supported parameter and return IOTypes.
+ * This caching implementation should be kept in sync with the other parametric IOType caching implementations.
+ * @param returnType - IOType of the return type of the function that can support cross-frame serialization
+ * @param functionParameterTypes - IOTypes for the individual arguments of the function.
+ */ const FunctionIO = (returnType, functionParameterTypes)=>{
+    for(let i = 0; i < functionParameterTypes.length; i++){
+        assert && assert(functionParameterTypes[i], 'parameter type was not truthy');
+    }
+    assert && assert(returnType, 'return type was not truthy');
+    // REVIEW https://github.com/phetsims/tandem/issues/169 Why is this different than the typeName later in this file?
+    const cacheKey = `${returnType.typeName}.${functionParameterTypes.map((type)=>type.typeName).join(',')}`;
+    if (!cache.has(cacheKey)) {
+        // gather a list of argument names for the documentation string
+        let argsString = functionParameterTypes.map((parameterType)=>parameterType.typeName).join(', ');
+        if (argsString === '') {
+            argsString = 'none';
+        }
+        const parameterTypesString = functionParameterTypes.map((parameterType)=>parameterType.typeName).join(',');
+        cache.set(cacheKey, new IOType(`FunctionIO(${parameterTypesString})=>${returnType.typeName}`, {
+            valueType: 'function',
+            isFunctionType: true,
+            // These are the parameters to this FunctionIO, not to the function it wraps. That is why it includes the return type.
+            // NOTE: the order is very important, for instance phetioCommandProcessor relies on the parameters being before
+            // the return type.  If we decide this is too brittle, perhaps we should subclass IOType to FunctionIOType, and it
+            // can track its functionParameterTypes separately from the returnType.
+            parameterTypes: functionParameterTypes.concat([
+                returnType
+            ]),
+            documentation: `${'Wrapper for the built-in JS function type.<br>' + '<strong>Arguments:</strong> '}${argsString}<br>` + `<strong>Return Type:</strong> ${returnType.typeName}`
+        }));
+    }
+    return cache.get(cacheKey);
+};
+tandemNamespace.register('FunctionIO', FunctionIO);
+export default FunctionIO;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3RhbmRlbS9qcy90eXBlcy9GdW5jdGlvbklPLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjQsIFVuaXZlcnNpdHkgb2YgQ29sb3JhZG8gQm91bGRlclxuXG4vKipcbiAqIFBoRVQtaU8gVHlwZSBmb3IgSlMncyBidWlsdC1pbiBmdW5jdGlvbiB0eXBlLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIEFuZHJldyBBZGFyZSAoUGhFVCBJbnRlcmFjdGl2ZSBTaW11bGF0aW9ucylcbiAqL1xuXG5pbXBvcnQgSU9UeXBlQ2FjaGUgZnJvbSAnLi4vSU9UeXBlQ2FjaGUuanMnO1xuaW1wb3J0IHRhbmRlbU5hbWVzcGFjZSBmcm9tICcuLi90YW5kZW1OYW1lc3BhY2UuanMnO1xuaW1wb3J0IElPVHlwZSBmcm9tICcuL0lPVHlwZS5qcyc7XG5cblxuLy8gY2FjaGUgZWFjaCBwYXJhbWV0ZXJpemVkIElPVHlwZSBzbyB0aGF0IGl0IGlzIG9ubHkgY3JlYXRlZCBvbmNlXG5jb25zdCBjYWNoZSA9IG5ldyBJT1R5cGVDYWNoZTxzdHJpbmc+KCk7XG5cbi8qKlxuICogUGFyYW1ldHJpYyBJT1R5cGUgY29uc3RydWN0b3ItLWdpdmVuIHJldHVybiB0eXBlIGFuZCBwYXJhbWV0ZXIgdHlwZXMsIHRoaXMgZnVuY3Rpb24gcmV0dXJucyBhIHR5cGUgd3JhcHBlZCBJT1R5cGUgZm9yXG4gKiB0aGF0IFwiY2xhc3NcIiBvZiBmdW5jdGlvbnMuIFwiQ2xhc3NcIiBoZXJlIHJlZmVycyB0byB0aGUgc3VwcG9ydGVkIHBhcmFtZXRlciBhbmQgcmV0dXJuIElPVHlwZXMuXG4gKiBUaGlzIGNhY2hpbmcgaW1wbGVtZW50YXRpb24gc2hvdWxkIGJlIGtlcHQgaW4gc3luYyB3aXRoIHRoZSBvdGhlciBwYXJhbWV0cmljIElPVHlwZSBjYWNoaW5nIGltcGxlbWVudGF0aW9ucy5cbiAqIEBwYXJhbSByZXR1cm5UeXBlIC0gSU9UeXBlIG9mIHRoZSByZXR1cm4gdHlwZSBvZiB0aGUgZnVuY3Rpb24gdGhhdCBjYW4gc3VwcG9ydCBjcm9zcy1mcmFtZSBzZXJpYWxpemF0aW9uXG4gKiBAcGFyYW0gZnVuY3Rpb25QYXJhbWV0ZXJUeXBlcyAtIElPVHlwZXMgZm9yIHRoZSBpbmRpdmlkdWFsIGFyZ3VtZW50cyBvZiB0aGUgZnVuY3Rpb24uXG4gKi9cbmNvbnN0IEZ1bmN0aW9uSU8gPSAoIHJldHVyblR5cGU6IElPVHlwZSwgZnVuY3Rpb25QYXJhbWV0ZXJUeXBlczogSU9UeXBlW10gKTogSU9UeXBlID0+IHtcbiAgZm9yICggbGV0IGkgPSAwOyBpIDwgZnVuY3Rpb25QYXJhbWV0ZXJUeXBlcy5sZW5ndGg7IGkrKyApIHtcbiAgICBhc3NlcnQgJiYgYXNzZXJ0KCBmdW5jdGlvblBhcmFtZXRlclR5cGVzWyBpIF0sICdwYXJhbWV0ZXIgdHlwZSB3YXMgbm90IHRydXRoeScgKTtcbiAgfVxuICBhc3NlcnQgJiYgYXNzZXJ0KCByZXR1cm5UeXBlLCAncmV0dXJuIHR5cGUgd2FzIG5vdCB0cnV0aHknICk7XG5cbiAgLy8gUkVWSUVXIGh0dHBzOi8vZ2l0aHViLmNvbS9waGV0c2ltcy90YW5kZW0vaXNzdWVzLzE2OSBXaHkgaXMgdGhpcyBkaWZmZXJlbnQgdGhhbiB0aGUgdHlwZU5hbWUgbGF0ZXIgaW4gdGhpcyBmaWxlP1xuICBjb25zdCBjYWNoZUtleSA9IGAke3JldHVyblR5cGUudHlwZU5hbWV9LiR7ZnVuY3Rpb25QYXJhbWV0ZXJUeXBlcy5tYXAoIHR5cGUgPT4gdHlwZS50eXBlTmFtZSApLmpvaW4oICcsJyApfWA7XG5cbiAgaWYgKCAhY2FjaGUuaGFzKCBjYWNoZUtleSApICkge1xuXG4gICAgLy8gZ2F0aGVyIGEgbGlzdCBvZiBhcmd1bWVudCBuYW1lcyBmb3IgdGhlIGRvY3VtZW50YXRpb24gc3RyaW5nXG4gICAgbGV0IGFyZ3NTdHJpbmcgPSBmdW5jdGlvblBhcmFtZXRlclR5cGVzLm1hcCggcGFyYW1ldGVyVHlwZSA9PiBwYXJhbWV0ZXJUeXBlLnR5cGVOYW1lICkuam9pbiggJywgJyApO1xuICAgIGlmICggYXJnc1N0cmluZyA9PT0gJycgKSB7XG4gICAgICBhcmdzU3RyaW5nID0gJ25vbmUnO1xuICAgIH1cbiAgICBjb25zdCBwYXJhbWV0ZXJUeXBlc1N0cmluZyA9IGZ1bmN0aW9uUGFyYW1ldGVyVHlwZXMubWFwKCBwYXJhbWV0ZXJUeXBlID0+IHBhcmFtZXRlclR5cGUudHlwZU5hbWUgKS5qb2luKCAnLCcgKTtcblxuICAgIGNhY2hlLnNldCggY2FjaGVLZXksIG5ldyBJT1R5cGUoIGBGdW5jdGlvbklPKCR7cGFyYW1ldGVyVHlwZXNTdHJpbmd9KT0+JHtyZXR1cm5UeXBlLnR5cGVOYW1lfWAsIHtcbiAgICAgIHZhbHVlVHlwZTogJ2Z1bmN0aW9uJyxcblxuICAgICAgaXNGdW5jdGlvblR5cGU6IHRydWUsXG5cbiAgICAgIC8vIFRoZXNlIGFyZSB0aGUgcGFyYW1ldGVycyB0byB0aGlzIEZ1bmN0aW9uSU8sIG5vdCB0byB0aGUgZnVuY3Rpb24gaXQgd3JhcHMuIFRoYXQgaXMgd2h5IGl0IGluY2x1ZGVzIHRoZSByZXR1cm4gdHlwZS5cbiAgICAgIC8vIE5PVEU6IHRoZSBvcmRlciBpcyB2ZXJ5IGltcG9ydGFudCwgZm9yIGluc3RhbmNlIHBoZXRpb0NvbW1hbmRQcm9jZXNzb3IgcmVsaWVzIG9uIHRoZSBwYXJhbWV0ZXJzIGJlaW5nIGJlZm9yZVxuICAgICAgLy8gdGhlIHJldHVybiB0eXBlLiAgSWYgd2UgZGVjaWRlIHRoaXMgaXMgdG9vIGJyaXR0bGUsIHBlcmhhcHMgd2Ugc2hvdWxkIHN1YmNsYXNzIElPVHlwZSB0byBGdW5jdGlvbklPVHlwZSwgYW5kIGl0XG4gICAgICAvLyBjYW4gdHJhY2sgaXRzIGZ1bmN0aW9uUGFyYW1ldGVyVHlwZXMgc2VwYXJhdGVseSBmcm9tIHRoZSByZXR1cm5UeXBlLlxuICAgICAgcGFyYW1ldGVyVHlwZXM6IGZ1bmN0aW9uUGFyYW1ldGVyVHlwZXMuY29uY2F0KCBbIHJldHVyblR5cGUgXSApLFxuICAgICAgZG9jdW1lbnRhdGlvbjogYCR7J1dyYXBwZXIgZm9yIHRoZSBidWlsdC1pbiBKUyBmdW5jdGlvbiB0eXBlLjxicj4nICtcbiAgICAgICAgICAgICAgICAgICAgICc8c3Ryb25nPkFyZ3VtZW50czo8L3N0cm9uZz4gJ30ke2FyZ3NTdHJpbmd9PGJyPmAgK1xuICAgICAgICAgICAgICAgICAgICAgYDxzdHJvbmc+UmV0dXJuIFR5cGU6PC9zdHJvbmc+ICR7cmV0dXJuVHlwZS50eXBlTmFtZX1gXG4gICAgfSApICk7XG4gIH1cblxuICByZXR1cm4gY2FjaGUuZ2V0KCBjYWNoZUtleSApITtcbn07XG5cbnRhbmRlbU5hbWVzcGFjZS5yZWdpc3RlciggJ0Z1bmN0aW9uSU8nLCBGdW5jdGlvbklPICk7XG5leHBvcnQgZGVmYXVsdCBGdW5jdGlvbklPOyJdLCJuYW1lcyI6WyJJT1R5cGVDYWNoZSIsInRhbmRlbU5hbWVzcGFjZSIsIklPVHlwZSIsImNhY2hlIiwiRnVuY3Rpb25JTyIsInJldHVyblR5cGUiLCJmdW5jdGlvblBhcmFtZXRlclR5cGVzIiwiaSIsImxlbmd0aCIsImFzc2VydCIsImNhY2hlS2V5IiwidHlwZU5hbWUiLCJtYXAiLCJ0eXBlIiwiam9pbiIsImhhcyIsImFyZ3NTdHJpbmciLCJwYXJhbWV0ZXJUeXBlIiwicGFyYW1ldGVyVHlwZXNTdHJpbmciLCJzZXQiLCJ2YWx1ZVR5cGUiLCJpc0Z1bmN0aW9uVHlwZSIsInBhcmFtZXRlclR5cGVzIiwiY29uY2F0IiwiZG9jdW1lbnRhdGlvbiIsImdldCIsInJlZ2lzdGVyIl0sIm1hcHBpbmdzIjoiQUFBQSxzREFBc0Q7QUFFdEQ7Ozs7O0NBS0MsR0FFRCxPQUFPQSxpQkFBaUIsb0JBQW9CO0FBQzVDLE9BQU9DLHFCQUFxQix3QkFBd0I7QUFDcEQsT0FBT0MsWUFBWSxjQUFjO0FBR2pDLGtFQUFrRTtBQUNsRSxNQUFNQyxRQUFRLElBQUlIO0FBRWxCOzs7Ozs7Q0FNQyxHQUNELE1BQU1JLGFBQWEsQ0FBRUMsWUFBb0JDO0lBQ3ZDLElBQU0sSUFBSUMsSUFBSSxHQUFHQSxJQUFJRCx1QkFBdUJFLE1BQU0sRUFBRUQsSUFBTTtRQUN4REUsVUFBVUEsT0FBUUgsc0JBQXNCLENBQUVDLEVBQUcsRUFBRTtJQUNqRDtJQUNBRSxVQUFVQSxPQUFRSixZQUFZO0lBRTlCLG1IQUFtSDtJQUNuSCxNQUFNSyxXQUFXLEdBQUdMLFdBQVdNLFFBQVEsQ0FBQyxDQUFDLEVBQUVMLHVCQUF1Qk0sR0FBRyxDQUFFQyxDQUFBQSxPQUFRQSxLQUFLRixRQUFRLEVBQUdHLElBQUksQ0FBRSxNQUFPO0lBRTVHLElBQUssQ0FBQ1gsTUFBTVksR0FBRyxDQUFFTCxXQUFhO1FBRTVCLCtEQUErRDtRQUMvRCxJQUFJTSxhQUFhVix1QkFBdUJNLEdBQUcsQ0FBRUssQ0FBQUEsZ0JBQWlCQSxjQUFjTixRQUFRLEVBQUdHLElBQUksQ0FBRTtRQUM3RixJQUFLRSxlQUFlLElBQUs7WUFDdkJBLGFBQWE7UUFDZjtRQUNBLE1BQU1FLHVCQUF1QlosdUJBQXVCTSxHQUFHLENBQUVLLENBQUFBLGdCQUFpQkEsY0FBY04sUUFBUSxFQUFHRyxJQUFJLENBQUU7UUFFekdYLE1BQU1nQixHQUFHLENBQUVULFVBQVUsSUFBSVIsT0FBUSxDQUFDLFdBQVcsRUFBRWdCLHFCQUFxQixHQUFHLEVBQUViLFdBQVdNLFFBQVEsRUFBRSxFQUFFO1lBQzlGUyxXQUFXO1lBRVhDLGdCQUFnQjtZQUVoQixzSEFBc0g7WUFDdEgsK0dBQStHO1lBQy9HLGtIQUFrSDtZQUNsSCx1RUFBdUU7WUFDdkVDLGdCQUFnQmhCLHVCQUF1QmlCLE1BQU0sQ0FBRTtnQkFBRWxCO2FBQVk7WUFDN0RtQixlQUFlLEdBQUcsbURBQ0gsaUNBQWlDUixXQUFXLElBQUksQ0FBQyxHQUNqRCxDQUFDLDhCQUE4QixFQUFFWCxXQUFXTSxRQUFRLEVBQUU7UUFDdkU7SUFDRjtJQUVBLE9BQU9SLE1BQU1zQixHQUFHLENBQUVmO0FBQ3BCO0FBRUFULGdCQUFnQnlCLFFBQVEsQ0FBRSxjQUFjdEI7QUFDeEMsZUFBZUEsV0FBVyJ9

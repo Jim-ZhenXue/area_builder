@@ -1,0 +1,14 @@
+// Copyright 2024, University of Colorado Boulder
+/**
+ * ESLint configuration for grunt tasks.
+ *
+ * @author Sam Reid (PhET Interactive Simulations)
+ * @author Michael Kauzmann (PhET Interactive Simulations)
+ */ import allowFloatingPromises from '../../../../perennial-alias/js/eslint/config/util/allowFloatingPromises.mjs';
+import eslintConfig from '../eslint.config.mjs';
+export default [
+    ...eslintConfig,
+    ...allowFloatingPromises
+];
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL2RvdC9qcy9ncnVudC90YXNrcy9lc2xpbnQuY29uZmlnLm1qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAyNCwgVW5pdmVyc2l0eSBvZiBDb2xvcmFkbyBCb3VsZGVyXG5cbi8qKlxuICogRVNMaW50IGNvbmZpZ3VyYXRpb24gZm9yIGdydW50IHRhc2tzLlxuICpcbiAqIEBhdXRob3IgU2FtIFJlaWQgKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKiBAYXV0aG9yIE1pY2hhZWwgS2F1em1hbm4gKFBoRVQgSW50ZXJhY3RpdmUgU2ltdWxhdGlvbnMpXG4gKi9cblxuaW1wb3J0IGFsbG93RmxvYXRpbmdQcm9taXNlcyBmcm9tICcuLi8uLi8uLi8uLi9wZXJlbm5pYWwtYWxpYXMvanMvZXNsaW50L2NvbmZpZy91dGlsL2FsbG93RmxvYXRpbmdQcm9taXNlcy5tanMnO1xuaW1wb3J0IGVzbGludENvbmZpZyBmcm9tICcuLi9lc2xpbnQuY29uZmlnLm1qcyc7XG5cbmV4cG9ydCBkZWZhdWx0IFtcbiAgLi4uZXNsaW50Q29uZmlnLFxuICAuLi5hbGxvd0Zsb2F0aW5nUHJvbWlzZXNcbl07Il0sIm5hbWVzIjpbImFsbG93RmxvYXRpbmdQcm9taXNlcyIsImVzbGludENvbmZpZyJdLCJtYXBwaW5ncyI6IkFBQUEsaURBQWlEO0FBRWpEOzs7OztDQUtDLEdBRUQsT0FBT0EsMkJBQTJCLDhFQUE4RTtBQUNoSCxPQUFPQyxrQkFBa0IsdUJBQXVCO0FBRWhELGVBQWU7T0FDVkE7T0FDQUQ7Q0FDSixDQUFDIn0=
